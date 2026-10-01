@@ -177,24 +177,73 @@ test("fetch-text and brand-probe refuse non-http input", () => {
   }
 });
 
-test("product page builds with every example as a live page, and stays brand-neutral", () => {
+
+// ---- product site ----
+const exampleDirs = () => storyDirs.filter((d) => path.relative(root, d).split(path.sep)[0] === "examples");
+const buildSite = (env) => {
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), "site-"));
+  execFileSync("node", [path.join(root, "scripts", "build-site.mjs")], { stdio: "pipe", env: { ...process.env, SITE_OUT: out, ...env } });
+  return out;
+};
+const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).flatMap((e) => (e.isDirectory() ? walk(path.join(d, e.name)) : [path.join(d, e.name)]));
+
+test("product site: landing page, a page and a full page per story, canonical urls, sitemap", () => {
   const origin = "https://example.test";
-  execFileSync("node", [path.join(root, "scripts", "build-site.mjs")], { stdio: "pipe", env: { ...process.env, SITE_URL: origin } });
-  const dist = path.join(root, "site", "dist");
-  const html = fs.readFileSync(path.join(dist, "index.html"), "utf8");
-  assert.ok(!/\{\{[A-Z_]+\}\}/.test(html), "all placeholders filled");
-  assert.ok(html.includes(`<link rel="canonical" href="${origin}/">`));
-  assert.ok(html.includes(`content="${origin}/assets/og.png"`));
-  for (const dir of storyDirs.filter((d) => path.relative(root, d).split(path.sep)[0] === "examples")) {
+  const dist = buildSite({ SITE_URL: origin, SHOWCASE_DIR: path.join(os.tmpdir(), "no-such-showcase-dir") });
+  const landing = fs.readFileSync(path.join(dist, "index.html"), "utf8");
+  assert.ok(!/\{\{[A-Z_]+\}\}/.test(landing), "landing placeholders filled");
+  assert.ok(landing.includes(`<link rel="canonical" href="${origin}/">`));
+  assert.ok(landing.includes(`content="${origin}/assets/og.png"`));
+  const sitemap = fs.readFileSync(path.join(dist, "sitemap.xml"), "utf8");
+  for (const dir of exampleDirs()) {
     const slug = path.basename(dir), story = read(path.join(dir, "story.json"));
-    assert.ok(fs.existsSync(path.join(dist, "examples", slug, "index.html")), slug + " page copied");
-    assert.ok(html.includes(`examples/${slug}/`), slug + " linked");
-    assert.ok(html.includes(`${story.nodes.length} nodes · ${story.edges.length} edges · ${story.sources.length} sources`), slug + " stats match story.json");
+    for (const p of [`stories/${slug}/index.html`, `stories/${slug}/full/index.html`]) assert.ok(fs.existsSync(path.join(dist, p)), p);
+    assert.ok(landing.includes(`data-slug="${slug}"`), slug + " in picker");
+    assert.ok(landing.includes(`${story.nodes.length} nodes · ${story.edges.length} edges · ${story.sources.length} sources`), slug + " stats match story.json");
+    const page = fs.readFileSync(path.join(dist, "stories", slug, "index.html"), "utf8");
+    assert.ok(!/\{\{[A-Z_]+\}\}/.test(page), slug + " page placeholders filled");
+    assert.ok(page.includes(`<link rel="canonical" href="${origin}/stories/${slug}/">`));
+    assert.ok(page.includes('allowfullscreen') && page.includes('id="v-fs"'), slug + " has the full-screen control");
+    assert.equal((page.match(/<li><a href="https?:/g) || []).length, story.sources.length, slug + " lists every source");
+    assert.ok(sitemap.includes(`<loc>${origin}/stories/${slug}/</loc>`));
   }
-  for (const f of ["assets/og.png", "assets/timeline.webp", "robots.txt", "sitemap.xml", "404.html"]) assert.ok(fs.existsSync(path.join(dist, f)), f);
-  assert.match(fs.readFileSync(path.join(dist, "sitemap.xml"), "utf8"), /<loc>https:\/\/example\.test\/<\/loc>/);
-  // images referenced by the page exist
-  for (const m of html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)) assert.ok(fs.existsSync(path.join(dist, m[1])), m[1]);
-  // the repo copy of the template carries no company or person names
-  assert.ok(!/teambotics|nikhil|nikdesign/i.test(fs.readFileSync(path.join(root, "site", "index.template.html"), "utf8")));
+  assert.match(sitemap, /<loc>https:\/\/example\.test\/<\/loc>/);
+});
+
+test("product site: every internal link and asset resolves", () => {
+  const dist = buildSite({ SHOWCASE_DIR: path.join(os.tmpdir(), "no-such-showcase-dir") });
+  const pages = walk(dist).filter((f) => f.endsWith(".html") && !f.includes(path.join("stories", "")) || /stories[\\/][^\\/]+[\\/]index\.html$/.test(f));
+  assert.ok(pages.length >= 1 + exampleDirs().length);
+  for (const f of pages) {
+    const html = fs.readFileSync(f, "utf8");
+    for (const m of html.matchAll(/(?:href|src)="(\/[^"#?]*)(?:[#?][^"]*)?"/g)) {
+      const target = path.join(dist, m[1]);
+      const ok = fs.existsSync(target) && (fs.statSync(target).isFile() || fs.existsSync(path.join(target, "index.html")));
+      assert.ok(ok, `${path.relative(dist, f)} links to missing ${m[1]}`);
+    }
+  }
+});
+
+test("product site: an optional showcase folder adds a story without committing it, and bad ones fail loudly", () => {
+  const sc = fs.mkdtempSync(path.join(os.tmpdir(), "showcase-"));
+  const src = exampleDirs()[0];
+  fs.mkdirSync(path.join(sc, "extra-story"));
+  fs.copyFileSync(path.join(src, "story.json"), path.join(sc, "extra-story", "story.json"));
+  fs.copyFileSync(path.join(src, "theme.json"), path.join(sc, "extra-story", "theme.json"));
+  const dist = buildSite({ SHOWCASE_DIR: sc });
+  assert.ok(fs.existsSync(path.join(dist, "stories", "extra-story", "full", "index.html")), "showcase page built from json");
+  assert.ok(fs.readFileSync(path.join(dist, "index.html"), "utf8").includes('data-slug="extra-story"'));
+  // a showcase story that fails validation must stop the build
+  const bad = read(path.join(sc, "extra-story", "story.json")); bad.nodes[1].sources = [];
+  fs.writeFileSync(path.join(sc, "extra-story", "story.json"), JSON.stringify(bad));
+  const r = spawnSync("node", [path.join(root, "scripts", "build-site.mjs")], { encoding: "utf8", env: { ...process.env, SITE_OUT: fs.mkdtempSync(path.join(os.tmpdir(), "site-")), SHOWCASE_DIR: sc } });
+  assert.notEqual(r.status, 0);
+});
+
+test("product site sources stay brand-neutral and hold no secrets", () => {
+  for (const f of ["site/index.template.html", "site/story.template.html", "site/assets/viewer.js", "site/assets/site.css", "scripts/build-site.mjs", "vercel.json"]) {
+    const txt = fs.readFileSync(path.join(root, f), "utf8");
+    assert.ok(!/teambotics|nikhil|nikdesign|tribalscale|patagonia/i.test(txt), f + " names a company or person");
+    assert.ok(!/(sk-[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_-]{30,}|ghp_[A-Za-z0-9]{30,}|PRIVATE KEY-----)/.test(txt), f + " looks like it holds a secret");
+  }
 });

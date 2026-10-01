@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Featured stories on the landing page: a picker and an embedded viewer with view switching and a full-screen button; every story also gets its own page (`/stories/<slug>/`) with about, guided stories and sources, plus a standalone full page. Optional git-ignored `site/showcase/` for deployer-only stories.
 - Product page (`site/`, built by `scripts/build-site.mjs`): every example is served as a live page, with example statistics generated from the real data.
 - `vercel.json` for static hosting with security headers.
 - New example: the Rosetta Stone (a historical object): independent sources for contested claims, Wikipedia-only details attributed, and open disagreements shown side by side.

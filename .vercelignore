@@ -1,0 +1,7 @@
+node_modules
+.git
+.tmp
+.playwright-mcp
+stories/*/raw
+site/dist
+.env*

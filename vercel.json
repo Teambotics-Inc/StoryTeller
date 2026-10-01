@@ -40,5 +40,18 @@
         }
       ]
     }
+  ],
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/stories",
+      "destination": "/#stories",
+      "permanent": false
+    },
+    {
+      "source": "/stories/",
+      "destination": "/#stories",
+      "permanent": false
+    }
   ]
 }

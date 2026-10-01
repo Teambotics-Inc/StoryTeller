@@ -8,3 +8,4 @@ site/dist/
 
 .vercel
 .env*
+site/showcase/

@@ -28,7 +28,9 @@ node scripts/build.mjs examples/<name>  # rebuild an example after changing the 
 
 ## The product page
 
-`site/` holds the product page. `node scripts/build-site.mjs` builds it into `site/dist` (set `SITE_URL` to add canonical and social-image URLs). `vercel.json` carries the static-hosting settings (build command, output directory, clean URLs, security headers), so any host that can run a Node build command and serve a folder will do. Example statistics on the page are read from each example, so rebuild the examples first if you change them.
+`site/` holds the product page. `node scripts/build-site.mjs` builds it into `site/dist` (set `SITE_URL` to add canonical and social-image URLs). `vercel.json` carries the static-hosting settings (build command, output directory, clean URLs, security headers), so any host that can run a Node build command and serve a folder will do. Every example gets its own page (`/stories/<slug>/`) and a standalone full page (`/stories/<slug>/full/`), and the landing page features them in an embedded viewer with a full-screen button. Example statistics are read from each story, so rebuild the examples first if you change them.
+
+A deployer can feature extra stories without committing them: put `story.json` and `theme.json` (and an optional `thumb.webp`, plus an `order.json` array of slugs) in `site/showcase/<slug>/`. That folder is git-ignored; `.vercelignore` makes sure it is still uploaded when you deploy from your machine.
 
 ## Reporting problems
 

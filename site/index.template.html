@@ -16,98 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 16 7 8M16 16l9-5M16 16l2 10' stroke='%237cc4ff' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237cc4ff'/%3E%3Ccircle cx='7' cy='8' r='3' fill='%237cc4ff'/%3E%3Ccircle cx='25' cy='11' r='3' fill='%237cc4ff'/%3E%3Ccircle cx='18' cy='26' r='3' fill='%237cc4ff'/%3E%3C/svg%3E">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareSourceCode","name":"StoryTeller","description":"Toolkit that lets an AI agent research a subject and produce an explorable, sourced story as one self-contained HTML file.","codeRepositoryUrl":"{{REPO_URL}}","license":"https://opensource.org/licenses/MIT","programmingLanguage":"JavaScript"}</script>
-<style>
-:root{--bg:#0c0d10;--surface:#14161b;--raised:#1a1d24;--text:#eceae4;--muted:#a3a19a;--line:rgba(236,234,228,.14);--accent:#7cc4ff;--accent-ink:#06121c;--warm:#ffb35a;--radius:14px;color-scheme:dark}
-@media (prefers-color-scheme:light){:root{--bg:#f6f4ef;--surface:#ffffff;--raised:#efece4;--text:#1c1b19;--muted:#5d5a52;--line:rgba(28,27,25,.14);--accent:#0b66b3;--accent-ink:#ffffff;--warm:#a8560a;color-scheme:light}}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:17px/1.6 Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-a{color:var(--accent)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
-.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 14px;border-radius:8px;z-index:50}
-.skip:focus{left:8px}
-.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
-header.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-.logo{min-height:44px;display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;color:var(--text);text-decoration:none;font-size:18px}
-.logo svg{width:24px;height:24px}
-nav.links{display:flex;gap:22px;align-items:center;font-size:15px}
-nav.links a{color:var(--muted);text-decoration:none;padding:12px 4px}
-nav.links a.btn{padding:8px 16px}
-nav.links a:hover{color:var(--text)}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-weight:600;font-size:16px;background:transparent;cursor:pointer;font-family:inherit}
-.btn:hover{border-color:var(--accent)}
-.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.btn.primary:hover{filter:brightness(1.08)}
-.btn.small{padding:8px 16px;font-size:14px}
-.hero{padding:76px 0 36px;text-align:center;background:radial-gradient(900px 420px at 50% -80px,color-mix(in srgb,var(--accent) 16%,transparent),transparent 70%)}
-.eyebrow{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-h1{font-size:clamp(40px,7vw,76px);line-height:1.04;letter-spacing:-.035em;margin:0 auto 22px;max-width:15ch}
-.lede{font-size:clamp(18px,2.2vw,22px);color:var(--muted);max-width:44em;margin:0 auto 30px}
-.cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.fine{font-size:14px;color:var(--muted);margin:18px 0 0}
-.frame{margin:48px auto 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
-.frame .bar{display:flex;gap:7px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--raised)}
-.frame .bar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
-.frame .bar span{margin-left:10px;font-size:13px;color:var(--muted)}
-.frame a{display:block}
-section{padding:84px 0}
-section.alt{background:var(--surface);border-block:1px solid var(--line)}
-h2{font-size:clamp(28px,4vw,42px);line-height:1.12;letter-spacing:-.025em;margin:0 0 14px}
-.sub{color:var(--muted);max-width:44em;margin:0 0 40px;font-size:18px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s;list-style:none;padding:0;margin:0}
-.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
-section.alt .steps li{background:var(--bg)}
-.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-weight:700;margin-bottom:14px}
-.steps h3{margin:0 0 8px;font-size:20px}
-.steps p{margin:0;color:var(--muted);font-size:16px}
-.prompt{margin-top:34px;border:1px solid var(--line);border-radius:var(--radius);background:var(--raised);padding:18px 18px 18px 22px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
-.prompt code{font:15px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;word-break:break-word;flex:1 1 420px}
-.prompt .hint{flex-basis:100%;margin:0;font-size:14px;color:var(--muted)}
-.views{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:22px}
-.views figure{margin:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
-.views figcaption{padding:16px 20px 20px}
-.views h3{margin:0 0 4px;font-size:19px}
-.views p{margin:0;color:var(--muted);font-size:15.5px}
-.demo{margin-top:36px}
-.demo .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;align-items:center}
-.demo .tabs .btn[aria-pressed=true]{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent)}
-.demo .tabs .spacer{flex:1}
-.demo iframe{width:100%;height:min(78vh,640px);border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);display:block}
-.two{display:grid;grid-template-columns:1fr 1.1fr;gap:44px;align-items:center}
-.ticks{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:14px}
-.ticks li{padding-left:30px;position:relative;color:var(--muted)}
-.ticks li strong{color:var(--text)}
-.ticks li::before{content:"";position:absolute;left:0;top:.5em;width:16px;height:16px;border-radius:50%;border:2px solid var(--accent)}
-.shot{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px}
-.card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--surface);text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}
-.card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.card .meta{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px}
-.card h3{margin:0;font-size:20px;color:var(--text)}
-.card p{margin:0;color:var(--muted);font-size:15.5px}
-.card .stats{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-top:6px}
-.agents{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.agents div{border:1px solid var(--line);border-radius:var(--radius);padding:22px;background:var(--surface)}
-.agents h3{margin:0 0 6px;font-size:18px}
-.agents p{margin:0;color:var(--muted);font-size:15.5px}
-details{border-bottom:1px solid var(--line);padding:8px 0}
-details summary{cursor:pointer;font-weight:600;font-size:18px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:44px}
-details summary::-webkit-details-marker{display:none}
-details summary::after{content:"+";color:var(--accent);font-size:22px;line-height:1}
-details[open] summary::after{content:"\2212"}
-details p{margin:12px 0 0;color:var(--muted);max-width:50em}
-.final{text-align:center}
-.final h2{margin-inline:auto;max-width:16ch}
-.final .sub{margin-inline:auto}
-footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:14.5px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
-footer a{color:var(--muted)}
-footer a:hover{color:var(--text)}
-@media (max-width:860px){.steps{grid-template-columns:1fr}.two{grid-template-columns:1fr;gap:28px}nav.links a.hide-sm{display:none}section{padding:60px 0}.hero{padding-top:52px}}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-</style>
+<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -120,7 +29,7 @@ footer a:hover{color:var(--text)}
     <nav class="links" aria-label="Primary">
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#views">Views</a>
-      <a href="#examples">Examples</a>
+      <a href="#stories">Stories</a>
       <a class="btn small primary" href="{{REPO_URL}}" rel="noopener">GitHub</a>
     </nav>
   </div>
@@ -135,14 +44,42 @@ footer a:hover{color:var(--text)}
     <p class="lede">Point an AI agent at StoryTeller, name a subject, and get back an explorable story where every claim is cited. One HTML file you can open, share or host anywhere.</p>
     <div class="cta">
       <a class="btn primary" href="#start">Get started</a>
-      <a class="btn" href="#examples">See live examples</a>
+      <a class="btn" href="#stories">Explore the stories</a>
     </div>
     <p class="fine">No account. No server. No dependencies. Works offline.</p>
     <div class="frame">
       <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>A story built by StoryTeller: five days, day by day</span></div>
-      <a href="examples/great-fire-of-london/#view=timeline&amp;story=five-days" aria-label="Open the Great Fire of London example on its timeline">
-        <img src="assets/timeline.webp" width="1280" height="667" alt="A zoomable timeline of the Great Fire of London, 2 to 6 September 1666, with a guided story card and themed lanes" fetchpriority="high">
+      <a href="/stories/great-fire-of-london/full/#view=timeline&amp;story=five-days" aria-label="Open the Great Fire of London example on its timeline">
+        <img src="/assets/timeline.webp" width="1280" height="667" alt="A zoomable timeline of the Great Fire of London, 2 to 6 September 1666, with a guided story card and themed lanes" fetchpriority="high">
       </a>
+    </div>
+  </div>
+</section>
+
+<section id="stories" class="alt">
+  <div class="wrap">
+    <h2>Featured stories</h2>
+    <p class="sub">Five stories made by StoryTeller, each from a one-line request. Open any of them right here, go full screen, or visit its own page.</p>
+    <div class="picker" id="picker">
+{{PICKER}}
+    </div>
+    <div id="showcase">
+      <div class="viewer-head">
+        <div><h3 id="v-title">{{V_TITLE}}</h3><p id="v-tagline">{{V_TAGLINE}}</p></div>
+        <div class="viewer-stats" id="v-stats">{{V_STATS}}</div>
+      </div>
+      <div class="vbar">
+        <div id="v-views" role="group" aria-label="View" style="display:contents"></div>
+        <span class="spacer"></span>
+        <a class="btn small" id="v-page" href="{{V_PAGE}}">Story page</a>
+        <a class="btn small" id="v-full" href="{{V_FULL}}" target="_blank" rel="noopener">Open full page</a>
+        <button class="btn small primary" id="v-fs" type="button">Full screen</button>
+      </div>
+      <div class="stage" id="v-stage">
+        <button class="btn small exit" id="v-exit" type="button">Exit full screen</button>
+        <iframe id="v-frame" title="Live story" loading="lazy" allow="fullscreen" allowfullscreen src="{{V_FRAME}}"></iframe>
+      </div>
+      <p class="note" id="v-note">{{V_NOTE}}</p>
     </div>
   </div>
 </section>
@@ -169,24 +106,14 @@ footer a:hover{color:var(--text)}
     <h2>One story, five ways to see it</h2>
     <p class="sub">The same sourced data renders as a graph, a timeline, a narrative, an outline and a list. Readers switch in the page; authors choose what to offer.</p>
     <div class="views">
-      <figure><img src="assets/graph.webp" width="1280" height="667" loading="lazy" alt="Force-directed graph of nodes connected by labelled relationships"><figcaption><h3>Graph</h3><p>See how people, places, ideas and events connect. Drag, zoom, search and filter by theme. Solid lines are sourced; dashed lines are interpretation.</p></figcaption></figure>
-      <figure><img src="assets/timeline.webp" width="1280" height="667" loading="lazy" alt="Timeline zoomed to five days with one lane per theme"><figcaption><h3>Timeline</h3><p>Anything dated gets a zoomable, calendar-aware timeline. Pick a guided story and the axis zooms to its own dates.</p></figcaption></figure>
-      <figure><img src="assets/read.webp" width="1280" height="667" loading="lazy" alt="A story laid out as numbered steps in a reading column"><figcaption><h3>Read</h3><p>Each guided story as a narrative, step by step, with the evidence and sources under every beat.</p></figcaption></figure>
-      <figure><img src="assets/outline.webp" width="1280" height="667" loading="lazy" alt="Collapsible outline of the whole story"><figcaption><h3>Outline</h3><p>The whole map as a table of contents you can expand and scan.</p></figcaption></figure>
-      <figure><img src="assets/list.webp" width="1280" height="667" loading="lazy" alt="Cards grouped by theme"><figcaption><h3>List</h3><p>Everything grouped by theme, for fast lookup and the simplest possible reading.</p></figcaption></figure>
+      <figure><img src="/assets/graph.webp" width="1280" height="667" loading="lazy" alt="Force-directed graph of nodes connected by labelled relationships"><figcaption><h3>Graph</h3><p>See how people, places, ideas and events connect. Drag, zoom, search and filter by theme. Solid lines are sourced; dashed lines are interpretation.</p></figcaption></figure>
+      <figure><img src="/assets/timeline.webp" width="1280" height="667" loading="lazy" alt="Timeline zoomed to five days with one lane per theme"><figcaption><h3>Timeline</h3><p>Anything dated gets a zoomable, calendar-aware timeline. Pick a guided story and the axis zooms to its own dates.</p></figcaption></figure>
+      <figure><img src="/assets/read.webp" width="1280" height="667" loading="lazy" alt="A story laid out as numbered steps in a reading column"><figcaption><h3>Read</h3><p>Each guided story as a narrative, step by step, with the evidence and sources under every beat.</p></figcaption></figure>
+      <figure><img src="/assets/outline.webp" width="1280" height="667" loading="lazy" alt="Collapsible outline of the whole story"><figcaption><h3>Outline</h3><p>The whole map as a table of contents you can expand and scan.</p></figcaption></figure>
+      <figure><img src="/assets/list.webp" width="1280" height="667" loading="lazy" alt="Cards grouped by theme"><figcaption><h3>List</h3><p>Everything grouped by theme, for fast lookup and the simplest possible reading.</p></figcaption></figure>
     </div>
-    <div class="demo">
-      <div class="tabs" role="group" aria-label="Try the views live">
-        <button class="btn small" type="button" data-v="graph" aria-pressed="false">Graph</button>
-        <button class="btn small" type="button" data-v="timeline" aria-pressed="true">Timeline</button>
-        <button class="btn small" type="button" data-v="read" aria-pressed="false">Read</button>
-        <button class="btn small" type="button" data-v="outline" aria-pressed="false">Outline</button>
-        <button class="btn small" type="button" data-v="list" aria-pressed="false">List</button>
-        <span class="spacer"></span>
-        <a class="btn small" id="demo-open" href="examples/great-fire-of-london/">Open full page</a>
-      </div>
-      <iframe id="demo" title="Live demo: the Great Fire of London" loading="lazy" src="examples/great-fire-of-london/#view=timeline"></iframe>
-    </div>
+    
+    <p class="note" style="margin-top:22px">Every featured story above offers the views that apply to it, live.</p>
   </div>
 </section>
 
@@ -202,21 +129,11 @@ footer a:hover{color:var(--text)}
         <li><strong>Honest about limits.</strong> Agents are told to say what they could not read or verify, and to attribute claims that rest on one tertiary source.</li>
       </ul>
     </div>
-    <div class="shot"><img src="assets/panel.webp" width="1280" height="667" loading="lazy" alt="A node's detail panel showing the summary, a quoted piece of evidence and its connections"></div>
+    <div class="shot"><img src="/assets/panel.webp" width="1280" height="667" loading="lazy" alt="A node's detail panel showing the summary, a quoted piece of evidence and its connections"></div>
   </div>
 </section>
 
-<section id="examples" class="alt">
-  <div class="wrap">
-    <h2>Built with StoryTeller</h2>
-    <p class="sub">Three worked examples, each from a one-line request. Every page below is a single file generated from the repository.</p>
-    <div class="cards">
-{{EXAMPLE_CARDS}}
-    </div>
-  </div>
-</section>
-
-<section id="agents">
+<section id="agents" class="alt">
   <div class="wrap">
     <h2>Built for agents, readable by humans</h2>
     <p class="sub">The repository is the product: instructions an agent can follow, and checks that catch it when it slips.</p>
@@ -229,7 +146,7 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<section id="faq" class="alt">
+<section id="faq">
   <div class="wrap">
     <h2>Questions</h2>
     <details><summary>Which agents does it work with?</summary><p>Any coding agent that can read files, run Node and browse the web. The instructions are plain Markdown in the repository. We have built and tested it with Claude-based agents and have not claimed anything beyond that.</p></details>
@@ -241,7 +158,7 @@ footer a:hover{color:var(--text)}
   </div>
 </section>
 
-<section class="final">
+<section class="final alt">
   <div class="wrap">
     <h2>Tell your first story</h2>
     <p class="sub">Copy the prompt, give it to your agent, and pick a subject you care about.</p>
@@ -257,25 +174,7 @@ footer a:hover{color:var(--text)}
   </div>
 </footer>
 
-<script>
-(function () {
-  var btn = document.getElementById("copy"), txt = document.getElementById("prompt-text");
-  btn.addEventListener("click", function () {
-    var s = txt.textContent;
-    var done = function () { btn.textContent = "Copied"; setTimeout(function () { btn.textContent = "Copy prompt"; }, 1800); };
-    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(s).then(done, fallback); else fallback();
-    function fallback() { var r = document.createRange(); r.selectNodeContents(txt); var sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); try { document.execCommand("copy"); done(); } catch (e) { btn.textContent = "Select and copy"; } }
-  });
-  var frame = document.getElementById("demo"), open = document.getElementById("demo-open"), tabs = document.querySelectorAll(".demo .tabs [data-v]");
-  tabs.forEach(function (t) {
-    t.addEventListener("click", function () {
-      var v = t.getAttribute("data-v"), url = "examples/great-fire-of-london/#view=" + v + (v === "timeline" ? "&story=five-days" : "");
-      tabs.forEach(function (o) { o.setAttribute("aria-pressed", String(o === t)); });
-      try { frame.contentWindow.location.hash = url.split("#")[1]; } catch (e) { frame.src = url; }
-      open.setAttribute("href", url);
-    });
-  });
-})();
-</script>
+<script type="application/json" id="showcase-data">{{SHOWCASE_JSON}}</script>
+<script src="/assets/viewer.js" defer></script>
 </body>
 </html>
