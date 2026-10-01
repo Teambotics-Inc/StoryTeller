@@ -176,3 +176,25 @@ test("fetch-text and brand-probe refuse non-http input", () => {
     assert.equal(r.status, 2, script);
   }
 });
+
+test("product page builds with every example as a live page, and stays brand-neutral", () => {
+  const origin = "https://example.test";
+  execFileSync("node", [path.join(root, "scripts", "build-site.mjs")], { stdio: "pipe", env: { ...process.env, SITE_URL: origin } });
+  const dist = path.join(root, "site", "dist");
+  const html = fs.readFileSync(path.join(dist, "index.html"), "utf8");
+  assert.ok(!/\{\{[A-Z_]+\}\}/.test(html), "all placeholders filled");
+  assert.ok(html.includes(`<link rel="canonical" href="${origin}/">`));
+  assert.ok(html.includes(`content="${origin}/assets/og.png"`));
+  for (const dir of storyDirs.filter((d) => path.relative(root, d).split(path.sep)[0] === "examples")) {
+    const slug = path.basename(dir), story = read(path.join(dir, "story.json"));
+    assert.ok(fs.existsSync(path.join(dist, "examples", slug, "index.html")), slug + " page copied");
+    assert.ok(html.includes(`examples/${slug}/`), slug + " linked");
+    assert.ok(html.includes(`${story.nodes.length} nodes · ${story.edges.length} edges · ${story.sources.length} sources`), slug + " stats match story.json");
+  }
+  for (const f of ["assets/og.png", "assets/timeline.webp", "robots.txt", "sitemap.xml", "404.html"]) assert.ok(fs.existsSync(path.join(dist, f)), f);
+  assert.match(fs.readFileSync(path.join(dist, "sitemap.xml"), "utf8"), /<loc>https:\/\/example\.test\/<\/loc>/);
+  // images referenced by the page exist
+  for (const m of html.matchAll(/(?:src|href)="(assets\/[^"]+)"/g)) assert.ok(fs.existsSync(path.join(dist, m[1])), m[1]);
+  // the repo copy of the template carries no company or person names
+  assert.ok(!/teambotics|nikhil|nikdesign/i.test(fs.readFileSync(path.join(root, "site", "index.template.html"), "utf8")));
+});

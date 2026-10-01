@@ -39,6 +39,7 @@ scripts/
   brand-probe.mjs    pull real colours/fonts/logo candidates from a site
 template/            the renderer (story.html) and a neutral default theme
 examples/            worked examples: research log, data, theme, built output
+site/                the product page (built into site/dist with scripts/build-site.mjs)
 tests/               node:test suite
 ```
 
@@ -53,6 +54,7 @@ node scripts/build.mjs examples/salary                 # validate + rebuild an e
 node scripts/build.mjs stories/my-subject --check      # validate only
 node scripts/brand-probe.mjs https://www.example.com   # inspect a site's brand evidence
 node --test tests/toolkit.test.mjs                     # run the tests
+SITE_URL=https://your.site node scripts/build-site.mjs # build the product page into site/dist
 ```
 
 ## Principles

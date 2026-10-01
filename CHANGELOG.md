@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Product page (`site/`, built by `scripts/build-site.mjs`): every example is served as a live page, with example statistics generated from the real data.
+- `vercel.json` for static hosting with security headers.
 - New example: the Rosetta Stone (a historical object): independent sources for contested claims, Wikipedia-only details attributed, and open disagreements shown side by side.
 
 ## 1.0.0
