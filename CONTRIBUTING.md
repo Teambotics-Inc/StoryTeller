@@ -6,7 +6,7 @@ Thanks for helping. This project has one job: make it easy for an AI agent (and 
 
 - **Zero dependencies.** The toolkit runs on plain Node 18+ with no `npm install`. Don't add runtime or build dependencies. The output is one self-contained HTML file with no external scripts.
 - **Sourced or it doesn't ship.** Examples and playbook guidance must keep the project's honesty rules: every node cites a source that was actually read; interpretations are marked `inferred`.
-- **The toolkit is neutral; examples are honest.** The scripts, templates, playbook and tests must not be tied to any person, company or brand. Examples may be about real organisations or public figures, but only as honest independent studies with an accurate `disclaimer` (including "not affiliated with or endorsed by" where that applies), built only from public sources. Don't add a real living private individual as a subject.
+- **The toolkit is neutral; examples are honest.** The scripts, templates, playbook and tests must not be tied to any person, company or brand. Examples may be about real organisations or public figures, but only as honest independent studies with an accurate `disclaimer` (including "not affiliated with or endorsed by" where that applies), built only from public sources. Don't add a real living private individual as a subject. Exception: site chrome may credit Teambotics (the `Built with ❤️ by Teambotics` footer line in `site/index.template.html` and `site/story.template.html`); the playbook, templates generated stories come from, and the rest of the toolkit must stay neutral. `tests/toolkit.test.mjs` enforces this.
 - **Short, concrete playbook text.** The playbook is read by agents. Prefer rules with an example and a reason over general advice.
 
 ## Making changes

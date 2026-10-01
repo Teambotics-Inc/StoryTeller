@@ -242,7 +242,12 @@ test("product site: an optional showcase folder adds a story without committing 
 
 test("product site sources stay brand-neutral and hold no secrets", () => {
   for (const f of ["site/index.template.html", "site/story.template.html", "site/assets/viewer.js", "site/assets/site.css", "scripts/build-site.mjs", "vercel.json"]) {
-    const txt = fs.readFileSync(path.join(root, f), "utf8");
+    let txt = fs.readFileSync(path.join(root, f), "utf8");
+    // Site chrome may credit Teambotics, but only inside the marked credit span in the two site templates.
+    // Everything else (including the rest of these files) must stay neutral.
+    if (f === "site/index.template.html" || f === "site/story.template.html") {
+      txt = txt.replace(/<!--credit-->[\s\S]*?<!--\/credit-->/, "");
+    }
     assert.ok(!/teambotics|nikhil|nikdesign|tribalscale|patagonia/i.test(txt), f + " names a company or person");
     assert.ok(!/(sk-[A-Za-z0-9]{20,}|AIza[0-9A-Za-z_-]{30,}|ghp_[A-Za-z0-9]{30,}|PRIVATE KEY-----)/.test(txt), f + " looks like it holds a secret");
   }
