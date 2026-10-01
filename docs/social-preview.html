@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StoryTeller social preview (1280x640)</title>
+<!-- Source for docs/social-preview.png. Open at exactly 1280x640 and screenshot. No external assets. -->
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1280px;height:640px;overflow:hidden;background:#0c0d10}
+body{position:relative;color:#eceae4;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(900px 560px at 78% 48%,rgba(124,196,255,.13),transparent 62%),radial-gradient(500px 400px at 8% 110%,rgba(255,170,90,.08),transparent 60%),#0c0d10}
+#g{position:absolute;right:0;top:0;width:720px;height:640px}
+.copy{position:absolute;left:72px;top:0;bottom:0;width:560px;display:flex;flex-direction:column;justify-content:center}
+.eyebrow{font-size:15px;letter-spacing:.24em;text-transform:uppercase;color:#7cc4ff;margin-bottom:26px}
+h1{font-size:104px;line-height:1;font-weight:700;letter-spacing:-.035em;margin-bottom:28px}
+p{font-size:30px;line-height:1.32;color:#c9c6bd;max-width:520px}
+.chips{display:flex;gap:10px;margin-top:40px;flex-wrap:wrap}
+.chips span{font-size:15px;letter-spacing:.12em;text-transform:uppercase;padding:9px 15px;border:1px solid rgba(236,234,228,.26);color:#a3a19a}
+.chips span:first-child{border-color:#7cc4ff;color:#7cc4ff;background:rgba(124,196,255,.1)}
+.foot{position:absolute;left:72px;bottom:36px;font-size:15px;color:#7d7b74;letter-spacing:.04em}
+</style>
+</head>
+<body>
+<svg id="g" viewBox="0 0 720 640" aria-hidden="true"></svg>
+<div class="copy">
+  <div class="eyebrow">Open source · Agent-ready</div>
+  <h1>StoryTeller</h1>
+  <p>Point an AI agent at this repo, name a subject, and get a sourced, explorable story as one HTML file.</p>
+  <div class="chips"><span>Graph</span><span>Timeline</span><span>Read</span><span>Outline</span></div>
+</div>
+<div class="foot">Every claim cited · no dependencies · works offline</div>
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg", svg = document.getElementById("g");
+  const rng = (a) => () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const rnd = rng(11), pal = ["#7cc4ff", "#ffb35a", "#8fe3a8", "#c3a1ff", "#ffd86b", "#ff8a8a"];
+  const cx = 400, cy = 320, nodes = [{ x: cx, y: cy, r: 22, c: "#7cc4ff", root: true }];
+  const rings = [[7, 130, 0], [11, 210, 0.3], [15, 285, 0.1]];
+  rings.forEach(([n, R, off], ri) => { for (let i = 0; i < n; i++) {
+    const a = (i / n) * Math.PI * 2 + off + (rnd() - .5) * .35, r = R + (rnd() - .5) * 46;
+    nodes.push({ x: cx + Math.cos(a) * r * 1.02, y: cy + Math.sin(a) * r * .98, r: 6 + rnd() * (ri === 0 ? 7 : 5), c: pal[(i + ri) % pal.length] });
+  } });
+  const el = (t, p) => { const e = document.createElementNS(NS, t); for (const k in p) e.setAttribute(k, p[k]); return e; };
+  const edges = [];
+  nodes.forEach((a, i) => {
+    if (!i) return;
+    const near = nodes.map((b, j) => ({ j, d: Math.hypot(a.x - b.x, a.y - b.y) })).filter((o) => o.j !== i).sort((p, q) => p.d - q.d).slice(0, 2);
+    near.forEach((o, k) => { const key = [i, o.j].sort().join("-"); if (!edges.includes(key) && o.d < 150 && nodes[o.j].c !== undefined) edges.push(key); });
+    if (i <= 7) edges.push("0-" + i);
+  });
+  const L = svg.appendChild(el("g", {})), N = svg.appendChild(el("g", {}));
+  [...new Set(edges)].forEach((k, idx) => { const [i, j] = k.split("-").map(Number), a = nodes[i], b = nodes[j];
+    L.append(el("line", { x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: "#eceae4", "stroke-opacity": idx % 4 === 0 ? .2 : .3, "stroke-width": 1.4, "stroke-dasharray": idx % 4 === 0 ? "3 6" : "none" })); });
+  nodes.forEach((n) => {
+    if (n.root) { N.append(el("circle", { cx: n.x, cy: n.y, r: 44, fill: n.c, "fill-opacity": .14 }), el("circle", { cx: n.x, cy: n.y, r: n.r, fill: n.c })); return; }
+    N.append(el("circle", { cx: n.x, cy: n.y, r: n.r + 6, fill: n.c, "fill-opacity": .1 }), el("circle", { cx: n.x, cy: n.y, r: n.r, fill: "#0c0d10", stroke: n.c, "stroke-width": 2.5 }), el("circle", { cx: n.x, cy: n.y, r: Math.max(2, n.r * .3), fill: n.c }));
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # StoryTeller
 
+![StoryTeller: point an AI agent at this repo, name a subject, get a sourced, explorable story as one HTML file](docs/social-preview.png)
+
 **Point your AI agent at this repo, name a subject, and get back an explorable, sourced story.**
 
 A person, a brand, a company, a relationship, a word's etymology, a moment in history, a place: anything with a story. The agent researches it, models it as a sourced graph, styles it to match the subject (real brand colours and fonts when there is a brand), and hands you **one self-contained HTML file** you can open, share, or host anywhere.
