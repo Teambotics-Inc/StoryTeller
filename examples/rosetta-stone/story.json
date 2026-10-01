@@ -1,0 +1,1243 @@
+{
+  "schemaVersion": 1,
+  "title": "The Rosetta Stone",
+  "subject": {
+    "name": "The Rosetta Stone (British Museum EA 24)",
+    "kind": "object",
+    "url": "https://www.britishmuseum.org/collection/object/Y_EA24"
+  },
+  "tagline": "How a dull priestly decree, carved three times in 196 BC, became the key to a forgotten script, and why the argument over who owns it is still running.",
+  "root": "rosetta-stone",
+  "credit": "An independent StoryTeller study.",
+  "disclaimer": "Compiled from the cited public sources (British Museum pages, Britannica and other reference works, museum and university pages, news reports, an English translation of Champollion's 1822 letter, and Wikipedia where flagged). This story is not affiliated with or endorsed by the British Museum or any other institution, publisher or person it cites. Where sources disagree, both versions are shown. The decree's own text was not read directly; its contents are as the British Museum and other cited sources summarise them. Details that rest only on Wikipedia are marked 'per Wikipedia'.",
+  "generated": {
+    "date": "2026-10-01",
+    "by": "Claude (StoryTeller)"
+  },
+  "defaultView": "timeline",
+  "clusters": [
+    {
+      "id": "stone",
+      "label": "The object"
+    },
+    {
+      "id": "decree",
+      "label": "The decree"
+    },
+    {
+      "id": "lost",
+      "label": "A script is lost"
+    },
+    {
+      "id": "capture",
+      "label": "Found and taken"
+    },
+    {
+      "id": "decode",
+      "label": "Cracking the code"
+    },
+    {
+      "id": "afterlife",
+      "label": "Afterlife and ownership"
+    }
+  ],
+  "sources": [
+    {
+      "id": "bm-obj",
+      "title": "The Rosetta Stone, collection record EA24",
+      "url": "https://www.britishmuseum.org/collection/object/Y_EA24",
+      "accessed": "2026-10-01",
+      "publisher": "British Museum"
+    },
+    {
+      "id": "bm-blog",
+      "title": "The Rosetta Stone: everything you need to know",
+      "url": "https://www.britishmuseum.org/blog/everything-you-ever-wanted-know-about-rosetta-stone",
+      "accessed": "2026-10-01",
+      "publisher": "British Museum"
+    },
+    {
+      "id": "bm-timeline",
+      "title": "How Egyptian hieroglyphs were decoded, a timeline to decipherment",
+      "url": "https://www.britishmuseum.org/exhibitions/hieroglyphs-unlocking-ancient-egypt/egyptian-hieroglyphs-decipherment-timeline",
+      "accessed": "2026-10-01",
+      "publisher": "British Museum"
+    },
+    {
+      "id": "brit",
+      "title": "Rosetta Stone",
+      "url": "https://www.britannica.com/topic/Rosetta-Stone",
+      "accessed": "2026-10-01",
+      "publisher": "Encyclopaedia Britannica"
+    },
+    {
+      "id": "wiki",
+      "title": "Rosetta Stone",
+      "url": "https://en.wikipedia.org/wiki/Rosetta_Stone",
+      "accessed": "2026-10-01",
+      "publisher": "Wikipedia (tertiary)"
+    },
+    {
+      "id": "champ-letter",
+      "title": "Letter to M. Dacier (1822), English translation by Rhys Bryant",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Bryant_translation_Champollion_letter.pdf",
+      "accessed": "2026-10-01",
+      "publisher": "Wikimedia Commons (translation of J.-F. Champollion)"
+    },
+    {
+      "id": "natl",
+      "title": "Petition to return Rosetta Stone to Egypt seeks a million signatures",
+      "url": "https://www.thenationalnews.com/world/2022/11/21/petition-to-return-rosetta-stone-to-egypt-seeks-a-million-signatures/",
+      "accessed": "2026-10-01",
+      "publisher": "The National"
+    },
+    {
+      "id": "abc",
+      "title": "Egyptians petition for the British Museum to return Rosetta Stone",
+      "url": "https://www.abc.net.au/news/2022-11-30/egyptians-call-on-british-museum-to-return-rosetta-stone/101719316",
+      "accessed": "2026-10-01",
+      "publisher": "ABC News (Australia)"
+    },
+    {
+      "id": "bm-conserve",
+      "title": "Ptolemaic: History Uncovered in Conserving the Rosetta Stone (British Museum text, reproduced in a SUNY Nassau course)",
+      "url": "https://courses.lumenlearning.com/suny-ncc-zeliart/chapter/ptolemaic-history-uncovered-in-conserving-the-rosetta-stone/",
+      "accessed": "2026-10-01",
+      "publisher": "British Museum (text reproduced by Lumen Learning)"
+    },
+    {
+      "id": "etym",
+      "title": "Rosetta Stone (Online Etymology Dictionary)",
+      "url": "https://www.etymonline.com/word/Rosetta%20Stone",
+      "accessed": "2026-10-01",
+      "publisher": "Online Etymology Dictionary"
+    },
+    {
+      "id": "mw",
+      "title": "Rosetta stone (Merriam-Webster dictionary entry)",
+      "url": "https://www.merriam-webster.com/dictionary/Rosetta%20stone",
+      "accessed": "2026-10-01",
+      "publisher": "Merriam-Webster"
+    },
+    {
+      "id": "natl26",
+      "title": "What is the Rosetta Stone and why does Egypt want it back?",
+      "url": "https://www.thenationalnews.com/arts-culture/2026/07/16/what-is-the-rosetta-stone-and-why-does-egypt-want-it-back/",
+      "accessed": "2026-10-01",
+      "publisher": "The National"
+    },
+    {
+      "id": "natl-oct22",
+      "title": "British Museum moves Rosetta Stone to new exhibition for first time in 18 years",
+      "url": "https://www.thenationalnews.com/world/uk-news/2022/10/02/british-museum-moves-rosetta-stone-to-new-exhibition-for-first-time-in-18-years/",
+      "accessed": "2026-10-01",
+      "publisher": "The National"
+    },
+    {
+      "id": "arce",
+      "title": "The Rosetta Stone: Unlocking the Ancient Egyptian Language (Foy Scalf, Oriental Institute, University of Chicago)",
+      "url": "https://arce.org/resource/rosetta-stone-unlocking-ancient-egyptian-language/",
+      "accessed": "2026-10-01",
+      "publisher": "American Research Center in Egypt"
+    },
+    {
+      "id": "brit-hiero",
+      "title": "Hieroglyph",
+      "url": "https://www.britannica.com/topic/hieroglyph",
+      "accessed": "2026-10-01",
+      "publisher": "Encyclopaedia Britannica"
+    },
+    {
+      "id": "carnegie",
+      "title": "Indiana Jones and the Rosetta Stone",
+      "url": "https://carnegiemnh.org/indiana-jones-and-the-rosetta-stone/",
+      "accessed": "2026-10-01",
+      "publisher": "Carnegie Museum of Natural History (staff blog)"
+    },
+    {
+      "id": "rcp",
+      "title": "Thomas Young and the decipherment of hieroglyphics",
+      "url": "https://history.rcp.ac.uk/blog/thomas-young-and-decipherment-hieroglyphics",
+      "accessed": "2026-10-01",
+      "publisher": "Royal College of Physicians Museum"
+    },
+    {
+      "id": "past",
+      "title": "Deciphering the decipherers: Young versus Champollion",
+      "url": "https://the-past.com/feature/deciphering-the-decipherers-young-versus-champollion/",
+      "accessed": "2026-10-01",
+      "publisher": "The Past"
+    },
+    {
+      "id": "aljaz",
+      "title": "'Act of plunder': Egyptians want the Rosetta Stone back",
+      "url": "https://www.aljazeera.com/news/2022/11/30/after-220-years-egypt-demands-the-return-of-the-rosetta-stone",
+      "accessed": "2026-10-01",
+      "publisher": "Al Jazeera"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "rosetta-stone",
+      "title": "The Rosetta Stone",
+      "type": "object",
+      "cluster": "stone",
+      "featured": true,
+      "summary": "A broken slab of stone carrying one royal decree in three kinds of writing. It is the most famous object in the British Museum for one reason: it let people read ancient Egyptian again.",
+      "details": "Catalogued as EA 24. The name comes from Rashid, which the French called Rosetta, where it was found.",
+      "evidence": "\"Part of grey and pink granodiorite stela bearing priestly decree concerning Ptolemy V in three blocks of text\" (British Museum record).",
+      "sources": [
+        "bm-obj",
+        "bm-blog"
+      ],
+      "themes": [
+        "object"
+      ]
+    },
+    {
+      "id": "three-scripts",
+      "title": "One decree, three scripts",
+      "type": "concept",
+      "cluster": "stone",
+      "featured": true,
+      "summary": "The same message is written in hieroglyphs, in the everyday Demotic script and in Greek. Because scholars could read Greek, the Greek could be used to pry open the other two.",
+      "details": "The British Museum calls hieroglyphs the sacred script suited to a priestly decree and Demotic the 'language of the people'; Greek was the language of the Greek-speaking rulers.",
+      "evidence": "Hieroglyphic (14 lines), Demotic (32 lines) and Greek (54 lines).",
+      "sources": [
+        "bm-obj",
+        "bm-blog"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "gaps",
+      "title": "Broken and incomplete",
+      "type": "condition",
+      "cluster": "stone",
+      "summary": "The stone is only a broken part of a bigger slab, and the British Museum says its hieroglyphic text is only partially preserved. That is why decoders needed other inscriptions to find enough royal names.",
+      "details": "In his 1822 letter, Champollion says the hieroglyphic text could not be used for his research beyond the single name Ptolemy because of its damage (translation by Rhys Bryant).",
+      "evidence": "\"The Rosetta Stone was found broken and incomplete.\" (British Museum blog)",
+      "sources": [
+        "bm-blog",
+        "champ-letter"
+      ],
+      "themes": [
+        "object",
+        "writing"
+      ]
+    },
+    {
+      "id": "material",
+      "title": "Granodiorite or basalt?",
+      "type": "puzzle",
+      "cluster": "stone",
+      "summary": "Sources describe the stone's rock differently: the British Museum says grey and pink granodiorite, Britannica says black granite and captions it basalt, and Merriam-Webster says black basalt.",
+      "details": "ARCE, the Carnegie Museum blog and The National (2026) also say granodiorite; ABC and Al Jazeera say dark grey granite. Per Wikipedia, later coats of chalk and carnauba wax darkened the stone and caused it to be mistaken for black basalt. The British Museum's conservation text (1999 cleaning) describes the cleaned stone as having 'a dark grey-pinkish tone with a pink streak running through it' but does not discuss basalt. This story does not settle the question; the museum's record, as the holder's own identification, says granodiorite.",
+      "evidence": "Britannica: \"black granite\". Merriam-Webster: \"a black basalt stone\". British Museum record: \"grey and pink granodiorite\".",
+      "sources": [
+        "bm-obj",
+        "brit",
+        "mw",
+        "arce",
+        "carnegie",
+        "natl26",
+        "bm-conserve",
+        "wiki"
+      ],
+      "themes": [
+        "object",
+        "disagreement"
+      ]
+    },
+    {
+      "id": "ptolemy-v",
+      "title": "Ptolemy V, the boy king",
+      "type": "person",
+      "cluster": "decree",
+      "summary": "A Macedonian rather than Egyptian king of Egypt, only a teenager when the decree was passed, whom the priests were asked to back as a divine ruler.",
+      "details": "The British Museum gives his reign as 204 to 181 BC and the Carnegie Museum blog also gives 204-181 B.C.E.; Britannica gives 205 to 180 BCE. ARCE says he inherited the throne when his father died in 204 BCE. This story uses the museum's figures and does not resolve the one-year difference.",
+      "evidence": "\"the 13 year-old Ptolemy V\" (British Museum record)",
+      "when": "reigned 204-181 BC (British Museum)",
+      "start": "-0204",
+      "end": "-0181",
+      "sources": [
+        "bm-obj",
+        "bm-blog",
+        "brit",
+        "carnegie",
+        "arce"
+      ],
+      "themes": [
+        "Ptolemaic Egypt"
+      ]
+    },
+    {
+      "id": "memphis-decree",
+      "title": "The decree of 27 March 196 BC",
+      "type": "event",
+      "cluster": "decree",
+      "featured": true,
+      "summary": "A council of priests at Memphis confirmed Ptolemy V's divine honours in return for his good deeds. It was a political bargain, and copies were meant for every sizeable temple.",
+      "details": "The British Museum says the decree marks the first anniversary of the coronation. ARCE (Foy Scalf) instead says the synod met to celebrate the coronation of the previous day at Memphis, and Britannica says the text was written in the ninth year of his reign to commemorate his accession; these accounts are not reconciled here. The British Museum reports that a copy was to be placed in every sizeable temple, though whether that happened is unknown.",
+      "evidence": "\"Issued on 27 March 196 BC, influential priests of a temple in Memphis, Egypt, gave king Ptolemy V (r. 204–181 BC) divine honours\" (British Museum), in return for his good deeds to the country.",
+      "when": "27 March 196 BC",
+      "start": "-0196-03-27",
+      "sources": [
+        "bm-timeline",
+        "bm-blog",
+        "bm-obj",
+        "arce",
+        "brit"
+      ],
+      "themes": [
+        "Ptolemaic Egypt",
+        "writing"
+      ]
+    },
+    {
+      "id": "great-rebellion",
+      "title": "The Great Rebellion",
+      "type": "event",
+      "cluster": "decree",
+      "summary": "An Egyptian uprising against Ptolemaic rule that rumbled on for nearly twenty years. The decree is not just boilerplate: it recounts real events from the troubled reign, which is why the king needed the priests.",
+      "evidence": "\"a sweeping Egyptian uprising that challenged Ptolemaic rule for nearly two decades (204–186 BC)\"",
+      "when": "204-186 BC (British Museum)",
+      "start": "-0204",
+      "end": "-0186",
+      "sources": [
+        "bm-blog"
+      ],
+      "themes": [
+        "Ptolemaic Egypt"
+      ]
+    },
+    {
+      "id": "sister-stelae",
+      "title": "Other copies of the decree",
+      "type": "concept",
+      "cluster": "decree",
+      "summary": "The Rosetta Stone was never unique. Other stones carry the same decree or very similar ones, and some of them preserve the hieroglyphic text that is missing here.",
+      "details": "The British Museum adds that the text is a partial copy of a prototype written about a century earlier, in the 3rd century BC, so in places only dates and names were changed.",
+      "evidence": "\"To date, 29 of these decrees on stones have been discovered across Egypt, starting with the Rosetta Stone in 1799.\" The same page says 22 of them remain in Egypt.",
+      "sources": [
+        "bm-blog"
+      ],
+      "themes": [
+        "writing",
+        "Ptolemaic Egypt"
+      ]
+    },
+    {
+      "id": "last-hieroglyph",
+      "title": "The last hieroglyphs",
+      "type": "event",
+      "cluster": "lost",
+      "summary": "Around the end of the 4th century the old temple scripts stopped being used, and with them the ability to read ancient Egyptian.",
+      "details": "Britannica's hieroglyph article also dates the last known use to 394 CE. Per Wikipedia, the inscription is the Graffito of Esmet-Akhom, dated 24 August 394.",
+      "evidence": "\"The last known hieroglyphic inscription is a graffito by a priest at Philae temple dated to AD 394.\"",
+      "when": "AD 394",
+      "start": "394",
+      "sources": [
+        "bm-timeline",
+        "brit-hiero",
+        "wiki"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "coptic",
+      "title": "Coptic takes over",
+      "type": "concept",
+      "cluster": "lost",
+      "summary": "Egyptians began writing their own language with Greek letters plus a few Demotic signs. That script, Coptic, outlived hieroglyphs and later turned out to be a vital clue to what the old language sounded like.",
+      "evidence": "\"Greek and Coptic gradually replaced other forms of Egyptian writing, including hieroglyphs.\"",
+      "when": "alphabetic system in place by AD 100",
+      "start": "100",
+      "sources": [
+        "bm-timeline",
+        "bm-blog"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "symbols-myth",
+      "title": "Hieroglyphs as pure symbols",
+      "type": "misreading",
+      "cluster": "lost",
+      "summary": "For centuries European scholars studied the signs as picture-ideas rather than as writing that stood for sounds. That assumption kept attempts at decipherment stuck.",
+      "details": "Medieval Arab scholars tried to decipher the signs from the AD 900s, according to the British Museum. Britannica's hieroglyph article says Athanasius Kircher, in the mid-1600s, assumed the signs were phonetic but correctly identified only one symbol. Per Wikipedia, a 5th-century work by Horapollo was long treated as an authority yet was misleading.",
+      "evidence": "\"European scholars still believed that hieroglyphs represented concepts as symbols, rather than a written language.\"",
+      "when": "1400-1700",
+      "start": "1400",
+      "end": "1700",
+      "sources": [
+        "bm-timeline",
+        "brit-hiero",
+        "wiki"
+      ],
+      "themes": [
+        "writing",
+        "misreading"
+      ]
+    },
+    {
+      "id": "napoleon-egypt",
+      "title": "Napoleon invades Egypt",
+      "type": "event",
+      "cluster": "capture",
+      "summary": "The French expedition of 1798 came with soldiers and also with scholars and scientists, which is how a soldier's find became a scholarly object within days.",
+      "details": "The British Museum says the invasion was meant to cut off Britain's trade route to India via the Red Sea.",
+      "evidence": "\"Napoleon Bonaparte invaded Egypt in 1798, bringing with him 40,000 troops\"; \"He unusually also brought a large team of scholars and scientists\"",
+      "when": "1798-1801",
+      "start": "1798",
+      "end": "1801",
+      "sources": [
+        "bm-timeline",
+        "bm-blog"
+      ],
+      "themes": [
+        "empire"
+      ]
+    },
+    {
+      "id": "find-1799",
+      "title": "Found at Fort Saint-Julien",
+      "type": "event",
+      "cluster": "capture",
+      "featured": true,
+      "summary": "French soldiers working on a fort at Rashid (Rosetta) pulled the slab out of old masonry, and their officer saw at once that it mattered.",
+      "details": "The British Museum says it had apparently been built into a very old wall. The National (2026) reports that Egypt's Ministry of Tourism and Antiquities marks the discovery on 19 July, the date mentioned in an early French report announcing the find. ARCE and Wikipedia both say July 1799; Britannica says August 1799 (see the next node).",
+      "evidence": "\"found by accident by soldiers on 15 July 1799 while digging the foundations of an addition to a fort near Rashid (Rosetta)\" (British Museum, which calls this the most generally accepted account)",
+      "when": "15 July 1799 (most generally accepted)",
+      "start": "1799-07-15",
+      "sources": [
+        "bm-blog",
+        "bm-timeline",
+        "bm-obj",
+        "natl26",
+        "arce",
+        "wiki"
+      ],
+      "themes": [
+        "discovery"
+      ]
+    },
+    {
+      "id": "find-dates",
+      "title": "When was it found? Sources differ",
+      "type": "puzzle",
+      "cluster": "capture",
+      "summary": "Even the discovery is slightly fuzzy: the British Museum calls the account of 15 July 1799 the most generally accepted, Britannica says August 1799, and Egypt's antiquities ministry marks 19 July.",
+      "details": "The National (July 2026) says 15 July is commonly accepted while the ministry marks the event on 19 July, the date in an early French report. ARCE says only 'July 1799'. None of the sources read here resolves the exact day; this story follows the British Museum's wording and labels it 'most generally accepted'.",
+      "evidence": "British Museum: \"accounts of the Stone's discovery in July 1799 are now rather vague\". Britannica: \"in August 1799\".",
+      "sources": [
+        "bm-blog",
+        "brit",
+        "natl26"
+      ],
+      "themes": [
+        "disagreement",
+        "discovery"
+      ]
+    },
+    {
+      "id": "copies-prints",
+      "title": "Copies fly around Europe",
+      "type": "event",
+      "cluster": "capture",
+      "summary": "Before the stone left Egypt, French experts made prints from it, and later plaster casts and prints reached scholars across Europe. Decipherment began on paper copies, not at the stone.",
+      "details": "The British Museum's conservation text says that after the 1799 discovery printer's ink was applied to the stone and paper laid over it, giving a copy of the text in reverse. Per Wikipedia, Nicolas-Jacques Conté used the stone itself as a printing block, and in 1802 the Society of Antiquaries made four plaster casts for universities.",
+      "evidence": "\"Prints and casts of the Rosetta Stone were distributed across Europe\" (British Museum)",
+      "when": "1800-1802",
+      "start": "1800",
+      "end": "1802",
+      "sources": [
+        "bm-timeline",
+        "bm-conserve",
+        "rcp",
+        "wiki"
+      ],
+      "themes": [
+        "discovery",
+        "writing"
+      ]
+    },
+    {
+      "id": "treaty-1801",
+      "title": "The 1801 surrender",
+      "type": "event",
+      "cluster": "capture",
+      "summary": "After the French lost to the British, the stone passed into British hands under a surrender agreement in 1801. Sources name the agreement differently and do not give one detailed account of the physical hand-over.",
+      "details": "The British Museum, ARCE, Al Jazeera and The National (2026) call it the Treaty of Alexandria; ABC calls it an 1801 surrender deal between the generals of the two sides; Britannica says only that the stone passed to the British after the French surrender of Egypt in 1801. Wikipedia calls it the Capitulation of Alexandria, dates Menou's surrender to 30 August 1801, and says contemporary accounts differ on how the stone was transferred. The National (Nov 2022) says Britain acquired it 'under a treaty in 1802'; the other sources give 1801.",
+      "evidence": "\"the Stone became the property of the British under the terms of the Treaty of Alexandria (1801)\"",
+      "when": "1801",
+      "start": "1801",
+      "sources": [
+        "bm-blog",
+        "arce",
+        "natl26",
+        "aljaz",
+        "brit",
+        "abc",
+        "natl",
+        "wiki"
+      ],
+      "themes": [
+        "empire",
+        "ownership"
+      ]
+    },
+    {
+      "id": "arrival-london",
+      "title": "To London, 1802",
+      "type": "event",
+      "cluster": "capture",
+      "summary": "A ship carried the stone to Portsmouth, and it was presented to the British Museum within months, along with other French-collected antiquities.",
+      "evidence": "\"arrived in Portsmouth in February 1802. It was presented to the British Museum by George III in July of that year.\"",
+      "when": "February-July 1802",
+      "start": "1802-02",
+      "sources": [
+        "bm-blog",
+        "wiki"
+      ],
+      "themes": [
+        "ownership"
+      ]
+    },
+    {
+      "id": "greek-first",
+      "title": "The Greek is read first",
+      "type": "event",
+      "cluster": "decode",
+      "summary": "Scholars could already read Greek, so the bottom text gave the meaning of the decree almost at once. The first published translations of the Greek appeared in 1803.",
+      "details": "The Carnegie Museum blog says Hubert-Pascal Ameilhon published the first translation of the Greek text in 1803 and that unfamiliar religious and administrative jargon slowed the work. Per Wikipedia only, Stephen Weston gave a spoken English translation in April 1802 and Christian Gottlob Heyne published a Latin one in 1803; we found no independent source for those two.",
+      "evidence": "\"Scholars from the previous 18th century had been longing to find a bilingual text written in a known language\" (Ilona Regulski, British Museum, quoted by ABC)",
+      "when": "April 1802 to 1803",
+      "start": "1802-04",
+      "end": "1803",
+      "sources": [
+        "carnegie",
+        "abc",
+        "bm-blog",
+        "wiki"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "demotic-names",
+      "title": "Names found in the Demotic",
+      "type": "event",
+      "cluster": "decode",
+      "summary": "Two European scholars compared the middle text with the Greek names and picked out proper names such as Ptolemy. It was real progress on the middle script, but the rest stayed unread.",
+      "details": "Britannica says Silvestre de Sacy and Åkerblad identified a number of proper names in the demotic text and that Åkerblad correctly assigned phonetic values to a few signs. The Carnegie Museum blog says Åkerblad proposed an alphabet of 29 letters, half of them correct. The 1802 date and the count of five names identified by Silvestre de Sacy are per Wikipedia only. Champollion's 1822 letter credits them both.",
+      "evidence": "Champollion thanks \"Mr. Sylvestre de Sacy ... Mr. Akerblad and Dr. Young, whose first conclusions were drawn from this monument\" (translation).",
+      "when": "1802 (per Wikipedia)",
+      "start": "1802",
+      "sources": [
+        "brit-hiero",
+        "carnegie",
+        "arce",
+        "champ-letter",
+        "wiki"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "young-ptolemy",
+      "title": "Young reads \"Ptolemy\"",
+      "type": "event",
+      "cluster": "decode",
+      "summary": "The English physicist Thomas Young was one of the first to show that some hieroglyphs on the stone spelled sounds, namely the royal name Ptolemy, according to the British Museum. It was an early bridge from the picture signs to sound.",
+      "details": "The Royal College of Physicians Museum says Young turned to the stone in 1814 and published his findings in 1819 in an 'Egypt' supplement for the Encyclopaedia Britannica, with proposed phonetic values for 13 hieroglyphs cautiously labelled 'Sounds?'. Britannica says Young identified the cartouche as the name of Ptolemy and showed that cartouches held royal names. In 1822 Champollion said Young's research on the stone presented \"a series of very important results\" (citing the December 1819 Britannica Supplement), yet judged his syllable theory \"quite inapplicable\" to many names.",
+      "evidence": "\"one of the first to show that some of the hieroglyphs on the Rosetta Stone wrote the sounds of a royal name, that of Ptolemy\" (British Museum)",
+      "when": "about 1814-1819",
+      "start": "1814",
+      "end": "1819",
+      "sources": [
+        "bm-blog",
+        "brit",
+        "rcp",
+        "champ-letter"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "philae-cleopatra",
+      "title": "A second royal name: Cleopatra",
+      "type": "event",
+      "cluster": "decode",
+      "summary": "The damaged stone only offered Ptolemy. An obelisk from Philae, moved to England, with a Greek-inscribed pedestal, supplied a second royal name, a queen's, which Champollion took to be Cleopatra, and with two names sharing letters the signs could be cross-checked.",
+      "details": "Per Wikipedia, William John Bankes had tentatively noted the two names on the obelisk and Champollion saw copies in 1822 (not independently checked). In the letter, Champollion explains that two names with letters in common were what he needed.",
+      "evidence": "\"The obelisk found on the island of Philae, and recently moved to London, also contains a hieroglyphic name Ptolemy\" (Champollion, translation)",
+      "when": "1822",
+      "start": "1822",
+      "sources": [
+        "champ-letter",
+        "wiki"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "breakthrough",
+      "title": "Champollion's breakthrough",
+      "type": "event",
+      "cluster": "decode",
+      "featured": true,
+      "summary": "On 14 September 1822 Jean-François Champollion worked out that hieroglyphs record the sounds of the Egyptian language, not just ideas. According to the British Museum's account he burst out with a famous line before collapsing.",
+      "details": "ARCE (Foy Scalf) calls the scene a legend recounted by Champollion's nephew, in which he shouted \"I've got it!\" and then fainted for nearly a week; the British Museum timeline tells it as fact, with the date 14 September 1822. Treat the anecdote as tradition, not documented detail.",
+      "evidence": "\"Je tiens l'affaire, vois!\" (Look, I've got it!) (British Museum timeline)",
+      "when": "14 September 1822",
+      "start": "1822-09-14",
+      "sources": [
+        "bm-timeline",
+        "bm-blog",
+        "arce",
+        "wiki"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "dacier-letter",
+      "title": "The Letter to M. Dacier",
+      "type": "document",
+      "cluster": "decode",
+      "summary": "Champollion's printed letter explaining the phonetic hieroglyphic alphabet was read in public on 27 September 1822. The British Museum treats that reading as the moment of decipherment.",
+      "details": "The British Museum blog says Thomas Young was in the audience. The published booklet appeared from Firmin Didot in Paris in 1822.",
+      "evidence": "\"The public reading of this letter on 27 September 1822 is considered the moment of decipherment.\"",
+      "when": "27 September 1822",
+      "start": "1822-09-27",
+      "sources": [
+        "bm-timeline",
+        "bm-blog",
+        "champ-letter"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "coptic-key",
+      "title": "Sounds, names and Coptic",
+      "type": "concept",
+      "cluster": "decode",
+      "summary": "Champollion's second step was to show that the sound-signs spelled Egyptian names too, not just foreign ones. Armed with Coptic, he could start reading real inscriptions.",
+      "details": "ARCE says Champollion used his Coptic to deduce the reading of the hieroglyphic word for 'to give birth' (ms), which let him read the cartouches of Ramses and Thutmosis in their original language, the first person to do so in well over a millennium.",
+      "evidence": "\"Together with his knowledge of the Coptic language ... this allowed him to begin reading hieroglyphic inscriptions fully.\" (British Museum, abridged)",
+      "when": "1822-1824",
+      "start": "1822",
+      "end": "1824",
+      "sources": [
+        "bm-blog",
+        "arce"
+      ],
+      "themes": [
+        "writing"
+      ]
+    },
+    {
+      "id": "credit-dispute",
+      "title": "Young or Champollion?",
+      "type": "dispute",
+      "cluster": "decode",
+      "summary": "Who deserves the credit has been argued since the 1820s. Britannica says the decipherment was largely the work of both men; the British Museum gives Champollion the decisive step.",
+      "details": "The Royal College of Physicians Museum says Young, stung by the lack of acknowledgement, published a book in 1823 with the subtitle 'Including the author's original alphabet, as extended by Mr Champollion'; The Past dates it April 1823 and says Champollion offended Young by 'conspicuously downplaying his work' in the letter. The RCP adds that how far Young's article influenced Champollion is 'fiercely disputed'. ARCE says Champollion 'led the final breakthrough'. Champollion's letter does name Young.",
+      "evidence": "Britannica: \"The decipherment was largely the work of Thomas Young of England and Jean-François Champollion of France.\"",
+      "when": "from 1823",
+      "start": "1823",
+      "sources": [
+        "brit",
+        "bm-blog",
+        "champ-letter",
+        "rcp",
+        "past",
+        "arce"
+      ],
+      "themes": [
+        "disagreement",
+        "writing"
+      ]
+    },
+    {
+      "id": "bm-display",
+      "title": "On show since 1802",
+      "type": "event",
+      "cluster": "afterlife",
+      "summary": "The stone has been on public view almost continuously since 1802. Even a wartime evacuation could not keep it away for long.",
+      "details": "The British Museum blog records one break: in 1917 it was moved to safety. Ilona Regulski told The National in 2022 that it was also at the Louvre in Paris 'for a very brief period' in 1972. Per Wikipedia, that was a month-long loan for the 150th anniversary of Champollion's letter, and the stone is the museum's most-visited single object.",
+      "evidence": "\"on display in the British Museum since 1802, with only one break\"; in 1917 it spent two years \"in a station on the Postal Tube Railway 50 feet below the ground at Holborn\"",
+      "when": "1802 onward",
+      "start": "1802",
+      "sources": [
+        "bm-blog",
+        "natl-oct22",
+        "wiki"
+      ],
+      "themes": [
+        "ownership",
+        "object"
+      ]
+    },
+    {
+      "id": "cleaning-1999",
+      "title": "The 1999 cleaning",
+      "type": "event",
+      "cluster": "afterlife",
+      "summary": "When the stone became the centrepiece of the museum's Cracking Codes exhibition in 1999, conservators cleaned off layers left by two centuries of copying and handling, including carnauba wax and printer's ink.",
+      "details": "The British Museum's conservation text also lists white paint applied in 1981, removed with cotton swabs and purified water, and says a small square at the bottom left was left untouched to show the darkened wax. Wikipedia instead describes white chalk on the inscriptions and says the cleaning revealed the original dark grey tint and a pink vein; the museum text does not mention chalk. Per Wikipedia only, the work was done in the gallery so the stone stayed visible.",
+      "evidence": "\"Grease from human handling, a coating of carnauba wax from the early 1800s and printer’s ink from 1799 were cleaned away\" (British Museum conservation text).",
+      "when": "1999",
+      "start": "1999",
+      "sources": [
+        "bm-conserve",
+        "wiki"
+      ],
+      "themes": [
+        "object"
+      ]
+    },
+    {
+      "id": "return-claims",
+      "title": "Calls to send it home",
+      "type": "dispute",
+      "cluster": "afterlife",
+      "featured": true,
+      "summary": "In November 2022 The National reported that Zahi Hawass, a former Egyptian antiquities minister, said 100,000 people had backed his petition and that he wanted a million signatures before sending it to the British Museum. ABC reported a second petition, by Monica Hanna, that calls the stone a \"spoil of war\".",
+      "details": "Per Wikipedia only, Hawass first called for the stone's return in July 2003, and in 2005 the British Museum gave Egypt a replica; we found no independent source for either. The National (2026) says the Rashid National Museum displays a replica, without dating it. ABC (30 Nov 2022) reported more than 100,000 signatures for Hawass's petition and 4,200 for Hanna's. The National (2026) cites Egyptian newspaper Al Shorouk for about 350,000 signatures.",
+      "evidence": "Hawass: \"The Rosetta Stone is the icon of our identity as Egyptians\" (The National, 2022).",
+      "when": "2003 (per Wikipedia) to 2022 and after",
+      "start": "2003-07",
+      "end": "2022",
+      "sources": [
+        "natl",
+        "abc",
+        "natl26",
+        "wiki"
+      ],
+      "themes": [
+        "ownership"
+      ]
+    },
+    {
+      "id": "bm-reply",
+      "title": "The museum's reply",
+      "type": "claim",
+      "cluster": "afterlife",
+      "summary": "The British Museum rejects the idea that Egypt had no say in 1801, citing an Egyptian representative and an Ottoman admiral in the treaty, and says it has received no formal request from Egypt's government.",
+      "details": "The two reports word the museum's statement differently. Al Jazeera says the treaty included the signature of an Ottoman admiral who fought alongside the British, whom the museum argued represented Egypt because the Ottoman sultan nominally ruled Egypt. The National (2022) says the museum's position is that it has never received a formal request to repatriate the stone; ABC says Egypt's government had not submitted a request.",
+      "evidence": "\"The museum said the 1801 treaty included the signature of a representative of Egypt\" (ABC), and that the treaty refers to an Ottoman admiral who had fought alongside the British against the French.",
+      "when": "2022",
+      "start": "2022",
+      "sources": [
+        "abc",
+        "natl",
+        "aljaz"
+      ],
+      "themes": [
+        "ownership",
+        "disagreement"
+      ]
+    },
+    {
+      "id": "idiom",
+      "title": "\"A Rosetta Stone\" for anything",
+      "type": "idea",
+      "cluster": "afterlife",
+      "summary": "The name has become a metaphor for anything that provides the key to understanding a hard code or puzzle.",
+      "details": "Merriam-Webster says the figurative use dates from the early 20th century. Per Wikipedia, the Oxford English Dictionary traces the first figurative use to the 1902 Encyclopædia Britannica; the OED entry itself could not be read (subscription site), so that attribution is unverified. The National (2026) says the decipherment made the stone a metaphor in popular science for a hard-to-solve puzzle or code.",
+      "evidence": "Online Etymology Dictionary: the term used figuratively for \"something which provides the key to previously unattainable understanding\" (1902).",
+      "when": "1902 onward",
+      "start": "1902",
+      "sources": [
+        "etym",
+        "mw",
+        "natl26",
+        "arce",
+        "wiki"
+      ],
+      "themes": [
+        "legacy"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "rosetta-stone",
+      "target": "three-scripts",
+      "label": "is inscribed in",
+      "kind": "explicit",
+      "sources": [
+        "bm-obj"
+      ]
+    },
+    {
+      "source": "rosetta-stone",
+      "target": "gaps",
+      "label": "survives only as",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "rosetta-stone",
+      "target": "material",
+      "label": "is made of",
+      "kind": "explicit",
+      "sources": [
+        "bm-obj",
+        "brit"
+      ]
+    },
+    {
+      "source": "material",
+      "target": "cleaning-1999",
+      "label": "was clarified by",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "memphis-decree",
+      "target": "rosetta-stone",
+      "label": "is carved on",
+      "kind": "explicit",
+      "sources": [
+        "bm-timeline",
+        "bm-obj"
+      ]
+    },
+    {
+      "source": "memphis-decree",
+      "target": "ptolemy-v",
+      "label": "gave divine honours to",
+      "kind": "explicit",
+      "sources": [
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "memphis-decree",
+      "target": "three-scripts",
+      "label": "was written in",
+      "kind": "explicit",
+      "sources": [
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "great-rebellion",
+      "target": "memphis-decree",
+      "label": "is recounted in",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "ptolemy-v",
+      "target": "great-rebellion",
+      "label": "reigned during",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "memphis-decree",
+      "target": "sister-stelae",
+      "label": "was repeated on",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "sister-stelae",
+      "target": "gaps",
+      "label": "help restore text missing from",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "last-hieroglyph",
+      "target": "symbols-myth",
+      "label": "then",
+      "kind": "explicit",
+      "sources": [
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "coptic",
+      "target": "last-hieroglyph",
+      "label": "gradually replaced hieroglyphs before",
+      "kind": "explicit",
+      "sources": [
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "coptic",
+      "target": "coptic-key",
+      "label": "became a key in",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "symbols-myth",
+      "target": "breakthrough",
+      "label": "was overturned by",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog",
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "napoleon-egypt",
+      "target": "find-1799",
+      "label": "led to",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog",
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "find-1799",
+      "target": "rosetta-stone",
+      "label": "uncovered",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "find-1799",
+      "target": "find-dates",
+      "label": "is dated differently in",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog",
+        "brit"
+      ]
+    },
+    {
+      "source": "find-1799",
+      "target": "copies-prints",
+      "label": "prompted",
+      "kind": "explicit",
+      "sources": [
+        "wiki",
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "napoleon-egypt",
+      "target": "copies-prints",
+      "label": "brought the experts who made",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "napoleon-egypt",
+      "target": "treaty-1801",
+      "label": "ended with",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "treaty-1801",
+      "target": "arrival-london",
+      "label": "brought the stone to",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "arrival-london",
+      "target": "copies-prints",
+      "label": "prompted further casts in",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "arrival-london",
+      "target": "bm-display",
+      "label": "led to",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "three-scripts",
+      "target": "greek-first",
+      "label": "let scholars start from",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "copies-prints",
+      "target": "greek-first",
+      "label": "let scholars attempt",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "copies-prints",
+      "target": "demotic-names",
+      "label": "let scholars attempt",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "greek-first",
+      "target": "demotic-names",
+      "label": "gave the base text for",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "demotic-names",
+      "target": "young-ptolemy",
+      "label": "had its method extended by",
+      "kind": "inferred"
+    },
+    {
+      "source": "young-ptolemy",
+      "target": "breakthrough",
+      "label": "paved the way for",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "gaps",
+      "target": "philae-cleopatra",
+      "label": "pushed scholars to",
+      "kind": "explicit",
+      "sources": [
+        "champ-letter"
+      ]
+    },
+    {
+      "source": "philae-cleopatra",
+      "target": "breakthrough",
+      "label": "supplied the second name for",
+      "kind": "explicit",
+      "sources": [
+        "champ-letter",
+        "wiki"
+      ]
+    },
+    {
+      "source": "breakthrough",
+      "target": "dacier-letter",
+      "label": "was announced in",
+      "kind": "explicit",
+      "sources": [
+        "bm-timeline"
+      ]
+    },
+    {
+      "source": "breakthrough",
+      "target": "coptic-key",
+      "label": "was extended by",
+      "kind": "explicit",
+      "sources": [
+        "bm-blog"
+      ]
+    },
+    {
+      "source": "dacier-letter",
+      "target": "young-ptolemy",
+      "label": "credits",
+      "kind": "explicit",
+      "sources": [
+        "champ-letter",
+        "wiki"
+      ]
+    },
+    {
+      "source": "credit-dispute",
+      "target": "dacier-letter",
+      "label": "criticised the credit in",
+      "kind": "explicit",
+      "sources": [
+        "past",
+        "rcp"
+      ]
+    },
+    {
+      "source": "young-ptolemy",
+      "target": "credit-dispute",
+      "label": "is contested in",
+      "kind": "explicit",
+      "sources": [
+        "rcp",
+        "brit"
+      ]
+    },
+    {
+      "source": "rosetta-stone",
+      "target": "idiom",
+      "label": "became a metaphor in",
+      "kind": "explicit",
+      "sources": [
+        "etym",
+        "mw"
+      ]
+    },
+    {
+      "source": "idiom",
+      "target": "three-scripts",
+      "label": "borrows the idea of",
+      "kind": "inferred"
+    },
+    {
+      "source": "bm-display",
+      "target": "cleaning-1999",
+      "label": "included conservation in",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "bm-display",
+      "target": "return-claims",
+      "label": "is the target of",
+      "kind": "explicit",
+      "sources": [
+        "natl"
+      ]
+    },
+    {
+      "source": "treaty-1801",
+      "target": "return-claims",
+      "label": "is challenged by",
+      "kind": "explicit",
+      "sources": [
+        "abc"
+      ]
+    },
+    {
+      "source": "return-claims",
+      "target": "bm-reply",
+      "label": "was answered by",
+      "kind": "explicit",
+      "sources": [
+        "abc",
+        "natl"
+      ]
+    },
+    {
+      "source": "treaty-1801",
+      "target": "bm-reply",
+      "label": "is defended in",
+      "kind": "explicit",
+      "sources": [
+        "abc"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "why-three-scripts",
+      "title": "Why three scripts mattered",
+      "summary": "A decree repeated in three scripts was ordinary administration in 196 BC. After some 1,400 years it was the one text where a known language sat next to two unknown ones.",
+      "steps": [
+        "memphis-decree",
+        "three-scripts",
+        "greek-first",
+        "demotic-names",
+        "young-ptolemy",
+        "breakthrough"
+      ]
+    },
+    {
+      "id": "found-and-copied",
+      "title": "Found, copied, carried off",
+      "summary": "Within three years of a soldier's chance find, the stone was inked, printed and copied for Europe's scholars, and then taken to London.",
+      "steps": [
+        "napoleon-egypt",
+        "find-1799",
+        "copies-prints",
+        "arrival-london"
+      ]
+    },
+    {
+      "id": "lost-script",
+      "title": "How a script was forgotten",
+      "summary": "Hieroglyphs were in use for nearly 3,000 years (per the British Museum), then Egyptian came to be written in Greek-letter Coptic, the old script was forgotten, and for centuries it was misread as picture symbols. Sound, not symbol, was the missing idea.",
+      "steps": [
+        "coptic",
+        "last-hieroglyph",
+        "symbols-myth",
+        "breakthrough",
+        "coptic-key"
+      ]
+    },
+    {
+      "id": "credit-quarrel",
+      "title": "Young or Champollion?",
+      "summary": "Two scholars worked on the same stone in two countries and each could claim part of the answer. The question of credit began almost as soon as the answer did.",
+      "steps": [
+        "young-ptolemy",
+        "breakthrough",
+        "dacier-letter",
+        "credit-dispute"
+      ]
+    },
+    {
+      "id": "whose-stone",
+      "title": "Whose stone is it?",
+      "summary": "The agreement that put the stone in London is the centre of today's dispute. Each side reads the same 1801 treaty differently.",
+      "steps": [
+        "treaty-1801",
+        "arrival-london",
+        "bm-display",
+        "return-claims",
+        "bm-reply"
+      ]
+    }
+  ]
+}

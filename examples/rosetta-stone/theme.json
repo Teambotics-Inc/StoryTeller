@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "Rosetta Stone: granodiorite and pink vein",
+  "mode": "dark",
+  "colors": { "bg": "#17181a", "surface": "#222427", "text": "#ecebe7", "muted": "#aeada7", "line": "rgba(236,235,231,0.16)", "accent": "#e58fa0" },
+  "clusters": {
+    "stone": "#e58fa0",
+    "decree": "#e3b866",
+    "lost": "#b3b8bf",
+    "capture": "#7fb7d9",
+    "decode": "#8fd19e",
+    "afterlife": "#c7a0e8"
+  },
+  "font": {
+    "body": "system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+    "display": "Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Times New Roman', serif"
+  },
+  "wordmark": { "text": "Rosetta Stone", "letterSpacing": "0.06em" },
+  "brandSources": [
+    { "what": "mode dark, bg #17181a, surface #222427", "from": "https://www.britishmuseum.org/collection/object/Y_EA24", "note": "An object has no brand. The British Museum record describes the stela as 'grey and pink granodiorite'; a dark slate canvas evokes the stone's grey body once the wax and chalk were removed. Chosen by judgement, not extracted from any site." },
+    { "what": "accent #e58fa0", "from": "same BM record ('pink' granodiorite); the pink vein across the top left corner is mentioned in the Wikipedia article on the 1999 cleaning", "note": "A soft pink picks up the stone's vein. Contrast on bg is well above 3:1. Not the British Museum's own brand colour; the page does not imitate the museum." },
+    { "what": "cluster colours", "from": "chosen by hand", "note": "Gold for the decree (royal/temple gilding), cool greys and blues for loss and capture, green for decipherment, lilac for the modern debate. All kept at least 3:1 on the dark background." },
+    { "what": "fonts", "from": "system stacks", "note": "Georgia-style serif for the wordmark (carved-inscription feel), system sans for body. No webfont, so the page works offline." }
+  ]
+}

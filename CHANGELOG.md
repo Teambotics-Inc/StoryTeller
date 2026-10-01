@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- New example: the Rosetta Stone (a historical object): independent sources for contested claims, Wikipedia-only details attributed, and open disagreements shown side by side.
+
 ## 1.0.0
 
 First public release.
