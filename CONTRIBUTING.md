@@ -26,6 +26,10 @@ node scripts/build.mjs examples/<name>  # rebuild an example after changing the 
 2. It must pass the build with **zero warnings**.
 3. Move it to `examples/<slug>/` and open a pull request that explains what the example demonstrates that the existing ones don't (a different subject kind, theme mode, view, or source situation).
 
+## The product page
+
+`site/` holds the product page. `node scripts/build-site.mjs` builds it into `site/dist` (set `SITE_URL` to add canonical and social-image URLs). `vercel.json` carries the static-hosting settings (build command, output directory, clean URLs, security headers), so any host that can run a Node build command and serve a folder will do. Example statistics on the page are read from each example, so rebuild the examples first if you change them.
+
 ## Reporting problems
 
 Open an issue with the subject you tried, what the agent produced, and what was wrong (a missing source, an unreadable colour, a broken view). A built `index.html` or the `story.json` helps.

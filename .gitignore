@@ -4,3 +4,7 @@ node_modules/
 *.log
 stories/*/raw/
 site/dist/
+.vercel
+
+.vercel
+.env*
