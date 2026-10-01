@@ -4,6 +4,8 @@
   "description": "Point an AI agent at this repo, name a subject, get an explorable, sourced story as one HTML file.",
   "private": true,
   "license": "MIT",
+  "author": "Teambotics",
+  "homepage": "https://storyteller.teambotics.app",
   "engines": {
     "node": ">=18"
   },

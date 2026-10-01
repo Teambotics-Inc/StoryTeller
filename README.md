@@ -1,5 +1,7 @@
 # StoryTeller
 
+Built with ❤️ by [Teambotics](https://www.teambotics.app)
+
 ![StoryTeller: point an AI agent at this repo, name a subject, get a sourced, explorable story as one HTML file](docs/social-preview.png)
 
 **Point your AI agent at this repo, name a subject, and get back an explorable, sourced story.**
