@@ -1,0 +1,1165 @@
+{
+  "schemaVersion": 1,
+  "title": "TribalScale",
+  "subject": {
+    "name": "TribalScale",
+    "kind": "company",
+    "url": "https://www.tribalscale.com/"
+  },
+  "tagline": "An explorable map of a company redesigning how products — and increasingly companies — get built.",
+  "root": "tribalscale",
+  "credit": "An independent StoryTeller study by Nikhil Khedkar.",
+  "disclaimer": "Built from TribalScale’s public work, capabilities, and thinking. Not affiliated with or endorsed by TribalScale.",
+  "generated": {
+    "date": "2026-09-30"
+  },
+  "clusters": [
+    {
+      "id": "identity",
+      "label": "Identity"
+    },
+    {
+      "id": "how-we-work",
+      "label": "How we work"
+    },
+    {
+      "id": "ai",
+      "label": "AI"
+    },
+    {
+      "id": "design",
+      "label": "Design"
+    },
+    {
+      "id": "engineering",
+      "label": "Engineering"
+    },
+    {
+      "id": "transformation",
+      "label": "Transformation"
+    },
+    {
+      "id": "work",
+      "label": "Work / evidence"
+    },
+    {
+      "id": "thinking",
+      "label": "Thinking"
+    },
+    {
+      "id": "outcomes",
+      "label": "Outcomes"
+    }
+  ],
+  "sources": [
+    {
+      "id": "home",
+      "title": "TribalScale — Global Innovation Partner",
+      "url": "https://www.tribalscale.com/",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "who",
+      "title": "Who We Are — Elite by Design. Human at Core.",
+      "url": "https://www.tribalscale.com/company/who-we-are",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "how",
+      "title": "How We Work — Fast. Precise. Always in Sync.",
+      "url": "https://www.tribalscale.com/company/how-we-work",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "agents",
+      "title": "AI Agent Development That Works at Enterprise Scale",
+      "url": "https://www.tribalscale.com/capabilities/ai-data/ai-agents",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "product",
+      "title": "Product Design That Turns Insight Into Delight",
+      "url": "https://www.tribalscale.com/capabilities/design-research/product-design",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "ux",
+      "title": "UX Research Services That Put People at the Centre",
+      "url": "https://www.tribalscale.com/capabilities/design-research/ux-research",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "ai-redesign",
+      "title": "Don't Add AI. Redesign the Company.",
+      "url": "https://www.tribalscale.com/insights/dont-add-ai-redesign-the-company",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "ai-native",
+      "title": "The AI-Native Enterprise: 12 Things You Must Do to Transform Your Company",
+      "url": "https://www.tribalscale.com/insights/ai-native-enterprise-12-things",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "embedded",
+      "title": "We Taught Enterprises to Build Like Startups. Now We're Teaching Them to Build With AI.",
+      "url": "https://www.tribalscale.com/insights/ai-transformation-embedded-teams",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "heather",
+      "title": "Advancing Innovation: AI-Powered Lean Product Design at TribalScale",
+      "url": "https://www.tribalscale.com/insights/advancing-innovation-ai-powered-lean-product-design-tribalscale",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "platform",
+      "title": "Building an Enterprise Agentic Platform for Delivery, Operations, and Personal Productivity",
+      "url": "https://www.tribalscale.com/work/enterprise-agentic-platform",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "terra",
+      "title": "Terra Energy — Accelerating Solar Expansion with AI-Powered Permit Automation",
+      "url": "https://www.tribalscale.com/work/terra-energy",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "mccain",
+      "title": "McCain Foods — Reinventing Quality at the Line",
+      "url": "https://www.tribalscale.com/work/mccain-ddh",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "aaa",
+      "title": "AAA — Driving Digital Transformation with Agile Delivery",
+      "url": "https://www.tribalscale.com/work/aaa",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "john-hancock",
+      "title": "John Hancock — Modernizing Wealth with Agile Transformation",
+      "url": "https://www.tribalscale.com/work/john-hancock",
+      "accessed": "2026-09-30"
+    },
+    {
+      "id": "pga",
+      "title": "PGA Tour — Pioneering Voice-First Sports Experiences",
+      "url": "https://www.tribalscale.com/work/pga-tour",
+      "accessed": "2026-09-30"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "tribalscale",
+      "title": "TRIBALSCALE",
+      "type": "organization",
+      "cluster": "identity",
+      "summary": "A global innovation partner combining AI-powered engineering, human-centred design, and agility at scale.",
+      "details": "This map connects TribalScale’s public identity, capabilities, thinking, and selected work so the relationships are explorable rather than flattened into a list.",
+      "sources": [
+        "home",
+        "who"
+      ],
+      "themes": [
+        "identity",
+        "operating model"
+      ],
+      "featured": true
+    },
+    {
+      "id": "ai-first-human",
+      "title": "AI-First, Relentlessly Human",
+      "type": "concept",
+      "cluster": "identity",
+      "summary": "TribalScale’s headline tension: apply AI with precision while keeping people at the core.",
+      "sources": [
+        "home",
+        "who"
+      ],
+      "themes": [
+        "identity",
+        "human-centred"
+      ],
+      "featured": true
+    },
+    {
+      "id": "right-future",
+      "title": "Right the Future",
+      "type": "concept",
+      "cluster": "identity",
+      "summary": "A belief that the future is built through human-centred design, engineering, and AI-powered innovation.",
+      "sources": [
+        "who"
+      ],
+      "themes": [
+        "identity",
+        "impact"
+      ]
+    },
+    {
+      "id": "true-partnership",
+      "title": "True Partnership",
+      "type": "concept",
+      "cluster": "identity",
+      "summary": "Move in sync with client teams, challenge ideas, adapt to reality, and measure success by outcomes.",
+      "sources": [
+        "who",
+        "how"
+      ],
+      "themes": [
+        "partnership",
+        "teams"
+      ]
+    },
+    {
+      "id": "ai-first-engineering",
+      "title": "AI-First Engineering",
+      "type": "capability",
+      "cluster": "engineering",
+      "summary": "Enterprise-grade solutions built for speed, scale, security, and longevity.",
+      "sources": [
+        "home",
+        "who",
+        "how"
+      ],
+      "themes": [
+        "engineering",
+        "scale"
+      ],
+      "featured": true
+    },
+    {
+      "id": "human-design",
+      "title": "Human-Centred Design",
+      "type": "capability",
+      "cluster": "design",
+      "summary": "Design that connects with real humans and balances business outcomes with adoption.",
+      "sources": [
+        "home",
+        "who",
+        "product"
+      ],
+      "themes": [
+        "design",
+        "human-centred"
+      ],
+      "featured": true
+    },
+    {
+      "id": "agility-scale",
+      "title": "Agility at Scale",
+      "type": "capability",
+      "cluster": "transformation",
+      "summary": "Tight cycles, fast adaptation, and automation designed for lasting business and customer impact.",
+      "sources": [
+        "home",
+        "who",
+        "how"
+      ],
+      "themes": [
+        "agility",
+        "transformation"
+      ],
+      "featured": true
+    },
+    {
+      "id": "frame",
+      "title": "Frame",
+      "type": "process",
+      "cluster": "how-we-work",
+      "summary": "Clarify the challenge with laser-sharp focus.",
+      "sources": [
+        "how"
+      ],
+      "themes": [
+        "process",
+        "discovery"
+      ]
+    },
+    {
+      "id": "ideate",
+      "title": "Ideate",
+      "type": "process",
+      "cluster": "how-we-work",
+      "summary": "Generate bold, business-ready, human-centred ideas.",
+      "sources": [
+        "how"
+      ],
+      "themes": [
+        "process",
+        "ideas"
+      ]
+    },
+    {
+      "id": "empathize",
+      "title": "Empathize",
+      "type": "process",
+      "cluster": "how-we-work",
+      "summary": "Understand humans at the core of the solution.",
+      "sources": [
+        "how"
+      ],
+      "themes": [
+        "process",
+        "research"
+      ]
+    },
+    {
+      "id": "validate",
+      "title": "Validate",
+      "type": "process",
+      "cluster": "how-we-work",
+      "summary": "Prototype, test fast with users, validate, and refine.",
+      "sources": [
+        "how"
+      ],
+      "themes": [
+        "process",
+        "testing"
+      ]
+    },
+    {
+      "id": "next-bets",
+      "title": "Next Bets",
+      "type": "process",
+      "cluster": "how-we-work",
+      "summary": "Scale wins and uncover what’s next.",
+      "sources": [
+        "how"
+      ],
+      "themes": [
+        "process",
+        "outcomes"
+      ]
+    },
+    {
+      "id": "ai-agents",
+      "title": "AI Agents",
+      "type": "capability",
+      "cluster": "ai",
+      "summary": "Intelligent agents that automate tasks, augment teams, and deliver measurable ROI with compliance and adoption in mind.",
+      "details": "TribalScale describes agents as enterprise-scale systems, not just pilots: grounded in data and evaluation, designed for security, orchestration, and measurable impact.",
+      "evidence": "15+ enterprise AI agents deployed since 2023; 65% reduction in manual workload; 12-week average time to launch.",
+      "sources": [
+        "agents"
+      ],
+      "themes": [
+        "AI",
+        "agents",
+        "ROI"
+      ],
+      "featured": true
+    },
+    {
+      "id": "agent-workflows",
+      "title": "Agent-Orchestrated Workflows",
+      "type": "capability",
+      "cluster": "ai",
+      "summary": "Multi-agent systems that collaborate across departments and integrate with enterprise systems.",
+      "sources": [
+        "agents"
+      ],
+      "themes": [
+        "AI",
+        "orchestration",
+        "workflow"
+      ]
+    },
+    {
+      "id": "enterprise-memory",
+      "title": "Enterprise Memory",
+      "type": "concept",
+      "cluster": "ai",
+      "summary": "A shared memory layer that makes a multi-agent platform coherent across fragmented enterprise knowledge.",
+      "sources": [
+        "platform"
+      ],
+      "themes": [
+        "AI",
+        "knowledge",
+        "platform"
+      ]
+    },
+    {
+      "id": "governed-tools",
+      "title": "Governed Tools",
+      "type": "concept",
+      "cluster": "ai",
+      "summary": "A governed tool framework that keeps agent capabilities, behaviour, and data access visible and controlled.",
+      "sources": [
+        "platform",
+        "agents"
+      ],
+      "themes": [
+        "governance",
+        "security",
+        "AI"
+      ]
+    },
+    {
+      "id": "human-loop",
+      "title": "Human-in-the-loop",
+      "type": "concept",
+      "cluster": "ai",
+      "summary": "Human adoption and oversight remain part of the system, especially where compliance and reliability matter.",
+      "sources": [
+        "agents",
+        "ai-native"
+      ],
+      "themes": [
+        "human-centred",
+        "governance",
+        "AI"
+      ]
+    },
+    {
+      "id": "evaluation",
+      "title": "Evaluation + ROI",
+      "type": "outcome",
+      "cluster": "outcomes",
+      "summary": "Agents are tied to evaluation pipelines and adoption, savings, efficiency, and other measurable outcomes.",
+      "sources": [
+        "agents"
+      ],
+      "themes": [
+        "evaluation",
+        "ROI"
+      ]
+    },
+    {
+      "id": "ux-research",
+      "title": "UX Research",
+      "type": "capability",
+      "cluster": "design",
+      "summary": "Research that uncovers human insight, reduces risk, and drives measurable outcomes.",
+      "evidence": "140+ research studies; 90% adoption rates achieved post-launch; 42% reduction in product redesign costs.",
+      "sources": [
+        "ux"
+      ],
+      "themes": [
+        "research",
+        "adoption",
+        "human insight"
+      ],
+      "featured": true
+    },
+    {
+      "id": "product-design",
+      "title": "Product Design",
+      "type": "capability",
+      "cluster": "design",
+      "summary": "Intuitive, inclusive, scalable products shaped by research, interaction design, prototyping, and testing.",
+      "evidence": "200+ products designed; 90% adoption rates achieved post-launch; 40% faster design-to-delivery cycles with embedded design teams.",
+      "sources": [
+        "product"
+      ],
+      "themes": [
+        "design",
+        "accessibility",
+        "adoption"
+      ],
+      "featured": true
+    },
+    {
+      "id": "design-process",
+      "title": "Discovery → Design → Build → Test → Launch",
+      "type": "process",
+      "cluster": "design",
+      "summary": "Heather Page’s published AI-Enhanced Design Process Matrix keeps a second five-stage sequence distinct from TribalScale’s company-wide way of working.",
+      "sources": [
+        "heather"
+      ],
+      "themes": [
+        "design",
+        "AI",
+        "process"
+      ]
+    },
+    {
+      "id": "workflow-redesign",
+      "title": "Workflow Redesign",
+      "type": "insight",
+      "cluster": "thinking",
+      "summary": "The AI-native move is not inserting AI into one step; it is redesigning the workflow around what is possible now.",
+      "sources": [
+        "ai-redesign",
+        "ai-native"
+      ],
+      "themes": [
+        "thinking",
+        "AI",
+        "transformation"
+      ],
+      "featured": true
+    },
+    {
+      "id": "embedded-teams",
+      "title": "Embedded Teams",
+      "type": "insight",
+      "cluster": "transformation",
+      "summary": "Pair with teams in their actual environment, on actual workflows, so capability and muscle memory remain after the engagement.",
+      "sources": [
+        "embedded",
+        "how"
+      ],
+      "themes": [
+        "transformation",
+        "partnership",
+        "capability building"
+      ],
+      "featured": true
+    },
+    {
+      "id": "enterprise-platform",
+      "title": "Enterprise Agentic Platform",
+      "type": "case-study",
+      "cluster": "work",
+      "summary": "A governed multi-agent platform for delivery, operations, and personal productivity.",
+      "details": "The case connects fragmented automations to a shared runtime, enterprise memory layer, and governed tool framework.",
+      "evidence": "Case-study creation reduced from days to approximately 15 minutes; 20 employees adopted Personal Agents; enterprise-scale operations run at approximately $20–40 USD per day.",
+      "sources": [
+        "platform"
+      ],
+      "themes": [
+        "case study",
+        "AI",
+        "platform"
+      ],
+      "featured": true
+    },
+    {
+      "id": "terra-energy",
+      "title": "Terra Energy",
+      "type": "case-study",
+      "cluster": "work",
+      "summary": "Generative AI-powered permit automation designed to scale across county-specific workflows.",
+      "evidence": "Bot development time reduced from four months to a few hours; approximately 45% of permit applications were being returned monthly before the intervention.",
+      "sources": [
+        "terra"
+      ],
+      "themes": [
+        "case study",
+        "workflow",
+        "automation"
+      ],
+      "featured": true
+    },
+    {
+      "id": "mccain-ddh",
+      "title": "McCain DDH",
+      "type": "case-study",
+      "cluster": "work",
+      "summary": "A Digital Defect Handling platform co-designed around real-world workflows, visibility, ownership, and feedback loops.",
+      "evidence": "70% reduction in defect submissions, with role-aligned workflows and real-time visibility across operators, supervisors, and maintenance.",
+      "sources": [
+        "mccain"
+      ],
+      "themes": [
+        "case study",
+        "workflow",
+        "visibility"
+      ],
+      "featured": true
+    },
+    {
+      "id": "aaa",
+      "title": "AAA",
+      "type": "case-study",
+      "cluster": "work",
+      "summary": "Embedded engineering, design, and product experts helped AAA shift from Waterfall to Agile XP and collaborative delivery.",
+      "evidence": "Time-to-market reduced from 8–12 months to 2–4 months, with TDD, CI/CD, and knowledge-sharing teams.",
+      "sources": [
+        "aaa"
+      ],
+      "themes": [
+        "case study",
+        "agile",
+        "embedded"
+      ],
+      "featured": true
+    },
+    {
+      "id": "john-hancock",
+      "title": "John Hancock",
+      "type": "case-study",
+      "cluster": "work",
+      "summary": "Agile transformation modernized retirement-service workflows and strengthened internal capability.",
+      "evidence": "Portfolio creation reduced from 10 minutes to 2 minutes; 78.6% story acceptance rate.",
+      "sources": [
+        "john-hancock"
+      ],
+      "themes": [
+        "case study",
+        "agile",
+        "modernization"
+      ]
+    },
+    {
+      "id": "pga-tour",
+      "title": "PGA Tour",
+      "type": "case-study",
+      "cluster": "work",
+      "summary": "Voice-first sports experiences brought live tournament data to Alexa and Google Assistant.",
+      "evidence": "One of the first sports leagues worldwide to launch on both Alexa and Google Assistant, with live scores and tournament updates.",
+      "sources": [
+        "pga"
+      ],
+      "themes": [
+        "case study",
+        "voice",
+        "emerging interface"
+      ]
+    },
+    {
+      "id": "products-launched",
+      "title": "700+ Products Launched",
+      "type": "outcome",
+      "cluster": "outcomes",
+      "summary": "A public homepage metric that signals the breadth of TribalScale’s delivery history.",
+      "sources": [
+        "who",
+        "home"
+      ],
+      "themes": [
+        "outcomes",
+        "scale"
+      ]
+    },
+    {
+      "id": "repeat-client",
+      "title": "95% Repeat Client Rate",
+      "type": "outcome",
+      "cluster": "outcomes",
+      "summary": "A public homepage metric connected to the company’s emphasis on partnership and lasting impact.",
+      "sources": [
+        "who",
+        "home"
+      ],
+      "themes": [
+        "outcomes",
+        "partnership"
+      ]
+    },
+    {
+      "id": "global-partners",
+      "title": "90+ Global Partners",
+      "type": "outcome",
+      "cluster": "outcomes",
+      "summary": "A public homepage metric describing the reach of TribalScale’s partner network.",
+      "sources": [
+        "who",
+        "home"
+      ],
+      "themes": [
+        "outcomes",
+        "scale"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "tribalscale",
+      "target": "ai-first-human",
+      "label": "identity",
+      "kind": "explicit",
+      "sources": [
+        "home"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "right-future",
+      "label": "mission",
+      "kind": "explicit",
+      "sources": [
+        "who"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "true-partnership",
+      "label": "partnership",
+      "kind": "explicit",
+      "sources": [
+        "who"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "ai-first-engineering",
+      "label": "capability",
+      "kind": "explicit",
+      "sources": [
+        "home"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "human-design",
+      "label": "capability",
+      "kind": "explicit",
+      "sources": [
+        "home"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "agility-scale",
+      "label": "capability",
+      "kind": "explicit",
+      "sources": [
+        "home"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "frame",
+      "label": "way of working",
+      "kind": "explicit",
+      "sources": [
+        "how"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "ai-agents",
+      "label": "AI capability",
+      "kind": "explicit",
+      "sources": [
+        "agents"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "ux-research",
+      "label": "research",
+      "kind": "explicit",
+      "sources": [
+        "ux"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "enterprise-platform",
+      "label": "evidence",
+      "kind": "explicit",
+      "sources": [
+        "platform"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "repeat-client",
+      "label": "outcome",
+      "kind": "explicit",
+      "sources": [
+        "who"
+      ]
+    },
+    {
+      "source": "frame",
+      "target": "ideate",
+      "label": "sequence",
+      "kind": "explicit",
+      "sources": [
+        "how"
+      ]
+    },
+    {
+      "source": "ideate",
+      "target": "empathize",
+      "label": "sequence",
+      "kind": "explicit",
+      "sources": [
+        "how"
+      ]
+    },
+    {
+      "source": "empathize",
+      "target": "validate",
+      "label": "sequence",
+      "kind": "explicit",
+      "sources": [
+        "how"
+      ]
+    },
+    {
+      "source": "validate",
+      "target": "next-bets",
+      "label": "sequence",
+      "kind": "explicit",
+      "sources": [
+        "how"
+      ]
+    },
+    {
+      "source": "empathize",
+      "target": "ux-research",
+      "label": "human insight",
+      "kind": "inferred",
+      "sources": [
+        "ux"
+      ]
+    },
+    {
+      "source": "validate",
+      "target": "product-design",
+      "label": "user validation",
+      "kind": "explicit",
+      "sources": [
+        "product"
+      ]
+    },
+    {
+      "source": "frame",
+      "target": "workflow-redesign",
+      "label": "reframe the work",
+      "kind": "inferred",
+      "sources": [
+        "ai-redesign"
+      ]
+    },
+    {
+      "source": "ux-research",
+      "target": "design-process",
+      "label": "design sequence",
+      "kind": "explicit",
+      "sources": [
+        "heather"
+      ]
+    },
+    {
+      "source": "design-process",
+      "target": "product-design",
+      "label": "product design",
+      "kind": "explicit",
+      "sources": [
+        "product"
+      ]
+    },
+    {
+      "source": "design-process",
+      "target": "ai-first-engineering",
+      "label": "build",
+      "kind": "explicit",
+      "sources": [
+        "heather"
+      ]
+    },
+    {
+      "source": "design-process",
+      "target": "next-bets",
+      "label": "iteration",
+      "kind": "inferred",
+      "sources": [
+        "heather"
+      ]
+    },
+    {
+      "source": "ai-first-human",
+      "target": "ai-agents",
+      "label": "human adoption",
+      "kind": "inferred",
+      "sources": [
+        "agents"
+      ]
+    },
+    {
+      "source": "ai-agents",
+      "target": "agent-workflows",
+      "label": "orchestration",
+      "kind": "explicit",
+      "sources": [
+        "agents"
+      ]
+    },
+    {
+      "source": "ai-agents",
+      "target": "evaluation",
+      "label": "measurable ROI",
+      "kind": "explicit",
+      "sources": [
+        "agents"
+      ]
+    },
+    {
+      "source": "agent-workflows",
+      "target": "enterprise-platform",
+      "label": "platform evidence",
+      "kind": "explicit",
+      "sources": [
+        "platform"
+      ]
+    },
+    {
+      "source": "enterprise-platform",
+      "target": "enterprise-memory",
+      "label": "shared memory",
+      "kind": "explicit",
+      "sources": [
+        "platform"
+      ]
+    },
+    {
+      "source": "enterprise-platform",
+      "target": "governed-tools",
+      "label": "governance",
+      "kind": "explicit",
+      "sources": [
+        "platform"
+      ]
+    },
+    {
+      "source": "enterprise-platform",
+      "target": "human-loop",
+      "label": "human adoption",
+      "kind": "inferred",
+      "sources": [
+        "platform"
+      ]
+    },
+    {
+      "source": "governed-tools",
+      "target": "evaluation",
+      "label": "control + measurement",
+      "kind": "inferred",
+      "sources": [
+        "agents"
+      ]
+    },
+    {
+      "source": "ai-agents",
+      "target": "workflow-redesign",
+      "label": "redesign the workflow",
+      "kind": "explicit",
+      "sources": [
+        "ai-redesign"
+      ]
+    },
+    {
+      "source": "workflow-redesign",
+      "target": "terra-energy",
+      "label": "workflow evidence",
+      "kind": "inferred",
+      "sources": [
+        "terra"
+      ]
+    },
+    {
+      "source": "workflow-redesign",
+      "target": "mccain-ddh",
+      "label": "workflow evidence",
+      "kind": "inferred",
+      "sources": [
+        "mccain"
+      ]
+    },
+    {
+      "source": "embedded-teams",
+      "target": "true-partnership",
+      "label": "embedded partnership",
+      "kind": "inferred",
+      "sources": [
+        "embedded"
+      ]
+    },
+    {
+      "source": "embedded-teams",
+      "target": "aaa",
+      "label": "case evidence",
+      "kind": "explicit",
+      "sources": [
+        "aaa"
+      ]
+    },
+    {
+      "source": "embedded-teams",
+      "target": "john-hancock",
+      "label": "case evidence",
+      "kind": "explicit",
+      "sources": [
+        "john-hancock"
+      ]
+    },
+    {
+      "source": "agility-scale",
+      "target": "aaa",
+      "label": "delivery transformation",
+      "kind": "explicit",
+      "sources": [
+        "aaa"
+      ]
+    },
+    {
+      "source": "agility-scale",
+      "target": "john-hancock",
+      "label": "agile transformation",
+      "kind": "explicit",
+      "sources": [
+        "john-hancock"
+      ]
+    },
+    {
+      "source": "aaa",
+      "target": "evaluation",
+      "label": "time-to-market",
+      "kind": "inferred",
+      "sources": [
+        "aaa"
+      ]
+    },
+    {
+      "source": "john-hancock",
+      "target": "evaluation",
+      "label": "cycle time",
+      "kind": "inferred",
+      "sources": [
+        "john-hancock"
+      ]
+    },
+    {
+      "source": "product-design",
+      "target": "pga-tour",
+      "label": "conversational UX",
+      "kind": "inferred",
+      "sources": [
+        "pga"
+      ]
+    },
+    {
+      "source": "pga-tour",
+      "target": "next-bets",
+      "label": "emerging interface",
+      "kind": "inferred",
+      "sources": [
+        "pga"
+      ]
+    },
+    {
+      "source": "terra-energy",
+      "target": "ai-agents",
+      "label": "generative automation",
+      "kind": "explicit",
+      "sources": [
+        "terra"
+      ]
+    },
+    {
+      "source": "mccain-ddh",
+      "target": "product-design",
+      "label": "role-aligned design",
+      "kind": "explicit",
+      "sources": [
+        "mccain"
+      ]
+    },
+    {
+      "source": "mccain-ddh",
+      "target": "evaluation",
+      "label": "70% reduction",
+      "kind": "explicit",
+      "sources": [
+        "mccain"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "products-launched",
+      "label": "public metric",
+      "kind": "explicit",
+      "sources": [
+        "who"
+      ]
+    },
+    {
+      "source": "tribalscale",
+      "target": "global-partners",
+      "label": "public metric",
+      "kind": "explicit",
+      "sources": [
+        "who"
+      ]
+    },
+    {
+      "source": "true-partnership",
+      "target": "repeat-client",
+      "label": "relationship",
+      "kind": "inferred",
+      "sources": [
+        "who"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "identity",
+      "title": "Identity to outcomes",
+      "summary": "What TribalScale says it is, the partnership it practises, and the client retention it reports.",
+      "steps": [
+        "ai-first-human",
+        "tribalscale",
+        "true-partnership",
+        "repeat-client"
+      ]
+    },
+    {
+      "id": "way-of-working",
+      "title": "The way of working",
+      "summary": "Frame, Ideate, Empathize, Validate, Next Bets: the company-wide sequence.",
+      "steps": [
+        "frame",
+        "ideate",
+        "empathize",
+        "validate",
+        "next-bets"
+      ]
+    },
+    {
+      "id": "design-practice",
+      "title": "The design practice",
+      "summary": "Heather Page's Discovery-to-Launch sequence, kept distinct from the company-wide method, feeding product design.",
+      "steps": [
+        "human-design",
+        "ux-research",
+        "design-process",
+        "product-design"
+      ]
+    },
+    {
+      "id": "agent-platform",
+      "title": "From agents to a governed platform",
+      "summary": "Agents, orchestration, the enterprise platform, memory, governed tools, and how it is all evaluated.",
+      "steps": [
+        "ai-agents",
+        "agent-workflows",
+        "enterprise-platform",
+        "enterprise-memory",
+        "governed-tools",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "workflow-redesign",
+      "title": "Redesign the workflow, not the step",
+      "summary": "AI-native thinking meets Terra Energy and McCain DDH evidence.",
+      "steps": [
+        "ai-agents",
+        "workflow-redesign",
+        "terra-energy",
+        "mccain-ddh"
+      ]
+    },
+    {
+      "id": "embedded",
+      "title": "Embedded teams",
+      "summary": "The partnership model behind the AAA and John Hancock transformations.",
+      "steps": [
+        "true-partnership",
+        "embedded-teams",
+        "aaa",
+        "john-hancock"
+      ]
+    }
+  ]
+}

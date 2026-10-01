@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "name": "Patagonia (independent study)",
+  "mode": "light",
+  "colors": {
+    "bg": "#ffffff",
+    "surface": "#f5f5f5",
+    "text": "#000000",
+    "muted": "#4a4a4a",
+    "line": "rgba(0,0,0,0.16)",
+    "accent": "#27455c"
+  },
+  "clusters": {
+    "origins": "#8a4b1f",
+    "identity": "#27455c",
+    "materials": "#2e7d57",
+    "growth": "#c2410c",
+    "giving": "#1b2b79",
+    "ownership": "#000000",
+    "people": "#6c757d",
+    "scrutiny": "#b91c1c"
+  },
+  "font": {
+    "body": "'Ridgeway Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif",
+    "display": "Georgia, 'Times New Roman', serif"
+  },
+  "wordmark": { "text": "patagonia", "letterSpacing": "-0.01em", "uppercase": false },
+  "brandSources": [
+    {
+      "what": "canvas (#ffffff), text (#000000), surface (#f5f5f5), muted (#4a4a4a), mode light",
+      "from": "https://www.patagonia.com/home/ rendered in a browser; computed styles and scripts/brand-probe.mjs",
+      "note": "The site is black text on white with #f5f5f5 panels; body colour is rgb(0,0,0) and #4a4a4a is a site grey. The brand has no single fixed accent: photography and a seasonal hero panel carry colour."
+    },
+    {
+      "what": "accent (#27455c)",
+      "from": "computed background colour rgb(39, 69, 92) on the home page (10 elements)",
+      "note": "Judgement call. The hero panel in the week I looked was deep blue #1b2b79 (used here for one cluster), and the probe's top saturated colour #91abe9 fails contrast on white. The slate blue #27455c is a real site colour, reads as alpine, and passes contrast."
+    },
+    {
+      "what": "cluster colours",
+      "from": "site colours #468254/#27455c/#1b2b79/#fa4616 (computed or probe); darker tones derived by me",
+      "note": "#2e7d57 is a darkened site green (#468254 fails 4.5:1 comfort at small size), #c2410c a deepened #fa4616, #b91c1c a deepened #e10000, #8a4b1f an earth brown of my own choosing, #6c757d the site grey. Only the first four have direct site provenance."
+    },
+    {
+      "what": "font",
+      "from": "https://www.patagonia.com/home/ body font-family: Ridgeway Sans",
+      "note": "Ridgeway Sans is a proprietary face not on Google Fonts, so it is named first then falls back to the system stack. No webfont is loaded. The wordmark uses Georgia because the real logo is a bold serif wordmark; it is an approximation and the logo is not embedded."
+    }
+  ]
+}

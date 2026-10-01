@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>TribalScale · Story Graph</title>
+<meta name="description" content="An explorable map of a company redesigning how products — and increasingly companies — get built. Built from TribalScale’s public work, capabilities, and thinking. Not affiliated with or endorsed by TribalScale.">
+<meta name="theme-color" content="#080808">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 16 7 8M16 16l9-5M16 16l2 10' stroke='%23ffea00' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ffea00'/%3E%3Ccircle cx='7' cy='8' r='3' fill='%23ffea00'/%3E%3Ccircle cx='25' cy='11' r='3' fill='%23ffea00'/%3E%3Ccircle cx='18' cy='26' r='3' fill='%23ffea00'/%3E%3C/svg%3E">
+<meta property="og:title" content="TribalScale · Story Graph">
+<meta property="og:description" content="An explorable map of a company redesigning how products — and increasingly companies — get built. Built from TribalScale’s public work, capabilities, and thinking. Not affiliated with or endorsed by TribalScale.">
+
+<style>:root{--bg:#080808;--surface:#101010;--text:#f5f2ea;--muted:#a29f96;--line:rgba(245,242,234,0.16);--accent:#ffea00;color-scheme:dark}</style>
+<style>
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;line-height:1.45;display:flex;flex-direction:column;height:100dvh;overflow:hidden;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px 24px 14px;border-bottom:1px solid var(--line);flex:none}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand img{max-height:30px;max-width:120px;display:block}
+.wordmark{margin:0;font-size:19px;font-weight:600;line-height:1.2;overflow-wrap:anywhere}
+.dek{margin:6px 0 0;max-width:640px;color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{min-height:36px;padding:0 12px;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:color-mix(in srgb,var(--bg) 88%,var(--text));text-transform:uppercase;letter-spacing:.1em;font-size:10px;transition:border-color .15s,color .15s,background .15s}
+.btn:hover,.btn[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 24px;border-bottom:1px solid var(--line);flex:none}
+.search{display:flex;align-items:center;gap:8px;min-width:220px;height:34px;padding:0 10px;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:color-mix(in srgb,var(--bg) 88%,var(--text));color:var(--muted)}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--text);font-size:12px}
+.search input::placeholder{color:var(--muted);opacity:.8}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:28px;padding:0 10px;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:none;color:var(--muted);font-size:11px;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent));display:inline-block}
+.chip:hover{color:var(--text)}
+.chip[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 14%,transparent);border-color:var(--accent);color:var(--accent)}
+.stories{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:auto}
+.stories>span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+main{position:relative;flex:1;min-height:0}
+#graph{display:block;width:100%;height:100%;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#graph.dragging{cursor:grabbing}
+.edge{stroke:var(--text);stroke-opacity:.34;stroke-width:1.2;vector-effect:non-scaling-stroke;transition:stroke-opacity .18s,stroke .18s}
+.edge.inferred{stroke-dasharray:3 5;stroke-opacity:.42}
+.edge.hl{stroke:var(--accent);stroke-opacity:1;stroke-width:2.2;stroke-dasharray:none}
+.edge.inferred.hl{stroke-dasharray:6 5}
+.edge.dim{stroke-opacity:.05}
+.edge-label{font-size:10px;fill:var(--accent);text-anchor:middle;opacity:0;pointer-events:none;paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.edge-label.hl{opacity:1}
+.node{cursor:pointer;transition:opacity .18s}
+.node .core{fill:var(--bg);stroke-width:2;transition:stroke-width .15s}
+.node.root .core{stroke-width:0}
+.node .dot{opacity:.9}
+.node .label{font-size:calc(11px * var(--ls,1));fill:var(--text);text-anchor:middle;paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.node.root .label{font-weight:700;letter-spacing:.2em;font-size:12px}
+.node .kind{font-size:7.5px;fill:var(--muted);text-anchor:middle;letter-spacing:.14em;text-transform:uppercase;paint-order:stroke;stroke:var(--bg);stroke-width:3px;pointer-events:none;opacity:0;transition:opacity .15s}
+#graph.zoomed .node .kind{opacity:1}
+.node:hover .core,.node:focus-visible .core{stroke-width:3.5}
+.node:focus-visible{outline:none}
+.node:focus-visible .ring{opacity:1}
+.ring{fill:none;stroke:var(--accent);stroke-width:2;opacity:0}
+.node.sel .ring{opacity:1}
+.node.dim{opacity:.16}
+.badge circle{fill:var(--accent)}
+.badge text{fill:var(--bg);font-size:9px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.story-path{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 7;vector-effect:non-scaling-stroke;opacity:.85}
+
+.zoom.right{left:auto;right:20px}
+.zoom{position:absolute;left:20px;bottom:92px;display:flex;flex-direction:column;gap:6px}
+.zoom .btn{width:36px;padding:0;font-size:16px;letter-spacing:0}
+.foot{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 24px;padding:10px 24px;font-size:11px;color:var(--muted);pointer-events:none;background:linear-gradient(to top,var(--bg) 40%,transparent)}
+.foot p{margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:flex-end}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.legend svg{width:22px;height:8px}
+.empty{position:absolute;inset:0;display:none;place-items:center;color:var(--muted);pointer-events:none}
+.empty.on{display:grid}
+
+#list{padding:20px 24px 80px}
+#list section{max-width:860px;margin:0 auto 26px}
+#list h2{margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+#list h2 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+#list ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.item{display:block;width:100%;text-align:left;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c)}
+.item:hover,.item:focus-visible{border-color:var(--c)}
+.item b{display:block;font-weight:600}
+.item small{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:10px}
+.item span{display:block;color:var(--muted);margin-top:4px;font-size:13px}
+
+.views{display:flex;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);flex:none}
+.views button{min-height:34px;padding:0 12px;border:0;border-right:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:none;color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.views button:last-child{border-right:0}
+.views button:hover{color:var(--text)}
+.views button[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.pane{position:absolute;inset:0;overflow:auto;display:none}
+.pane.on{display:block}
+
+#timeline{overflow-x:hidden;overflow-y:auto}
+#tl{display:block;width:100%;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.tl-mode{position:absolute;top:8px;right:16px;z-index:2}
+.tl-lane{fill:var(--text);opacity:.04}
+.tl-lane.alt{opacity:.015}
+.tl-lane-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted)}
+.tl-tick{stroke:var(--line);stroke-dasharray:2 5}
+.tl-tick-label{font-size:10px;fill:var(--muted);text-anchor:middle}
+.tl-node{cursor:pointer}
+.tl-node text{font-size:11px;fill:var(--text);paint-order:stroke;stroke:var(--bg);stroke-width:3.5px;stroke-linejoin:round}
+.tl-node .tl-when{font-size:9px;fill:var(--muted)}
+.tl-node .tl-dot{stroke:var(--bg);stroke-width:1.5}
+.tl-node.sel .tl-dot{stroke:var(--accent);stroke-width:3}
+.tl-node:focus-visible{outline:none}
+.tl-node:focus-visible .tl-dot{stroke:var(--accent);stroke-width:3}
+.tl-node.dim{opacity:.18}
+.tl-bar{opacity:.5}
+
+#read{padding:28px 24px 140px}
+.read-wrap{max-width:720px;margin:0 auto}
+.read-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px}
+.read-wrap h2.rt{font-size:30px;line-height:1.15;margin:0 0 10px}
+.read-wrap .intro{color:var(--muted);font-size:16px;margin:0 0 34px}
+.rstep{position:relative;padding:0 0 34px 54px}
+.rstep::before{content:"";position:absolute;left:15px;top:36px;bottom:2px;width:1px;background:var(--line)}
+.rstep:last-child::before{display:none}
+.rnum{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--c,var(--accent));color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:13px}
+.rstep .via{font-size:12px;color:var(--muted);margin:0 0 6px}
+.rstep .via em{font-style:normal;color:var(--accent)}
+.rstep h3{margin:0 0 2px;font-size:21px;line-height:1.25}
+.rstep h3 button{background:none;border:0;padding:0;text-align:left;font:inherit;color:inherit}
+.rstep h3 button:hover{color:var(--accent)}
+.rstep .meta{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.rstep p{margin:0 0 10px;font-size:15px}
+.rstep .details{color:var(--muted)}
+.rstep blockquote{margin:0 0 12px;padding:8px 12px;border-left:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);font-size:14px}
+.rstep .rsrc{font-size:12px;color:var(--muted)}
+.rstep .rsrc a{color:var(--accent)}
+
+#outline{padding:22px 24px 110px}
+.ol-wrap{max-width:880px;margin:0 auto}
+.ol-tools{display:flex;gap:8px;margin-bottom:16px}
+.ol-wrap ul{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--line)}
+.ol-wrap>ul{border-left:0;padding-left:0}
+.ol-wrap li{margin:2px 0}
+.ol-wrap li.dim{opacity:.35}
+.ol-wrap .row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding:6px 6px;list-style:none}
+.ol-wrap summary.row{cursor:pointer}
+.ol-wrap summary::-webkit-details-marker{display:none}
+.ol-wrap summary.row::before{content:"+";color:var(--muted);width:12px;flex:none}
+.ol-wrap details[open]>summary.row::before{content:"\2212"}
+.ol-wrap .row i{width:9px;height:9px;border-radius:50%;background:var(--c);align-self:center;flex:none}
+.ol-wrap .via{font-size:11px;color:var(--accent)}
+.ol-wrap .olt{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--text);text-align:left}
+.ol-wrap .olt:hover{color:var(--accent)}
+.ol-wrap small{color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.ol-wrap .olcount{margin-left:auto;font-size:11px;color:var(--muted)}
+.ol-wrap .olbody{padding:0 6px 8px 26px;color:var(--muted);font-size:13px}
+.ol-wrap .olbody p{margin:0 0 4px}
+.ol-wrap .olink{background:none;border:0;padding:0;font:inherit;font-size:12px;color:var(--accent);text-align:left}
+.ol-wrap .olink:hover{text-decoration:underline}
+@media (max-width:760px){.views{width:100%;overflow-x:auto}.views button{flex:1 0 auto;padding:0 10px}#read{padding:20px 16px 150px}.rstep{padding-left:46px}.tl-mode{right:10px}#outline{padding:16px 14px 110px}}
+
+#panel{position:absolute;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--surface);border-left:1px solid var(--line);overflow:auto;padding:22px 22px 40px;transform:translateX(102%);transition:transform .25s ease,visibility 0s linear .25s;z-index:6;box-shadow:-12px 0 40px rgba(0,0,0,.25)}
+#panel.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+#panel:not(.open){box-shadow:none;visibility:hidden}
+#panel .close{position:absolute;top:10px;right:10px;width:32px;height:32px;border:0;background:none;color:var(--muted);font-size:20px}
+#panel .close:hover{color:var(--accent)}
+#panel .kicker{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#panel .kicker i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+#panel h2{margin:8px 28px 10px 0;font-size:22px;line-height:1.2;overflow-wrap:anywhere}
+#panel p{margin:0 0 12px}
+#panel .details{color:var(--muted)}
+#panel h3{margin:20px 0 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+#panel blockquote{margin:0 0 12px;padding:8px 12px;border-left:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:2px 8px;border:1px solid var(--line);font-size:11px;color:var(--muted)}
+.links{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.links button{width:100%;text-align:left;background:none;border:1px solid var(--line);padding:8px 10px;display:grid;gap:2px}
+.links button:hover{border-color:var(--accent)}
+.links .rel{font-size:11px;color:var(--muted)}
+.links .rel em{font-style:normal;color:var(--accent)}
+.src{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.src a{color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
+.src a:hover{text-decoration:underline}
+.src small{display:block;color:var(--muted)}
+
+#storybar{z-index:7;position:absolute;left:50%;bottom:54px;transform:translateX(-50%);width:min(560px,calc(100% - 32px));background:var(--surface);border:1px solid var(--accent);padding:10px 14px;display:none;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;z-index:5;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+#storybar.on{display:grid}
+#storybar .t{min-width:0}
+#storybar b{display:block;font-size:13px}
+#storybar span{display:block;color:var(--muted);font-size:12px}
+#storybar .step{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+#storybar .nav{display:flex;gap:6px}
+#storybar .btn{padding:0 10px}
+
+noscript{display:block;padding:24px;max-width:760px}
+
+@media (max-width:760px){
+  header{padding:14px 16px 10px;flex-direction:column}
+  .actions{justify-content:flex-start}
+  .toolbar{padding:8px 16px}
+  .stories{margin-left:0;width:100%}
+  .search{flex:1 1 100%}
+  .chips,.stories{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none;padding-bottom:2px}
+  .chips::-webkit-scrollbar,.stories::-webkit-scrollbar{display:none}
+  .chip,.stories>span{flex:none;white-space:nowrap}
+  .dek{font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  header{flex-direction:row;flex-wrap:wrap}
+  .legend,#status{display:none}
+  .wordmark{font-size:16px}
+  .actions .btn{min-height:30px;padding:0 9px}
+  .zoom{bottom:70px}
+  .toolbar{gap:6px}
+  .foot{font-size:10px}
+  .foot{padding:8px 16px}
+  .legend{justify-content:flex-start}
+  .zoom{left:12px}
+  #panel{top:auto;width:100%;height:58%;border-left:0;border-top:1px solid var(--line);transform:translateY(102%)}
+  #panel.open{transform:none}
+  #storybar{bottom:68px;grid-template-columns:1fr;}
+  main.sheet #storybar{bottom:calc(58% + 10px)}
+  #list{padding:14px 16px 90px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div id="logo"></div><div><h1 class="wordmark" id="wordmark"></h1><p class="dek" id="dek"></p></div></div>
+  <div class="actions">
+    <button class="btn" id="btn-fit">Fit</button>
+    <button class="btn" id="btn-reset">Reset</button>
+  </div>
+</header>
+<div class="toolbar" role="region" aria-label="Filters">
+  <div class="views" id="views" role="group" aria-label="View"></div>
+  <label class="search"><span class="sr-only">Search nodes</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search nodes  ( / )" autocomplete="off"></label>
+  <div class="chips" id="chips"></div>
+  <div class="stories" id="stories"></div>
+</div>
+<main>
+  <svg id="graph" role="group" aria-label="Story graph. The Read, Outline and List views are linear alternatives."><g id="vp"><g id="edges"></g><g id="edge-labels"></g><path id="story-path" class="story-path" d=""/><g id="nodes"></g><g id="badges"></g></g></svg>
+  <div id="list" class="pane" aria-label="Story list"></div>
+  <div id="timeline" class="pane" aria-label="Timeline"><button class="btn tl-mode" id="tl-mode">Even spacing</button><svg id="tl" role="group" aria-label="Timeline of dated nodes"></svg></div>
+  <div id="read" class="pane" aria-label="Read the story"></div>
+  <div id="outline" class="pane" aria-label="Outline"></div>
+  <div class="empty" id="empty">No nodes match.</div>
+  <div class="zoom" id="zoom"><button class="btn" id="zin" aria-label="Zoom in">+</button><button class="btn" id="zout" aria-label="Zoom out">&minus;</button></div>
+  <div id="storybar" role="region" aria-label="Guided story">
+    <div class="t"><div class="step" id="sb-step"></div><b id="sb-title"></b><span id="sb-sum"></span></div>
+    <div class="nav"><button class="btn" id="sb-prev" aria-label="Previous step">&lsaquo;</button><button class="btn" id="sb-next" aria-label="Next step">&rsaquo;</button><button class="btn" id="sb-exit" aria-label="Exit story">&times;</button></div>
+  </div>
+  <aside id="panel" aria-label="Node details" aria-live="polite"></aside>
+  <div class="foot" id="foot"><div><p id="status"></p><p id="credit"></p></div><div class="legend" id="legend"></div></div>
+</main>
+<noscript><h1>TribalScale</h1><p>An explorable map of a company redesigning how products — and increasingly companies — get built.</p><p>This interactive story graph needs JavaScript. The full content follows.</p><ul><li><strong>TRIBALSCALE</strong>: A global innovation partner combining AI-powered engineering, human-centred design, and agility at scale.</li><li><strong>AI-First, Relentlessly Human</strong>: TribalScale’s headline tension: apply AI with precision while keeping people at the core.</li><li><strong>Right the Future</strong>: A belief that the future is built through human-centred design, engineering, and AI-powered innovation.</li><li><strong>True Partnership</strong>: Move in sync with client teams, challenge ideas, adapt to reality, and measure success by outcomes.</li><li><strong>AI-First Engineering</strong>: Enterprise-grade solutions built for speed, scale, security, and longevity.</li><li><strong>Human-Centred Design</strong>: Design that connects with real humans and balances business outcomes with adoption.</li><li><strong>Agility at Scale</strong>: Tight cycles, fast adaptation, and automation designed for lasting business and customer impact.</li><li><strong>Frame</strong>: Clarify the challenge with laser-sharp focus.</li><li><strong>Ideate</strong>: Generate bold, business-ready, human-centred ideas.</li><li><strong>Empathize</strong>: Understand humans at the core of the solution.</li><li><strong>Validate</strong>: Prototype, test fast with users, validate, and refine.</li><li><strong>Next Bets</strong>: Scale wins and uncover what’s next.</li><li><strong>AI Agents</strong>: Intelligent agents that automate tasks, augment teams, and deliver measurable ROI with compliance and adoption in mind.</li><li><strong>Agent-Orchestrated Workflows</strong>: Multi-agent systems that collaborate across departments and integrate with enterprise systems.</li><li><strong>Enterprise Memory</strong>: A shared memory layer that makes a multi-agent platform coherent across fragmented enterprise knowledge.</li><li><strong>Governed Tools</strong>: A governed tool framework that keeps agent capabilities, behaviour, and data access visible and controlled.</li><li><strong>Human-in-the-loop</strong>: Human adoption and oversight remain part of the system, especially where compliance and reliability matter.</li><li><strong>Evaluation + ROI</strong>: Agents are tied to evaluation pipelines and adoption, savings, efficiency, and other measurable outcomes.</li><li><strong>UX Research</strong>: Research that uncovers human insight, reduces risk, and drives measurable outcomes.</li><li><strong>Product Design</strong>: Intuitive, inclusive, scalable products shaped by research, interaction design, prototyping, and testing.</li><li><strong>Discovery → Design → Build → Test → Launch</strong>: Heather Page’s published AI-Enhanced Design Process Matrix keeps a second five-stage sequence distinct from TribalScale’s company-wide way of working.</li><li><strong>Workflow Redesign</strong>: The AI-native move is not inserting AI into one step; it is redesigning the workflow around what is possible now.</li><li><strong>Embedded Teams</strong>: Pair with teams in their actual environment, on actual workflows, so capability and muscle memory remain after the engagement.</li><li><strong>Enterprise Agentic Platform</strong>: A governed multi-agent platform for delivery, operations, and personal productivity.</li><li><strong>Terra Energy</strong>: Generative AI-powered permit automation designed to scale across county-specific workflows.</li><li><strong>McCain DDH</strong>: A Digital Defect Handling platform co-designed around real-world workflows, visibility, ownership, and feedback loops.</li><li><strong>AAA</strong>: Embedded engineering, design, and product experts helped AAA shift from Waterfall to Agile XP and collaborative delivery.</li><li><strong>John Hancock</strong>: Agile transformation modernized retirement-service workflows and strengthened internal capability.</li><li><strong>PGA Tour</strong>: Voice-first sports experiences brought live tournament data to Alexa and Google Assistant.</li><li><strong>700+ Products Launched</strong>: A public homepage metric that signals the breadth of TribalScale’s delivery history.</li><li><strong>95% Repeat Client Rate</strong>: A public homepage metric connected to the company’s emphasis on partnership and lasting impact.</li><li><strong>90+ Global Partners</strong>: A public homepage metric describing the reach of TribalScale’s partner network.</li></ul></noscript>
+
+<script type="application/json" id="theme-data">{"schemaVersion":1,"name":"TribalScale","mode":"dark","colors":{"bg":"#080808","surface":"#101010","text":"#f5f2ea","muted":"#a29f96","line":"rgba(245,242,234,0.16)","accent":"#ffea00"},"clusters":{"identity":"#ffea00","how-we-work":"#e9d8a6","ai":"#ff9f43","design":"#bfc9c6","engineering":"#8caaa8","transformation":"#ff7a59","work":"#f4f0e6","thinking":"#b8c4ff","outcomes":"#f5d96a"},"font":{"body":"Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"},"wordmark":{"text":"TRIBALSCALE","letterSpacing":"0.28em"},"brandSources":[{"what":"accent + identity cluster (#ffea00)","from":"https://www.tribalscale.com/ via scripts/brand-probe.mjs","note":"Brand yellow is a design token on the site (--token-…: #ffea00)."},{"what":"background (#080808)","from":"https://www.tribalscale.com/","note":"Site pairs #000000 / #0d0d0d surfaces with the yellow; a dark canvas keeps the yellow at high contrast (accent about 16:1)."},{"what":"font (Inter)","from":"https://www.tribalscale.com/","note":"Most-used font-family in the site CSS (Work Sans and Montserrat appear for display; Inter chosen for legibility at small label sizes)."}]}</script>
+<script type="application/json" id="story-data">{"schemaVersion":1,"title":"TribalScale","subject":{"name":"TribalScale","kind":"company","url":"https://www.tribalscale.com/"},"tagline":"An explorable map of a company redesigning how products — and increasingly companies — get built.","root":"tribalscale","credit":"An independent StoryTeller study by Nikhil Khedkar.","disclaimer":"Built from TribalScale’s public work, capabilities, and thinking. Not affiliated with or endorsed by TribalScale.","generated":{"date":"2026-09-30"},"clusters":[{"id":"identity","label":"Identity"},{"id":"how-we-work","label":"How we work"},{"id":"ai","label":"AI"},{"id":"design","label":"Design"},{"id":"engineering","label":"Engineering"},{"id":"transformation","label":"Transformation"},{"id":"work","label":"Work / evidence"},{"id":"thinking","label":"Thinking"},{"id":"outcomes","label":"Outcomes"}],"sources":[{"id":"home","title":"TribalScale — Global Innovation Partner","url":"https://www.tribalscale.com/","accessed":"2026-09-30"},{"id":"who","title":"Who We Are — Elite by Design. Human at Core.","url":"https://www.tribalscale.com/company/who-we-are","accessed":"2026-09-30"},{"id":"how","title":"How We Work — Fast. Precise. Always in Sync.","url":"https://www.tribalscale.com/company/how-we-work","accessed":"2026-09-30"},{"id":"agents","title":"AI Agent Development That Works at Enterprise Scale","url":"https://www.tribalscale.com/capabilities/ai-data/ai-agents","accessed":"2026-09-30"},{"id":"product","title":"Product Design That Turns Insight Into Delight","url":"https://www.tribalscale.com/capabilities/design-research/product-design","accessed":"2026-09-30"},{"id":"ux","title":"UX Research Services That Put People at the Centre","url":"https://www.tribalscale.com/capabilities/design-research/ux-research","accessed":"2026-09-30"},{"id":"ai-redesign","title":"Don't Add AI. Redesign the Company.","url":"https://www.tribalscale.com/insights/dont-add-ai-redesign-the-company","accessed":"2026-09-30"},{"id":"ai-native","title":"The AI-Native Enterprise: 12 Things You Must Do to Transform Your Company","url":"https://www.tribalscale.com/insights/ai-native-enterprise-12-things","accessed":"2026-09-30"},{"id":"embedded","title":"We Taught Enterprises to Build Like Startups. Now We're Teaching Them to Build With AI.","url":"https://www.tribalscale.com/insights/ai-transformation-embedded-teams","accessed":"2026-09-30"},{"id":"heather","title":"Advancing Innovation: AI-Powered Lean Product Design at TribalScale","url":"https://www.tribalscale.com/insights/advancing-innovation-ai-powered-lean-product-design-tribalscale","accessed":"2026-09-30"},{"id":"platform","title":"Building an Enterprise Agentic Platform for Delivery, Operations, and Personal Productivity","url":"https://www.tribalscale.com/work/enterprise-agentic-platform","accessed":"2026-09-30"},{"id":"terra","title":"Terra Energy — Accelerating Solar Expansion with AI-Powered Permit Automation","url":"https://www.tribalscale.com/work/terra-energy","accessed":"2026-09-30"},{"id":"mccain","title":"McCain Foods — Reinventing Quality at the Line","url":"https://www.tribalscale.com/work/mccain-ddh","accessed":"2026-09-30"},{"id":"aaa","title":"AAA — Driving Digital Transformation with Agile Delivery","url":"https://www.tribalscale.com/work/aaa","accessed":"2026-09-30"},{"id":"john-hancock","title":"John Hancock — Modernizing Wealth with Agile Transformation","url":"https://www.tribalscale.com/work/john-hancock","accessed":"2026-09-30"},{"id":"pga","title":"PGA Tour — Pioneering Voice-First Sports Experiences","url":"https://www.tribalscale.com/work/pga-tour","accessed":"2026-09-30"}],"nodes":[{"id":"tribalscale","title":"TRIBALSCALE","type":"organization","cluster":"identity","summary":"A global innovation partner combining AI-powered engineering, human-centred design, and agility at scale.","details":"This map connects TribalScale’s public identity, capabilities, thinking, and selected work so the relationships are explorable rather than flattened into a list.","sources":["home","who"],"themes":["identity","operating model"],"featured":true},{"id":"ai-first-human","title":"AI-First, Relentlessly Human","type":"concept","cluster":"identity","summary":"TribalScale’s headline tension: apply AI with precision while keeping people at the core.","sources":["home","who"],"themes":["identity","human-centred"],"featured":true},{"id":"right-future","title":"Right the Future","type":"concept","cluster":"identity","summary":"A belief that the future is built through human-centred design, engineering, and AI-powered innovation.","sources":["who"],"themes":["identity","impact"]},{"id":"true-partnership","title":"True Partnership","type":"concept","cluster":"identity","summary":"Move in sync with client teams, challenge ideas, adapt to reality, and measure success by outcomes.","sources":["who","how"],"themes":["partnership","teams"]},{"id":"ai-first-engineering","title":"AI-First Engineering","type":"capability","cluster":"engineering","summary":"Enterprise-grade solutions built for speed, scale, security, and longevity.","sources":["home","who","how"],"themes":["engineering","scale"],"featured":true},{"id":"human-design","title":"Human-Centred Design","type":"capability","cluster":"design","summary":"Design that connects with real humans and balances business outcomes with adoption.","sources":["home","who","product"],"themes":["design","human-centred"],"featured":true},{"id":"agility-scale","title":"Agility at Scale","type":"capability","cluster":"transformation","summary":"Tight cycles, fast adaptation, and automation designed for lasting business and customer impact.","sources":["home","who","how"],"themes":["agility","transformation"],"featured":true},{"id":"frame","title":"Frame","type":"process","cluster":"how-we-work","summary":"Clarify the challenge with laser-sharp focus.","sources":["how"],"themes":["process","discovery"]},{"id":"ideate","title":"Ideate","type":"process","cluster":"how-we-work","summary":"Generate bold, business-ready, human-centred ideas.","sources":["how"],"themes":["process","ideas"]},{"id":"empathize","title":"Empathize","type":"process","cluster":"how-we-work","summary":"Understand humans at the core of the solution.","sources":["how"],"themes":["process","research"]},{"id":"validate","title":"Validate","type":"process","cluster":"how-we-work","summary":"Prototype, test fast with users, validate, and refine.","sources":["how"],"themes":["process","testing"]},{"id":"next-bets","title":"Next Bets","type":"process","cluster":"how-we-work","summary":"Scale wins and uncover what’s next.","sources":["how"],"themes":["process","outcomes"]},{"id":"ai-agents","title":"AI Agents","type":"capability","cluster":"ai","summary":"Intelligent agents that automate tasks, augment teams, and deliver measurable ROI with compliance and adoption in mind.","details":"TribalScale describes agents as enterprise-scale systems, not just pilots: grounded in data and evaluation, designed for security, orchestration, and measurable impact.","evidence":"15+ enterprise AI agents deployed since 2023; 65% reduction in manual workload; 12-week average time to launch.","sources":["agents"],"themes":["AI","agents","ROI"],"featured":true},{"id":"agent-workflows","title":"Agent-Orchestrated Workflows","type":"capability","cluster":"ai","summary":"Multi-agent systems that collaborate across departments and integrate with enterprise systems.","sources":["agents"],"themes":["AI","orchestration","workflow"]},{"id":"enterprise-memory","title":"Enterprise Memory","type":"concept","cluster":"ai","summary":"A shared memory layer that makes a multi-agent platform coherent across fragmented enterprise knowledge.","sources":["platform"],"themes":["AI","knowledge","platform"]},{"id":"governed-tools","title":"Governed Tools","type":"concept","cluster":"ai","summary":"A governed tool framework that keeps agent capabilities, behaviour, and data access visible and controlled.","sources":["platform","agents"],"themes":["governance","security","AI"]},{"id":"human-loop","title":"Human-in-the-loop","type":"concept","cluster":"ai","summary":"Human adoption and oversight remain part of the system, especially where compliance and reliability matter.","sources":["agents","ai-native"],"themes":["human-centred","governance","AI"]},{"id":"evaluation","title":"Evaluation + ROI","type":"outcome","cluster":"outcomes","summary":"Agents are tied to evaluation pipelines and adoption, savings, efficiency, and other measurable outcomes.","sources":["agents"],"themes":["evaluation","ROI"]},{"id":"ux-research","title":"UX Research","type":"capability","cluster":"design","summary":"Research that uncovers human insight, reduces risk, and drives measurable outcomes.","evidence":"140+ research studies; 90% adoption rates achieved post-launch; 42% reduction in product redesign costs.","sources":["ux"],"themes":["research","adoption","human insight"],"featured":true},{"id":"product-design","title":"Product Design","type":"capability","cluster":"design","summary":"Intuitive, inclusive, scalable products shaped by research, interaction design, prototyping, and testing.","evidence":"200+ products designed; 90% adoption rates achieved post-launch; 40% faster design-to-delivery cycles with embedded design teams.","sources":["product"],"themes":["design","accessibility","adoption"],"featured":true},{"id":"design-process","title":"Discovery → Design → Build → Test → Launch","type":"process","cluster":"design","summary":"Heather Page’s published AI-Enhanced Design Process Matrix keeps a second five-stage sequence distinct from TribalScale’s company-wide way of working.","sources":["heather"],"themes":["design","AI","process"]},{"id":"workflow-redesign","title":"Workflow Redesign","type":"insight","cluster":"thinking","summary":"The AI-native move is not inserting AI into one step; it is redesigning the workflow around what is possible now.","sources":["ai-redesign","ai-native"],"themes":["thinking","AI","transformation"],"featured":true},{"id":"embedded-teams","title":"Embedded Teams","type":"insight","cluster":"transformation","summary":"Pair with teams in their actual environment, on actual workflows, so capability and muscle memory remain after the engagement.","sources":["embedded","how"],"themes":["transformation","partnership","capability building"],"featured":true},{"id":"enterprise-platform","title":"Enterprise Agentic Platform","type":"case-study","cluster":"work","summary":"A governed multi-agent platform for delivery, operations, and personal productivity.","details":"The case connects fragmented automations to a shared runtime, enterprise memory layer, and governed tool framework.","evidence":"Case-study creation reduced from days to approximately 15 minutes; 20 employees adopted Personal Agents; enterprise-scale operations run at approximately $20–40 USD per day.","sources":["platform"],"themes":["case study","AI","platform"],"featured":true},{"id":"terra-energy","title":"Terra Energy","type":"case-study","cluster":"work","summary":"Generative AI-powered permit automation designed to scale across county-specific workflows.","evidence":"Bot development time reduced from four months to a few hours; approximately 45% of permit applications were being returned monthly before the intervention.","sources":["terra"],"themes":["case study","workflow","automation"],"featured":true},{"id":"mccain-ddh","title":"McCain DDH","type":"case-study","cluster":"work","summary":"A Digital Defect Handling platform co-designed around real-world workflows, visibility, ownership, and feedback loops.","evidence":"70% reduction in defect submissions, with role-aligned workflows and real-time visibility across operators, supervisors, and maintenance.","sources":["mccain"],"themes":["case study","workflow","visibility"],"featured":true},{"id":"aaa","title":"AAA","type":"case-study","cluster":"work","summary":"Embedded engineering, design, and product experts helped AAA shift from Waterfall to Agile XP and collaborative delivery.","evidence":"Time-to-market reduced from 8–12 months to 2–4 months, with TDD, CI/CD, and knowledge-sharing teams.","sources":["aaa"],"themes":["case study","agile","embedded"],"featured":true},{"id":"john-hancock","title":"John Hancock","type":"case-study","cluster":"work","summary":"Agile transformation modernized retirement-service workflows and strengthened internal capability.","evidence":"Portfolio creation reduced from 10 minutes to 2 minutes; 78.6% story acceptance rate.","sources":["john-hancock"],"themes":["case study","agile","modernization"]},{"id":"pga-tour","title":"PGA Tour","type":"case-study","cluster":"work","summary":"Voice-first sports experiences brought live tournament data to Alexa and Google Assistant.","evidence":"One of the first sports leagues worldwide to launch on both Alexa and Google Assistant, with live scores and tournament updates.","sources":["pga"],"themes":["case study","voice","emerging interface"]},{"id":"products-launched","title":"700+ Products Launched","type":"outcome","cluster":"outcomes","summary":"A public homepage metric that signals the breadth of TribalScale’s delivery history.","sources":["who","home"],"themes":["outcomes","scale"]},{"id":"repeat-client","title":"95% Repeat Client Rate","type":"outcome","cluster":"outcomes","summary":"A public homepage metric connected to the company’s emphasis on partnership and lasting impact.","sources":["who","home"],"themes":["outcomes","partnership"]},{"id":"global-partners","title":"90+ Global Partners","type":"outcome","cluster":"outcomes","summary":"A public homepage metric describing the reach of TribalScale’s partner network.","sources":["who","home"],"themes":["outcomes","scale"]}],"edges":[{"source":"tribalscale","target":"ai-first-human","label":"identity","kind":"explicit","sources":["home"]},{"source":"tribalscale","target":"right-future","label":"mission","kind":"explicit","sources":["who"]},{"source":"tribalscale","target":"true-partnership","label":"partnership","kind":"explicit","sources":["who"]},{"source":"tribalscale","target":"ai-first-engineering","label":"capability","kind":"explicit","sources":["home"]},{"source":"tribalscale","target":"human-design","label":"capability","kind":"explicit","sources":["home"]},{"source":"tribalscale","target":"agility-scale","label":"capability","kind":"explicit","sources":["home"]},{"source":"tribalscale","target":"frame","label":"way of working","kind":"explicit","sources":["how"]},{"source":"tribalscale","target":"ai-agents","label":"AI capability","kind":"explicit","sources":["agents"]},{"source":"tribalscale","target":"ux-research","label":"research","kind":"explicit","sources":["ux"]},{"source":"tribalscale","target":"enterprise-platform","label":"evidence","kind":"explicit","sources":["platform"]},{"source":"tribalscale","target":"repeat-client","label":"outcome","kind":"explicit","sources":["who"]},{"source":"frame","target":"ideate","label":"sequence","kind":"explicit","sources":["how"]},{"source":"ideate","target":"empathize","label":"sequence","kind":"explicit","sources":["how"]},{"source":"empathize","target":"validate","label":"sequence","kind":"explicit","sources":["how"]},{"source":"validate","target":"next-bets","label":"sequence","kind":"explicit","sources":["how"]},{"source":"empathize","target":"ux-research","label":"human insight","kind":"inferred","sources":["ux"]},{"source":"validate","target":"product-design","label":"user validation","kind":"explicit","sources":["product"]},{"source":"frame","target":"workflow-redesign","label":"reframe the work","kind":"inferred","sources":["ai-redesign"]},{"source":"ux-research","target":"design-process","label":"design sequence","kind":"explicit","sources":["heather"]},{"source":"design-process","target":"product-design","label":"product design","kind":"explicit","sources":["product"]},{"source":"design-process","target":"ai-first-engineering","label":"build","kind":"explicit","sources":["heather"]},{"source":"design-process","target":"next-bets","label":"iteration","kind":"inferred","sources":["heather"]},{"source":"ai-first-human","target":"ai-agents","label":"human adoption","kind":"inferred","sources":["agents"]},{"source":"ai-agents","target":"agent-workflows","label":"orchestration","kind":"explicit","sources":["agents"]},{"source":"ai-agents","target":"evaluation","label":"measurable ROI","kind":"explicit","sources":["agents"]},{"source":"agent-workflows","target":"enterprise-platform","label":"platform evidence","kind":"explicit","sources":["platform"]},{"source":"enterprise-platform","target":"enterprise-memory","label":"shared memory","kind":"explicit","sources":["platform"]},{"source":"enterprise-platform","target":"governed-tools","label":"governance","kind":"explicit","sources":["platform"]},{"source":"enterprise-platform","target":"human-loop","label":"human adoption","kind":"inferred","sources":["platform"]},{"source":"governed-tools","target":"evaluation","label":"control + measurement","kind":"inferred","sources":["agents"]},{"source":"ai-agents","target":"workflow-redesign","label":"redesign the workflow","kind":"explicit","sources":["ai-redesign"]},{"source":"workflow-redesign","target":"terra-energy","label":"workflow evidence","kind":"inferred","sources":["terra"]},{"source":"workflow-redesign","target":"mccain-ddh","label":"workflow evidence","kind":"inferred","sources":["mccain"]},{"source":"embedded-teams","target":"true-partnership","label":"embedded partnership","kind":"inferred","sources":["embedded"]},{"source":"embedded-teams","target":"aaa","label":"case evidence","kind":"explicit","sources":["aaa"]},{"source":"embedded-teams","target":"john-hancock","label":"case evidence","kind":"explicit","sources":["john-hancock"]},{"source":"agility-scale","target":"aaa","label":"delivery transformation","kind":"explicit","sources":["aaa"]},{"source":"agility-scale","target":"john-hancock","label":"agile transformation","kind":"explicit","sources":["john-hancock"]},{"source":"aaa","target":"evaluation","label":"time-to-market","kind":"inferred","sources":["aaa"]},{"source":"john-hancock","target":"evaluation","label":"cycle time","kind":"inferred","sources":["john-hancock"]},{"source":"product-design","target":"pga-tour","label":"conversational UX","kind":"inferred","sources":["pga"]},{"source":"pga-tour","target":"next-bets","label":"emerging interface","kind":"inferred","sources":["pga"]},{"source":"terra-energy","target":"ai-agents","label":"generative automation","kind":"explicit","sources":["terra"]},{"source":"mccain-ddh","target":"product-design","label":"role-aligned design","kind":"explicit","sources":["mccain"]},{"source":"mccain-ddh","target":"evaluation","label":"70% reduction","kind":"explicit","sources":["mccain"]},{"source":"tribalscale","target":"products-launched","label":"public metric","kind":"explicit","sources":["who"]},{"source":"tribalscale","target":"global-partners","label":"public metric","kind":"explicit","sources":["who"]},{"source":"true-partnership","target":"repeat-client","label":"relationship","kind":"inferred","sources":["who"]}],"stories":[{"id":"identity","title":"Identity to outcomes","summary":"What TribalScale says it is, the partnership it practises, and the client retention it reports.","steps":["ai-first-human","tribalscale","true-partnership","repeat-client"]},{"id":"way-of-working","title":"The way of working","summary":"Frame, Ideate, Empathize, Validate, Next Bets: the company-wide sequence.","steps":["frame","ideate","empathize","validate","next-bets"]},{"id":"design-practice","title":"The design practice","summary":"Heather Page's Discovery-to-Launch sequence, kept distinct from the company-wide method, feeding product design.","steps":["human-design","ux-research","design-process","product-design"]},{"id":"agent-platform","title":"From agents to a governed platform","summary":"Agents, orchestration, the enterprise platform, memory, governed tools, and how it is all evaluated.","steps":["ai-agents","agent-workflows","enterprise-platform","enterprise-memory","governed-tools","evaluation"]},{"id":"workflow-redesign","title":"Redesign the workflow, not the step","summary":"AI-native thinking meets Terra Energy and McCain DDH evidence.","steps":["ai-agents","workflow-redesign","terra-energy","mccain-ddh"]},{"id":"embedded","title":"Embedded teams","summary":"The partnership model behind the AAA and John Hancock transformations.","steps":["true-partnership","embedded-teams","aaa","john-hancock"]}]}</script>
+<script>
+(() => {
+"use strict";
+const story = JSON.parse(document.getElementById("story-data").textContent);
+const theme = JSON.parse(document.getElementById("theme-data").textContent);
+const NS = "http://www.w3.org/2000/svg";
+const $ = (id) => document.getElementById(id);
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isNarrow = () => innerWidth <= 760;
+
+/* ---------- tiny DOM helpers (all text goes through textContent: no HTML injection) ---------- */
+function el(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function sv(tag, props) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(props || {})) if (v != null) e.setAttribute(k, v);
+  return e;
+}
+const safeUrl = (u) => { try { return /^https?:$/.test(new URL(u).protocol) ? u : null; } catch { return null; } };
+const cap = (s) => String(s || "").replace(/[-_]/g, " ").replace(/^./, (c) => c.toUpperCase());
+
+/* ---------- theme ---------- */
+const hex2rgb = (h) => { h = h.replace("#", ""); if (h.length === 3) h = [...h].map((x) => x + x).join(""); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)); };
+function rgb2hsl([r, g, b]) {
+  r /= 255; g /= 255; b /= 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0, s = 0; const l = (mx + mn) / 2;
+  if (d) { s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn); h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; }
+  return [h, s, l];
+}
+const nClusters = story.clusters.length;
+const cIndex = new Map(story.clusters.map((c, i) => [c.id, i]));
+function clusterColor(id) {
+  if (theme.clusters && theme.clusters[id]) return theme.clusters[id];
+  const [h, s] = rgb2hsl(hex2rgb(theme.colors.accent));
+  const hue = (h + cIndex.get(id) * (360 / nClusters)) % 360;
+  return `hsl(${hue.toFixed(0)} ${Math.max(45, Math.min(75, s * 100)).toFixed(0)}% ${theme.mode === "dark" ? 66 : 40}%)`;
+}
+const colors = Object.fromEntries(story.clusters.map((c) => [c.id, clusterColor(c.id)]));
+if (theme.font) {
+  if (theme.font.body) document.body.style.fontFamily = theme.font.body;
+  if (theme.font.display) $("wordmark").style.fontFamily = theme.font.display;
+}
+const wm = theme.wordmark || {};
+$("wordmark").textContent = wm.text || story.title;
+if (wm.letterSpacing) $("wordmark").style.letterSpacing = wm.letterSpacing;
+if (wm.uppercase) $("wordmark").style.textTransform = "uppercase";
+if (theme.logo && theme.logo.src) $("logo").append(el("img", { src: theme.logo.src, alt: theme.logo.alt || "" }));
+$("dek").textContent = story.tagline;
+$("credit").textContent = [story.disclaimer, story.credit].filter(Boolean).join(" ");
+
+/* ---------- model ---------- */
+const nodes = story.nodes.map((n) => ({ ...n, x: 0, y: 0, vx: 0, vy: 0, deg: 0, color: colors[n.cluster], isRoot: n.id === story.root }));
+const byId = new Map(nodes.map((n) => [n.id, n]));
+const edges = story.edges.map((e, i) => ({ ...e, i, a: byId.get(e.source), b: byId.get(e.target) }));
+const adj = new Map(nodes.map((n) => [n.id, new Set()]));
+for (const e of edges) { e.a.deg++; e.b.deg++; adj.get(e.source).add(e.target); adj.get(e.target).add(e.source); }
+for (const n of nodes) n.r = n.isRoot ? 30 : (n.featured ? 13 : 8) + Math.min(n.deg, 8) * 0.45;
+const srcById = new Map(story.sources.map((s) => [s.id, s]));
+const storyById = new Map((story.stories || []).map((s) => [s.id, s]));
+
+/* ---------- force layout (deterministic, no dependencies) ---------- */
+function rng(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function layout() {
+  const rnd = rng(7), N = nodes.length;
+  const sector = (id) => 2 * Math.PI * (cIndex.get(id) + 0.5) / nClusters;
+  const R = 330 + Math.sqrt(N) * 40;
+  const asp = Math.max(0.75, Math.min(2.2, svgEl.clientWidth / Math.max(1, svgEl.clientHeight))), ax = Math.sqrt(asp), ay = 1 / ax; // fill the stage shape
+  for (const n of nodes) {
+    n.vx = n.vy = 0;
+    if (n.isRoot) { n.x = n.y = 0; continue; }
+    const ang = sector(n.cluster) + (rnd() - 0.5) * 0.9, rad = R * (0.45 + rnd() * 0.7);
+    n.x = Math.cos(ang) * rad * ax; n.y = Math.sin(ang) * rad * ay;
+  }
+  const iters = N > 140 ? 220 : 480, XS = 0.55; // XS<1 makes horizontal crowding count more: labels are wider than tall
+  for (let it = 0; it < iters; it++) {
+    const alpha = Math.pow(1 - it / iters, 1.4);
+    for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+      const a = nodes[i], b = nodes[j];
+      let dx = b.x - a.x, dy = b.y - a.y;
+      if (dx * dx + dy * dy < 1) { dx = rnd() - .5; dy = rnd() - .5; }
+      const wd = Math.sqrt(dx * dx * XS * XS + dy * dy) || 1, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const min = a.r + b.r + 95;
+      let f = 26000 / (wd * wd); if (wd < min) f += (min - wd) * 0.9;
+      f *= alpha + 0.04;
+      const fx = dx / d * f, fy = dy / d * f;
+      a.vx -= fx; a.vy -= fy; b.vx += fx; b.vy += fy;
+    }
+    for (const e of edges) {
+      const a = e.a, b = e.b, dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const L = a.cluster === b.cluster ? 150 : 250, f = (d - L) * 0.03 * (alpha + 0.1);
+      const fx = dx / d * f, fy = dy / d * f; a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+    }
+    for (const n of nodes) {
+      if (n.isRoot) continue;
+      const s = sector(n.cluster), tx = Math.cos(s) * R * ax, ty = Math.sin(s) * R * ay;
+      n.vx += (tx - n.x) * 0.014 * alpha; n.vy += (ty - n.y) * 0.014 * alpha;
+      n.x += n.vx * 0.6; n.y += n.vy * 0.6; n.vx *= 0.55; n.vy *= 0.55;
+    }
+  }
+}
+
+/* ---------- SVG build ---------- */
+const svgEl = $("graph"), vp = $("vp");
+for (const e of edges) {
+  e.line = sv("line", { class: "edge" + (e.kind === "inferred" ? " inferred" : "") });
+  e.line.append(Object.assign(sv("title"), { textContent: `${e.a.title} → ${e.b.title}: ${e.label} (${e.kind})` }));
+  e.text = sv("text", { class: "edge-label" }); e.text.textContent = e.label;
+  $("edges").append(e.line); $("edge-labels").append(e.text);
+}
+for (const n of nodes) {
+  const g = sv("g", { class: "node" + (n.isRoot ? " root" : ""), tabindex: 0, role: "button", "aria-label": `${n.title}, ${cap(n.type)}, ${story.clusters[cIndex.get(n.cluster)].label}`, "data-id": n.id });
+  g.append(sv("circle", { r: n.r + 11, fill: "transparent" }));
+  g.append(sv("circle", { class: "ring", r: n.r + 6 }));
+  g.append(sv("circle", { class: "core", r: n.r, stroke: n.color, style: n.isRoot ? "fill:" + n.color : null }));
+  if (!n.isRoot) g.append(sv("circle", { class: "dot", r: Math.max(2, n.r * 0.22), fill: n.color }));
+  const lab = sv("text", { class: "label", y: n.r + 15 }); lab.textContent = n.title; g.append(lab);
+  if (!n.isRoot) { const k = sv("text", { class: "kind", y: n.r + 26 }); k.textContent = cap(n.type); g.append(k); }
+  g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id, { center: true }); } });
+  n.g = g; $("nodes").append(g);
+}
+function place() {
+  for (const e of edges) {
+    e.line.setAttribute("x1", e.a.x); e.line.setAttribute("y1", e.a.y); e.line.setAttribute("x2", e.b.x); e.line.setAttribute("y2", e.b.y);
+    e.text.setAttribute("x", (e.a.x + e.b.x) / 2); e.text.setAttribute("y", (e.a.y + e.b.y) / 2 - 4);
+  }
+  for (const n of nodes) n.g.setAttribute("transform", `translate(${n.x.toFixed(1)} ${n.y.toFixed(1)})`);
+  drawStoryPath();
+}
+
+/* ---------- view (pan / zoom) ---------- */
+const view = { x: 0, y: 0, k: 1 };
+function applyView() { svgEl.style.setProperty("--ls", Math.min(2.2, Math.max(1, 0.95 / view.k)).toFixed(2)); vp.setAttribute("transform", `translate(${view.x} ${view.y}) scale(${view.k})`); svgEl.classList.toggle("zoomed", view.k >= 1.15); }
+let tweenId = 0;
+function tween(to, ms = 480) {
+  cancelAnimationFrame(tweenId);
+  if (reduceMotion) { Object.assign(view, to); applyView(); return; }
+  const from = { ...view }, t0 = performance.now();
+  const step = (t) => {
+    const p = Math.min(1, (t - t0) / ms), q = 1 - Math.pow(1 - p, 3);
+    view.x = from.x + (to.x - from.x) * q; view.y = from.y + (to.y - from.y) * q; view.k = from.k + (to.k - from.k) * q; applyView();
+    if (p < 1) tweenId = requestAnimationFrame(step);
+  };
+  tweenId = requestAnimationFrame(step);
+}
+const stageBox = () => {
+  const W = svgEl.clientWidth, H = svgEl.clientHeight;
+  const panelOpen = $("panel").classList.contains("open");
+  return { W, H, left: 0, right: panelOpen && !isNarrow() ? Math.min(400, W) : 0, bottom: (panelOpen && isNarrow() ? H * 0.58 : 0) + $("foot").offsetHeight };
+};
+function fit(animate = true, list = nodes) {
+  const { W, H, right, bottom } = stageBox();
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const n of list) { const lw = Math.min(210, n.title.length * 6.2) / 2 + 12; x0 = Math.min(x0, n.x - Math.max(n.r, lw)); x1 = Math.max(x1, n.x + Math.max(n.r, lw)); y0 = Math.min(y0, n.y - n.r - 30); y1 = Math.max(y1, n.y + n.r + 50); }
+  const aw = W - right, ah = H - bottom - 8;
+  const k = Math.max(0.2, Math.min(1.6, Math.min(aw / (x1 - x0), ah / (y1 - y0))));
+  const to = { k, x: aw / 2 - (x0 + x1) / 2 * k, y: (ah + 0) / 2 - (y0 + y1) / 2 * k + 6 };
+  animate ? tween(to) : (Object.assign(view, to), applyView());
+}
+function center(n) {
+  const { W, H, right, bottom } = stageBox(), k = Math.max(view.k, 1);
+  tween({ k, x: (W - right) / 2 - n.x * k, y: (H - bottom) / 2 - n.y * k - 10 }, 420);
+}
+function zoomAt(f, cx, cy) {
+  const k = Math.max(0.2, Math.min(4, view.k * f)), r = k / view.k;
+  view.x = cx - (cx - view.x) * r; view.y = cy - (cy - view.y) * r; view.k = k; applyView();
+}
+
+/* ---------- state + render ---------- */
+const S = { selected: null, filter: "all", q: "", view: "graph", story: null, step: 0, readStory: null, open: new Set() };
+const matches = (n) => {
+  if (S.filter !== "all" && n.cluster !== S.filter) return false;
+  if (!S.q) return true;
+  return [n.title, n.summary, n.details, n.type, (n.themes || []).join(" ")].join(" ").toLowerCase().includes(S.q);
+};
+function render() {
+  const sel = S.selected && byId.get(S.selected), nb = sel ? adj.get(sel.id) : null;
+  const inStory = S.story ? new Set(S.story.steps) : null;
+  let shown = 0;
+  for (const n of nodes) {
+    const m = matches(n); if (m) shown++;
+    let dim = !m;
+    if (inStory) dim = dim || !inStory.has(n.id);
+    else if (sel && n !== sel && !nb.has(n.id)) dim = true;
+    n.g.classList.toggle("dim", dim);
+    n.g.classList.toggle("sel", n === sel);
+    n.g.setAttribute("aria-pressed", String(n === sel));
+  }
+  for (const e of edges) {
+    const hl = !inStory && sel && (e.a === sel || e.b === sel);
+    e.line.classList.toggle("hl", !!hl); e.text.classList.toggle("hl", !!hl);
+    let dim = !(matches(e.a) && matches(e.b));
+    if (inStory) dim = true; else if (sel && !hl) dim = true;
+    e.line.classList.toggle("dim", dim);
+  }
+  $("empty").classList.toggle("on", shown === 0 && S.view === "graph");
+  $("status").textContent = `${nodes.length} nodes · ${edges.length} edges · ${S.q || S.filter !== "all" ? `${shown} match · ` : ""}Click a node to explore the story.`;
+  for (const b of $("chips").children) b.setAttribute("aria-pressed", String(b.dataset.c === S.filter));
+  for (const b of $("stories").querySelectorAll("button")) b.setAttribute("aria-pressed", String(!!S.story && b.dataset.s === S.story.id));
+  if (S.view === "list") renderList(); else if (S.view === "timeline") renderTimeline(); else if (S.view === "outline") renderOutline();
+  drawStoryPath();
+}
+
+/* ---------- story mode ---------- */
+function drawStoryPath() {
+  const p = $("story-path"), bg = $("badges"); bg.textContent = "";
+  if (!S.story) { p.setAttribute("d", ""); return; }
+  const pts = S.story.steps.map((id) => byId.get(id));
+  p.setAttribute("d", pts.map((n, i) => `${i ? "L" : "M"}${n.x.toFixed(1)} ${n.y.toFixed(1)}`).join(" "));
+  pts.forEach((n, i) => {
+    const g = sv("g", { class: "badge", transform: `translate(${(n.x + n.r * 0.8).toFixed(1)} ${(n.y - n.r * 0.8).toFixed(1)})`, opacity: i === S.step ? 1 : 0.75 });
+    g.append(sv("circle", { r: i === S.step ? 10 : 8 })); const t = sv("text"); t.textContent = i + 1; g.append(t); bg.append(g);
+  });
+}
+function startStory(id) {
+  const st = storyById.get(id); if (!st) return;
+  S.story = st; S.step = 0;
+  if (S.view !== "graph" && S.view !== "timeline") setView("graph");
+  if (S.view === "timeline") tlFocusStory(st); // zoom the timeline to the story's own dates
+  $("storybar").classList.add("on"); goStep(0);
+}
+function goStep(i) {
+  const st = S.story; if (!st) return;
+  S.step = Math.max(0, Math.min(st.steps.length - 1, i));
+  $("sb-step").textContent = `Story · step ${S.step + 1} of ${st.steps.length}`;
+  $("sb-title").textContent = st.title; $("sb-sum").textContent = st.summary || "";
+  $("sb-prev").disabled = S.step === 0; $("sb-next").disabled = S.step === st.steps.length - 1;
+  select(st.steps[S.step], { center: true, keepStory: true });
+}
+function endStory() { S.story = null; $("storybar").classList.remove("on"); render(); }
+
+/* ---------- detail panel ---------- */
+function relRow(e, n) {
+  const other = e.a === n ? e.b : e.a, out = e.a === n;
+  return el("li", null, el("button", { onclick: () => select(other.id, { center: true }) },
+    el("b", { text: other.title }),
+    el("span", { class: "rel" }, out ? "→ " : "← ", el("em", { text: e.label }), ` · ${e.kind}`)));
+}
+function openPanel(n) {
+  const p = $("panel"); p.textContent = "";
+  const cl = story.clusters[cIndex.get(n.cluster)];
+  p.append(el("button", { class: "close", "aria-label": "Close details", text: "×", onclick: () => select(null) }));
+  p.append(el("div", { class: "kicker", style: `--c:${n.color}` }, el("i"), el("span", { text: cl.label }), el("span", { text: "·", "aria-hidden": "true" }), el("span", { text: cap(n.type) })));
+  p.append(el("h2", { text: n.title }), el("p", { text: n.summary }));
+  if (n.details) p.append(el("p", { class: "details", text: n.details }));
+  if (n.evidence) p.append(el("h3", { text: "Evidence" }), el("blockquote", { text: n.evidence }));
+  if (n.when) p.append(el("h3", { text: "When" }), el("p", { text: n.when }));
+  if (n.themes && n.themes.length) p.append(el("h3", { text: "Themes" }), el("div", { class: "tags" }, n.themes.map((t) => el("span", { class: "tag", text: t }))));
+  const rel = edges.filter((e) => e.a === n || e.b === n);
+  if (rel.length) p.append(el("h3", { text: `Connections (${rel.length})` }), el("ul", { class: "links" }, rel.map((e) => relRow(e, n))));
+  const srcs = (n.sources || []).map((id) => srcById.get(id)).filter(Boolean);
+  if (srcs.length) p.append(el("h3", { text: "Sources" }), el("ul", { class: "src" }, srcs.map((s) => {
+    const u = safeUrl(s.url);
+    return el("li", null, u ? el("a", { href: u, target: "_blank", rel: "noopener noreferrer", text: s.title }) : s.title, s.accessed ? el("small", { text: `Accessed ${s.accessed}` }) : null);
+  })));
+  const inStories = (story.stories || []).filter((s) => s.steps.includes(n.id));
+  if (inStories.length && !S.story) p.append(el("h3", { text: "Appears in" }), el("div", { class: "tags" }, inStories.map((s) => el("button", { class: "chip", text: s.title, onclick: () => startStory(s.id) }))));
+  p.classList.add("open"); p.scrollTop = 0;
+}
+function select(id, opts = {}) {
+  if (!opts.keepStory && S.story && id) endStoryQuiet();
+  S.selected = id;
+  const p = $("panel");
+  document.querySelector("main").classList.toggle("sheet", !!id);
+  if (id) { openPanel(byId.get(id)); try { history.replaceState(null, "", "#node=" + encodeURIComponent(id)); } catch {} }
+  else { p.classList.remove("open"); try { history.replaceState(null, "", location.pathname + location.search); } catch {} }
+  if (id) ensureTL(byId.get(id));
+  render();
+  if (id && opts.center && S.view === "graph") center(byId.get(id));
+}
+function endStoryQuiet() { S.story = null; $("storybar").classList.remove("on"); }
+
+/* ---------- views: list, timeline, read, outline ---------- */
+function renderList() {
+  const box = $("list"); box.textContent = "";
+  let any = false;
+  for (const c of story.clusters) {
+    const items = nodes.filter((n) => n.cluster === c.id && matches(n));
+    if (!items.length) continue; any = true;
+    box.append(el("section", null,
+      el("h2", { style: `--c:${colors[c.id]}` }, el("i"), c.label),
+      el("ul", null, items.map((n) => el("li", null, el("button", { class: "item", style: `--c:${n.color}`, onclick: () => select(n.id) },
+        el("small", { text: cap(n.type) }), el("b", { text: n.title }), el("span", { text: n.summary })))))));
+  }
+  if (!any) box.append(el("p", { text: "No nodes match.", style: "color:var(--muted);text-align:center" }));
+}
+
+/* ----- time parsing: "1666-09-02" | "1666-09" | "1666" | "-0500" (negative = BCE). Decimal years. ----- */
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function utc(y, mo, d) { const dt = new Date(0); dt.setUTCFullYear(y, mo, d); dt.setUTCHours(0, 0, 0, 0); return dt; }
+function tOf(y, mo, d) { return y + Math.round((utc(y, mo, d) - utc(y, 0, 1)) / 864e5) / 365.25; }
+function parseT(s) {
+  if (typeof s !== "string") return null;
+  const m = /^(-?\d{1,5})(?:-(\d{2})(?:-(\d{2}))?)?$/.exec(s.trim());
+  if (!m) return null;
+  return tOf(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1);
+}
+function dateOf(t) { const y = Math.floor(t), dt = utc(y, 0, 1); dt.setTime(dt.getTime() + Math.round((t - y) * 365.25) * 864e5); return dt; }
+const yearLabel = (y) => (y < 0 ? `${-y} BCE` : String(y));
+function makeTicks(a, b, want) {
+  const span = b - a, out = [];
+  const steps = [["y", 1000], ["y", 500], ["y", 200], ["y", 100], ["y", 50], ["y", 20], ["y", 10], ["y", 5], ["y", 2], ["y", 1], ["m", 6], ["m", 3], ["m", 1], ["d", 14], ["d", 7], ["d", 2], ["d", 1]];
+  const size = (s) => (s[0] === "y" ? s[1] : s[0] === "m" ? s[1] / 12 : s[1] / 365.25);
+  let pick = steps[steps.length - 1];
+  for (const s of steps) if (span / size(s) >= want) { pick = s; break; }
+  const [u, k] = pick;
+  if (u === "y") {
+    for (let y = Math.ceil(Math.floor(a) / k) * k; out.length < 300; y += k) { const t = tOf(y, 0, 1); if (t > b) break; if (t >= a) out.push({ t, label: yearLabel(y) }); }
+  } else if (u === "m") {
+    const d0 = dateOf(a); let y = d0.getUTCFullYear(), mo = Math.floor(d0.getUTCMonth() / k) * k;
+    for (; out.length < 300; mo += k) { if (mo >= 12) { y += Math.floor(mo / 12); mo %= 12; } const t = tOf(y, mo, 1); if (t > b) break; if (t >= a) out.push({ t, label: `${MON[mo]} ${yearLabel(y)}` }); }
+  } else {
+    const dt = dateOf(a);
+    for (; out.length < 300; dt.setUTCDate(dt.getUTCDate() + k)) { const t = tOf(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate()); if (t > b) break; if (t >= a) out.push({ t, label: `${dt.getUTCDate()} ${MON[dt.getUTCMonth()]} ${yearLabel(dt.getUTCFullYear())}` }); }
+  }
+  return out;
+}
+for (const n of nodes) {
+  n.t0 = parseT(n.start); n.t1 = n.end ? parseT(n.end) : n.t0;
+  if (n.t0 != null && (n.t1 == null || n.t1 < n.t0)) n.t1 = n.t0;
+}
+const dated = nodes.filter((n) => n.t0 != null);
+
+/* ----- which views exist ----- */
+const VIEW_LABEL = { graph: "Graph", timeline: "Timeline", read: "Read", outline: "Outline", list: "List" };
+const can = { graph: true, timeline: dated.length >= 5, read: (story.stories || []).length > 0, outline: true, list: true };
+let viewList = (Array.isArray(story.views) && story.views.length ? story.views : Object.keys(VIEW_LABEL)).filter((v) => can[v]);
+if (!viewList.length) viewList = ["graph"];
+
+/* ----- timeline ----- */
+const TL = { v0: 0, v1: 1, even: false, init: false, geo: null };
+function tlFull() {
+  let a = Infinity, b = -Infinity;
+  for (const n of dated) { a = Math.min(a, n.t0); b = Math.max(b, n.t1); }
+  const pad = Math.max((b - a) * 0.05, 2 / 365.25);
+  return [a - pad, b + pad];
+}
+function tlReset() { [TL.v0, TL.v1] = tlFull(); TL.even = false; }
+function tlZoom(f, mx) {
+  if (TL.even || !TL.geo) return;
+  const [fa, fb] = tlFull(), span = TL.v1 - TL.v0;
+  const ns = Math.min((fb - fa) * 1.5, Math.max(span * f, 2 / 365.25));
+  const fx = Math.min(1, Math.max(0, (mx - TL.geo.x0) / TL.geo.pw)), tc = TL.v0 + fx * span;
+  TL.v0 = tc - fx * ns; TL.v1 = TL.v0 + ns; renderTimeline();
+}
+function tlFocusStory(st) {
+  if (TL.even) return;
+  if (!TL.init) { tlReset(); TL.init = true; }
+  const ts = st.steps.map((id) => byId.get(id)).filter((n) => n && n.t0 != null);
+  if (ts.length < 2) return;
+  const a = Math.min(...ts.map((n) => n.t0)), b = Math.max(...ts.map((n) => n.t1)), pad = Math.max((b - a) * 0.14, 2 / 365.25);
+  TL.v0 = a - pad; TL.v1 = b + pad;
+}
+function ensureTL(n) {
+  if (S.view !== "timeline" || TL.even || n.t0 == null || !TL.geo) return;
+  const s = TL.v1 - TL.v0, covered = $("panel").classList.contains("open") && !isNarrow() ? Math.min(400, TL.geo.x0 + TL.geo.pw) : 0;
+  const free = Math.max(120, TL.geo.pw - covered), frac = (n.t0 - TL.v0) / s, hi = (free - 60) / TL.geo.pw;
+  if (frac < 0.04 || frac > hi) { const target = (free / 2) / TL.geo.pw; TL.v0 = n.t0 - target * s; TL.v1 = TL.v0 + s; } // centre it in the part the panel leaves free
+}
+function renderTimeline() {
+  const svg = $("tl"), host = $("timeline"), W = host.clientWidth, Hc = host.clientHeight;
+  if (!W || !Hc || !dated.length) return;
+  if (!TL.init) { tlReset(); TL.init = true; }
+  svg.textContent = "";
+  const narrow = W < 600, LW = narrow ? 0 : 150, x0 = LW + 14, x1 = W - 26, pw = Math.max(80, x1 - x0);
+  TL.geo = { x0, pw };
+  const lanes = story.clusters.filter((c) => dated.some((n) => n.cluster === c.id));
+  let X;
+  if (TL.even) {
+    const order = [...dated].sort((a, b) => a.t0 - b.t0 || a.t1 - b.t1), rank = new Map(order.map((n, i) => [n.id, i]));
+    X = (n) => x0 + 14 + (pw - 28) * (order.length > 1 ? rank.get(n.id) / (order.length - 1) : 0.5);
+  } else {
+    X = (n, end) => x0 + (((end ? n.t1 : n.t0) - TL.v0) / (TL.v1 - TL.v0)) * pw;
+  }
+  const AX = 40, rowH = TL.even ? 34 : 23, hh = narrow ? 16 : 0;
+  const sel = S.selected && byId.get(S.selected), nb = sel ? adj.get(sel.id) : null, inStory = S.story ? new Set(S.story.steps) : null;
+  let y = AX; const blocks = [];
+  for (const c of lanes) {
+    const items = dated.filter((n) => n.cluster === c.id).map((n) => ({ n, x: X(n), xe: TL.even ? X(n) : X(n, true) })).sort((a, b) => a.x - b.x);
+    const rows = [];
+    for (const it of items) {
+      if (it.x > x1 + 60 || it.xe < x0 - 60) { it.row = -1; continue; }
+      const lw = Math.min(230, it.n.title.length * 6.4 + 16);
+      it.flip = it.x + 16 + lw > x1;
+      const iv = it.flip ? [it.x - 12 - lw, Math.max(it.x, it.xe) + 6] : [it.x - 6, Math.max(it.x, it.xe) + 12 + lw];
+      let r = rows.findIndex((row) => row.every(([l, rr]) => iv[1] < l - 4 || iv[0] > rr + 4));
+      if (r < 0) { r = rows.length; rows.push([]); }
+      rows[r].push(iv); it.row = r;
+    }
+    const h = Math.max(58, Math.max(1, rows.length) * rowH + 30 + hh);
+    blocks.push({ c, items, top: y, h }); y += h;
+  }
+  const total = y + 14;
+  svg.setAttribute("width", W); const room = $("foot").offsetHeight + 28; // so the footer never covers the last lane
+  svg.setAttribute("height", Math.max(Hc, total + room));
+  const defs = sv("defs"), clip = sv("clipPath", { id: "tl-clip" });
+  clip.append(sv("rect", { x: x0 - 10, y: 0, width: pw + 20, height: Math.max(Hc, total + room) })); defs.append(clip); svg.append(defs);
+  blocks.forEach((b, i) => {
+    svg.append(sv("rect", { class: "tl-lane" + (i % 2 ? " alt" : ""), x: 0, y: b.top, width: W, height: b.h }));
+    const lab = sv("text", { class: "tl-lane-label", x: narrow ? x0 : 14, y: b.top + (narrow ? 12 : 24) });
+    lab.textContent = b.c.label; lab.setAttribute("fill", colors[b.c.id]); lab.style.fill = colors[b.c.id]; svg.append(lab);
+  });
+  const grid = sv("g", { "clip-path": "url(#tl-clip)" });
+  if (!TL.even) {
+    for (const k of makeTicks(TL.v0, TL.v1, Math.max(3, pw / 140))) {
+      const tx = x0 + ((k.t - TL.v0) / (TL.v1 - TL.v0)) * pw;
+      grid.append(sv("line", { class: "tl-tick", x1: tx, x2: tx, y1: AX - 6, y2: total }));
+      const t = sv("text", { class: "tl-tick-label", x: tx, y: AX - 14 }); t.textContent = k.label; grid.append(t);
+    }
+  } else {
+    const t = sv("text", { class: "tl-tick-label", x: x0, y: 22, "text-anchor": "start" }); t.textContent = "Events in order, evenly spaced (not to scale)"; grid.append(t);
+  }
+  svg.append(grid);
+  const layer = sv("g", { "clip-path": "url(#tl-clip)" });
+  for (const b of blocks) for (const it of b.items) {
+    if (it.row < 0) continue;
+    const n = it.n, cy = b.top + hh + 22 + it.row * rowH;
+    const dim = !matches(n) || (inStory ? !inStory.has(n.id) : (sel && n !== sel && !nb.has(n.id)));
+    const g = sv("g", { class: "tl-node" + (dim ? " dim" : "") + (n === sel ? " sel" : ""), tabindex: 0, role: "button", "data-id": n.id, "aria-label": `${n.title}, ${n.when || n.start}` });
+    const tt = sv("title"); tt.textContent = `${n.title}${n.when ? " (" + n.when + ")" : ""}`; g.append(tt);
+    if (!TL.even && it.xe - it.x > 3) g.append(sv("rect", { class: "tl-bar", x: it.x, y: cy - 3, width: it.xe - it.x, height: 6, rx: 3, fill: n.color }));
+    g.append(sv("circle", { class: "tl-dot", cx: it.x, cy, r: n.featured ? 7 : 5.5, fill: n.color }));
+    const tx = it.flip ? it.x - 12 : Math.max(it.x, it.xe) + 12;
+    const t = sv("text", { x: tx, y: cy + 4, "text-anchor": it.flip ? "end" : "start" }); t.textContent = n.title; g.append(t);
+    if (TL.even && n.when) { const w = sv("text", { class: "tl-when", x: tx, y: cy + 16, "text-anchor": it.flip ? "end" : "start" }); w.textContent = n.when; g.append(w); }
+    g.addEventListener("click", () => select(n.id));
+    g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
+    layer.append(g);
+  }
+  svg.append(layer);
+  const undated = nodes.length - dated.length;
+  if (undated > 0) { const note = sv("text", { class: "tl-tick-label", x: 14, y: total + 12, "text-anchor": "start" }); note.textContent = `${undated} of ${nodes.length} nodes have no date, so they appear only in the other views.`; svg.append(note); }
+  $("tl-mode").textContent = TL.even ? "True scale" : "Even spacing";
+}
+(function timelineInput() {
+  const svg = $("tl"); let d = null; const pts = new Map(); let pinch = 0;
+  const pdist = () => { const [a, b] = [...pts.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
+  svg.addEventListener("wheel", (e) => { if (TL.even) return; e.preventDefault(); const r = svg.getBoundingClientRect(); tlZoom(Math.exp(e.deltaY * 0.0015), e.clientX - r.left); }, { passive: false });
+  svg.addEventListener("pointerdown", (e) => {
+    if (TL.even || e.button > 0) return;
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2) { pinch = pdist(); d = null; return; }
+    d = { x: e.clientX, v0: TL.v0, v1: TL.v1, id: e.pointerId, moved: false };
+  });
+  svg.addEventListener("pointermove", (e) => {
+    if (pts.has(e.pointerId)) pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2 && pinch) {
+      const nd = pdist(), [a, b] = [...pts.values()], r = svg.getBoundingClientRect();
+      tlZoom(pinch / nd, (a.x + b.x) / 2 - r.left); pinch = nd; return;
+    }
+    if (!d || e.pointerId !== d.id || !TL.geo) return;
+    const dx = e.clientX - d.x;
+    if (!d.moved && Math.abs(dx) > 5) { d.moved = true; try { svg.setPointerCapture(e.pointerId); } catch {} svg.style.cursor = "grabbing"; }
+    if (d.moved) { const dt = -dx / TL.geo.pw * (d.v1 - d.v0); TL.v0 = d.v0 + dt; TL.v1 = d.v1 + dt; renderTimeline(); }
+  });
+  const end = (e) => { pts.delete(e.pointerId); if (pts.size < 2) pinch = 0; d = null; svg.style.cursor = ""; };
+  svg.addEventListener("pointerup", end); svg.addEventListener("pointercancel", end);
+  $("tl-mode").onclick = () => { TL.even = !TL.even; if (!TL.even) tlReset(); renderTimeline(); };
+})();
+
+/* ----- read: guided stories as a narrative ----- */
+function showStep(sid, i) { setView("graph"); startStory(sid); goStep(i); }
+function renderRead() {
+  const box = $("read"); box.textContent = "";
+  const all = story.stories || []; if (!all.length) return;
+  const st = storyById.get(S.readStory) || all[0]; S.readStory = st.id;
+  const wrap = el("div", { class: "read-wrap" });
+  wrap.append(el("div", { class: "read-tabs" }, all.map((s) => el("button", { class: "chip", "aria-pressed": String(s.id === st.id), text: s.title, onclick: () => { S.readStory = s.id; renderRead(); box.scrollTop = 0; } }))));
+  wrap.append(el("h2", { class: "rt", text: st.title }));
+  if (st.summary) wrap.append(el("p", { class: "intro", text: st.summary }));
+  st.steps.forEach((id, i) => {
+    const n = byId.get(id), prev = i ? byId.get(st.steps[i - 1]) : null;
+    const e = prev ? edges.find((x) => (x.a === prev && x.b === n) || (x.a === n && x.b === prev)) : null;
+    const srcs = (n.sources || []).map((s) => srcById.get(s)).filter(Boolean);
+    wrap.append(el("section", { class: "rstep", style: `--c:${n.color}` },
+      el("span", { class: "rnum", text: String(i + 1) }),
+      e ? el("p", { class: "via" }, `${e.a.title} `, el("em", { text: `${e.label} →` }), ` ${e.b.title}`, e.kind === "inferred" ? " (inferred)" : "") : null,
+      el("h3", null, el("button", { text: n.title, onclick: () => select(n.id) })),
+      el("p", { class: "meta", text: [story.clusters[cIndex.get(n.cluster)].label, cap(n.type), n.when].filter(Boolean).join(" · ") }),
+      el("p", { text: n.summary }),
+      n.details ? el("p", { class: "details", text: n.details }) : null,
+      n.evidence ? el("blockquote", { text: n.evidence }) : null,
+      srcs.length ? el("p", { class: "rsrc" }, "Sources: ", srcs.flatMap((s, k) => { const u = safeUrl(s.url); return [k ? ", " : "", u ? el("a", { href: u, target: "_blank", rel: "noopener noreferrer", text: s.title }) : s.title]; })) : null,
+      el("p", null, el("button", { class: "chip", text: "Show on graph", onclick: () => showStep(st.id, i) }))));
+  });
+  box.append(wrap);
+}
+
+/* ----- outline: the graph as a collapsible tree from the root ----- */
+const tree = (() => {
+  const nbrs = new Map(nodes.map((n) => [n.id, []]));
+  for (const e of [...edges].sort((a, b) => (a.kind === "explicit" ? 0 : 1) - (b.kind === "explicit" ? 0 : 1))) { nbrs.get(e.source).push([e.target, e]); nbrs.get(e.target).push([e.source, e]); }
+  const parent = new Map([[story.root, null]]), kids = new Map(nodes.map((n) => [n.id, []])), q = [story.root];
+  while (q.length) { const id = q.shift(); for (const [o, e] of nbrs.get(id)) if (!parent.has(o)) { parent.set(o, { id, e }); kids.get(id).push(o); q.push(o); } }
+  const treeEdges = new Set([...parent.values()].filter(Boolean).map((p) => p.e));
+  return { parent, kids, treeEdges, orphans: nodes.filter((n) => !parent.has(n.id)) };
+})();
+S.open.add(story.root);
+function renderOutline() {
+  const box = $("outline"); box.textContent = "";
+  const wrap = el("div", { class: "ol-wrap" });
+  wrap.append(el("div", { class: "ol-tools" },
+    el("button", { class: "btn", text: "Expand all", onclick: () => { nodes.forEach((n) => S.open.add(n.id)); renderOutline(); } }),
+    el("button", { class: "btn", text: "Collapse all", onclick: () => { S.open.clear(); S.open.add(story.root); renderOutline(); } })));
+  const item = (n) => {
+    const kids = tree.kids.get(n.id), p = tree.parent.get(n.id), dim = !matches(n);
+    const head = [
+      el("i", { style: `--c:${n.color}` }),
+      p ? el("span", { class: "via", text: `${p.e.a.id === p.id ? "→" : "←"} ${p.e.label}` }) : null,
+      el("button", { class: "olt", text: n.title, onclick: (ev) => { ev.preventDefault(); ev.stopPropagation(); select(n.id); } }),
+      el("small", { text: [cap(n.type), n.when].filter(Boolean).join(" · ") }),
+    ];
+    const also = edges.filter((e) => (e.a === n || e.b === n) && !tree.treeEdges.has(e)).slice(0, 8);
+    const body = el("div", { class: "olbody" }, el("p", { text: n.summary }),
+      also.length ? el("p", null, "Also: ", also.flatMap((e, k) => { const o = e.a === n ? e.b : e.a; return [k ? "  ·  " : "", el("button", { class: "olink", text: `${e.a === n ? "→" : "←"} ${e.label} ${o.title}`, onclick: () => select(o.id) })]; })) : null);
+    if (!kids.length) return el("li", { class: dim ? "dim" : "" }, el("div", { class: "row" }, head), body);
+    return el("li", { class: dim ? "dim" : "" },
+      el("details", { open: S.open.has(n.id), ontoggle: (ev) => { if (ev.target.open) S.open.add(n.id); else S.open.delete(n.id); } },
+        el("summary", { class: "row" }, head, el("span", { class: "olcount", text: String(kids.length) })), body,
+        el("ul", null, kids.map((k) => item(byId.get(k))))));
+  };
+  wrap.append(el("ul", null, item(byId.get(story.root))));
+  if (tree.orphans.length) wrap.append(el("h3", { text: "Not connected to the root", style: "margin:24px 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)" }), el("ul", null, tree.orphans.map((n) => el("li", null, el("div", { class: "row" }, el("i", { style: `--c:${n.color}` }), el("button", { class: "olt", text: n.title, onclick: () => select(n.id) }), el("small", { text: cap(n.type) }))))));
+  box.append(wrap);
+}
+
+/* ----- switching ----- */
+function setView(v) {
+  if (!viewList.includes(v)) v = viewList[0];
+  const was = S.view; S.view = v;
+  for (const key of ["list", "timeline", "read", "outline"]) $(key).classList.toggle("on", v === key);
+  svgEl.style.visibility = v === "graph" ? "visible" : "hidden";
+  const spatial = v === "graph" || v === "timeline";
+  $("zoom").style.display = spatial ? "" : "none";
+  $("zoom").classList.toggle("right", v === "timeline");
+  $("btn-fit").style.display = spatial ? "" : "none";
+  $("chips").style.display = v === "read" ? "none" : "";
+  $("stories").style.display = spatial ? "" : "none";
+  if (!spatial && S.story) endStoryQuiet();
+  for (const b of $("views").children) b.setAttribute("aria-pressed", String(b.dataset.v === v));
+  if (v === "read") renderRead();
+  render();
+  if (v === "graph" && was !== "graph") requestAnimationFrame(() => { if (!touched) fit(false); });
+  if (v === "timeline") requestAnimationFrame(renderTimeline);
+}
+
+/* ---------- toolbar ---------- */
+const usedClusters = new Set(nodes.map((n) => n.cluster));
+$("chips").append(el("button", { class: "chip", "data-c": "all", text: "All", onclick: () => { S.filter = "all"; render(); } }));
+for (const c of story.clusters) if (usedClusters.has(c.id)) $("chips").append(el("button", { class: "chip", "data-c": c.id, style: `--c:${colors[c.id]}`, onclick: () => { S.filter = S.filter === c.id ? "all" : c.id; render(); } }, el("i"), c.label));
+if ((story.stories || []).length) {
+  $("stories").append(el("span", { text: "Follow a story" }));
+  for (const s of story.stories) $("stories").append(el("button", { class: "chip", "data-s": s.id, title: s.summary || "", text: s.title, onclick: () => (S.story && S.story.id === s.id ? endStory() : startStory(s.id)) }));
+}
+for (const c of story.clusters) if (usedClusters.has(c.id)) $("legend").append(el("span", { style: `--c:${colors[c.id]}` }, el("i"), c.label));
+$("legend").append(el("span", { title: "Relationship directly supported by a cited source" }, (() => { const s = sv("svg", { viewBox: "0 0 22 8" }); s.append(sv("line", { x1: 0, y1: 4, x2: 22, y2: 4, stroke: "currentColor", "stroke-width": 1.5 })); return s; })(), "sourced"));
+$("legend").append(el("span", { title: "Editorial bridge: an interpretation, not a direct claim" }, (() => { const s = sv("svg", { viewBox: "0 0 22 8" }); s.append(sv("line", { x1: 0, y1: 4, x2: 22, y2: 4, stroke: "currentColor", "stroke-width": 1.5, "stroke-dasharray": "3 4" })); return s; })(), "inferred"));
+
+$("views").append(...viewList.map((v) => el("button", { "data-v": v, "aria-pressed": "false", text: VIEW_LABEL[v], onclick: () => setView(v) })));
+if (viewList.length < 2) $("views").style.display = "none";
+$("q").addEventListener("input", (e) => { S.q = e.target.value.trim().toLowerCase(); render(); });
+$("btn-fit").onclick = () => { if (S.view === "timeline") { tlReset(); renderTimeline(); } else fit(); };
+$("btn-reset").onclick = () => { S.filter = "all"; S.q = ""; $("q").value = ""; endStoryQuiet(); tlReset(); layout(); place(); select(null); fit(); };
+$("zin").onclick = () => (S.view === "timeline" ? tlZoom(1 / 1.4, (TL.geo ? TL.geo.x0 + TL.geo.pw / 2 : 0)) : zoomAt(1.3, svgEl.clientWidth / 2, svgEl.clientHeight / 2));
+$("zout").onclick = () => (S.view === "timeline" ? tlZoom(1.4, (TL.geo ? TL.geo.x0 + TL.geo.pw / 2 : 0)) : zoomAt(1 / 1.3, svgEl.clientWidth / 2, svgEl.clientHeight / 2));
+$("sb-prev").onclick = () => goStep(S.step - 1); $("sb-next").onclick = () => goStep(S.step + 1); $("sb-exit").onclick = endStory;
+addEventListener("keydown", (e) => {
+  const typing = e.target.tagName === "INPUT";
+  if (e.key === "/" && !typing) { e.preventDefault(); $("q").focus(); }
+  else if (e.key === "Escape") { if (typing) e.target.blur(); else if (S.selected) select(null); else if (S.story) endStory(); }
+  else if (S.story && !typing && e.key === "ArrowRight") goStep(S.step + 1);
+  else if (S.story && !typing && e.key === "ArrowLeft") goStep(S.step - 1);
+});
+
+/* ---------- pointer interaction: pan, zoom, pinch, drag nodes ---------- */
+const ptrs = new Map(); let drag = null;
+const toWorld = (cx, cy) => { const r = svgEl.getBoundingClientRect(); return [(cx - r.left - view.x) / view.k, (cy - r.top - view.y) / view.k]; };
+const pinchInfo = () => { const [a, b] = [...ptrs.values()]; return { d: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 }; };
+svgEl.addEventListener("pointerdown", (e) => {
+  cancelAnimationFrame(tweenId);
+  svgEl.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (ptrs.size === 2) { drag = { type: "pinch", ...pinchInfo() }; return; }
+  const g = e.target.closest && e.target.closest(".node");
+  drag = g ? { type: "node", n: byId.get(g.dataset.id), sx: e.clientX, sy: e.clientY, moved: false }
+           : { type: "pan", sx: e.clientX, sy: e.clientY, vx: view.x, vy: view.y, moved: false };
+});
+svgEl.addEventListener("pointermove", (e) => {
+  if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (!drag) return;
+  if (drag.type === "pinch" && ptrs.size === 2) {
+    const p = pinchInfo(), r = svgEl.getBoundingClientRect();
+    zoomAt(p.d / drag.d, p.mx - r.left, p.my - r.top); view.x += p.mx - drag.mx; view.y += p.my - drag.my; applyView(); drag = { type: "pinch", ...p }; return;
+  }
+  const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+  if (!drag.moved && Math.hypot(dx, dy) > 4) { drag.moved = true; svgEl.classList.add("dragging"); }
+  if (!drag.moved) return;
+  if (drag.type === "pan") { view.x = drag.vx + dx; view.y = drag.vy + dy; applyView(); }
+  else if (drag.type === "node") { const [wx, wy] = toWorld(e.clientX, e.clientY); drag.n.x = wx; drag.n.y = wy; place(); }
+});
+const endPtr = (e) => {
+  ptrs.delete(e.pointerId); svgEl.classList.remove("dragging");
+  if (drag && drag.type !== "pinch" && !drag.moved) { if (drag.type === "node") select(drag.n.id, { center: false }); else if (S.selected && !S.story) select(null); }
+  if (ptrs.size < 2) drag = null;
+};
+svgEl.addEventListener("pointerup", endPtr); svgEl.addEventListener("pointercancel", endPtr);
+svgEl.addEventListener("wheel", (e) => { e.preventDefault(); const r = svgEl.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+let sized = svgEl.clientWidth > 0 && svgEl.clientHeight > 0, touched = false;
+svgEl.addEventListener("pointerdown", () => { touched = true; }); svgEl.addEventListener("wheel", () => { touched = true; }, { passive: true });
+const onSize = () => {
+  if (S.view === "timeline") { renderTimeline(); return; }
+  if (S.view !== "graph" || !svgEl.clientWidth || !svgEl.clientHeight) return;
+  if (!sized) { sized = true; layout(); place(); fit(false); return; } // first real size (page was loaded hidden / zero-sized)
+  if (!touched && !S.selected && !S.story) fit(false);
+};
+if (window.ResizeObserver) { new ResizeObserver(onSize).observe(svgEl); new ResizeObserver(() => { if (S.view === "timeline") renderTimeline(); }).observe($("timeline")); } else addEventListener("resize", onSize);
+
+/* ---------- boot ---------- */
+layout(); place(); setView(viewList.includes(story.defaultView) ? story.defaultView : "graph"); fit(false);
+function fromHash() {
+  const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+  if (p.has("view") && S.view !== p.get("view")) setView(p.get("view"));
+  if (p.has("story") && storyById.has(p.get("story")) && !(S.story && S.story.id === p.get("story"))) startStory(p.get("story"));
+  else if (p.has("node") && byId.has(p.get("node")) && S.selected !== p.get("node")) select(p.get("node"), { center: true });
+}
+addEventListener("hashchange", fromHash);
+fromHash();
+})();
+</script>
+</body>
+</html>

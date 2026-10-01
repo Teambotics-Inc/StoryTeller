@@ -1,0 +1,1146 @@
+{
+  "schemaVersion": 1,
+  "title": "Patagonia",
+  "subject": {
+    "name": "Patagonia, Inc.",
+    "kind": "company",
+    "url": "https://www.patagonia.com/"
+  },
+  "tagline": "A map of an outdoor-gear company that keeps treating its own growth as the problem to solve, from hammered pitons to giving the company away, and of the critics who test that claim.",
+  "root": "patagonia",
+  "credit": "An independent StoryTeller study.",
+  "disclaimer": "Built from Patagonia’s public pages and independent press. Not affiliated with or endorsed by Patagonia.",
+  "generated": {
+    "date": "2026-09-30"
+  },
+  "clusters": [
+    {
+      "id": "origins",
+      "label": "Origins & craft"
+    },
+    {
+      "id": "identity",
+      "label": "Identity & promises"
+    },
+    {
+      "id": "materials",
+      "label": "Materials & making"
+    },
+    {
+      "id": "growth",
+      "label": "Growth & its limits"
+    },
+    {
+      "id": "giving",
+      "label": "Giving & activism"
+    },
+    {
+      "id": "ownership",
+      "label": "Ownership"
+    },
+    {
+      "id": "people",
+      "label": "People & networks"
+    },
+    {
+      "id": "scrutiny",
+      "label": "Tensions & scrutiny"
+    }
+  ],
+  "sources": [
+    {
+      "id": "hist",
+      "title": "Our Company History",
+      "url": "https://www.patagonia.com/company-history/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "own",
+      "title": "Yvon Chouinard Donates Patagonia to Fight Climate Crisis",
+      "url": "https://www.patagonia.com/ownership/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "values",
+      "title": "Our Core Values",
+      "url": "https://www.patagonia.com/core-values/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "foot",
+      "title": "Environmental & Social Footprint",
+      "url": "https://www.patagonia.com/our-footprint/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "pfas",
+      "title": "Made Without PFAS",
+      "url": "https://www.patagonia.com/our-footprint/pfas.html",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "cotton",
+      "title": "Cotton for Change",
+      "url": "https://www.patagonia.com/our-footprint/organic-cotton.html",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "poly",
+      "title": "Polyester: Virgin & Recycled",
+      "url": "https://www.patagonia.com/our-footprint/recycled-polyester.html",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "fair",
+      "title": "Fair Trade Certified",
+      "url": "https://www.patagonia.com/our-footprint/fair-trade.html",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "onep",
+      "title": "1% for the Planet",
+      "url": "https://www.patagonia.com/one-percent-for-the-planet.html",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "dbtj",
+      "title": "Don’t Buy This Jacket, Black Friday and the New York Times",
+      "url": "https://www.patagonia.com/stories/dont-buy-this-jacket-black-friday-and-the-new-york-times/story-18615.html",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "climate",
+      "title": "Climate Goals",
+      "url": "https://www.patagonia.com/climate-goals/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "worn",
+      "title": "Worn Wear",
+      "url": "https://www.patagonia.com/worn-wear/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "aw",
+      "title": "Patagonia Action Works: About",
+      "url": "https://www.patagonia.com/actionworks/about/",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia"
+    },
+    {
+      "id": "guar",
+      "title": "Ironclad Guarantee",
+      "url": "https://help.patagonia.com/s/article/Ironclad-Guarantee",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia Help Center"
+    },
+    {
+      "id": "b17",
+      "title": "Broad Coalition Sues to Stop Trump Administration’s Unlawful Dismemberment of the Bears Ears National Monument",
+      "url": "https://www.patagoniaworks.com/press/2017/12/11/broad-coalition-sues-to-stop-trump-administrations-unlawful-dismemberment-of-the-bears-ears-national-monument",
+      "accessed": "2026-09-30",
+      "publisher": "Patagonia Works"
+    },
+    {
+      "id": "b26",
+      "title": "Patagonia Joins Environmental Groups in Suing Trump Over Bears Ears",
+      "url": "https://www.outsideonline.com/outdoor-adventure/environment/patagonia-lawsuit-bears-ears-trump/",
+      "accessed": "2026-09-30",
+      "publisher": "Outside"
+    },
+    {
+      "id": "tomp",
+      "title": "About Kristine & Douglas Tompkins",
+      "url": "https://www.rewildingchile.org/en/about-us/about-kristine-and-douglas-tompkins/",
+      "accessed": "2026-09-30",
+      "publisher": "Fundación Rewilding Chile"
+    },
+    {
+      "id": "sierra",
+      "title": "How Patagonia Surfed Around Death and Taxes",
+      "url": "https://www.sierraclub.org/sierra/how-patagonia-surfed-around-death-and-taxes",
+      "accessed": "2026-09-30",
+      "publisher": "Sierra (Sierra Club)"
+    },
+    {
+      "id": "grist",
+      "title": "Two ways to think about Patagonia’s $3 billion climate donation",
+      "url": "https://grist.org/accountability/patagonia-turns-over-company-fight-climate-change/",
+      "accessed": "2026-09-30",
+      "publisher": "Grist"
+    },
+    {
+      "id": "ecchr",
+      "title": "Human rights violations off the rack: Dutch and US brands allegedly rely on forced labor",
+      "url": "https://www.ecchr.eu/en/press-release/human-rights-violations-off-the-rack/",
+      "accessed": "2026-09-30",
+      "publisher": "ECCHR"
+    },
+    {
+      "id": "inc92",
+      "title": "Lost in Patagonia: Yvon Chouinard’s Ambitious Social Mission (1992 profile)",
+      "url": "https://www.inc.com/magazine/19920801/4210.html",
+      "accessed": "2026-09-30",
+      "publisher": "Inc."
+    },
+    {
+      "id": "wiki",
+      "title": "Patagonia, Inc.",
+      "url": "https://en.wikipedia.org/wiki/Patagonia,_Inc.",
+      "accessed": "2026-09-30",
+      "publisher": "Wikipedia"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "patagonia",
+      "title": "Patagonia",
+      "type": "company",
+      "cluster": "identity",
+      "featured": true,
+      "summary": "An outdoor apparel and gear company that calls itself an experiment in responsible business, and whose stated reason for existing is now environmental rather than commercial.",
+      "details": "Wikipedia dates the first store, Great Pacific Iron Works in Ventura, California, to May 9, 1973; the company’s own history page that was read does not give a founding date.",
+      "evidence": "We’re in business to save our home planet.",
+      "when": "1973 to present",
+      "sources": [
+        "own",
+        "wiki"
+      ]
+    },
+    {
+      "id": "chouinard",
+      "title": "Yvon Chouinard",
+      "type": "person",
+      "cluster": "origins",
+      "featured": true,
+      "summary": "Climber turned blacksmith turned reluctant businessman; every thread of the company runs back to his habits as a craftsman.",
+      "evidence": "I never wanted to be a businessman. I started as a craftsman, making climbing gear for my friends and myself, then got into apparel.",
+      "when": "climbing from 1953",
+      "sources": [
+        "hist",
+        "own"
+      ]
+    },
+    {
+      "id": "forge-1957",
+      "title": "Forge and anvil, 1957",
+      "type": "event",
+      "cluster": "origins",
+      "summary": "Self-taught, Chouinard bought a junkyard forge and began hammering steel pitons for climbing friends. The business began as favours sold from the back of a car.",
+      "details": "Per the company, he could forge two pitons an hour and sold them for $1.50 each.",
+      "evidence": "In 1957, Yvon went to a junkyard and bought a used coal-fired forge, a 138-pound anvil and some tongs and hammers",
+      "when": "1957",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "id": "equipment-1965",
+      "title": "Chouinard Equipment",
+      "type": "company",
+      "cluster": "origins",
+      "summary": "The partnership with Tom Frost that became the largest US supplier of climbing hardware. It is the company Patagonia’s clothing business grew beside.",
+      "details": "Wikipedia reports that in 1981 Patagonia and Chouinard Equipment were incorporated within Great Pacific Iron Works. Inc. (1992) reports Chouinard Equipment declared Chapter 11 about three years earlier, when liability premiums soared, and was sold to former Patagonia employees.",
+      "evidence": "In 1965, Yvon went into partnership with Tom Frost and started Chouinard Equipment.",
+      "when": "1965",
+      "sources": [
+        "hist",
+        "inc92",
+        "wiki"
+      ]
+    },
+    {
+      "id": "design-principle",
+      "title": "Nothing left to take away",
+      "type": "idea",
+      "cluster": "identity",
+      "summary": "A design rule borrowed from the aviator Saint-Exupéry: improve a tool by removing what it doesn’t need. The company still treats subtraction as quality.",
+      "evidence": "perfection is finally attained not when there is no longer anything to add, but when there is no longer anything to take away",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "id": "chocks-1972",
+      "title": "Chocks replace pitons",
+      "type": "event",
+      "cluster": "origins",
+      "featured": true,
+      "summary": "By the company’s own telling, the pitons that made it the largest US climbing-hardware supplier were damaging the rock, so it shrank the piton business and sold hand-placed aluminium chocks instead. The company calls this its first big environmental step.",
+      "evidence": "We introduced them in the first Chouinard Equipment catalog in 1972.",
+      "when": "1972",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "id": "tom-frost",
+      "title": "Tom Frost",
+      "type": "person",
+      "cluster": "people",
+      "summary": "Climbing partner from the Tahquitz and Yosemite years and Chouinard’s business partner in Chouinard Equipment.",
+      "evidence": "During the nine years that Frost and Chouinard were partners, they redesigned and improved almost every climbing tool",
+      "when": "1965, for nine years",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "id": "guarantee",
+      "title": "Ironclad Guarantee",
+      "type": "promise",
+      "cluster": "identity",
+      "summary": "A blanket warranty that makes repair and replacement part of the product. It is the commercial twin of the company’s argument that the most responsible garment is the one you keep.",
+      "evidence": "We guarantee everything we make.",
+      "sources": [
+        "guar"
+      ]
+    },
+    {
+      "id": "values",
+      "title": "Five core values",
+      "type": "idea",
+      "cluster": "identity",
+      "summary": "Quality, Integrity, Environmentalism, Justice and Not bound by convention, rewritten in 2022 on the eve of the company’s 50th anniversary.",
+      "evidence": "Build the best product, provide the best service and constantly improve everything we do.",
+      "when": "2022",
+      "sources": [
+        "values"
+      ]
+    },
+    {
+      "id": "purpose-2018",
+      "title": "“Save our home planet”",
+      "type": "idea",
+      "cluster": "identity",
+      "summary": "In 2018 the company rewrote its stated purpose from inspiring solutions to the environmental crisis to an unqualified mission. Every later structural move is justified by this sentence.",
+      "details": "The 2011 Black Friday essay quotes the earlier purpose: to inspire and implement solutions to the environmental crisis.",
+      "evidence": "More recently, in 2018, we changed the company’s purpose to: We’re in business to save our home planet.",
+      "when": "2018",
+      "sources": [
+        "own",
+        "dbtj"
+      ]
+    },
+    {
+      "id": "recycled-1993",
+      "title": "Fleece from soda bottles",
+      "type": "product",
+      "cluster": "materials",
+      "summary": "Patagonia says it began making recycled polyester from plastic bottles in 1993 and was the first outdoor-clothing maker to do so. By Spring 2026 it reports recycled content in most of its polyester.",
+      "details": "Company figures: recycled polyester was 94% of polyester fabric by weight in Spring 2026; virgin polyester was 6%. The first-mover claim is the company’s own.",
+      "evidence": "We began making recycled polyester from plastic soda bottles back in 1993",
+      "when": "1993",
+      "sources": [
+        "poly"
+      ]
+    },
+    {
+      "id": "cotton-1996",
+      "title": "All-organic cotton",
+      "type": "commitment",
+      "cluster": "materials",
+      "summary": "A 1996 pledge to stop using conventionally grown cotton, after the company looked hard at what farming it involved.",
+      "evidence": "In 1996, we made a commitment to exclusively use 100% virgin cotton grown with organic practices",
+      "when": "1996",
+      "sources": [
+        "cotton"
+      ]
+    },
+    {
+      "id": "pfas",
+      "title": "Chasing PFAS out",
+      "type": "commitment",
+      "cluster": "materials",
+      "summary": "A long, admitted detour: the company swapped one fluorochemical waterproofing for another it later found just as harmful, before making all new products without intentionally added PFAS from Spring 2025.",
+      "details": "The company says it phased out C8 treatments between 2013 and 2016, moved to C6, then learned from new research that C6 is just as detrimental. First products without intentionally added PFAS in DWR finishes: Fall 2019.",
+      "evidence": "For the Spring 2025 season and beyond, 100% of our new products are made without intentionally added PFAS.",
+      "when": "2013 to 2025",
+      "sources": [
+        "pfas"
+      ]
+    },
+    {
+      "id": "fair-trade",
+      "title": "Fair Trade factories",
+      "type": "program",
+      "cluster": "materials",
+      "summary": "Since 2014 the company has paid a premium on items made in Fair Trade Certified factories, and says most of its line now is. It also concedes a living wage for all workers is not yet secured.",
+      "details": "Worker counts differ between the company’s own pages: “85,000+” on the footprint page and “90,000+” on the Fair Trade page.",
+      "evidence": "Patagonia doesn’t own any factories that make our products, so we have limited control over how much workers receive.",
+      "when": "2014 to present",
+      "sources": [
+        "fair",
+        "foot"
+      ]
+    },
+    {
+      "id": "boom-80s",
+      "title": "The 1980s boom",
+      "type": "period",
+      "cluster": "growth",
+      "summary": "Catalog-driven growth turned a climbing-gear side business into a fashionable outdoor brand, and set up the crash that followed.",
+      "evidence": "sales have soared from roughly $3 million in 1979 to $117 million in the latest fiscal year",
+      "when": "1979 to 1992",
+      "sources": [
+        "inc92"
+      ]
+    },
+    {
+      "id": "layoffs-1991",
+      "title": "Layoffs of July 1991",
+      "type": "event",
+      "cluster": "growth",
+      "summary": "A recession, too much inventory and a nervous bank forced the company to lay off a fifth of its staff. Chouinard later described the growth as a course it could not sustain.",
+      "details": "Inc. reports inventory was dumped below cost and the bank clamped down on the credit line. The quote is Chouinard’s, as reported by Inc.",
+      "evidence": "In July 1991 Patagonia, always known for “taking care of its own,” laid off 120 people, or roughly 20% of its work force",
+      "when": "July 1991",
+      "sources": [
+        "inc92"
+      ]
+    },
+    {
+      "id": "dbtj-2011",
+      "title": "“Don’t Buy This Jacket”",
+      "type": "campaign",
+      "cluster": "growth",
+      "featured": true,
+      "summary": "A Black Friday newspaper ad urging shoppers to buy less, from a company still selling jackets. The follow-up essay openly takes on the charge of hypocrisy and offers a Reduce, Repair, Reuse, Recycle, Reimagine pledge.",
+      "evidence": "We should be the only retailer in the country asking people to buy less on Black Friday.",
+      "when": "Nov 25, 2011",
+      "sources": [
+        "dbtj"
+      ]
+    },
+    {
+      "id": "worn-wear",
+      "title": "Worn Wear",
+      "type": "program",
+      "cluster": "growth",
+      "summary": "A trade-in and resale program for used Patagonia gear, the practical follow-through on the 2011 plea to consume less.",
+      "details": "Wikipedia dates the trade-in and exchange program to 2017; the company’s pages read here give no start date. The 85% figure is US EPA data for 2018, as cited by Patagonia.",
+      "evidence": "Worn Wear® allows you to trade in and buy used Patagonia® gear.",
+      "when": "2017 (per Wikipedia)",
+      "sources": [
+        "worn",
+        "dbtj",
+        "wiki"
+      ]
+    },
+    {
+      "id": "tithe",
+      "title": "The earth tax: 1% of sales",
+      "type": "commitment",
+      "cluster": "giving",
+      "summary": "A standing pledge to give 1% of sales to environmental groups. Sources disagree about when it began, so the start date is shown as a range.",
+      "details": "Start date by source: Patagonia’s 1% page says 1985; its Action Works page says “Since 1972”; Inc. (1992) says tithing began in 1984 at 10% of pretax profits. The company reports over $140 million in cash and in-kind donations.",
+      "evidence": "Since 1985, Patagonia has pledged 1% of sales to the preservation and restoration of the natural environment.",
+      "when": "1984 to 1985 (sources differ)",
+      "sources": [
+        "onep",
+        "aw",
+        "inc92"
+      ]
+    },
+    {
+      "id": "onep-2002",
+      "title": "1% for the Planet",
+      "type": "organization",
+      "cluster": "giving",
+      "summary": "In 2002 Chouinard and fly-shop owner Craig Mathews founded a non-profit to get other businesses to make the same pledge, turning a house rule into a movement.",
+      "evidence": "1% for the Planet is an alliance of businesses that understand the necessity of protecting the natural environment.",
+      "when": "2002",
+      "sources": [
+        "onep"
+      ]
+    },
+    {
+      "id": "action-works",
+      "title": "Patagonia Action Works",
+      "type": "program",
+      "cluster": "giving",
+      "summary": "A platform that connects customers with local environmental groups, events and petitions. It funds grassroots organisations, and says it funds only environmental work.",
+      "evidence": "We built Patagonia Action Works to connect committed individuals to organizations working on environmental issues in the same community.",
+      "sources": [
+        "aw"
+      ]
+    },
+    {
+      "id": "bears-2017",
+      "title": "Suing over Bears Ears, 2017",
+      "type": "event",
+      "cluster": "giving",
+      "summary": "Patagonia Works joined a coalition of tribal, conservation and outdoor groups suing to challenge the first reduction of the Bears Ears National Monument. The company treats public-land protection as part of its business.",
+      "evidence": "amounts to the largest elimination of protected areas in American history",
+      "when": "Dec 2017",
+      "sources": [
+        "b17"
+      ]
+    },
+    {
+      "id": "bears-2026",
+      "title": "Suing over Bears Ears, 2026",
+      "type": "event",
+      "cluster": "giving",
+      "summary": "In September 2026 Patagonia and partners moved to revive the 2017 case against a fresh, larger reduction of the monument. The outcome is pending.",
+      "details": "The 2017 suits were administratively closed in 2021 when President Biden reinstated the monument’s boundaries. Outside reports the new reduction as roughly 91% of the monument.",
+      "evidence": "reduced Bears Ears from 1.31 million acres to about 121,000 acres on July 13, 2026",
+      "when": "Sept 2026",
+      "sources": [
+        "b26"
+      ]
+    },
+    {
+      "id": "transfer-2022",
+      "title": "“Earth is now our only shareholder”",
+      "type": "event",
+      "cluster": "ownership",
+      "featured": true,
+      "summary": "On September 14, 2022 Chouinard announced the company’s ownership had been moved into a purpose trust and a nonprofit, rejecting a sale or an IPO as ways to keep the company’s values intact.",
+      "evidence": "Instead of “going public,” you could say we’re “going purpose.”",
+      "when": "Sept 14, 2022",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "id": "trust",
+      "title": "Patagonia Purpose Trust",
+      "type": "organization",
+      "cluster": "ownership",
+      "summary": "Holds all the voting stock, about 2% of the company, so it can approve board changes and charter changes. The Chouinard family guides it.",
+      "details": "The Trust’s consent is now required to change the company’s 1%-of-sales pledge, which sits in the business charter.",
+      "evidence": "The Patagonia Purpose Trust was created solely to protect our company’s values and mission.",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "id": "holdfast",
+      "title": "Holdfast Collective",
+      "type": "organization",
+      "cluster": "ownership",
+      "summary": "A 501(c)(4) nonprofit that owns the other 98% (all nonvoting stock) and receives Patagonia’s excess profits as a dividend to spend on environmental work, including advocacy.",
+      "details": "Sierra reports Patagonia projects Holdfast will spend or donate $100 million a year. Patagonia itself says the dividend is what is left after reinvesting in the business.",
+      "evidence": "the Collective can advocate for causes and political candidates in addition to making grants and investments in our planet",
+      "sources": [
+        "own",
+        "sierra"
+      ]
+    },
+    {
+      "id": "kris-tompkins",
+      "title": "Kris Tompkins",
+      "type": "person",
+      "cluster": "people",
+      "summary": "Former Patagonia CEO who left in 1993, married Doug Tompkins and turned to land protection; she sits on Patagonia’s board today.",
+      "evidence": "Kristine Tompkins, former CEO of the clothing company Patagonia, is the co-founder and president of Tompkins Conservation",
+      "when": "CEO until 1993",
+      "sources": [
+        "tomp",
+        "own"
+      ]
+    },
+    {
+      "id": "tompkins-conservation",
+      "title": "Tompkins Conservation",
+      "type": "organization",
+      "cluster": "people",
+      "summary": "The Chile and Argentina land-protection work of Kris and Doug Tompkins, an example of a Patagonia alumna carrying the company’s conservation streak outside the company.",
+      "details": "The description comes from an affiliated organisation, Fundación Rewilding Chile.",
+      "evidence": "Kris and Doug helped protect more than 14 million acres of land in Chile and Argentina",
+      "sources": [
+        "tomp"
+      ]
+    },
+    {
+      "id": "tax-critique",
+      "title": "The tax-savings critique",
+      "type": "critique",
+      "cluster": "scrutiny",
+      "summary": "Tax-law commentators argue the structure cut the family’s gift-tax bill by more than 98%, while also stressing that the money still goes to environmental work. A company adviser had said it brought no tax benefit.",
+      "details": "Reported figures differ slightly: Sierra says $17 million in tax; Grist says $17.5 million on the trust transfer, on a giveaway valued at roughly $3 billion.",
+      "evidence": "instead of paying $1.2 billion in gift tax, they’re paying $17 million in tax",
+      "when": "Sept 2022",
+      "sources": [
+        "sierra",
+        "grist"
+      ]
+    },
+    {
+      "id": "holdfast-politics",
+      "title": "The 501(c)(4) question",
+      "type": "critique",
+      "cluster": "scrutiny",
+      "summary": "Because Holdfast is a 501(c)(4), it can spend on politics and need not disclose donors. One academic warns of a billionaire-funded political arms race, a point Patagonia’s own FAQ does not dispute: it says Holdfast can back candidates.",
+      "details": "NYU’s Daniel Hemel called the structure “substantively similar” to a conservative billionaire’s earlier transfer, per Grist.",
+      "evidence": "an escalating zero-sum political arms race",
+      "when": "Sept 2022",
+      "sources": [
+        "grist",
+        "own"
+      ]
+    },
+    {
+      "id": "uyghur",
+      "title": "Forced-labour complaint",
+      "type": "allegation",
+      "cluster": "scrutiny",
+      "summary": "In December 2021 a European legal group filed a criminal complaint in the Netherlands against Patagonia and three other brands, alleging possible complicity in forced labour in Xinjiang. This records the allegation, not a finding; Patagonia’s response was not in the sources read.",
+      "evidence": "may have been directly or indirectly complicit in the forced labor of members of the Uyghur population",
+      "when": "Dec 2, 2021",
+      "sources": [
+        "ecchr"
+      ]
+    },
+    {
+      "id": "emissions-99",
+      "title": "99% of emissions are upstream",
+      "type": "admission",
+      "cluster": "scrutiny",
+      "summary": "The company says nearly all its emissions come from making materials and products, not from its own stores and offices, and rejects carbon offsets as enough. It has set science-based reduction targets for 2030 and 2040.",
+      "details": "Targets, against a FY2017 base: 80% cut in Scope 1 and 2 by FY2030; 55% cut in listed Scope 3 categories by FY2030; net-zero across the value chain by FY2040.",
+      "evidence": "the bulk of our emissions—nearly 99%—comes from our supply chain and materials manufacturing",
+      "sources": [
+        "climate"
+      ]
+    },
+    {
+      "id": "growth-tension",
+      "title": "Growth vs footprint",
+      "type": "tension",
+      "cluster": "scrutiny",
+      "summary": "The company admits that selling more gear is at odds with its mission, and that the new ownership structure does not make that tension go away.",
+      "details": "The 2011 essay says each Patagonia garment, organic or recycled or not, emits several times its weight in greenhouse gases and generates at least another half garment’s worth of scrap.",
+      "evidence": "This is not an excuse to ignore the real tension we’ll continue to face between growth and the environmental impact of our operations.",
+      "sources": [
+        "own",
+        "dbtj"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "chouinard",
+      "target": "patagonia",
+      "label": "founded",
+      "kind": "explicit",
+      "sources": [
+        "own",
+        "wiki"
+      ]
+    },
+    {
+      "source": "chouinard",
+      "target": "forge-1957",
+      "label": "taught himself blacksmithing in",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "forge-1957",
+      "target": "equipment-1965",
+      "label": "grew into",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "tom-frost",
+      "target": "equipment-1965",
+      "label": "co-founded",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "chouinard",
+      "target": "tom-frost",
+      "label": "partnered with",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "equipment-1965",
+      "target": "design-principle",
+      "label": "was guided by",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "equipment-1965",
+      "target": "chocks-1972",
+      "label": "pivoted to",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "chocks-1972",
+      "target": "patagonia",
+      "label": "paved the way for environmental essays in",
+      "kind": "explicit",
+      "sources": [
+        "hist"
+      ]
+    },
+    {
+      "source": "equipment-1965",
+      "target": "patagonia",
+      "label": "merged under one company with",
+      "kind": "explicit",
+      "sources": [
+        "wiki"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "guarantee",
+      "label": "promises",
+      "kind": "explicit",
+      "sources": [
+        "guar"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "values",
+      "label": "states",
+      "kind": "explicit",
+      "sources": [
+        "values"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "purpose-2018",
+      "label": "adopted",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "dbtj-2011",
+      "target": "purpose-2018",
+      "label": "was followed by a rewritten purpose in",
+      "kind": "explicit",
+      "sources": [
+        "dbtj"
+      ]
+    },
+    {
+      "source": "trust",
+      "target": "purpose-2018",
+      "label": "protects",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "recycled-1993",
+      "label": "began making",
+      "kind": "explicit",
+      "sources": [
+        "poly"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "cotton-1996",
+      "label": "committed to",
+      "kind": "explicit",
+      "sources": [
+        "cotton"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "pfas",
+      "label": "is phasing out",
+      "kind": "explicit",
+      "sources": [
+        "pfas"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "fair-trade",
+      "label": "joined",
+      "kind": "explicit",
+      "sources": [
+        "fair"
+      ]
+    },
+    {
+      "source": "values",
+      "target": "pfas",
+      "label": "is tested by",
+      "kind": "inferred"
+    },
+    {
+      "source": "values",
+      "target": "fair-trade",
+      "label": "claims justice through",
+      "kind": "inferred"
+    },
+    {
+      "source": "emissions-99",
+      "target": "recycled-1993",
+      "label": "is partly addressed by",
+      "kind": "inferred"
+    },
+    {
+      "source": "recycled-1993",
+      "target": "cotton-1996",
+      "label": "was followed three years later by",
+      "kind": "explicit",
+      "sources": [
+        "poly",
+        "cotton"
+      ]
+    },
+    {
+      "source": "cotton-1996",
+      "target": "fair-trade",
+      "label": "was followed in 2014 by",
+      "kind": "explicit",
+      "sources": [
+        "cotton",
+        "fair"
+      ]
+    },
+    {
+      "source": "fair-trade",
+      "target": "pfas",
+      "label": "runs alongside",
+      "kind": "inferred"
+    },
+    {
+      "source": "pfas",
+      "target": "emissions-99",
+      "label": "is one upstream piece of",
+      "kind": "inferred"
+    },
+    {
+      "source": "patagonia",
+      "target": "emissions-99",
+      "label": "acknowledges",
+      "kind": "explicit",
+      "sources": [
+        "climate"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "boom-80s",
+      "label": "grew through",
+      "kind": "explicit",
+      "sources": [
+        "inc92"
+      ]
+    },
+    {
+      "source": "boom-80s",
+      "target": "layoffs-1991",
+      "label": "ended in",
+      "kind": "explicit",
+      "sources": [
+        "inc92"
+      ]
+    },
+    {
+      "source": "layoffs-1991",
+      "target": "dbtj-2011",
+      "label": "was an early lesson in limits before",
+      "kind": "inferred"
+    },
+    {
+      "source": "dbtj-2011",
+      "target": "worn-wear",
+      "label": "was later followed by",
+      "kind": "explicit",
+      "sources": [
+        "dbtj"
+      ]
+    },
+    {
+      "source": "guarantee",
+      "target": "worn-wear",
+      "label": "shares a keep-it-longer logic with",
+      "kind": "inferred"
+    },
+    {
+      "source": "dbtj-2011",
+      "target": "growth-tension",
+      "label": "admits",
+      "kind": "explicit",
+      "sources": [
+        "dbtj"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "tithe",
+      "label": "pledges",
+      "kind": "explicit",
+      "sources": [
+        "onep"
+      ]
+    },
+    {
+      "source": "tithe",
+      "target": "onep-2002",
+      "label": "inspired",
+      "kind": "explicit",
+      "sources": [
+        "onep"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "action-works",
+      "label": "runs",
+      "kind": "explicit",
+      "sources": [
+        "aw"
+      ]
+    },
+    {
+      "source": "tithe",
+      "target": "action-works",
+      "label": "is extended by",
+      "kind": "inferred"
+    },
+    {
+      "source": "patagonia",
+      "target": "bears-2017",
+      "label": "sued over",
+      "kind": "explicit",
+      "sources": [
+        "b17"
+      ]
+    },
+    {
+      "source": "bears-2017",
+      "target": "bears-2026",
+      "label": "was revived in",
+      "kind": "explicit",
+      "sources": [
+        "b26"
+      ]
+    },
+    {
+      "source": "chouinard",
+      "target": "transfer-2022",
+      "label": "announced",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "transfer-2022",
+      "target": "trust",
+      "label": "created",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "transfer-2022",
+      "target": "holdfast",
+      "label": "created",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "holdfast",
+      "target": "patagonia",
+      "label": "receives dividends from",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "trust",
+      "target": "tithe",
+      "label": "locks in",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "growth-tension",
+      "target": "transfer-2022",
+      "label": "is answered, in part, by",
+      "kind": "explicit",
+      "sources": [
+        "own"
+      ]
+    },
+    {
+      "source": "transfer-2022",
+      "target": "tax-critique",
+      "label": "drew",
+      "kind": "explicit",
+      "sources": [
+        "sierra",
+        "grist"
+      ]
+    },
+    {
+      "source": "tax-critique",
+      "target": "holdfast",
+      "label": "hinges on the status of",
+      "kind": "explicit",
+      "sources": [
+        "sierra",
+        "grist"
+      ]
+    },
+    {
+      "source": "holdfast",
+      "target": "holdfast-politics",
+      "label": "is questioned for",
+      "kind": "explicit",
+      "sources": [
+        "grist"
+      ]
+    },
+    {
+      "source": "kris-tompkins",
+      "target": "patagonia",
+      "label": "was CEO of",
+      "kind": "explicit",
+      "sources": [
+        "tomp"
+      ]
+    },
+    {
+      "source": "kris-tompkins",
+      "target": "tompkins-conservation",
+      "label": "co-founded",
+      "kind": "explicit",
+      "sources": [
+        "tomp"
+      ]
+    },
+    {
+      "source": "patagonia",
+      "target": "uyghur",
+      "label": "was named in",
+      "kind": "explicit",
+      "sources": [
+        "ecchr"
+      ]
+    },
+    {
+      "source": "fair-trade",
+      "target": "uyghur",
+      "label": "is tested by",
+      "kind": "inferred"
+    },
+    {
+      "source": "emissions-99",
+      "target": "growth-tension",
+      "label": "is why growth matters to",
+      "kind": "inferred"
+    }
+  ],
+  "stories": [
+    {
+      "id": "chocks-to-charter",
+      "title": "From chocks to charter",
+      "summary": "The thesis: a craftsman who stopped selling a product that scarred rock built a company whose structure now locks in that instinct.",
+      "steps": [
+        "chouinard",
+        "forge-1957",
+        "equipment-1965",
+        "chocks-1972",
+        "patagonia",
+        "purpose-2018",
+        "trust",
+        "transfer-2022"
+      ]
+    },
+    {
+      "id": "less-harm-with-receipts",
+      "title": "Less harm, with receipts",
+      "summary": "Four material and labour commitments, each with a date, and the admission that nearly all emissions remain upstream.",
+      "steps": [
+        "recycled-1993",
+        "cotton-1996",
+        "fair-trade",
+        "pfas",
+        "emissions-99"
+      ]
+    },
+    {
+      "id": "growth-and-its-limits",
+      "title": "Growth and its limits",
+      "summary": "A boom, a crash, an ad telling people to buy less, and a structure meant to make growth serve the mission.",
+      "steps": [
+        "boom-80s",
+        "layoffs-1991",
+        "dbtj-2011",
+        "worn-wear",
+        "growth-tension",
+        "transfer-2022"
+      ]
+    },
+    {
+      "id": "money-then-a-fight",
+      "title": "Money, then a fight",
+      "summary": "Giving as a tax on itself, exported to other businesses, and finally taken to court over public land.",
+      "steps": [
+        "tithe",
+        "onep-2002",
+        "action-works",
+        "bears-2017",
+        "bears-2026"
+      ]
+    },
+    {
+      "id": "the-skeptics-file",
+      "title": "The skeptics’ file",
+      "summary": "What the company’s critics and its own admissions add: tax savings, political reach, an unresolved labour allegation, a long PFAS detour, and a standing tension.",
+      "steps": [
+        "tax-critique",
+        "holdfast",
+        "holdfast-politics",
+        "uyghur",
+        "pfas",
+        "growth-tension"
+      ]
+    }
+  ]
+}

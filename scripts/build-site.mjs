@@ -35,7 +35,9 @@ const siteUrl = (process.env.SITE_URL || "").replace(/\/$/, "");
 if (siteUrl && !/^https:\/\//.test(siteUrl)) fail("SITE_URL must start with https://");
 
 /* ---------- gather stories ---------- */
-const ORDER = ["great-fire-of-london", "salary", "rosetta-stone"]; // preferred order for the committed examples; anything else follows alphabetically
+// Featured order for the committed examples comes from site/order.json (an array of slugs); anything not listed follows alphabetically.
+let ORDER = [];
+try { ORDER = readJson(path.join(site, "order.json")); } catch { /* optional */ }
 const entries = [];
 const add = (slug, dir, kind, thumbSrc) => {
   if (entries.some((e) => e.slug === slug)) fail(`duplicate story slug '${slug}'`);

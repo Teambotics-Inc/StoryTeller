@@ -1,6 +1,6 @@
 # 4. Brand and theme
 
-Goal: `theme.json` that makes the story look like it belongs to its subject, *derived from evidence*, never from memory. Schema: [`../schema/theme.schema.json`](../schema/theme.schema.json). Example of a non-brand palette with its reasoning recorded: [`../examples/salary/theme.json`](../examples/salary/theme.json). An illustrative brand theme (fictional) follows below.
+Goal: `theme.json` that makes the story look like it belongs to its subject, *derived from evidence*, never from memory. Schema: [`../schema/theme.schema.json`](../schema/theme.schema.json). Real brand themes extracted from the companies' own sites, with provenance recorded in `brandSources`: [`../examples/tribalscale/theme.json`](../examples/tribalscale/theme.json) (dark, one signature colour) and [`../examples/patagonia/theme.json`](../examples/patagonia/theme.json) (light, a restrained accent for a near-monochrome identity). A non-brand palette with its reasoning recorded: [`../examples/salary/theme.json`](../examples/salary/theme.json). An illustrative fictional brand theme follows below.
 
 ## Decide: brand or not?
 

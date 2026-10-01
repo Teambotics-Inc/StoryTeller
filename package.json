@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "node --test tests/toolkit.test.mjs",
-    "build:examples": "node scripts/build.mjs examples/salary && node scripts/build.mjs examples/great-fire-of-london && node scripts/build.mjs examples/rosetta-stone",
+    "build:examples": "node -e \"const fs=require('fs'),cp=require('child_process');for(const d of fs.readdirSync('examples'))cp.execFileSync('node',['scripts/build.mjs','examples/'+d],{stdio:'inherit'})\"",
     "build:site": "node scripts/build-site.mjs"
   },
   "repository": "github:Teambotics-OSS/StoryTeller"

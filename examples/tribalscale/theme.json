@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "name": "TribalScale",
+  "mode": "dark",
+  "colors": {
+    "bg": "#080808",
+    "surface": "#101010",
+    "text": "#f5f2ea",
+    "muted": "#a29f96",
+    "line": "rgba(245,242,234,0.16)",
+    "accent": "#ffea00"
+  },
+  "clusters": {
+    "identity": "#ffea00",
+    "how-we-work": "#e9d8a6",
+    "ai": "#ff9f43",
+    "design": "#bfc9c6",
+    "engineering": "#8caaa8",
+    "transformation": "#ff7a59",
+    "work": "#f4f0e6",
+    "thinking": "#b8c4ff",
+    "outcomes": "#f5d96a"
+  },
+  "font": {
+    "body": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"
+  },
+  "wordmark": {
+    "text": "TRIBALSCALE",
+    "letterSpacing": "0.28em"
+  },
+  "brandSources": [
+    {
+      "what": "accent + identity cluster (#ffea00)",
+      "from": "https://www.tribalscale.com/ via scripts/brand-probe.mjs",
+      "note": "Brand yellow is a design token on the site (--token-…: #ffea00)."
+    },
+    {
+      "what": "background (#080808)",
+      "from": "https://www.tribalscale.com/",
+      "note": "Site pairs #000000 / #0d0d0d surfaces with the yellow; a dark canvas keeps the yellow at high contrast (accent about 16:1)."
+    },
+    {
+      "what": "font (Inter)",
+      "from": "https://www.tribalscale.com/",
+      "note": "Most-used font-family in the site CSS (Work Sans and Montserrat appear for display; Inter chosen for legibility at small label sizes)."
+    }
+  ]
+}

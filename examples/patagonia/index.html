@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Patagonia · Story Graph</title>
+<meta name="description" content="A map of an outdoor-gear company that keeps treating its own growth as the problem to solve, from hammered pitons to giving the company away, and of the critics who test that claim. Built from Patagonia’s public pages and independent press. Not affiliated with or endorsed by Patagonia.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 16 7 8M16 16l9-5M16 16l2 10' stroke='%2327455c' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%2327455c'/%3E%3Ccircle cx='7' cy='8' r='3' fill='%2327455c'/%3E%3Ccircle cx='25' cy='11' r='3' fill='%2327455c'/%3E%3Ccircle cx='18' cy='26' r='3' fill='%2327455c'/%3E%3C/svg%3E">
+<meta property="og:title" content="Patagonia · Story Graph">
+<meta property="og:description" content="A map of an outdoor-gear company that keeps treating its own growth as the problem to solve, from hammered pitons to giving the company away, and of the critics who test that claim. Built from Patagonia’s public pages and independent press. Not affiliated with or endorsed by Patagonia.">
+
+<style>:root{--bg:#ffffff;--surface:#f5f5f5;--text:#000000;--muted:#4a4a4a;--line:rgba(0,0,0,0.16);--accent:#27455c;color-scheme:light}</style>
+<style>
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;line-height:1.45;display:flex;flex-direction:column;height:100dvh;overflow:hidden;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:18px 24px 14px;border-bottom:1px solid var(--line);flex:none}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand img{max-height:30px;max-width:120px;display:block}
+.wordmark{margin:0;font-size:19px;font-weight:600;line-height:1.2;overflow-wrap:anywhere}
+.dek{margin:6px 0 0;max-width:640px;color:var(--muted);font-size:13px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.btn{min-height:36px;padding:0 12px;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:color-mix(in srgb,var(--bg) 88%,var(--text));text-transform:uppercase;letter-spacing:.1em;font-size:10px;transition:border-color .15s,color .15s,background .15s}
+.btn:hover,.btn[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding:10px 24px;border-bottom:1px solid var(--line);flex:none}
+.search{display:flex;align-items:center;gap:8px;min-width:220px;height:34px;padding:0 10px;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:color-mix(in srgb,var(--bg) 88%,var(--text));color:var(--muted)}
+.search:focus-within{border-color:var(--accent)}
+.search input{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--text);font-size:12px}
+.search input::placeholder{color:var(--muted);opacity:.8}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-height:28px;padding:0 10px;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:none;color:var(--muted);font-size:11px;display:inline-flex;align-items:center;gap:6px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--c,var(--accent));display:inline-block}
+.chip:hover{color:var(--text)}
+.chip[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 14%,transparent);border-color:var(--accent);color:var(--accent)}
+.stories{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-left:auto}
+.stories>span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+main{position:relative;flex:1;min-height:0}
+#graph{display:block;width:100%;height:100%;touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#graph.dragging{cursor:grabbing}
+.edge{stroke:var(--text);stroke-opacity:.34;stroke-width:1.2;vector-effect:non-scaling-stroke;transition:stroke-opacity .18s,stroke .18s}
+.edge.inferred{stroke-dasharray:3 5;stroke-opacity:.42}
+.edge.hl{stroke:var(--accent);stroke-opacity:1;stroke-width:2.2;stroke-dasharray:none}
+.edge.inferred.hl{stroke-dasharray:6 5}
+.edge.dim{stroke-opacity:.05}
+.edge-label{font-size:10px;fill:var(--accent);text-anchor:middle;opacity:0;pointer-events:none;paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round}
+.edge-label.hl{opacity:1}
+.node{cursor:pointer;transition:opacity .18s}
+.node .core{fill:var(--bg);stroke-width:2;transition:stroke-width .15s}
+.node.root .core{stroke-width:0}
+.node .dot{opacity:.9}
+.node .label{font-size:calc(11px * var(--ls,1));fill:var(--text);text-anchor:middle;paint-order:stroke;stroke:var(--bg);stroke-width:4px;stroke-linejoin:round;pointer-events:none}
+.node.root .label{font-weight:700;letter-spacing:.2em;font-size:12px}
+.node .kind{font-size:7.5px;fill:var(--muted);text-anchor:middle;letter-spacing:.14em;text-transform:uppercase;paint-order:stroke;stroke:var(--bg);stroke-width:3px;pointer-events:none;opacity:0;transition:opacity .15s}
+#graph.zoomed .node .kind{opacity:1}
+.node:hover .core,.node:focus-visible .core{stroke-width:3.5}
+.node:focus-visible{outline:none}
+.node:focus-visible .ring{opacity:1}
+.ring{fill:none;stroke:var(--accent);stroke-width:2;opacity:0}
+.node.sel .ring{opacity:1}
+.node.dim{opacity:.16}
+.badge circle{fill:var(--accent)}
+.badge text{fill:var(--bg);font-size:9px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+.story-path{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 7;vector-effect:non-scaling-stroke;opacity:.85}
+
+.zoom.right{left:auto;right:20px}
+.zoom{position:absolute;left:20px;bottom:92px;display:flex;flex-direction:column;gap:6px}
+.zoom .btn{width:36px;padding:0;font-size:16px;letter-spacing:0}
+.foot{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 24px;padding:10px 24px;font-size:11px;color:var(--muted);pointer-events:none;background:linear-gradient(to top,var(--bg) 40%,transparent)}
+.foot p{margin:0}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;justify-content:flex-end}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:8px;height:8px;border-radius:50%;background:var(--c)}
+.legend svg{width:22px;height:8px}
+.empty{position:absolute;inset:0;display:none;place-items:center;color:var(--muted);pointer-events:none}
+.empty.on{display:grid}
+
+#list{padding:20px 24px 80px}
+#list section{max-width:860px;margin:0 auto 26px}
+#list h2{margin:0 0 10px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px}
+#list h2 i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+#list ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.item{display:block;width:100%;text-align:left;padding:12px 14px;background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--c)}
+.item:hover,.item:focus-visible{border-color:var(--c)}
+.item b{display:block;font-weight:600}
+.item small{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-size:10px}
+.item span{display:block;color:var(--muted);margin-top:4px;font-size:13px}
+
+.views{display:flex;border:1px solid color-mix(in srgb,var(--text) 22%,transparent);flex:none}
+.views button{min-height:34px;padding:0 12px;border:0;border-right:1px solid color-mix(in srgb,var(--text) 22%,transparent);background:none;color:var(--muted);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.views button:last-child{border-right:0}
+.views button:hover{color:var(--text)}
+.views button[aria-pressed=true]{background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.pane{position:absolute;inset:0;overflow:auto;display:none}
+.pane.on{display:block}
+
+#timeline{overflow-x:hidden;overflow-y:auto}
+#tl{display:block;width:100%;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.tl-mode{position:absolute;top:8px;right:16px;z-index:2}
+.tl-lane{fill:var(--text);opacity:.04}
+.tl-lane.alt{opacity:.015}
+.tl-lane-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;fill:var(--muted)}
+.tl-tick{stroke:var(--line);stroke-dasharray:2 5}
+.tl-tick-label{font-size:10px;fill:var(--muted);text-anchor:middle}
+.tl-node{cursor:pointer}
+.tl-node text{font-size:11px;fill:var(--text);paint-order:stroke;stroke:var(--bg);stroke-width:3.5px;stroke-linejoin:round}
+.tl-node .tl-when{font-size:9px;fill:var(--muted)}
+.tl-node .tl-dot{stroke:var(--bg);stroke-width:1.5}
+.tl-node.sel .tl-dot{stroke:var(--accent);stroke-width:3}
+.tl-node:focus-visible{outline:none}
+.tl-node:focus-visible .tl-dot{stroke:var(--accent);stroke-width:3}
+.tl-node.dim{opacity:.18}
+.tl-bar{opacity:.5}
+
+#read{padding:28px 24px 140px}
+.read-wrap{max-width:720px;margin:0 auto}
+.read-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:26px}
+.read-wrap h2.rt{font-size:30px;line-height:1.15;margin:0 0 10px}
+.read-wrap .intro{color:var(--muted);font-size:16px;margin:0 0 34px}
+.rstep{position:relative;padding:0 0 34px 54px}
+.rstep::before{content:"";position:absolute;left:15px;top:36px;bottom:2px;width:1px;background:var(--line)}
+.rstep:last-child::before{display:none}
+.rnum{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;background:var(--c,var(--accent));color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:13px}
+.rstep .via{font-size:12px;color:var(--muted);margin:0 0 6px}
+.rstep .via em{font-style:normal;color:var(--accent)}
+.rstep h3{margin:0 0 2px;font-size:21px;line-height:1.25}
+.rstep h3 button{background:none;border:0;padding:0;text-align:left;font:inherit;color:inherit}
+.rstep h3 button:hover{color:var(--accent)}
+.rstep .meta{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.rstep p{margin:0 0 10px;font-size:15px}
+.rstep .details{color:var(--muted)}
+.rstep blockquote{margin:0 0 12px;padding:8px 12px;border-left:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);font-size:14px}
+.rstep .rsrc{font-size:12px;color:var(--muted)}
+.rstep .rsrc a{color:var(--accent)}
+
+#outline{padding:22px 24px 110px}
+.ol-wrap{max-width:880px;margin:0 auto}
+.ol-tools{display:flex;gap:8px;margin-bottom:16px}
+.ol-wrap ul{list-style:none;margin:0;padding:0 0 0 22px;border-left:1px solid var(--line)}
+.ol-wrap>ul{border-left:0;padding-left:0}
+.ol-wrap li{margin:2px 0}
+.ol-wrap li.dim{opacity:.35}
+.ol-wrap .row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;padding:6px 6px;list-style:none}
+.ol-wrap summary.row{cursor:pointer}
+.ol-wrap summary::-webkit-details-marker{display:none}
+.ol-wrap summary.row::before{content:"+";color:var(--muted);width:12px;flex:none}
+.ol-wrap details[open]>summary.row::before{content:"\2212"}
+.ol-wrap .row i{width:9px;height:9px;border-radius:50%;background:var(--c);align-self:center;flex:none}
+.ol-wrap .via{font-size:11px;color:var(--accent)}
+.ol-wrap .olt{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--text);text-align:left}
+.ol-wrap .olt:hover{color:var(--accent)}
+.ol-wrap small{color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.ol-wrap .olcount{margin-left:auto;font-size:11px;color:var(--muted)}
+.ol-wrap .olbody{padding:0 6px 8px 26px;color:var(--muted);font-size:13px}
+.ol-wrap .olbody p{margin:0 0 4px}
+.ol-wrap .olink{background:none;border:0;padding:0;font:inherit;font-size:12px;color:var(--accent);text-align:left}
+.ol-wrap .olink:hover{text-decoration:underline}
+@media (max-width:760px){.views{width:100%;overflow-x:auto}.views button{flex:1 0 auto;padding:0 10px}#read{padding:20px 16px 150px}.rstep{padding-left:46px}.tl-mode{right:10px}#outline{padding:16px 14px 110px}}
+
+#panel{position:absolute;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--surface);border-left:1px solid var(--line);overflow:auto;padding:22px 22px 40px;transform:translateX(102%);transition:transform .25s ease,visibility 0s linear .25s;z-index:6;box-shadow:-12px 0 40px rgba(0,0,0,.25)}
+#panel.open{transform:none;visibility:visible;transition:transform .25s ease,visibility 0s}
+#panel:not(.open){box-shadow:none;visibility:hidden}
+#panel .close{position:absolute;top:10px;right:10px;width:32px;height:32px;border:0;background:none;color:var(--muted);font-size:20px}
+#panel .close:hover{color:var(--accent)}
+#panel .kicker{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+#panel .kicker i{width:9px;height:9px;border-radius:50%;background:var(--c)}
+#panel h2{margin:8px 28px 10px 0;font-size:22px;line-height:1.2;overflow-wrap:anywhere}
+#panel p{margin:0 0 12px}
+#panel .details{color:var(--muted)}
+#panel h3{margin:20px 0 8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+#panel blockquote{margin:0 0 12px;padding:8px 12px;border-left:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{padding:2px 8px;border:1px solid var(--line);font-size:11px;color:var(--muted)}
+.links{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.links button{width:100%;text-align:left;background:none;border:1px solid var(--line);padding:8px 10px;display:grid;gap:2px}
+.links button:hover{border-color:var(--accent)}
+.links .rel{font-size:11px;color:var(--muted)}
+.links .rel em{font-style:normal;color:var(--accent)}
+.src{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.src a{color:var(--accent);text-decoration:none;overflow-wrap:anywhere}
+.src a:hover{text-decoration:underline}
+.src small{display:block;color:var(--muted)}
+
+#storybar{z-index:7;position:absolute;left:50%;bottom:54px;transform:translateX(-50%);width:min(560px,calc(100% - 32px));background:var(--surface);border:1px solid var(--accent);padding:10px 14px;display:none;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;z-index:5;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+#storybar.on{display:grid}
+#storybar .t{min-width:0}
+#storybar b{display:block;font-size:13px}
+#storybar span{display:block;color:var(--muted);font-size:12px}
+#storybar .step{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+#storybar .nav{display:flex;gap:6px}
+#storybar .btn{padding:0 10px}
+
+noscript{display:block;padding:24px;max-width:760px}
+
+@media (max-width:760px){
+  header{padding:14px 16px 10px;flex-direction:column}
+  .actions{justify-content:flex-start}
+  .toolbar{padding:8px 16px}
+  .stories{margin-left:0;width:100%}
+  .search{flex:1 1 100%}
+  .chips,.stories{flex-wrap:nowrap;overflow-x:auto;width:100%;scrollbar-width:none;padding-bottom:2px}
+  .chips::-webkit-scrollbar,.stories::-webkit-scrollbar{display:none}
+  .chip,.stories>span{flex:none;white-space:nowrap}
+  .dek{font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  header{flex-direction:row;flex-wrap:wrap}
+  .legend,#status{display:none}
+  .wordmark{font-size:16px}
+  .actions .btn{min-height:30px;padding:0 9px}
+  .zoom{bottom:70px}
+  .toolbar{gap:6px}
+  .foot{font-size:10px}
+  .foot{padding:8px 16px}
+  .legend{justify-content:flex-start}
+  .zoom{left:12px}
+  #panel{top:auto;width:100%;height:58%;border-left:0;border-top:1px solid var(--line);transform:translateY(102%)}
+  #panel.open{transform:none}
+  #storybar{bottom:68px;grid-template-columns:1fr;}
+  main.sheet #storybar{bottom:calc(58% + 10px)}
+  #list{padding:14px 16px 90px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div id="logo"></div><div><h1 class="wordmark" id="wordmark"></h1><p class="dek" id="dek"></p></div></div>
+  <div class="actions">
+    <button class="btn" id="btn-fit">Fit</button>
+    <button class="btn" id="btn-reset">Reset</button>
+  </div>
+</header>
+<div class="toolbar" role="region" aria-label="Filters">
+  <div class="views" id="views" role="group" aria-label="View"></div>
+  <label class="search"><span class="sr-only">Search nodes</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+    <input id="q" type="search" placeholder="Search nodes  ( / )" autocomplete="off"></label>
+  <div class="chips" id="chips"></div>
+  <div class="stories" id="stories"></div>
+</div>
+<main>
+  <svg id="graph" role="group" aria-label="Story graph. The Read, Outline and List views are linear alternatives."><g id="vp"><g id="edges"></g><g id="edge-labels"></g><path id="story-path" class="story-path" d=""/><g id="nodes"></g><g id="badges"></g></g></svg>
+  <div id="list" class="pane" aria-label="Story list"></div>
+  <div id="timeline" class="pane" aria-label="Timeline"><button class="btn tl-mode" id="tl-mode">Even spacing</button><svg id="tl" role="group" aria-label="Timeline of dated nodes"></svg></div>
+  <div id="read" class="pane" aria-label="Read the story"></div>
+  <div id="outline" class="pane" aria-label="Outline"></div>
+  <div class="empty" id="empty">No nodes match.</div>
+  <div class="zoom" id="zoom"><button class="btn" id="zin" aria-label="Zoom in">+</button><button class="btn" id="zout" aria-label="Zoom out">&minus;</button></div>
+  <div id="storybar" role="region" aria-label="Guided story">
+    <div class="t"><div class="step" id="sb-step"></div><b id="sb-title"></b><span id="sb-sum"></span></div>
+    <div class="nav"><button class="btn" id="sb-prev" aria-label="Previous step">&lsaquo;</button><button class="btn" id="sb-next" aria-label="Next step">&rsaquo;</button><button class="btn" id="sb-exit" aria-label="Exit story">&times;</button></div>
+  </div>
+  <aside id="panel" aria-label="Node details" aria-live="polite"></aside>
+  <div class="foot" id="foot"><div><p id="status"></p><p id="credit"></p></div><div class="legend" id="legend"></div></div>
+</main>
+<noscript><h1>Patagonia</h1><p>A map of an outdoor-gear company that keeps treating its own growth as the problem to solve, from hammered pitons to giving the company away, and of the critics who test that claim.</p><p>This interactive story graph needs JavaScript. The full content follows.</p><ul><li><strong>Patagonia</strong>: An outdoor apparel and gear company that calls itself an experiment in responsible business, and whose stated reason for existing is now environmental rather than commercial.</li><li><strong>Yvon Chouinard</strong>: Climber turned blacksmith turned reluctant businessman; every thread of the company runs back to his habits as a craftsman.</li><li><strong>Forge and anvil, 1957</strong>: Self-taught, Chouinard bought a junkyard forge and began hammering steel pitons for climbing friends. The business began as favours sold from the back of a car.</li><li><strong>Chouinard Equipment</strong>: The partnership with Tom Frost that became the largest US supplier of climbing hardware. It is the company Patagonia’s clothing business grew beside.</li><li><strong>Nothing left to take away</strong>: A design rule borrowed from the aviator Saint-Exupéry: improve a tool by removing what it doesn’t need. The company still treats subtraction as quality.</li><li><strong>Chocks replace pitons</strong>: By the company’s own telling, the pitons that made it the largest US climbing-hardware supplier were damaging the rock, so it shrank the piton business and sold hand-placed aluminium chocks instead. The company calls this its first big environmental step.</li><li><strong>Tom Frost</strong>: Climbing partner from the Tahquitz and Yosemite years and Chouinard’s business partner in Chouinard Equipment.</li><li><strong>Ironclad Guarantee</strong>: A blanket warranty that makes repair and replacement part of the product. It is the commercial twin of the company’s argument that the most responsible garment is the one you keep.</li><li><strong>Five core values</strong>: Quality, Integrity, Environmentalism, Justice and Not bound by convention, rewritten in 2022 on the eve of the company’s 50th anniversary.</li><li><strong>“Save our home planet”</strong>: In 2018 the company rewrote its stated purpose from inspiring solutions to the environmental crisis to an unqualified mission. Every later structural move is justified by this sentence.</li><li><strong>Fleece from soda bottles</strong>: Patagonia says it began making recycled polyester from plastic bottles in 1993 and was the first outdoor-clothing maker to do so. By Spring 2026 it reports recycled content in most of its polyester.</li><li><strong>All-organic cotton</strong>: A 1996 pledge to stop using conventionally grown cotton, after the company looked hard at what farming it involved.</li><li><strong>Chasing PFAS out</strong>: A long, admitted detour: the company swapped one fluorochemical waterproofing for another it later found just as harmful, before making all new products without intentionally added PFAS from Spring 2025.</li><li><strong>Fair Trade factories</strong>: Since 2014 the company has paid a premium on items made in Fair Trade Certified factories, and says most of its line now is. It also concedes a living wage for all workers is not yet secured.</li><li><strong>The 1980s boom</strong>: Catalog-driven growth turned a climbing-gear side business into a fashionable outdoor brand, and set up the crash that followed.</li><li><strong>Layoffs of July 1991</strong>: A recession, too much inventory and a nervous bank forced the company to lay off a fifth of its staff. Chouinard later described the growth as a course it could not sustain.</li><li><strong>“Don’t Buy This Jacket”</strong>: A Black Friday newspaper ad urging shoppers to buy less, from a company still selling jackets. The follow-up essay openly takes on the charge of hypocrisy and offers a Reduce, Repair, Reuse, Recycle, Reimagine pledge.</li><li><strong>Worn Wear</strong>: A trade-in and resale program for used Patagonia gear, the practical follow-through on the 2011 plea to consume less.</li><li><strong>The earth tax: 1% of sales</strong>: A standing pledge to give 1% of sales to environmental groups. Sources disagree about when it began, so the start date is shown as a range.</li><li><strong>1% for the Planet</strong>: In 2002 Chouinard and fly-shop owner Craig Mathews founded a non-profit to get other businesses to make the same pledge, turning a house rule into a movement.</li><li><strong>Patagonia Action Works</strong>: A platform that connects customers with local environmental groups, events and petitions. It funds grassroots organisations, and says it funds only environmental work.</li><li><strong>Suing over Bears Ears, 2017</strong>: Patagonia Works joined a coalition of tribal, conservation and outdoor groups suing to challenge the first reduction of the Bears Ears National Monument. The company treats public-land protection as part of its business.</li><li><strong>Suing over Bears Ears, 2026</strong>: In September 2026 Patagonia and partners moved to revive the 2017 case against a fresh, larger reduction of the monument. The outcome is pending.</li><li><strong>“Earth is now our only shareholder”</strong>: On September 14, 2022 Chouinard announced the company’s ownership had been moved into a purpose trust and a nonprofit, rejecting a sale or an IPO as ways to keep the company’s values intact.</li><li><strong>Patagonia Purpose Trust</strong>: Holds all the voting stock, about 2% of the company, so it can approve board changes and charter changes. The Chouinard family guides it.</li><li><strong>Holdfast Collective</strong>: A 501(c)(4) nonprofit that owns the other 98% (all nonvoting stock) and receives Patagonia’s excess profits as a dividend to spend on environmental work, including advocacy.</li><li><strong>Kris Tompkins</strong>: Former Patagonia CEO who left in 1993, married Doug Tompkins and turned to land protection; she sits on Patagonia’s board today.</li><li><strong>Tompkins Conservation</strong>: The Chile and Argentina land-protection work of Kris and Doug Tompkins, an example of a Patagonia alumna carrying the company’s conservation streak outside the company.</li><li><strong>The tax-savings critique</strong>: Tax-law commentators argue the structure cut the family’s gift-tax bill by more than 98%, while also stressing that the money still goes to environmental work. A company adviser had said it brought no tax benefit.</li><li><strong>The 501(c)(4) question</strong>: Because Holdfast is a 501(c)(4), it can spend on politics and need not disclose donors. One academic warns of a billionaire-funded political arms race, a point Patagonia’s own FAQ does not dispute: it says Holdfast can back candidates.</li><li><strong>Forced-labour complaint</strong>: In December 2021 a European legal group filed a criminal complaint in the Netherlands against Patagonia and three other brands, alleging possible complicity in forced labour in Xinjiang. This records the allegation, not a finding; Patagonia’s response was not in the sources read.</li><li><strong>99% of emissions are upstream</strong>: The company says nearly all its emissions come from making materials and products, not from its own stores and offices, and rejects carbon offsets as enough. It has set science-based reduction targets for 2030 and 2040.</li><li><strong>Growth vs footprint</strong>: The company admits that selling more gear is at odds with its mission, and that the new ownership structure does not make that tension go away.</li></ul></noscript>
+
+<script type="application/json" id="theme-data">{"schemaVersion":1,"name":"Patagonia (independent study)","mode":"light","colors":{"bg":"#ffffff","surface":"#f5f5f5","text":"#000000","muted":"#4a4a4a","line":"rgba(0,0,0,0.16)","accent":"#27455c"},"clusters":{"origins":"#8a4b1f","identity":"#27455c","materials":"#2e7d57","growth":"#c2410c","giving":"#1b2b79","ownership":"#000000","people":"#6c757d","scrutiny":"#b91c1c"},"font":{"body":"'Ridgeway Sans', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif","display":"Georgia, 'Times New Roman', serif"},"wordmark":{"text":"patagonia","letterSpacing":"-0.01em","uppercase":false},"brandSources":[{"what":"canvas (#ffffff), text (#000000), surface (#f5f5f5), muted (#4a4a4a), mode light","from":"https://www.patagonia.com/home/ rendered in a browser; computed styles and scripts/brand-probe.mjs","note":"The site is black text on white with #f5f5f5 panels; body colour is rgb(0,0,0) and #4a4a4a is a site grey. The brand has no single fixed accent: photography and a seasonal hero panel carry colour."},{"what":"accent (#27455c)","from":"computed background colour rgb(39, 69, 92) on the home page (10 elements)","note":"Judgement call. The hero panel in the week I looked was deep blue #1b2b79 (used here for one cluster), and the probe's top saturated colour #91abe9 fails contrast on white. The slate blue #27455c is a real site colour, reads as alpine, and passes contrast."},{"what":"cluster colours","from":"site colours #468254/#27455c/#1b2b79/#fa4616 (computed or probe); darker tones derived by me","note":"#2e7d57 is a darkened site green (#468254 fails 4.5:1 comfort at small size), #c2410c a deepened #fa4616, #b91c1c a deepened #e10000, #8a4b1f an earth brown of my own choosing, #6c757d the site grey. Only the first four have direct site provenance."},{"what":"font","from":"https://www.patagonia.com/home/ body font-family: Ridgeway Sans","note":"Ridgeway Sans is a proprietary face not on Google Fonts, so it is named first then falls back to the system stack. No webfont is loaded. The wordmark uses Georgia because the real logo is a bold serif wordmark; it is an approximation and the logo is not embedded."}]}</script>
+<script type="application/json" id="story-data">{"schemaVersion":1,"title":"Patagonia","subject":{"name":"Patagonia, Inc.","kind":"company","url":"https://www.patagonia.com/"},"tagline":"A map of an outdoor-gear company that keeps treating its own growth as the problem to solve, from hammered pitons to giving the company away, and of the critics who test that claim.","root":"patagonia","credit":"An independent StoryTeller study.","disclaimer":"Built from Patagonia’s public pages and independent press. Not affiliated with or endorsed by Patagonia.","generated":{"date":"2026-09-30"},"clusters":[{"id":"origins","label":"Origins & craft"},{"id":"identity","label":"Identity & promises"},{"id":"materials","label":"Materials & making"},{"id":"growth","label":"Growth & its limits"},{"id":"giving","label":"Giving & activism"},{"id":"ownership","label":"Ownership"},{"id":"people","label":"People & networks"},{"id":"scrutiny","label":"Tensions & scrutiny"}],"sources":[{"id":"hist","title":"Our Company History","url":"https://www.patagonia.com/company-history/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"own","title":"Yvon Chouinard Donates Patagonia to Fight Climate Crisis","url":"https://www.patagonia.com/ownership/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"values","title":"Our Core Values","url":"https://www.patagonia.com/core-values/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"foot","title":"Environmental & Social Footprint","url":"https://www.patagonia.com/our-footprint/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"pfas","title":"Made Without PFAS","url":"https://www.patagonia.com/our-footprint/pfas.html","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"cotton","title":"Cotton for Change","url":"https://www.patagonia.com/our-footprint/organic-cotton.html","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"poly","title":"Polyester: Virgin & Recycled","url":"https://www.patagonia.com/our-footprint/recycled-polyester.html","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"fair","title":"Fair Trade Certified","url":"https://www.patagonia.com/our-footprint/fair-trade.html","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"onep","title":"1% for the Planet","url":"https://www.patagonia.com/one-percent-for-the-planet.html","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"dbtj","title":"Don’t Buy This Jacket, Black Friday and the New York Times","url":"https://www.patagonia.com/stories/dont-buy-this-jacket-black-friday-and-the-new-york-times/story-18615.html","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"climate","title":"Climate Goals","url":"https://www.patagonia.com/climate-goals/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"worn","title":"Worn Wear","url":"https://www.patagonia.com/worn-wear/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"aw","title":"Patagonia Action Works: About","url":"https://www.patagonia.com/actionworks/about/","accessed":"2026-09-30","publisher":"Patagonia"},{"id":"guar","title":"Ironclad Guarantee","url":"https://help.patagonia.com/s/article/Ironclad-Guarantee","accessed":"2026-09-30","publisher":"Patagonia Help Center"},{"id":"b17","title":"Broad Coalition Sues to Stop Trump Administration’s Unlawful Dismemberment of the Bears Ears National Monument","url":"https://www.patagoniaworks.com/press/2017/12/11/broad-coalition-sues-to-stop-trump-administrations-unlawful-dismemberment-of-the-bears-ears-national-monument","accessed":"2026-09-30","publisher":"Patagonia Works"},{"id":"b26","title":"Patagonia Joins Environmental Groups in Suing Trump Over Bears Ears","url":"https://www.outsideonline.com/outdoor-adventure/environment/patagonia-lawsuit-bears-ears-trump/","accessed":"2026-09-30","publisher":"Outside"},{"id":"tomp","title":"About Kristine & Douglas Tompkins","url":"https://www.rewildingchile.org/en/about-us/about-kristine-and-douglas-tompkins/","accessed":"2026-09-30","publisher":"Fundación Rewilding Chile"},{"id":"sierra","title":"How Patagonia Surfed Around Death and Taxes","url":"https://www.sierraclub.org/sierra/how-patagonia-surfed-around-death-and-taxes","accessed":"2026-09-30","publisher":"Sierra (Sierra Club)"},{"id":"grist","title":"Two ways to think about Patagonia’s $3 billion climate donation","url":"https://grist.org/accountability/patagonia-turns-over-company-fight-climate-change/","accessed":"2026-09-30","publisher":"Grist"},{"id":"ecchr","title":"Human rights violations off the rack: Dutch and US brands allegedly rely on forced labor","url":"https://www.ecchr.eu/en/press-release/human-rights-violations-off-the-rack/","accessed":"2026-09-30","publisher":"ECCHR"},{"id":"inc92","title":"Lost in Patagonia: Yvon Chouinard’s Ambitious Social Mission (1992 profile)","url":"https://www.inc.com/magazine/19920801/4210.html","accessed":"2026-09-30","publisher":"Inc."},{"id":"wiki","title":"Patagonia, Inc.","url":"https://en.wikipedia.org/wiki/Patagonia,_Inc.","accessed":"2026-09-30","publisher":"Wikipedia"}],"nodes":[{"id":"patagonia","title":"Patagonia","type":"company","cluster":"identity","featured":true,"summary":"An outdoor apparel and gear company that calls itself an experiment in responsible business, and whose stated reason for existing is now environmental rather than commercial.","details":"Wikipedia dates the first store, Great Pacific Iron Works in Ventura, California, to May 9, 1973; the company’s own history page that was read does not give a founding date.","evidence":"We’re in business to save our home planet.","when":"1973 to present","sources":["own","wiki"]},{"id":"chouinard","title":"Yvon Chouinard","type":"person","cluster":"origins","featured":true,"summary":"Climber turned blacksmith turned reluctant businessman; every thread of the company runs back to his habits as a craftsman.","evidence":"I never wanted to be a businessman. I started as a craftsman, making climbing gear for my friends and myself, then got into apparel.","when":"climbing from 1953","sources":["hist","own"]},{"id":"forge-1957","title":"Forge and anvil, 1957","type":"event","cluster":"origins","summary":"Self-taught, Chouinard bought a junkyard forge and began hammering steel pitons for climbing friends. The business began as favours sold from the back of a car.","details":"Per the company, he could forge two pitons an hour and sold them for $1.50 each.","evidence":"In 1957, Yvon went to a junkyard and bought a used coal-fired forge, a 138-pound anvil and some tongs and hammers","when":"1957","sources":["hist"]},{"id":"equipment-1965","title":"Chouinard Equipment","type":"company","cluster":"origins","summary":"The partnership with Tom Frost that became the largest US supplier of climbing hardware. It is the company Patagonia’s clothing business grew beside.","details":"Wikipedia reports that in 1981 Patagonia and Chouinard Equipment were incorporated within Great Pacific Iron Works. Inc. (1992) reports Chouinard Equipment declared Chapter 11 about three years earlier, when liability premiums soared, and was sold to former Patagonia employees.","evidence":"In 1965, Yvon went into partnership with Tom Frost and started Chouinard Equipment.","when":"1965","sources":["hist","inc92","wiki"]},{"id":"design-principle","title":"Nothing left to take away","type":"idea","cluster":"identity","summary":"A design rule borrowed from the aviator Saint-Exupéry: improve a tool by removing what it doesn’t need. The company still treats subtraction as quality.","evidence":"perfection is finally attained not when there is no longer anything to add, but when there is no longer anything to take away","sources":["hist"]},{"id":"chocks-1972","title":"Chocks replace pitons","type":"event","cluster":"origins","featured":true,"summary":"By the company’s own telling, the pitons that made it the largest US climbing-hardware supplier were damaging the rock, so it shrank the piton business and sold hand-placed aluminium chocks instead. The company calls this its first big environmental step.","evidence":"We introduced them in the first Chouinard Equipment catalog in 1972.","when":"1972","sources":["hist"]},{"id":"tom-frost","title":"Tom Frost","type":"person","cluster":"people","summary":"Climbing partner from the Tahquitz and Yosemite years and Chouinard’s business partner in Chouinard Equipment.","evidence":"During the nine years that Frost and Chouinard were partners, they redesigned and improved almost every climbing tool","when":"1965, for nine years","sources":["hist"]},{"id":"guarantee","title":"Ironclad Guarantee","type":"promise","cluster":"identity","summary":"A blanket warranty that makes repair and replacement part of the product. It is the commercial twin of the company’s argument that the most responsible garment is the one you keep.","evidence":"We guarantee everything we make.","sources":["guar"]},{"id":"values","title":"Five core values","type":"idea","cluster":"identity","summary":"Quality, Integrity, Environmentalism, Justice and Not bound by convention, rewritten in 2022 on the eve of the company’s 50th anniversary.","evidence":"Build the best product, provide the best service and constantly improve everything we do.","when":"2022","sources":["values"]},{"id":"purpose-2018","title":"“Save our home planet”","type":"idea","cluster":"identity","summary":"In 2018 the company rewrote its stated purpose from inspiring solutions to the environmental crisis to an unqualified mission. Every later structural move is justified by this sentence.","details":"The 2011 Black Friday essay quotes the earlier purpose: to inspire and implement solutions to the environmental crisis.","evidence":"More recently, in 2018, we changed the company’s purpose to: We’re in business to save our home planet.","when":"2018","sources":["own","dbtj"]},{"id":"recycled-1993","title":"Fleece from soda bottles","type":"product","cluster":"materials","summary":"Patagonia says it began making recycled polyester from plastic bottles in 1993 and was the first outdoor-clothing maker to do so. By Spring 2026 it reports recycled content in most of its polyester.","details":"Company figures: recycled polyester was 94% of polyester fabric by weight in Spring 2026; virgin polyester was 6%. The first-mover claim is the company’s own.","evidence":"We began making recycled polyester from plastic soda bottles back in 1993","when":"1993","sources":["poly"]},{"id":"cotton-1996","title":"All-organic cotton","type":"commitment","cluster":"materials","summary":"A 1996 pledge to stop using conventionally grown cotton, after the company looked hard at what farming it involved.","evidence":"In 1996, we made a commitment to exclusively use 100% virgin cotton grown with organic practices","when":"1996","sources":["cotton"]},{"id":"pfas","title":"Chasing PFAS out","type":"commitment","cluster":"materials","summary":"A long, admitted detour: the company swapped one fluorochemical waterproofing for another it later found just as harmful, before making all new products without intentionally added PFAS from Spring 2025.","details":"The company says it phased out C8 treatments between 2013 and 2016, moved to C6, then learned from new research that C6 is just as detrimental. First products without intentionally added PFAS in DWR finishes: Fall 2019.","evidence":"For the Spring 2025 season and beyond, 100% of our new products are made without intentionally added PFAS.","when":"2013 to 2025","sources":["pfas"]},{"id":"fair-trade","title":"Fair Trade factories","type":"program","cluster":"materials","summary":"Since 2014 the company has paid a premium on items made in Fair Trade Certified factories, and says most of its line now is. It also concedes a living wage for all workers is not yet secured.","details":"Worker counts differ between the company’s own pages: “85,000+” on the footprint page and “90,000+” on the Fair Trade page.","evidence":"Patagonia doesn’t own any factories that make our products, so we have limited control over how much workers receive.","when":"2014 to present","sources":["fair","foot"]},{"id":"boom-80s","title":"The 1980s boom","type":"period","cluster":"growth","summary":"Catalog-driven growth turned a climbing-gear side business into a fashionable outdoor brand, and set up the crash that followed.","evidence":"sales have soared from roughly $3 million in 1979 to $117 million in the latest fiscal year","when":"1979 to 1992","sources":["inc92"]},{"id":"layoffs-1991","title":"Layoffs of July 1991","type":"event","cluster":"growth","summary":"A recession, too much inventory and a nervous bank forced the company to lay off a fifth of its staff. Chouinard later described the growth as a course it could not sustain.","details":"Inc. reports inventory was dumped below cost and the bank clamped down on the credit line. The quote is Chouinard’s, as reported by Inc.","evidence":"In July 1991 Patagonia, always known for “taking care of its own,” laid off 120 people, or roughly 20% of its work force","when":"July 1991","sources":["inc92"]},{"id":"dbtj-2011","title":"“Don’t Buy This Jacket”","type":"campaign","cluster":"growth","featured":true,"summary":"A Black Friday newspaper ad urging shoppers to buy less, from a company still selling jackets. The follow-up essay openly takes on the charge of hypocrisy and offers a Reduce, Repair, Reuse, Recycle, Reimagine pledge.","evidence":"We should be the only retailer in the country asking people to buy less on Black Friday.","when":"Nov 25, 2011","sources":["dbtj"]},{"id":"worn-wear","title":"Worn Wear","type":"program","cluster":"growth","summary":"A trade-in and resale program for used Patagonia gear, the practical follow-through on the 2011 plea to consume less.","details":"Wikipedia dates the trade-in and exchange program to 2017; the company’s pages read here give no start date. The 85% figure is US EPA data for 2018, as cited by Patagonia.","evidence":"Worn Wear® allows you to trade in and buy used Patagonia® gear.","when":"2017 (per Wikipedia)","sources":["worn","dbtj","wiki"]},{"id":"tithe","title":"The earth tax: 1% of sales","type":"commitment","cluster":"giving","summary":"A standing pledge to give 1% of sales to environmental groups. Sources disagree about when it began, so the start date is shown as a range.","details":"Start date by source: Patagonia’s 1% page says 1985; its Action Works page says “Since 1972”; Inc. (1992) says tithing began in 1984 at 10% of pretax profits. The company reports over $140 million in cash and in-kind donations.","evidence":"Since 1985, Patagonia has pledged 1% of sales to the preservation and restoration of the natural environment.","when":"1984 to 1985 (sources differ)","sources":["onep","aw","inc92"]},{"id":"onep-2002","title":"1% for the Planet","type":"organization","cluster":"giving","summary":"In 2002 Chouinard and fly-shop owner Craig Mathews founded a non-profit to get other businesses to make the same pledge, turning a house rule into a movement.","evidence":"1% for the Planet is an alliance of businesses that understand the necessity of protecting the natural environment.","when":"2002","sources":["onep"]},{"id":"action-works","title":"Patagonia Action Works","type":"program","cluster":"giving","summary":"A platform that connects customers with local environmental groups, events and petitions. It funds grassroots organisations, and says it funds only environmental work.","evidence":"We built Patagonia Action Works to connect committed individuals to organizations working on environmental issues in the same community.","sources":["aw"]},{"id":"bears-2017","title":"Suing over Bears Ears, 2017","type":"event","cluster":"giving","summary":"Patagonia Works joined a coalition of tribal, conservation and outdoor groups suing to challenge the first reduction of the Bears Ears National Monument. The company treats public-land protection as part of its business.","evidence":"amounts to the largest elimination of protected areas in American history","when":"Dec 2017","sources":["b17"]},{"id":"bears-2026","title":"Suing over Bears Ears, 2026","type":"event","cluster":"giving","summary":"In September 2026 Patagonia and partners moved to revive the 2017 case against a fresh, larger reduction of the monument. The outcome is pending.","details":"The 2017 suits were administratively closed in 2021 when President Biden reinstated the monument’s boundaries. Outside reports the new reduction as roughly 91% of the monument.","evidence":"reduced Bears Ears from 1.31 million acres to about 121,000 acres on July 13, 2026","when":"Sept 2026","sources":["b26"]},{"id":"transfer-2022","title":"“Earth is now our only shareholder”","type":"event","cluster":"ownership","featured":true,"summary":"On September 14, 2022 Chouinard announced the company’s ownership had been moved into a purpose trust and a nonprofit, rejecting a sale or an IPO as ways to keep the company’s values intact.","evidence":"Instead of “going public,” you could say we’re “going purpose.”","when":"Sept 14, 2022","sources":["own"]},{"id":"trust","title":"Patagonia Purpose Trust","type":"organization","cluster":"ownership","summary":"Holds all the voting stock, about 2% of the company, so it can approve board changes and charter changes. The Chouinard family guides it.","details":"The Trust’s consent is now required to change the company’s 1%-of-sales pledge, which sits in the business charter.","evidence":"The Patagonia Purpose Trust was created solely to protect our company’s values and mission.","sources":["own"]},{"id":"holdfast","title":"Holdfast Collective","type":"organization","cluster":"ownership","summary":"A 501(c)(4) nonprofit that owns the other 98% (all nonvoting stock) and receives Patagonia’s excess profits as a dividend to spend on environmental work, including advocacy.","details":"Sierra reports Patagonia projects Holdfast will spend or donate $100 million a year. Patagonia itself says the dividend is what is left after reinvesting in the business.","evidence":"the Collective can advocate for causes and political candidates in addition to making grants and investments in our planet","sources":["own","sierra"]},{"id":"kris-tompkins","title":"Kris Tompkins","type":"person","cluster":"people","summary":"Former Patagonia CEO who left in 1993, married Doug Tompkins and turned to land protection; she sits on Patagonia’s board today.","evidence":"Kristine Tompkins, former CEO of the clothing company Patagonia, is the co-founder and president of Tompkins Conservation","when":"CEO until 1993","sources":["tomp","own"]},{"id":"tompkins-conservation","title":"Tompkins Conservation","type":"organization","cluster":"people","summary":"The Chile and Argentina land-protection work of Kris and Doug Tompkins, an example of a Patagonia alumna carrying the company’s conservation streak outside the company.","details":"The description comes from an affiliated organisation, Fundación Rewilding Chile.","evidence":"Kris and Doug helped protect more than 14 million acres of land in Chile and Argentina","sources":["tomp"]},{"id":"tax-critique","title":"The tax-savings critique","type":"critique","cluster":"scrutiny","summary":"Tax-law commentators argue the structure cut the family’s gift-tax bill by more than 98%, while also stressing that the money still goes to environmental work. A company adviser had said it brought no tax benefit.","details":"Reported figures differ slightly: Sierra says $17 million in tax; Grist says $17.5 million on the trust transfer, on a giveaway valued at roughly $3 billion.","evidence":"instead of paying $1.2 billion in gift tax, they’re paying $17 million in tax","when":"Sept 2022","sources":["sierra","grist"]},{"id":"holdfast-politics","title":"The 501(c)(4) question","type":"critique","cluster":"scrutiny","summary":"Because Holdfast is a 501(c)(4), it can spend on politics and need not disclose donors. One academic warns of a billionaire-funded political arms race, a point Patagonia’s own FAQ does not dispute: it says Holdfast can back candidates.","details":"NYU’s Daniel Hemel called the structure “substantively similar” to a conservative billionaire’s earlier transfer, per Grist.","evidence":"an escalating zero-sum political arms race","when":"Sept 2022","sources":["grist","own"]},{"id":"uyghur","title":"Forced-labour complaint","type":"allegation","cluster":"scrutiny","summary":"In December 2021 a European legal group filed a criminal complaint in the Netherlands against Patagonia and three other brands, alleging possible complicity in forced labour in Xinjiang. This records the allegation, not a finding; Patagonia’s response was not in the sources read.","evidence":"may have been directly or indirectly complicit in the forced labor of members of the Uyghur population","when":"Dec 2, 2021","sources":["ecchr"]},{"id":"emissions-99","title":"99% of emissions are upstream","type":"admission","cluster":"scrutiny","summary":"The company says nearly all its emissions come from making materials and products, not from its own stores and offices, and rejects carbon offsets as enough. It has set science-based reduction targets for 2030 and 2040.","details":"Targets, against a FY2017 base: 80% cut in Scope 1 and 2 by FY2030; 55% cut in listed Scope 3 categories by FY2030; net-zero across the value chain by FY2040.","evidence":"the bulk of our emissions—nearly 99%—comes from our supply chain and materials manufacturing","sources":["climate"]},{"id":"growth-tension","title":"Growth vs footprint","type":"tension","cluster":"scrutiny","summary":"The company admits that selling more gear is at odds with its mission, and that the new ownership structure does not make that tension go away.","details":"The 2011 essay says each Patagonia garment, organic or recycled or not, emits several times its weight in greenhouse gases and generates at least another half garment’s worth of scrap.","evidence":"This is not an excuse to ignore the real tension we’ll continue to face between growth and the environmental impact of our operations.","sources":["own","dbtj"]}],"edges":[{"source":"chouinard","target":"patagonia","label":"founded","kind":"explicit","sources":["own","wiki"]},{"source":"chouinard","target":"forge-1957","label":"taught himself blacksmithing in","kind":"explicit","sources":["hist"]},{"source":"forge-1957","target":"equipment-1965","label":"grew into","kind":"explicit","sources":["hist"]},{"source":"tom-frost","target":"equipment-1965","label":"co-founded","kind":"explicit","sources":["hist"]},{"source":"chouinard","target":"tom-frost","label":"partnered with","kind":"explicit","sources":["hist"]},{"source":"equipment-1965","target":"design-principle","label":"was guided by","kind":"explicit","sources":["hist"]},{"source":"equipment-1965","target":"chocks-1972","label":"pivoted to","kind":"explicit","sources":["hist"]},{"source":"chocks-1972","target":"patagonia","label":"paved the way for environmental essays in","kind":"explicit","sources":["hist"]},{"source":"equipment-1965","target":"patagonia","label":"merged under one company with","kind":"explicit","sources":["wiki"]},{"source":"patagonia","target":"guarantee","label":"promises","kind":"explicit","sources":["guar"]},{"source":"patagonia","target":"values","label":"states","kind":"explicit","sources":["values"]},{"source":"patagonia","target":"purpose-2018","label":"adopted","kind":"explicit","sources":["own"]},{"source":"dbtj-2011","target":"purpose-2018","label":"was followed by a rewritten purpose in","kind":"explicit","sources":["dbtj"]},{"source":"trust","target":"purpose-2018","label":"protects","kind":"explicit","sources":["own"]},{"source":"patagonia","target":"recycled-1993","label":"began making","kind":"explicit","sources":["poly"]},{"source":"patagonia","target":"cotton-1996","label":"committed to","kind":"explicit","sources":["cotton"]},{"source":"patagonia","target":"pfas","label":"is phasing out","kind":"explicit","sources":["pfas"]},{"source":"patagonia","target":"fair-trade","label":"joined","kind":"explicit","sources":["fair"]},{"source":"values","target":"pfas","label":"is tested by","kind":"inferred"},{"source":"values","target":"fair-trade","label":"claims justice through","kind":"inferred"},{"source":"emissions-99","target":"recycled-1993","label":"is partly addressed by","kind":"inferred"},{"source":"recycled-1993","target":"cotton-1996","label":"was followed three years later by","kind":"explicit","sources":["poly","cotton"]},{"source":"cotton-1996","target":"fair-trade","label":"was followed in 2014 by","kind":"explicit","sources":["cotton","fair"]},{"source":"fair-trade","target":"pfas","label":"runs alongside","kind":"inferred"},{"source":"pfas","target":"emissions-99","label":"is one upstream piece of","kind":"inferred"},{"source":"patagonia","target":"emissions-99","label":"acknowledges","kind":"explicit","sources":["climate"]},{"source":"patagonia","target":"boom-80s","label":"grew through","kind":"explicit","sources":["inc92"]},{"source":"boom-80s","target":"layoffs-1991","label":"ended in","kind":"explicit","sources":["inc92"]},{"source":"layoffs-1991","target":"dbtj-2011","label":"was an early lesson in limits before","kind":"inferred"},{"source":"dbtj-2011","target":"worn-wear","label":"was later followed by","kind":"explicit","sources":["dbtj"]},{"source":"guarantee","target":"worn-wear","label":"shares a keep-it-longer logic with","kind":"inferred"},{"source":"dbtj-2011","target":"growth-tension","label":"admits","kind":"explicit","sources":["dbtj"]},{"source":"patagonia","target":"tithe","label":"pledges","kind":"explicit","sources":["onep"]},{"source":"tithe","target":"onep-2002","label":"inspired","kind":"explicit","sources":["onep"]},{"source":"patagonia","target":"action-works","label":"runs","kind":"explicit","sources":["aw"]},{"source":"tithe","target":"action-works","label":"is extended by","kind":"inferred"},{"source":"patagonia","target":"bears-2017","label":"sued over","kind":"explicit","sources":["b17"]},{"source":"bears-2017","target":"bears-2026","label":"was revived in","kind":"explicit","sources":["b26"]},{"source":"chouinard","target":"transfer-2022","label":"announced","kind":"explicit","sources":["own"]},{"source":"transfer-2022","target":"trust","label":"created","kind":"explicit","sources":["own"]},{"source":"transfer-2022","target":"holdfast","label":"created","kind":"explicit","sources":["own"]},{"source":"holdfast","target":"patagonia","label":"receives dividends from","kind":"explicit","sources":["own"]},{"source":"trust","target":"tithe","label":"locks in","kind":"explicit","sources":["own"]},{"source":"growth-tension","target":"transfer-2022","label":"is answered, in part, by","kind":"explicit","sources":["own"]},{"source":"transfer-2022","target":"tax-critique","label":"drew","kind":"explicit","sources":["sierra","grist"]},{"source":"tax-critique","target":"holdfast","label":"hinges on the status of","kind":"explicit","sources":["sierra","grist"]},{"source":"holdfast","target":"holdfast-politics","label":"is questioned for","kind":"explicit","sources":["grist"]},{"source":"kris-tompkins","target":"patagonia","label":"was CEO of","kind":"explicit","sources":["tomp"]},{"source":"kris-tompkins","target":"tompkins-conservation","label":"co-founded","kind":"explicit","sources":["tomp"]},{"source":"patagonia","target":"uyghur","label":"was named in","kind":"explicit","sources":["ecchr"]},{"source":"fair-trade","target":"uyghur","label":"is tested by","kind":"inferred"},{"source":"emissions-99","target":"growth-tension","label":"is why growth matters to","kind":"inferred"}],"stories":[{"id":"chocks-to-charter","title":"From chocks to charter","summary":"The thesis: a craftsman who stopped selling a product that scarred rock built a company whose structure now locks in that instinct.","steps":["chouinard","forge-1957","equipment-1965","chocks-1972","patagonia","purpose-2018","trust","transfer-2022"]},{"id":"less-harm-with-receipts","title":"Less harm, with receipts","summary":"Four material and labour commitments, each with a date, and the admission that nearly all emissions remain upstream.","steps":["recycled-1993","cotton-1996","fair-trade","pfas","emissions-99"]},{"id":"growth-and-its-limits","title":"Growth and its limits","summary":"A boom, a crash, an ad telling people to buy less, and a structure meant to make growth serve the mission.","steps":["boom-80s","layoffs-1991","dbtj-2011","worn-wear","growth-tension","transfer-2022"]},{"id":"money-then-a-fight","title":"Money, then a fight","summary":"Giving as a tax on itself, exported to other businesses, and finally taken to court over public land.","steps":["tithe","onep-2002","action-works","bears-2017","bears-2026"]},{"id":"the-skeptics-file","title":"The skeptics’ file","summary":"What the company’s critics and its own admissions add: tax savings, political reach, an unresolved labour allegation, a long PFAS detour, and a standing tension.","steps":["tax-critique","holdfast","holdfast-politics","uyghur","pfas","growth-tension"]}]}</script>
+<script>
+(() => {
+"use strict";
+const story = JSON.parse(document.getElementById("story-data").textContent);
+const theme = JSON.parse(document.getElementById("theme-data").textContent);
+const NS = "http://www.w3.org/2000/svg";
+const $ = (id) => document.getElementById(id);
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isNarrow = () => innerWidth <= 760;
+
+/* ---------- tiny DOM helpers (all text goes through textContent: no HTML injection) ---------- */
+function el(tag, props, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(props || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") e.className = v;
+    else if (k === "text") e.textContent = v;
+    else if (k.startsWith("on")) e.addEventListener(k.slice(2), v);
+    else e.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids.flat()) if (c != null) e.append(c.nodeType ? c : document.createTextNode(c));
+  return e;
+}
+function sv(tag, props) {
+  const e = document.createElementNS(NS, tag);
+  for (const [k, v] of Object.entries(props || {})) if (v != null) e.setAttribute(k, v);
+  return e;
+}
+const safeUrl = (u) => { try { return /^https?:$/.test(new URL(u).protocol) ? u : null; } catch { return null; } };
+const cap = (s) => String(s || "").replace(/[-_]/g, " ").replace(/^./, (c) => c.toUpperCase());
+
+/* ---------- theme ---------- */
+const hex2rgb = (h) => { h = h.replace("#", ""); if (h.length === 3) h = [...h].map((x) => x + x).join(""); return [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16)); };
+function rgb2hsl([r, g, b]) {
+  r /= 255; g /= 255; b /= 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn; let h = 0, s = 0; const l = (mx + mn) / 2;
+  if (d) { s = l > .5 ? d / (2 - mx - mn) : d / (mx + mn); h = mx === r ? (g - b) / d + (g < b ? 6 : 0) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; }
+  return [h, s, l];
+}
+const nClusters = story.clusters.length;
+const cIndex = new Map(story.clusters.map((c, i) => [c.id, i]));
+function clusterColor(id) {
+  if (theme.clusters && theme.clusters[id]) return theme.clusters[id];
+  const [h, s] = rgb2hsl(hex2rgb(theme.colors.accent));
+  const hue = (h + cIndex.get(id) * (360 / nClusters)) % 360;
+  return `hsl(${hue.toFixed(0)} ${Math.max(45, Math.min(75, s * 100)).toFixed(0)}% ${theme.mode === "dark" ? 66 : 40}%)`;
+}
+const colors = Object.fromEntries(story.clusters.map((c) => [c.id, clusterColor(c.id)]));
+if (theme.font) {
+  if (theme.font.body) document.body.style.fontFamily = theme.font.body;
+  if (theme.font.display) $("wordmark").style.fontFamily = theme.font.display;
+}
+const wm = theme.wordmark || {};
+$("wordmark").textContent = wm.text || story.title;
+if (wm.letterSpacing) $("wordmark").style.letterSpacing = wm.letterSpacing;
+if (wm.uppercase) $("wordmark").style.textTransform = "uppercase";
+if (theme.logo && theme.logo.src) $("logo").append(el("img", { src: theme.logo.src, alt: theme.logo.alt || "" }));
+$("dek").textContent = story.tagline;
+$("credit").textContent = [story.disclaimer, story.credit].filter(Boolean).join(" ");
+
+/* ---------- model ---------- */
+const nodes = story.nodes.map((n) => ({ ...n, x: 0, y: 0, vx: 0, vy: 0, deg: 0, color: colors[n.cluster], isRoot: n.id === story.root }));
+const byId = new Map(nodes.map((n) => [n.id, n]));
+const edges = story.edges.map((e, i) => ({ ...e, i, a: byId.get(e.source), b: byId.get(e.target) }));
+const adj = new Map(nodes.map((n) => [n.id, new Set()]));
+for (const e of edges) { e.a.deg++; e.b.deg++; adj.get(e.source).add(e.target); adj.get(e.target).add(e.source); }
+for (const n of nodes) n.r = n.isRoot ? 30 : (n.featured ? 13 : 8) + Math.min(n.deg, 8) * 0.45;
+const srcById = new Map(story.sources.map((s) => [s.id, s]));
+const storyById = new Map((story.stories || []).map((s) => [s.id, s]));
+
+/* ---------- force layout (deterministic, no dependencies) ---------- */
+function rng(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function layout() {
+  const rnd = rng(7), N = nodes.length;
+  const sector = (id) => 2 * Math.PI * (cIndex.get(id) + 0.5) / nClusters;
+  const R = 330 + Math.sqrt(N) * 40;
+  const asp = Math.max(0.75, Math.min(2.2, svgEl.clientWidth / Math.max(1, svgEl.clientHeight))), ax = Math.sqrt(asp), ay = 1 / ax; // fill the stage shape
+  for (const n of nodes) {
+    n.vx = n.vy = 0;
+    if (n.isRoot) { n.x = n.y = 0; continue; }
+    const ang = sector(n.cluster) + (rnd() - 0.5) * 0.9, rad = R * (0.45 + rnd() * 0.7);
+    n.x = Math.cos(ang) * rad * ax; n.y = Math.sin(ang) * rad * ay;
+  }
+  const iters = N > 140 ? 220 : 480, XS = 0.55; // XS<1 makes horizontal crowding count more: labels are wider than tall
+  for (let it = 0; it < iters; it++) {
+    const alpha = Math.pow(1 - it / iters, 1.4);
+    for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+      const a = nodes[i], b = nodes[j];
+      let dx = b.x - a.x, dy = b.y - a.y;
+      if (dx * dx + dy * dy < 1) { dx = rnd() - .5; dy = rnd() - .5; }
+      const wd = Math.sqrt(dx * dx * XS * XS + dy * dy) || 1, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const min = a.r + b.r + 95;
+      let f = 26000 / (wd * wd); if (wd < min) f += (min - wd) * 0.9;
+      f *= alpha + 0.04;
+      const fx = dx / d * f, fy = dy / d * f;
+      a.vx -= fx; a.vy -= fy; b.vx += fx; b.vy += fy;
+    }
+    for (const e of edges) {
+      const a = e.a, b = e.b, dx = b.x - a.x, dy = b.y - a.y, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      const L = a.cluster === b.cluster ? 150 : 250, f = (d - L) * 0.03 * (alpha + 0.1);
+      const fx = dx / d * f, fy = dy / d * f; a.vx += fx; a.vy += fy; b.vx -= fx; b.vy -= fy;
+    }
+    for (const n of nodes) {
+      if (n.isRoot) continue;
+      const s = sector(n.cluster), tx = Math.cos(s) * R * ax, ty = Math.sin(s) * R * ay;
+      n.vx += (tx - n.x) * 0.014 * alpha; n.vy += (ty - n.y) * 0.014 * alpha;
+      n.x += n.vx * 0.6; n.y += n.vy * 0.6; n.vx *= 0.55; n.vy *= 0.55;
+    }
+  }
+}
+
+/* ---------- SVG build ---------- */
+const svgEl = $("graph"), vp = $("vp");
+for (const e of edges) {
+  e.line = sv("line", { class: "edge" + (e.kind === "inferred" ? " inferred" : "") });
+  e.line.append(Object.assign(sv("title"), { textContent: `${e.a.title} → ${e.b.title}: ${e.label} (${e.kind})` }));
+  e.text = sv("text", { class: "edge-label" }); e.text.textContent = e.label;
+  $("edges").append(e.line); $("edge-labels").append(e.text);
+}
+for (const n of nodes) {
+  const g = sv("g", { class: "node" + (n.isRoot ? " root" : ""), tabindex: 0, role: "button", "aria-label": `${n.title}, ${cap(n.type)}, ${story.clusters[cIndex.get(n.cluster)].label}`, "data-id": n.id });
+  g.append(sv("circle", { r: n.r + 11, fill: "transparent" }));
+  g.append(sv("circle", { class: "ring", r: n.r + 6 }));
+  g.append(sv("circle", { class: "core", r: n.r, stroke: n.color, style: n.isRoot ? "fill:" + n.color : null }));
+  if (!n.isRoot) g.append(sv("circle", { class: "dot", r: Math.max(2, n.r * 0.22), fill: n.color }));
+  const lab = sv("text", { class: "label", y: n.r + 15 }); lab.textContent = n.title; g.append(lab);
+  if (!n.isRoot) { const k = sv("text", { class: "kind", y: n.r + 26 }); k.textContent = cap(n.type); g.append(k); }
+  g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id, { center: true }); } });
+  n.g = g; $("nodes").append(g);
+}
+function place() {
+  for (const e of edges) {
+    e.line.setAttribute("x1", e.a.x); e.line.setAttribute("y1", e.a.y); e.line.setAttribute("x2", e.b.x); e.line.setAttribute("y2", e.b.y);
+    e.text.setAttribute("x", (e.a.x + e.b.x) / 2); e.text.setAttribute("y", (e.a.y + e.b.y) / 2 - 4);
+  }
+  for (const n of nodes) n.g.setAttribute("transform", `translate(${n.x.toFixed(1)} ${n.y.toFixed(1)})`);
+  drawStoryPath();
+}
+
+/* ---------- view (pan / zoom) ---------- */
+const view = { x: 0, y: 0, k: 1 };
+function applyView() { svgEl.style.setProperty("--ls", Math.min(2.2, Math.max(1, 0.95 / view.k)).toFixed(2)); vp.setAttribute("transform", `translate(${view.x} ${view.y}) scale(${view.k})`); svgEl.classList.toggle("zoomed", view.k >= 1.15); }
+let tweenId = 0;
+function tween(to, ms = 480) {
+  cancelAnimationFrame(tweenId);
+  if (reduceMotion) { Object.assign(view, to); applyView(); return; }
+  const from = { ...view }, t0 = performance.now();
+  const step = (t) => {
+    const p = Math.min(1, (t - t0) / ms), q = 1 - Math.pow(1 - p, 3);
+    view.x = from.x + (to.x - from.x) * q; view.y = from.y + (to.y - from.y) * q; view.k = from.k + (to.k - from.k) * q; applyView();
+    if (p < 1) tweenId = requestAnimationFrame(step);
+  };
+  tweenId = requestAnimationFrame(step);
+}
+const stageBox = () => {
+  const W = svgEl.clientWidth, H = svgEl.clientHeight;
+  const panelOpen = $("panel").classList.contains("open");
+  return { W, H, left: 0, right: panelOpen && !isNarrow() ? Math.min(400, W) : 0, bottom: (panelOpen && isNarrow() ? H * 0.58 : 0) + $("foot").offsetHeight };
+};
+function fit(animate = true, list = nodes) {
+  const { W, H, right, bottom } = stageBox();
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (const n of list) { const lw = Math.min(210, n.title.length * 6.2) / 2 + 12; x0 = Math.min(x0, n.x - Math.max(n.r, lw)); x1 = Math.max(x1, n.x + Math.max(n.r, lw)); y0 = Math.min(y0, n.y - n.r - 30); y1 = Math.max(y1, n.y + n.r + 50); }
+  const aw = W - right, ah = H - bottom - 8;
+  const k = Math.max(0.2, Math.min(1.6, Math.min(aw / (x1 - x0), ah / (y1 - y0))));
+  const to = { k, x: aw / 2 - (x0 + x1) / 2 * k, y: (ah + 0) / 2 - (y0 + y1) / 2 * k + 6 };
+  animate ? tween(to) : (Object.assign(view, to), applyView());
+}
+function center(n) {
+  const { W, H, right, bottom } = stageBox(), k = Math.max(view.k, 1);
+  tween({ k, x: (W - right) / 2 - n.x * k, y: (H - bottom) / 2 - n.y * k - 10 }, 420);
+}
+function zoomAt(f, cx, cy) {
+  const k = Math.max(0.2, Math.min(4, view.k * f)), r = k / view.k;
+  view.x = cx - (cx - view.x) * r; view.y = cy - (cy - view.y) * r; view.k = k; applyView();
+}
+
+/* ---------- state + render ---------- */
+const S = { selected: null, filter: "all", q: "", view: "graph", story: null, step: 0, readStory: null, open: new Set() };
+const matches = (n) => {
+  if (S.filter !== "all" && n.cluster !== S.filter) return false;
+  if (!S.q) return true;
+  return [n.title, n.summary, n.details, n.type, (n.themes || []).join(" ")].join(" ").toLowerCase().includes(S.q);
+};
+function render() {
+  const sel = S.selected && byId.get(S.selected), nb = sel ? adj.get(sel.id) : null;
+  const inStory = S.story ? new Set(S.story.steps) : null;
+  let shown = 0;
+  for (const n of nodes) {
+    const m = matches(n); if (m) shown++;
+    let dim = !m;
+    if (inStory) dim = dim || !inStory.has(n.id);
+    else if (sel && n !== sel && !nb.has(n.id)) dim = true;
+    n.g.classList.toggle("dim", dim);
+    n.g.classList.toggle("sel", n === sel);
+    n.g.setAttribute("aria-pressed", String(n === sel));
+  }
+  for (const e of edges) {
+    const hl = !inStory && sel && (e.a === sel || e.b === sel);
+    e.line.classList.toggle("hl", !!hl); e.text.classList.toggle("hl", !!hl);
+    let dim = !(matches(e.a) && matches(e.b));
+    if (inStory) dim = true; else if (sel && !hl) dim = true;
+    e.line.classList.toggle("dim", dim);
+  }
+  $("empty").classList.toggle("on", shown === 0 && S.view === "graph");
+  $("status").textContent = `${nodes.length} nodes · ${edges.length} edges · ${S.q || S.filter !== "all" ? `${shown} match · ` : ""}Click a node to explore the story.`;
+  for (const b of $("chips").children) b.setAttribute("aria-pressed", String(b.dataset.c === S.filter));
+  for (const b of $("stories").querySelectorAll("button")) b.setAttribute("aria-pressed", String(!!S.story && b.dataset.s === S.story.id));
+  if (S.view === "list") renderList(); else if (S.view === "timeline") renderTimeline(); else if (S.view === "outline") renderOutline();
+  drawStoryPath();
+}
+
+/* ---------- story mode ---------- */
+function drawStoryPath() {
+  const p = $("story-path"), bg = $("badges"); bg.textContent = "";
+  if (!S.story) { p.setAttribute("d", ""); return; }
+  const pts = S.story.steps.map((id) => byId.get(id));
+  p.setAttribute("d", pts.map((n, i) => `${i ? "L" : "M"}${n.x.toFixed(1)} ${n.y.toFixed(1)}`).join(" "));
+  pts.forEach((n, i) => {
+    const g = sv("g", { class: "badge", transform: `translate(${(n.x + n.r * 0.8).toFixed(1)} ${(n.y - n.r * 0.8).toFixed(1)})`, opacity: i === S.step ? 1 : 0.75 });
+    g.append(sv("circle", { r: i === S.step ? 10 : 8 })); const t = sv("text"); t.textContent = i + 1; g.append(t); bg.append(g);
+  });
+}
+function startStory(id) {
+  const st = storyById.get(id); if (!st) return;
+  S.story = st; S.step = 0;
+  if (S.view !== "graph" && S.view !== "timeline") setView("graph");
+  if (S.view === "timeline") tlFocusStory(st); // zoom the timeline to the story's own dates
+  $("storybar").classList.add("on"); goStep(0);
+}
+function goStep(i) {
+  const st = S.story; if (!st) return;
+  S.step = Math.max(0, Math.min(st.steps.length - 1, i));
+  $("sb-step").textContent = `Story · step ${S.step + 1} of ${st.steps.length}`;
+  $("sb-title").textContent = st.title; $("sb-sum").textContent = st.summary || "";
+  $("sb-prev").disabled = S.step === 0; $("sb-next").disabled = S.step === st.steps.length - 1;
+  select(st.steps[S.step], { center: true, keepStory: true });
+}
+function endStory() { S.story = null; $("storybar").classList.remove("on"); render(); }
+
+/* ---------- detail panel ---------- */
+function relRow(e, n) {
+  const other = e.a === n ? e.b : e.a, out = e.a === n;
+  return el("li", null, el("button", { onclick: () => select(other.id, { center: true }) },
+    el("b", { text: other.title }),
+    el("span", { class: "rel" }, out ? "→ " : "← ", el("em", { text: e.label }), ` · ${e.kind}`)));
+}
+function openPanel(n) {
+  const p = $("panel"); p.textContent = "";
+  const cl = story.clusters[cIndex.get(n.cluster)];
+  p.append(el("button", { class: "close", "aria-label": "Close details", text: "×", onclick: () => select(null) }));
+  p.append(el("div", { class: "kicker", style: `--c:${n.color}` }, el("i"), el("span", { text: cl.label }), el("span", { text: "·", "aria-hidden": "true" }), el("span", { text: cap(n.type) })));
+  p.append(el("h2", { text: n.title }), el("p", { text: n.summary }));
+  if (n.details) p.append(el("p", { class: "details", text: n.details }));
+  if (n.evidence) p.append(el("h3", { text: "Evidence" }), el("blockquote", { text: n.evidence }));
+  if (n.when) p.append(el("h3", { text: "When" }), el("p", { text: n.when }));
+  if (n.themes && n.themes.length) p.append(el("h3", { text: "Themes" }), el("div", { class: "tags" }, n.themes.map((t) => el("span", { class: "tag", text: t }))));
+  const rel = edges.filter((e) => e.a === n || e.b === n);
+  if (rel.length) p.append(el("h3", { text: `Connections (${rel.length})` }), el("ul", { class: "links" }, rel.map((e) => relRow(e, n))));
+  const srcs = (n.sources || []).map((id) => srcById.get(id)).filter(Boolean);
+  if (srcs.length) p.append(el("h3", { text: "Sources" }), el("ul", { class: "src" }, srcs.map((s) => {
+    const u = safeUrl(s.url);
+    return el("li", null, u ? el("a", { href: u, target: "_blank", rel: "noopener noreferrer", text: s.title }) : s.title, s.accessed ? el("small", { text: `Accessed ${s.accessed}` }) : null);
+  })));
+  const inStories = (story.stories || []).filter((s) => s.steps.includes(n.id));
+  if (inStories.length && !S.story) p.append(el("h3", { text: "Appears in" }), el("div", { class: "tags" }, inStories.map((s) => el("button", { class: "chip", text: s.title, onclick: () => startStory(s.id) }))));
+  p.classList.add("open"); p.scrollTop = 0;
+}
+function select(id, opts = {}) {
+  if (!opts.keepStory && S.story && id) endStoryQuiet();
+  S.selected = id;
+  const p = $("panel");
+  document.querySelector("main").classList.toggle("sheet", !!id);
+  if (id) { openPanel(byId.get(id)); try { history.replaceState(null, "", "#node=" + encodeURIComponent(id)); } catch {} }
+  else { p.classList.remove("open"); try { history.replaceState(null, "", location.pathname + location.search); } catch {} }
+  if (id) ensureTL(byId.get(id));
+  render();
+  if (id && opts.center && S.view === "graph") center(byId.get(id));
+}
+function endStoryQuiet() { S.story = null; $("storybar").classList.remove("on"); }
+
+/* ---------- views: list, timeline, read, outline ---------- */
+function renderList() {
+  const box = $("list"); box.textContent = "";
+  let any = false;
+  for (const c of story.clusters) {
+    const items = nodes.filter((n) => n.cluster === c.id && matches(n));
+    if (!items.length) continue; any = true;
+    box.append(el("section", null,
+      el("h2", { style: `--c:${colors[c.id]}` }, el("i"), c.label),
+      el("ul", null, items.map((n) => el("li", null, el("button", { class: "item", style: `--c:${n.color}`, onclick: () => select(n.id) },
+        el("small", { text: cap(n.type) }), el("b", { text: n.title }), el("span", { text: n.summary })))))));
+  }
+  if (!any) box.append(el("p", { text: "No nodes match.", style: "color:var(--muted);text-align:center" }));
+}
+
+/* ----- time parsing: "1666-09-02" | "1666-09" | "1666" | "-0500" (negative = BCE). Decimal years. ----- */
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function utc(y, mo, d) { const dt = new Date(0); dt.setUTCFullYear(y, mo, d); dt.setUTCHours(0, 0, 0, 0); return dt; }
+function tOf(y, mo, d) { return y + Math.round((utc(y, mo, d) - utc(y, 0, 1)) / 864e5) / 365.25; }
+function parseT(s) {
+  if (typeof s !== "string") return null;
+  const m = /^(-?\d{1,5})(?:-(\d{2})(?:-(\d{2}))?)?$/.exec(s.trim());
+  if (!m) return null;
+  return tOf(+m[1], m[2] ? +m[2] - 1 : 0, m[3] ? +m[3] : 1);
+}
+function dateOf(t) { const y = Math.floor(t), dt = utc(y, 0, 1); dt.setTime(dt.getTime() + Math.round((t - y) * 365.25) * 864e5); return dt; }
+const yearLabel = (y) => (y < 0 ? `${-y} BCE` : String(y));
+function makeTicks(a, b, want) {
+  const span = b - a, out = [];
+  const steps = [["y", 1000], ["y", 500], ["y", 200], ["y", 100], ["y", 50], ["y", 20], ["y", 10], ["y", 5], ["y", 2], ["y", 1], ["m", 6], ["m", 3], ["m", 1], ["d", 14], ["d", 7], ["d", 2], ["d", 1]];
+  const size = (s) => (s[0] === "y" ? s[1] : s[0] === "m" ? s[1] / 12 : s[1] / 365.25);
+  let pick = steps[steps.length - 1];
+  for (const s of steps) if (span / size(s) >= want) { pick = s; break; }
+  const [u, k] = pick;
+  if (u === "y") {
+    for (let y = Math.ceil(Math.floor(a) / k) * k; out.length < 300; y += k) { const t = tOf(y, 0, 1); if (t > b) break; if (t >= a) out.push({ t, label: yearLabel(y) }); }
+  } else if (u === "m") {
+    const d0 = dateOf(a); let y = d0.getUTCFullYear(), mo = Math.floor(d0.getUTCMonth() / k) * k;
+    for (; out.length < 300; mo += k) { if (mo >= 12) { y += Math.floor(mo / 12); mo %= 12; } const t = tOf(y, mo, 1); if (t > b) break; if (t >= a) out.push({ t, label: `${MON[mo]} ${yearLabel(y)}` }); }
+  } else {
+    const dt = dateOf(a);
+    for (; out.length < 300; dt.setUTCDate(dt.getUTCDate() + k)) { const t = tOf(dt.getUTCFullYear(), dt.getUTCMonth(), dt.getUTCDate()); if (t > b) break; if (t >= a) out.push({ t, label: `${dt.getUTCDate()} ${MON[dt.getUTCMonth()]} ${yearLabel(dt.getUTCFullYear())}` }); }
+  }
+  return out;
+}
+for (const n of nodes) {
+  n.t0 = parseT(n.start); n.t1 = n.end ? parseT(n.end) : n.t0;
+  if (n.t0 != null && (n.t1 == null || n.t1 < n.t0)) n.t1 = n.t0;
+}
+const dated = nodes.filter((n) => n.t0 != null);
+
+/* ----- which views exist ----- */
+const VIEW_LABEL = { graph: "Graph", timeline: "Timeline", read: "Read", outline: "Outline", list: "List" };
+const can = { graph: true, timeline: dated.length >= 5, read: (story.stories || []).length > 0, outline: true, list: true };
+let viewList = (Array.isArray(story.views) && story.views.length ? story.views : Object.keys(VIEW_LABEL)).filter((v) => can[v]);
+if (!viewList.length) viewList = ["graph"];
+
+/* ----- timeline ----- */
+const TL = { v0: 0, v1: 1, even: false, init: false, geo: null };
+function tlFull() {
+  let a = Infinity, b = -Infinity;
+  for (const n of dated) { a = Math.min(a, n.t0); b = Math.max(b, n.t1); }
+  const pad = Math.max((b - a) * 0.05, 2 / 365.25);
+  return [a - pad, b + pad];
+}
+function tlReset() { [TL.v0, TL.v1] = tlFull(); TL.even = false; }
+function tlZoom(f, mx) {
+  if (TL.even || !TL.geo) return;
+  const [fa, fb] = tlFull(), span = TL.v1 - TL.v0;
+  const ns = Math.min((fb - fa) * 1.5, Math.max(span * f, 2 / 365.25));
+  const fx = Math.min(1, Math.max(0, (mx - TL.geo.x0) / TL.geo.pw)), tc = TL.v0 + fx * span;
+  TL.v0 = tc - fx * ns; TL.v1 = TL.v0 + ns; renderTimeline();
+}
+function tlFocusStory(st) {
+  if (TL.even) return;
+  if (!TL.init) { tlReset(); TL.init = true; }
+  const ts = st.steps.map((id) => byId.get(id)).filter((n) => n && n.t0 != null);
+  if (ts.length < 2) return;
+  const a = Math.min(...ts.map((n) => n.t0)), b = Math.max(...ts.map((n) => n.t1)), pad = Math.max((b - a) * 0.14, 2 / 365.25);
+  TL.v0 = a - pad; TL.v1 = b + pad;
+}
+function ensureTL(n) {
+  if (S.view !== "timeline" || TL.even || n.t0 == null || !TL.geo) return;
+  const s = TL.v1 - TL.v0, covered = $("panel").classList.contains("open") && !isNarrow() ? Math.min(400, TL.geo.x0 + TL.geo.pw) : 0;
+  const free = Math.max(120, TL.geo.pw - covered), frac = (n.t0 - TL.v0) / s, hi = (free - 60) / TL.geo.pw;
+  if (frac < 0.04 || frac > hi) { const target = (free / 2) / TL.geo.pw; TL.v0 = n.t0 - target * s; TL.v1 = TL.v0 + s; } // centre it in the part the panel leaves free
+}
+function renderTimeline() {
+  const svg = $("tl"), host = $("timeline"), W = host.clientWidth, Hc = host.clientHeight;
+  if (!W || !Hc || !dated.length) return;
+  if (!TL.init) { tlReset(); TL.init = true; }
+  svg.textContent = "";
+  const narrow = W < 600, LW = narrow ? 0 : 150, x0 = LW + 14, x1 = W - 26, pw = Math.max(80, x1 - x0);
+  TL.geo = { x0, pw };
+  const lanes = story.clusters.filter((c) => dated.some((n) => n.cluster === c.id));
+  let X;
+  if (TL.even) {
+    const order = [...dated].sort((a, b) => a.t0 - b.t0 || a.t1 - b.t1), rank = new Map(order.map((n, i) => [n.id, i]));
+    X = (n) => x0 + 14 + (pw - 28) * (order.length > 1 ? rank.get(n.id) / (order.length - 1) : 0.5);
+  } else {
+    X = (n, end) => x0 + (((end ? n.t1 : n.t0) - TL.v0) / (TL.v1 - TL.v0)) * pw;
+  }
+  const AX = 40, rowH = TL.even ? 34 : 23, hh = narrow ? 16 : 0;
+  const sel = S.selected && byId.get(S.selected), nb = sel ? adj.get(sel.id) : null, inStory = S.story ? new Set(S.story.steps) : null;
+  let y = AX; const blocks = [];
+  for (const c of lanes) {
+    const items = dated.filter((n) => n.cluster === c.id).map((n) => ({ n, x: X(n), xe: TL.even ? X(n) : X(n, true) })).sort((a, b) => a.x - b.x);
+    const rows = [];
+    for (const it of items) {
+      if (it.x > x1 + 60 || it.xe < x0 - 60) { it.row = -1; continue; }
+      const lw = Math.min(230, it.n.title.length * 6.4 + 16);
+      it.flip = it.x + 16 + lw > x1;
+      const iv = it.flip ? [it.x - 12 - lw, Math.max(it.x, it.xe) + 6] : [it.x - 6, Math.max(it.x, it.xe) + 12 + lw];
+      let r = rows.findIndex((row) => row.every(([l, rr]) => iv[1] < l - 4 || iv[0] > rr + 4));
+      if (r < 0) { r = rows.length; rows.push([]); }
+      rows[r].push(iv); it.row = r;
+    }
+    const h = Math.max(58, Math.max(1, rows.length) * rowH + 30 + hh);
+    blocks.push({ c, items, top: y, h }); y += h;
+  }
+  const total = y + 14;
+  svg.setAttribute("width", W); const room = $("foot").offsetHeight + 28; // so the footer never covers the last lane
+  svg.setAttribute("height", Math.max(Hc, total + room));
+  const defs = sv("defs"), clip = sv("clipPath", { id: "tl-clip" });
+  clip.append(sv("rect", { x: x0 - 10, y: 0, width: pw + 20, height: Math.max(Hc, total + room) })); defs.append(clip); svg.append(defs);
+  blocks.forEach((b, i) => {
+    svg.append(sv("rect", { class: "tl-lane" + (i % 2 ? " alt" : ""), x: 0, y: b.top, width: W, height: b.h }));
+    const lab = sv("text", { class: "tl-lane-label", x: narrow ? x0 : 14, y: b.top + (narrow ? 12 : 24) });
+    lab.textContent = b.c.label; lab.setAttribute("fill", colors[b.c.id]); lab.style.fill = colors[b.c.id]; svg.append(lab);
+  });
+  const grid = sv("g", { "clip-path": "url(#tl-clip)" });
+  if (!TL.even) {
+    for (const k of makeTicks(TL.v0, TL.v1, Math.max(3, pw / 140))) {
+      const tx = x0 + ((k.t - TL.v0) / (TL.v1 - TL.v0)) * pw;
+      grid.append(sv("line", { class: "tl-tick", x1: tx, x2: tx, y1: AX - 6, y2: total }));
+      const t = sv("text", { class: "tl-tick-label", x: tx, y: AX - 14 }); t.textContent = k.label; grid.append(t);
+    }
+  } else {
+    const t = sv("text", { class: "tl-tick-label", x: x0, y: 22, "text-anchor": "start" }); t.textContent = "Events in order, evenly spaced (not to scale)"; grid.append(t);
+  }
+  svg.append(grid);
+  const layer = sv("g", { "clip-path": "url(#tl-clip)" });
+  for (const b of blocks) for (const it of b.items) {
+    if (it.row < 0) continue;
+    const n = it.n, cy = b.top + hh + 22 + it.row * rowH;
+    const dim = !matches(n) || (inStory ? !inStory.has(n.id) : (sel && n !== sel && !nb.has(n.id)));
+    const g = sv("g", { class: "tl-node" + (dim ? " dim" : "") + (n === sel ? " sel" : ""), tabindex: 0, role: "button", "data-id": n.id, "aria-label": `${n.title}, ${n.when || n.start}` });
+    const tt = sv("title"); tt.textContent = `${n.title}${n.when ? " (" + n.when + ")" : ""}`; g.append(tt);
+    if (!TL.even && it.xe - it.x > 3) g.append(sv("rect", { class: "tl-bar", x: it.x, y: cy - 3, width: it.xe - it.x, height: 6, rx: 3, fill: n.color }));
+    g.append(sv("circle", { class: "tl-dot", cx: it.x, cy, r: n.featured ? 7 : 5.5, fill: n.color }));
+    const tx = it.flip ? it.x - 12 : Math.max(it.x, it.xe) + 12;
+    const t = sv("text", { x: tx, y: cy + 4, "text-anchor": it.flip ? "end" : "start" }); t.textContent = n.title; g.append(t);
+    if (TL.even && n.when) { const w = sv("text", { class: "tl-when", x: tx, y: cy + 16, "text-anchor": it.flip ? "end" : "start" }); w.textContent = n.when; g.append(w); }
+    g.addEventListener("click", () => select(n.id));
+    g.addEventListener("keydown", (ev) => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); select(n.id); } });
+    layer.append(g);
+  }
+  svg.append(layer);
+  const undated = nodes.length - dated.length;
+  if (undated > 0) { const note = sv("text", { class: "tl-tick-label", x: 14, y: total + 12, "text-anchor": "start" }); note.textContent = `${undated} of ${nodes.length} nodes have no date, so they appear only in the other views.`; svg.append(note); }
+  $("tl-mode").textContent = TL.even ? "True scale" : "Even spacing";
+}
+(function timelineInput() {
+  const svg = $("tl"); let d = null; const pts = new Map(); let pinch = 0;
+  const pdist = () => { const [a, b] = [...pts.values()]; return Math.hypot(a.x - b.x, a.y - b.y) || 1; };
+  svg.addEventListener("wheel", (e) => { if (TL.even) return; e.preventDefault(); const r = svg.getBoundingClientRect(); tlZoom(Math.exp(e.deltaY * 0.0015), e.clientX - r.left); }, { passive: false });
+  svg.addEventListener("pointerdown", (e) => {
+    if (TL.even || e.button > 0) return;
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2) { pinch = pdist(); d = null; return; }
+    d = { x: e.clientX, v0: TL.v0, v1: TL.v1, id: e.pointerId, moved: false };
+  });
+  svg.addEventListener("pointermove", (e) => {
+    if (pts.has(e.pointerId)) pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2 && pinch) {
+      const nd = pdist(), [a, b] = [...pts.values()], r = svg.getBoundingClientRect();
+      tlZoom(pinch / nd, (a.x + b.x) / 2 - r.left); pinch = nd; return;
+    }
+    if (!d || e.pointerId !== d.id || !TL.geo) return;
+    const dx = e.clientX - d.x;
+    if (!d.moved && Math.abs(dx) > 5) { d.moved = true; try { svg.setPointerCapture(e.pointerId); } catch {} svg.style.cursor = "grabbing"; }
+    if (d.moved) { const dt = -dx / TL.geo.pw * (d.v1 - d.v0); TL.v0 = d.v0 + dt; TL.v1 = d.v1 + dt; renderTimeline(); }
+  });
+  const end = (e) => { pts.delete(e.pointerId); if (pts.size < 2) pinch = 0; d = null; svg.style.cursor = ""; };
+  svg.addEventListener("pointerup", end); svg.addEventListener("pointercancel", end);
+  $("tl-mode").onclick = () => { TL.even = !TL.even; if (!TL.even) tlReset(); renderTimeline(); };
+})();
+
+/* ----- read: guided stories as a narrative ----- */
+function showStep(sid, i) { setView("graph"); startStory(sid); goStep(i); }
+function renderRead() {
+  const box = $("read"); box.textContent = "";
+  const all = story.stories || []; if (!all.length) return;
+  const st = storyById.get(S.readStory) || all[0]; S.readStory = st.id;
+  const wrap = el("div", { class: "read-wrap" });
+  wrap.append(el("div", { class: "read-tabs" }, all.map((s) => el("button", { class: "chip", "aria-pressed": String(s.id === st.id), text: s.title, onclick: () => { S.readStory = s.id; renderRead(); box.scrollTop = 0; } }))));
+  wrap.append(el("h2", { class: "rt", text: st.title }));
+  if (st.summary) wrap.append(el("p", { class: "intro", text: st.summary }));
+  st.steps.forEach((id, i) => {
+    const n = byId.get(id), prev = i ? byId.get(st.steps[i - 1]) : null;
+    const e = prev ? edges.find((x) => (x.a === prev && x.b === n) || (x.a === n && x.b === prev)) : null;
+    const srcs = (n.sources || []).map((s) => srcById.get(s)).filter(Boolean);
+    wrap.append(el("section", { class: "rstep", style: `--c:${n.color}` },
+      el("span", { class: "rnum", text: String(i + 1) }),
+      e ? el("p", { class: "via" }, `${e.a.title} `, el("em", { text: `${e.label} →` }), ` ${e.b.title}`, e.kind === "inferred" ? " (inferred)" : "") : null,
+      el("h3", null, el("button", { text: n.title, onclick: () => select(n.id) })),
+      el("p", { class: "meta", text: [story.clusters[cIndex.get(n.cluster)].label, cap(n.type), n.when].filter(Boolean).join(" · ") }),
+      el("p", { text: n.summary }),
+      n.details ? el("p", { class: "details", text: n.details }) : null,
+      n.evidence ? el("blockquote", { text: n.evidence }) : null,
+      srcs.length ? el("p", { class: "rsrc" }, "Sources: ", srcs.flatMap((s, k) => { const u = safeUrl(s.url); return [k ? ", " : "", u ? el("a", { href: u, target: "_blank", rel: "noopener noreferrer", text: s.title }) : s.title]; })) : null,
+      el("p", null, el("button", { class: "chip", text: "Show on graph", onclick: () => showStep(st.id, i) }))));
+  });
+  box.append(wrap);
+}
+
+/* ----- outline: the graph as a collapsible tree from the root ----- */
+const tree = (() => {
+  const nbrs = new Map(nodes.map((n) => [n.id, []]));
+  for (const e of [...edges].sort((a, b) => (a.kind === "explicit" ? 0 : 1) - (b.kind === "explicit" ? 0 : 1))) { nbrs.get(e.source).push([e.target, e]); nbrs.get(e.target).push([e.source, e]); }
+  const parent = new Map([[story.root, null]]), kids = new Map(nodes.map((n) => [n.id, []])), q = [story.root];
+  while (q.length) { const id = q.shift(); for (const [o, e] of nbrs.get(id)) if (!parent.has(o)) { parent.set(o, { id, e }); kids.get(id).push(o); q.push(o); } }
+  const treeEdges = new Set([...parent.values()].filter(Boolean).map((p) => p.e));
+  return { parent, kids, treeEdges, orphans: nodes.filter((n) => !parent.has(n.id)) };
+})();
+S.open.add(story.root);
+function renderOutline() {
+  const box = $("outline"); box.textContent = "";
+  const wrap = el("div", { class: "ol-wrap" });
+  wrap.append(el("div", { class: "ol-tools" },
+    el("button", { class: "btn", text: "Expand all", onclick: () => { nodes.forEach((n) => S.open.add(n.id)); renderOutline(); } }),
+    el("button", { class: "btn", text: "Collapse all", onclick: () => { S.open.clear(); S.open.add(story.root); renderOutline(); } })));
+  const item = (n) => {
+    const kids = tree.kids.get(n.id), p = tree.parent.get(n.id), dim = !matches(n);
+    const head = [
+      el("i", { style: `--c:${n.color}` }),
+      p ? el("span", { class: "via", text: `${p.e.a.id === p.id ? "→" : "←"} ${p.e.label}` }) : null,
+      el("button", { class: "olt", text: n.title, onclick: (ev) => { ev.preventDefault(); ev.stopPropagation(); select(n.id); } }),
+      el("small", { text: [cap(n.type), n.when].filter(Boolean).join(" · ") }),
+    ];
+    const also = edges.filter((e) => (e.a === n || e.b === n) && !tree.treeEdges.has(e)).slice(0, 8);
+    const body = el("div", { class: "olbody" }, el("p", { text: n.summary }),
+      also.length ? el("p", null, "Also: ", also.flatMap((e, k) => { const o = e.a === n ? e.b : e.a; return [k ? "  ·  " : "", el("button", { class: "olink", text: `${e.a === n ? "→" : "←"} ${e.label} ${o.title}`, onclick: () => select(o.id) })]; })) : null);
+    if (!kids.length) return el("li", { class: dim ? "dim" : "" }, el("div", { class: "row" }, head), body);
+    return el("li", { class: dim ? "dim" : "" },
+      el("details", { open: S.open.has(n.id), ontoggle: (ev) => { if (ev.target.open) S.open.add(n.id); else S.open.delete(n.id); } },
+        el("summary", { class: "row" }, head, el("span", { class: "olcount", text: String(kids.length) })), body,
+        el("ul", null, kids.map((k) => item(byId.get(k))))));
+  };
+  wrap.append(el("ul", null, item(byId.get(story.root))));
+  if (tree.orphans.length) wrap.append(el("h3", { text: "Not connected to the root", style: "margin:24px 0 8px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)" }), el("ul", null, tree.orphans.map((n) => el("li", null, el("div", { class: "row" }, el("i", { style: `--c:${n.color}` }), el("button", { class: "olt", text: n.title, onclick: () => select(n.id) }), el("small", { text: cap(n.type) }))))));
+  box.append(wrap);
+}
+
+/* ----- switching ----- */
+function setView(v) {
+  if (!viewList.includes(v)) v = viewList[0];
+  const was = S.view; S.view = v;
+  for (const key of ["list", "timeline", "read", "outline"]) $(key).classList.toggle("on", v === key);
+  svgEl.style.visibility = v === "graph" ? "visible" : "hidden";
+  const spatial = v === "graph" || v === "timeline";
+  $("zoom").style.display = spatial ? "" : "none";
+  $("zoom").classList.toggle("right", v === "timeline");
+  $("btn-fit").style.display = spatial ? "" : "none";
+  $("chips").style.display = v === "read" ? "none" : "";
+  $("stories").style.display = spatial ? "" : "none";
+  if (!spatial && S.story) endStoryQuiet();
+  for (const b of $("views").children) b.setAttribute("aria-pressed", String(b.dataset.v === v));
+  if (v === "read") renderRead();
+  render();
+  if (v === "graph" && was !== "graph") requestAnimationFrame(() => { if (!touched) fit(false); });
+  if (v === "timeline") requestAnimationFrame(renderTimeline);
+}
+
+/* ---------- toolbar ---------- */
+const usedClusters = new Set(nodes.map((n) => n.cluster));
+$("chips").append(el("button", { class: "chip", "data-c": "all", text: "All", onclick: () => { S.filter = "all"; render(); } }));
+for (const c of story.clusters) if (usedClusters.has(c.id)) $("chips").append(el("button", { class: "chip", "data-c": c.id, style: `--c:${colors[c.id]}`, onclick: () => { S.filter = S.filter === c.id ? "all" : c.id; render(); } }, el("i"), c.label));
+if ((story.stories || []).length) {
+  $("stories").append(el("span", { text: "Follow a story" }));
+  for (const s of story.stories) $("stories").append(el("button", { class: "chip", "data-s": s.id, title: s.summary || "", text: s.title, onclick: () => (S.story && S.story.id === s.id ? endStory() : startStory(s.id)) }));
+}
+for (const c of story.clusters) if (usedClusters.has(c.id)) $("legend").append(el("span", { style: `--c:${colors[c.id]}` }, el("i"), c.label));
+$("legend").append(el("span", { title: "Relationship directly supported by a cited source" }, (() => { const s = sv("svg", { viewBox: "0 0 22 8" }); s.append(sv("line", { x1: 0, y1: 4, x2: 22, y2: 4, stroke: "currentColor", "stroke-width": 1.5 })); return s; })(), "sourced"));
+$("legend").append(el("span", { title: "Editorial bridge: an interpretation, not a direct claim" }, (() => { const s = sv("svg", { viewBox: "0 0 22 8" }); s.append(sv("line", { x1: 0, y1: 4, x2: 22, y2: 4, stroke: "currentColor", "stroke-width": 1.5, "stroke-dasharray": "3 4" })); return s; })(), "inferred"));
+
+$("views").append(...viewList.map((v) => el("button", { "data-v": v, "aria-pressed": "false", text: VIEW_LABEL[v], onclick: () => setView(v) })));
+if (viewList.length < 2) $("views").style.display = "none";
+$("q").addEventListener("input", (e) => { S.q = e.target.value.trim().toLowerCase(); render(); });
+$("btn-fit").onclick = () => { if (S.view === "timeline") { tlReset(); renderTimeline(); } else fit(); };
+$("btn-reset").onclick = () => { S.filter = "all"; S.q = ""; $("q").value = ""; endStoryQuiet(); tlReset(); layout(); place(); select(null); fit(); };
+$("zin").onclick = () => (S.view === "timeline" ? tlZoom(1 / 1.4, (TL.geo ? TL.geo.x0 + TL.geo.pw / 2 : 0)) : zoomAt(1.3, svgEl.clientWidth / 2, svgEl.clientHeight / 2));
+$("zout").onclick = () => (S.view === "timeline" ? tlZoom(1.4, (TL.geo ? TL.geo.x0 + TL.geo.pw / 2 : 0)) : zoomAt(1 / 1.3, svgEl.clientWidth / 2, svgEl.clientHeight / 2));
+$("sb-prev").onclick = () => goStep(S.step - 1); $("sb-next").onclick = () => goStep(S.step + 1); $("sb-exit").onclick = endStory;
+addEventListener("keydown", (e) => {
+  const typing = e.target.tagName === "INPUT";
+  if (e.key === "/" && !typing) { e.preventDefault(); $("q").focus(); }
+  else if (e.key === "Escape") { if (typing) e.target.blur(); else if (S.selected) select(null); else if (S.story) endStory(); }
+  else if (S.story && !typing && e.key === "ArrowRight") goStep(S.step + 1);
+  else if (S.story && !typing && e.key === "ArrowLeft") goStep(S.step - 1);
+});
+
+/* ---------- pointer interaction: pan, zoom, pinch, drag nodes ---------- */
+const ptrs = new Map(); let drag = null;
+const toWorld = (cx, cy) => { const r = svgEl.getBoundingClientRect(); return [(cx - r.left - view.x) / view.k, (cy - r.top - view.y) / view.k]; };
+const pinchInfo = () => { const [a, b] = [...ptrs.values()]; return { d: Math.hypot(a.x - b.x, a.y - b.y), mx: (a.x + b.x) / 2, my: (a.y + b.y) / 2 }; };
+svgEl.addEventListener("pointerdown", (e) => {
+  cancelAnimationFrame(tweenId);
+  svgEl.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (ptrs.size === 2) { drag = { type: "pinch", ...pinchInfo() }; return; }
+  const g = e.target.closest && e.target.closest(".node");
+  drag = g ? { type: "node", n: byId.get(g.dataset.id), sx: e.clientX, sy: e.clientY, moved: false }
+           : { type: "pan", sx: e.clientX, sy: e.clientY, vx: view.x, vy: view.y, moved: false };
+});
+svgEl.addEventListener("pointermove", (e) => {
+  if (!ptrs.has(e.pointerId)) return; ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (!drag) return;
+  if (drag.type === "pinch" && ptrs.size === 2) {
+    const p = pinchInfo(), r = svgEl.getBoundingClientRect();
+    zoomAt(p.d / drag.d, p.mx - r.left, p.my - r.top); view.x += p.mx - drag.mx; view.y += p.my - drag.my; applyView(); drag = { type: "pinch", ...p }; return;
+  }
+  const dx = e.clientX - drag.sx, dy = e.clientY - drag.sy;
+  if (!drag.moved && Math.hypot(dx, dy) > 4) { drag.moved = true; svgEl.classList.add("dragging"); }
+  if (!drag.moved) return;
+  if (drag.type === "pan") { view.x = drag.vx + dx; view.y = drag.vy + dy; applyView(); }
+  else if (drag.type === "node") { const [wx, wy] = toWorld(e.clientX, e.clientY); drag.n.x = wx; drag.n.y = wy; place(); }
+});
+const endPtr = (e) => {
+  ptrs.delete(e.pointerId); svgEl.classList.remove("dragging");
+  if (drag && drag.type !== "pinch" && !drag.moved) { if (drag.type === "node") select(drag.n.id, { center: false }); else if (S.selected && !S.story) select(null); }
+  if (ptrs.size < 2) drag = null;
+};
+svgEl.addEventListener("pointerup", endPtr); svgEl.addEventListener("pointercancel", endPtr);
+svgEl.addEventListener("wheel", (e) => { e.preventDefault(); const r = svgEl.getBoundingClientRect(); zoomAt(Math.exp(-e.deltaY * (e.ctrlKey ? 0.01 : 0.0015)), e.clientX - r.left, e.clientY - r.top); }, { passive: false });
+let sized = svgEl.clientWidth > 0 && svgEl.clientHeight > 0, touched = false;
+svgEl.addEventListener("pointerdown", () => { touched = true; }); svgEl.addEventListener("wheel", () => { touched = true; }, { passive: true });
+const onSize = () => {
+  if (S.view === "timeline") { renderTimeline(); return; }
+  if (S.view !== "graph" || !svgEl.clientWidth || !svgEl.clientHeight) return;
+  if (!sized) { sized = true; layout(); place(); fit(false); return; } // first real size (page was loaded hidden / zero-sized)
+  if (!touched && !S.selected && !S.story) fit(false);
+};
+if (window.ResizeObserver) { new ResizeObserver(onSize).observe(svgEl); new ResizeObserver(() => { if (S.view === "timeline") renderTimeline(); }).observe($("timeline")); } else addEventListener("resize", onSize);
+
+/* ---------- boot ---------- */
+layout(); place(); setView(viewList.includes(story.defaultView) ? story.defaultView : "graph"); fit(false);
+function fromHash() {
+  const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+  if (p.has("view") && S.view !== p.get("view")) setView(p.get("view"));
+  if (p.has("story") && storyById.has(p.get("story")) && !(S.story && S.story.id === p.get("story"))) startStory(p.get("story"));
+  else if (p.has("node") && byId.has(p.get("node")) && S.selected !== p.get("node")) select(p.get("node"), { center: true });
+}
+addEventListener("hashchange", fromHash);
+fromHash();
+})();
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@ Thanks for helping. This project has one job: make it easy for an AI agent (and 
 
 - **Zero dependencies.** The toolkit runs on plain Node 18+ with no `npm install`. Don't add runtime or build dependencies. The output is one self-contained HTML file with no external scripts.
 - **Sourced or it doesn't ship.** Examples and playbook guidance must keep the project's honesty rules: every node cites a source that was actually read; interpretations are marked `inferred`.
-- **Neutral by default.** The repo should not be tied to any person, company or brand. Examples should be subjects where a neutral treatment is natural (words, events, places, ideas, public-domain works). Don't add a real living private individual as a subject. An example about a real organisation or public figure must be an honest independent study with an accurate `disclaimer`, built only from public sources.
+- **The toolkit is neutral; examples are honest.** The scripts, templates, playbook and tests must not be tied to any person, company or brand. Examples may be about real organisations or public figures, but only as honest independent studies with an accurate `disclaimer` (including "not affiliated with or endorsed by" where that applies), built only from public sources. Don't add a real living private individual as a subject.
 - **Short, concrete playbook text.** The playbook is read by agents. Prefer rules with an example and a reason over general advice.
 
 ## Making changes
