@@ -12,5 +12,5 @@
     "build:examples": "node -e \"const fs=require('fs'),cp=require('child_process');for(const d of fs.readdirSync('examples'))cp.execFileSync('node',['scripts/build.mjs','examples/'+d],{stdio:'inherit'})\"",
     "build:site": "node scripts/build-site.mjs"
   },
-  "repository": "github:Teambotics-OSS/StoryTeller"
+  "repository": "github:Teambotics-Inc/StoryTeller"
 }
