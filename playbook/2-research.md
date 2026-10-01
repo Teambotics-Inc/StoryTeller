@@ -47,6 +47,8 @@ If a part of the subject is thinly sourced, *say so* (final message) rather than
 
 Some fetch tools return a model-written digest of a page, not the page. Never put a digest's wording in `evidence` as if it were a quote. For any figure or quote, get the raw text (curl the URL, or read it in a browser tool) and copy from that. If you only have a digest, paraphrase and say "per <source>", or leave the quote out. Put the assumptions you made without asking the user (scope, angle, affiliation) at the top of `research.md`.
 
+Reading helper: `node scripts/fetch-text.mjs <url>` prints a page as plain text (and warns when the page is a JavaScript shell that needs a browser). Browser tools may only write inside your workspace: return page text in the tool result and save it with your file tool. `python3` may not exist on your machine (it is often `python`); prefer Node scripts.
+
 Other reading traps: a primary source that exists only as a scanned image or PDF with no text layer (render the page and read it, mark it "read from scan", and flag its quotes for a human to check); and tag-stripped page text can leave stray spaces before punctuation, so compare any quote with the rendered page, not just the extracted text.
 
 ## Conflicts and gaps

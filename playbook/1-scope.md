@@ -27,6 +27,7 @@ Otherwise decide, note your assumption in the final message, and move on.
 Fill `credit` and `disclaimer` honestly:
 
 - Independent study of a public subject: `credit: "An independent StoryTeller study by <user name>."`, `disclaimer: "Built from <Subject>'s public <pages/work/records>. Not affiliated with or endorsed by <Subject>."`
+- If the institution holding the subject (a museum, archive, publisher) is also one of your sources, say you are not affiliated with it in the disclaimer.
 - Made by or for the subject: say so.
 - Built from user-supplied private material: say that, and don't imply public sourcing.
 

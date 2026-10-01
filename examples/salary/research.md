@@ -76,3 +76,44 @@ All pages were read on 2026-09-30 via a fetch tool that returns a model-written 
 ## Gaps and conflicts
 - Core conflict: how salarium got from "salt" to "pay". Options: salt allowance; "salt money" (phrase unattested); discretionary money (Coverley's view). Also the two secondary renderings of Pliny disagree.
 - Not covered: OED first citation dates, Pliny's Latin read first-hand, Roman payroll detail, non-European equivalents.
+
+## Update 2026-10-01: independent sources for five Wikipedia-only nodes
+The validator warned that five nodes rested only on Wikipedia. Each new page below was read as raw text via `node scripts/fetch-text.mjs` on 2026-10-01 (Britannica, Merriam-Webster and the British Museum's own site returned 403, so they are not cited). Quotes are copied from that raw text.
+
+### ety-salt: Etymonline, "salt"
+- https://www.etymonline.com/word/salt · Online Etymology Dictionary · accessed 2026-10-01 · tier 3 (reference)
+- "worth one's salt "efficient, capable" (1830)" (copied; listed among metaphoric uses reflecting that salt "was once a rare and important resource"). It does NOT link the idiom to the Roman salarium.
+
+### phrasefinder: Phrase Finder, "Worth one's salt"
+- https://www.phrases.org.uk/meanings/worth-ones-salt.html · The Phrase Finder · accessed 2026-10-01 · tier 3 (reference site, not scholarly)
+- "‘worth one’s salt’ didn’t exist in Roman Latin or even in medieval English and dates from as recently as the 19th century." (copied)
+- Earliest print citation it gives: Philip Beaver, African Memoranda, 1805 ("not worth his salt"). Note: this predates Etymonline's 1830 date; both are 19th century.
+- Says most scholars accept salarium was money allowed to soldiers to buy salt, and that soldiers were not actually paid in salt.
+
+### bm-beer: British Museum, "The first writing: counting beer for the workers"
+- https://artsandculture.google.com/asset/the-first-writing-counting-beer-for-the-workers/fgF9ioy89DC2Uw?hl=en · British Museum, registration number 1989,0130.4, hosted on Google Arts & Culture · accessed 2026-10-01 · tier 1/2 (museum catalogue text)
+- "It was made around 3100–3000 BC in southern Iraq, known as Mesopotamia. The text records beer given to workers as part of their daily rations." (copied)
+- Node keeps "c. 3100 BCE"; the museum range is 3100-3000 BC.
+
+### lse-wages: LSE, medieval English agricultural wages
+- https://www.lse.ac.uk/research/research-for-the-world/economics/its-not-just-about-the-money-a-reappraisal-of-medieval-english-agricultural-wages · London School of Economics · accessed 2026-10-01 · tier 2 (university research summary)
+- "Often, they were paid both in cash and "in-kind", usually in grain but also sometimes in accommodation, food, clothing or even tools." (copied)
+- "In medieval England, many workers received the majority of their wages as in-kind payments." (copied)
+- Silent on how rare salaried work was, and on servants or government roles.
+
+### iess-whitecollar: Heckscher, "Employment, White Collar"
+- https://www.encyclopedia.com/social-sciences/applied-and-social-sciences-magazines/employment-white-collar · International Encyclopedia of the Social Sciences (Charles Heckscher), via Encyclopedia.com · accessed 2026-10-01 · tier 2
+- "White-collar workers were also paid salaries, rather than wages" (copied; context: perquisites of white-collar staff "for most of the twentieth century").
+- Silent on output being hard to measure by the hour.
+
+### platner-salaria: Platner & Ashby, "Via Salaria"
+- https://penelope.uchicago.edu/Thayer/E/Gazetteer/Places/Europe/Italy/Lazio/Roma/Rome/_Texts/PLATOP*/Via_Salaria.html · A Topographical Dictionary of Ancient Rome (1929), transcribed on LacusCurtius, University of Chicago · accessed 2026-10-01 · tier 2
+- "It was a very ancient road, by which the Sabines came to fetch salt from the salt marshes at the mouth of the Tiber" (copied), citing Festus, Cicero, Strabo, Pliny NH 31.89. It does not use the word "named"; the naming is implied by the cited ancient authors and stated by Wikipedia/Etymonline.
+
+### What changed and why
+- worth-salt: the independent sources show the idiom is only attested from the 19th century and do not connect it to salarium. Summary softened to say the Roman link is a popular explanation. Claim loosened deliberately.
+- beer-rations: fully supported by the British Museum. Evidence replaced.
+- medieval-rare: independent source supports only in-kind pay (food, accommodation, clothing), not the rarity of salaries or the servants/government framing. Summary now attributes the rarity claim to Wikipedia. Claim loosened deliberately.
+- office-work: independent source supports only that white-collar staff were salaried, not the "hard to measure hourly" reason. Summary now attributes the reason to Wikipedia. Claim loosened deliberately.
+- via-salaria: fully supported by Platner & Ashby (Sabines fetching salt). Evidence replaced.
+- Node ids, edges, clusters, stories, theme and start/end values are unchanged. Wikipedia remains as a secondary source on four nodes.

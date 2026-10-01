@@ -48,6 +48,8 @@ If you have no Node, see the fallback in step 5. If you have no browser tool, sa
 - **Honest seams.** What the sources don't cover is named in your final message, not papered over.
 - **It looks like the subject.** Open the result next to the subject's own site. It should feel like it belongs to the same family.
 
+Keep scratch material (raw page text, notes) in `stories/<slug>/raw/`. It is git-ignored; delete it if you like.
+
 ## Final message to the user
 
 Keep it short: the path to `index.html`, node/edge/source counts, how many edges are inferred, which views the page offers (graph, timeline, read, outline, list), the brand choices and where they came from, anything you could not verify or cover, and how to host it (any static host; it is one file).

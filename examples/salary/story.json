@@ -134,6 +134,48 @@
       "url": "https://www.dol.gov/agencies/whd/flsa",
       "accessed": "2026-09-30",
       "publisher": "US Department of Labor"
+    },
+    {
+      "id": "ety-salt",
+      "title": "Etymonline: salt",
+      "url": "https://www.etymonline.com/word/salt",
+      "accessed": "2026-10-01",
+      "publisher": "Online Etymology Dictionary"
+    },
+    {
+      "id": "phrasefinder",
+      "title": "Phrase Finder: Worth one's salt",
+      "url": "https://www.phrases.org.uk/meanings/worth-ones-salt.html",
+      "accessed": "2026-10-01",
+      "publisher": "The Phrase Finder"
+    },
+    {
+      "id": "bm-beer",
+      "title": "The first writing: counting beer for the workers (British Museum, 1989,0130.4)",
+      "url": "https://artsandculture.google.com/asset/the-first-writing-counting-beer-for-the-workers/fgF9ioy89DC2Uw?hl=en",
+      "accessed": "2026-10-01",
+      "publisher": "British Museum, via Google Arts & Culture"
+    },
+    {
+      "id": "lse-wages",
+      "title": "LSE: It's not just about the money, a reappraisal of medieval English agricultural wages",
+      "url": "https://www.lse.ac.uk/research/research-for-the-world/economics/its-not-just-about-the-money-a-reappraisal-of-medieval-english-agricultural-wages",
+      "accessed": "2026-10-01",
+      "publisher": "London School of Economics"
+    },
+    {
+      "id": "iess-whitecollar",
+      "title": "Employment, White Collar (C. Heckscher)",
+      "url": "https://www.encyclopedia.com/social-sciences/applied-and-social-sciences-magazines/employment-white-collar",
+      "accessed": "2026-10-01",
+      "publisher": "International Encyclopedia of the Social Sciences, via Encyclopedia.com"
+    },
+    {
+      "id": "platner-salaria",
+      "title": "Via Salaria (Platner & Ashby, A Topographical Dictionary of Ancient Rome, 1929)",
+      "url": "https://penelope.uchicago.edu/Thayer/E/Gazetteer/Places/Europe/Italy/Lazio/Roma/Rome/_Texts/PLATOP*/Via_Salaria.html",
+      "accessed": "2026-10-01",
+      "publisher": "LacusCurtius (University of Chicago)"
     }
   ],
   "nodes": [
@@ -184,9 +226,11 @@
       "title": "Worth one's salt",
       "type": "idiom",
       "cluster": "modern",
-      "summary": "An English idiom for doing a job well enough to earn your keep, said to descend from the Roman salarium.",
-      "evidence": "The salarium \"gave rise to such expressions as 'being worth one's salt'\" (Wikipedia).",
+      "summary": "An English idiom for doing a job well enough to earn your keep. It is popularly traced to the Roman salarium, but dictionaries date the phrase only to the 19th century, so the link is a popular explanation, not an attested line of descent.",
+      "evidence": "Etymonline dates worth one's salt \"efficient, capable\" to 1830; Phrase Finder says it \"dates from as recently as the 19th century\".",
       "sources": [
+        "ety-salt",
+        "phrasefinder",
         "wiki-sal"
       ]
     },
@@ -197,8 +241,9 @@
       "cluster": "cousins",
       "when": "c. 3100 BCE",
       "summary": "The oldest pay record the sources mention is not money at all: a tablet counting workers' daily beer. Pay in goods long predates pay in coin.",
-      "evidence": "\"A cuneiform inscribed clay tablet dated about 3100 BCE provides a record of the daily beer rations for workers in Mesopotamia.\"",
+      "evidence": "British Museum: \"The text records beer given to workers as part of their daily rations.\"",
       "sources": [
+        "bm-beer",
         "wiki-sal"
       ],
       "start": "-3100"
@@ -209,9 +254,10 @@
       "type": "shift",
       "cluster": "shifts",
       "when": "Middle Ages",
-      "summary": "For centuries regular salaried work was the exception, reserved for servants and higher-status roles, and pay often came as lodging and food.",
-      "evidence": "Salaried employment \"relatively rare and mostly limited to servants and higher status roles, especially in government service\"; pay could be \"lodging, food, and livery clothes\".",
+      "summary": "Wikipedia says that for centuries regular salaried work was the exception, reserved for servants and higher-status roles. Independent research confirms that much medieval pay came in kind, such as food, lodging and clothing, rather than as cash.",
+      "evidence": "LSE: medieval wages were often paid \"usually in grain but also sometimes in accommodation, food, clothing or even tools\". The rarity of salaries is Wikipedia's claim.",
       "sources": [
+        "lse-wages",
         "wiki-sal"
       ],
       "start": "0500",
@@ -236,9 +282,10 @@
       "type": "shift",
       "cluster": "shifts",
       "when": "1870-1930",
-      "summary": "Big firms created managers and clerks whose output was hard to count by the hour, and a per-period salary fitted them.",
-      "evidence": "Office work was \"hard to measure hourly or piecewise\" (Wikipedia, on the Second Industrial Revolution, 1870-1930).",
+      "summary": "Big firms created managers and clerks, and a per-period salary became the norm for them. One account (Wikipedia) gives the reason as output that was hard to count by the hour; the independent source only confirms that white-collar staff were salaried.",
+      "evidence": "Heckscher: \"White-collar workers were also paid salaries, rather than wages\". The \"hard to measure hourly\" reason is Wikipedia's.",
       "sources": [
+        "iess-whitecollar",
         "wiki-sal"
       ],
       "start": "1870",
@@ -331,8 +378,9 @@
       "type": "place",
       "cluster": "rome",
       "summary": "A road out of Rome named for salt, used for fetching it. It shows how central salt was to early Rome's geography and trade, which is the background any salt-pay theory needs.",
-      "evidence": "\"The Via Salaria owes its name to the Latin word for 'salt'.\"",
+      "evidence": "Platner & Ashby: \"a very ancient road, by which the Sabines came to fetch salt from the salt marshes at the mouth of the Tiber\".",
       "sources": [
+        "platner-salaria",
         "wiki-via",
         "wiki-hs"
       ]

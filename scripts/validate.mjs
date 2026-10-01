@@ -52,6 +52,7 @@ export function validateStory(s) {
   const clusterIds = uniq(s.clusters, "cluster");
   const sourceIds = uniq(s.sources, "source");
   const nodeIds = uniq(s.nodes, "node");
+  const srcUrl = new Map(s.sources.map((x) => [x.id, x.url]));
   if (s.clusters.length === 0) E("need at least one cluster");
   if (s.clusters.length > 12) W(`${s.clusters.length} clusters is a lot; 4-9 reads best`);
   for (const c of s.clusters) if (typeof c.label !== "string" || !c.label) E(`cluster '${c.id}' needs a label`);
@@ -70,6 +71,7 @@ export function validateStory(s) {
     if (!clusterIds.has(n.cluster)) E(`${at} has unknown cluster '${n.cluster}'`);
     if (!Array.isArray(n.sources) || n.sources.length === 0) E(`${at} has no sources (every node must be traceable)`);
     else for (const id of n.sources) if (!sourceIds.has(id)) E(`${at} cites unknown source '${id}'`);
+    if (Array.isArray(n.sources) && n.sources.length > 0 && n.sources.every((id) => /(^|\.)wikipedia\.org\//.test(String(srcUrl.get(id) || "")) )) W(`${at} rests only on Wikipedia (tertiary); add a primary or reputable secondary source, or word it as tentative`);
     if (typeof n.summary === "string" && n.summary.length > 320) W(`${at} summary is ${n.summary.length} chars; keep it to 1-2 sentences and move the rest to 'details'`);
     if (typeof n.title === "string" && n.title.length > 48) W(`${at} title is long (${n.title.length}); labels get crowded on the canvas`);
   }

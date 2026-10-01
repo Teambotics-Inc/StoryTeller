@@ -160,3 +160,19 @@ test("warns when one far-off date would stretch the timeline axis", () => {
   story.nodes[10].start = "1830";
   assert.ok(validateStory(story).warnings.some((w) => /outlier/.test(w)));
 });
+
+test("warns when a node rests only on Wikipedia", () => {
+  const { story } = example();
+  story.sources.push({ id: "wp-test", title: "Test", url: "https://en.wikipedia.org/wiki/Test", accessed: "2026-01-01" });
+  story.nodes[1].sources = ["wp-test"];
+  assert.ok(validateStory(story).warnings.some((w) => /rests only on Wikipedia/.test(w)));
+  story.nodes[1].sources = ["wp-test", story.sources[0].id];
+  assert.ok(!validateStory(story).warnings.some((w) => /node '.*' rests only on Wikipedia/.test(w)));
+});
+
+test("fetch-text and brand-probe refuse non-http input", () => {
+  for (const script of ["fetch-text.mjs", "brand-probe.mjs"]) {
+    const r = spawnSync("node", [path.join(root, "scripts", script), "file:///etc/passwd"], { encoding: "utf8" });
+    assert.equal(r.status, 2, script);
+  }
+});

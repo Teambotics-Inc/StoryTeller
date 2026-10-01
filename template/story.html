@@ -6,6 +6,7 @@
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESCRIPTION}}">
 <meta name="theme-color" content="{{THEME_COLOR}}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 16 7 8M16 16l9-5M16 16l2 10' stroke='%23{{ACCENT_HEX}}' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23{{ACCENT_HEX}}'/%3E%3Ccircle cx='7' cy='8' r='3' fill='%23{{ACCENT_HEX}}'/%3E%3Ccircle cx='25' cy='11' r='3' fill='%23{{ACCENT_HEX}}'/%3E%3Ccircle cx='18' cy='26' r='3' fill='%23{{ACCENT_HEX}}'/%3E%3C/svg%3E">
 <meta property="og:title" content="{{TITLE}}">
 <meta property="og:description" content="{{DESCRIPTION}}">
 {{FONT_LINKS}}
@@ -187,7 +188,7 @@ main{position:relative;flex:1;min-height:0}
 .src a:hover{text-decoration:underline}
 .src small{display:block;color:var(--muted)}
 
-#storybar{position:absolute;left:50%;bottom:54px;transform:translateX(-50%);width:min(560px,calc(100% - 32px));background:var(--surface);border:1px solid var(--accent);padding:10px 14px;display:none;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;z-index:5;box-shadow:0 10px 40px rgba(0,0,0,.35)}
+#storybar{z-index:7;position:absolute;left:50%;bottom:54px;transform:translateX(-50%);width:min(560px,calc(100% - 32px));background:var(--surface);border:1px solid var(--accent);padding:10px 14px;display:none;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;z-index:5;box-shadow:0 10px 40px rgba(0,0,0,.35)}
 #storybar.on{display:grid}
 #storybar .t{min-width:0}
 #storybar b{display:block;font-size:13px}
@@ -221,6 +222,7 @@ noscript{display:block;padding:24px;max-width:760px}
   #panel{top:auto;width:100%;height:58%;border-left:0;border-top:1px solid var(--line);transform:translateY(102%)}
   #panel.open{transform:none}
   #storybar{bottom:68px;grid-template-columns:1fr;}
+  main.sheet #storybar{bottom:calc(58% + 10px)}
   #list{padding:14px 16px 90px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -255,7 +257,7 @@ noscript{display:block;padding:24px;max-width:760px}
     <div class="nav"><button class="btn" id="sb-prev" aria-label="Previous step">&lsaquo;</button><button class="btn" id="sb-next" aria-label="Next step">&rsaquo;</button><button class="btn" id="sb-exit" aria-label="Exit story">&times;</button></div>
   </div>
   <aside id="panel" aria-label="Node details" aria-live="polite"></aside>
-  <div class="foot"><div><p id="status"></p><p id="credit"></p></div><div class="legend" id="legend"></div></div>
+  <div class="foot" id="foot"><div><p id="status"></p><p id="credit"></p></div><div class="legend" id="legend"></div></div>
 </main>
 <noscript>{{NOSCRIPT}}</noscript>
 
@@ -418,13 +420,13 @@ function tween(to, ms = 480) {
 const stageBox = () => {
   const W = svgEl.clientWidth, H = svgEl.clientHeight;
   const panelOpen = $("panel").classList.contains("open");
-  return { W, H, left: 0, right: panelOpen && !isNarrow() ? Math.min(400, W) : 0, bottom: panelOpen && isNarrow() ? H * 0.58 : 0 };
+  return { W, H, left: 0, right: panelOpen && !isNarrow() ? Math.min(400, W) : 0, bottom: (panelOpen && isNarrow() ? H * 0.58 : 0) + $("foot").offsetHeight };
 };
 function fit(animate = true, list = nodes) {
   const { W, H, right, bottom } = stageBox();
   let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
-  for (const n of list) { x0 = Math.min(x0, n.x - n.r - 60); x1 = Math.max(x1, n.x + n.r + 60); y0 = Math.min(y0, n.y - n.r - 30); y1 = Math.max(y1, n.y + n.r + 50); }
-  const aw = W - right, ah = H - bottom - 40;
+  for (const n of list) { const lw = Math.min(210, n.title.length * 6.2) / 2 + 12; x0 = Math.min(x0, n.x - Math.max(n.r, lw)); x1 = Math.max(x1, n.x + Math.max(n.r, lw)); y0 = Math.min(y0, n.y - n.r - 30); y1 = Math.max(y1, n.y + n.r + 50); }
+  const aw = W - right, ah = H - bottom - 8;
   const k = Math.max(0.2, Math.min(1.6, Math.min(aw / (x1 - x0), ah / (y1 - y0))));
   const to = { k, x: aw / 2 - (x0 + x1) / 2 * k, y: (ah + 0) / 2 - (y0 + y1) / 2 * k + 6 };
   animate ? tween(to) : (Object.assign(view, to), applyView());
@@ -533,6 +535,7 @@ function select(id, opts = {}) {
   if (!opts.keepStory && S.story && id) endStoryQuiet();
   S.selected = id;
   const p = $("panel");
+  document.querySelector("main").classList.toggle("sheet", !!id);
   if (id) { openPanel(byId.get(id)); try { history.replaceState(null, "", "#node=" + encodeURIComponent(id)); } catch {} }
   else { p.classList.remove("open"); try { history.replaceState(null, "", location.pathname + location.search); } catch {} }
   if (id) ensureTL(byId.get(id));
@@ -623,9 +626,10 @@ function tlFocusStory(st) {
   TL.v0 = a - pad; TL.v1 = b + pad;
 }
 function ensureTL(n) {
-  if (S.view !== "timeline" || TL.even || n.t0 == null) return;
-  const s = TL.v1 - TL.v0;
-  if (n.t0 < TL.v0 + s * 0.05 || n.t0 > TL.v1 - s * 0.12) { TL.v0 = n.t0 - s / 2; TL.v1 = n.t0 + s / 2; }
+  if (S.view !== "timeline" || TL.even || n.t0 == null || !TL.geo) return;
+  const s = TL.v1 - TL.v0, covered = $("panel").classList.contains("open") && !isNarrow() ? Math.min(400, TL.geo.x0 + TL.geo.pw) : 0;
+  const free = Math.max(120, TL.geo.pw - covered), frac = (n.t0 - TL.v0) / s, hi = (free - 60) / TL.geo.pw;
+  if (frac < 0.04 || frac > hi) { const target = (free / 2) / TL.geo.pw; TL.v0 = n.t0 - target * s; TL.v1 = TL.v0 + s; } // centre it in the part the panel leaves free
 }
 function renderTimeline() {
   const svg = $("tl"), host = $("timeline"), W = host.clientWidth, Hc = host.clientHeight;
@@ -661,9 +665,10 @@ function renderTimeline() {
     blocks.push({ c, items, top: y, h }); y += h;
   }
   const total = y + 14;
-  svg.setAttribute("width", W); svg.setAttribute("height", Math.max(Hc, total + 70)); // extra room so the footer never covers the last lane
+  svg.setAttribute("width", W); const room = $("foot").offsetHeight + 28; // so the footer never covers the last lane
+  svg.setAttribute("height", Math.max(Hc, total + room));
   const defs = sv("defs"), clip = sv("clipPath", { id: "tl-clip" });
-  clip.append(sv("rect", { x: x0 - 10, y: 0, width: pw + 20, height: Math.max(Hc, total + 70) })); defs.append(clip); svg.append(defs);
+  clip.append(sv("rect", { x: x0 - 10, y: 0, width: pw + 20, height: Math.max(Hc, total + room) })); defs.append(clip); svg.append(defs);
   blocks.forEach((b, i) => {
     svg.append(sv("rect", { class: "tl-lane" + (i % 2 ? " alt" : ""), x: 0, y: b.top, width: W, height: b.h }));
     const lab = sv("text", { class: "tl-lane-label", x: narrow ? x0 : 14, y: b.top + (narrow ? 12 : 24) });
@@ -697,6 +702,8 @@ function renderTimeline() {
     layer.append(g);
   }
   svg.append(layer);
+  const undated = nodes.length - dated.length;
+  if (undated > 0) { const note = sv("text", { class: "tl-tick-label", x: 14, y: total + 12, "text-anchor": "start" }); note.textContent = `${undated} of ${nodes.length} nodes have no date, so they appear only in the other views.`; svg.append(note); }
   $("tl-mode").textContent = TL.even ? "True scale" : "Even spacing";
 }
 (function timelineInput() {
@@ -884,11 +891,10 @@ if (window.ResizeObserver) { new ResizeObserver(onSize).observe(svgEl); new Resi
 /* ---------- boot ---------- */
 layout(); place(); setView(viewList.includes(story.defaultView) ? story.defaultView : "graph"); fit(false);
 function fromHash() {
-  const m = /#(node|story|view)=([^&]+)/.exec(location.hash); if (!m) return;
-  const id = decodeURIComponent(m[2]);
-  if (m[1] === "view") { if (S.view !== id) setView(id); return; }
-  if (m[1] === "node" && byId.has(id) && S.selected !== id) select(id, { center: true });
-  else if (m[1] === "story" && storyById.has(id) && !(S.story && S.story.id === id)) startStory(id);
+  const p = new URLSearchParams(location.hash.replace(/^#/, ""));
+  if (p.has("view") && S.view !== p.get("view")) setView(p.get("view"));
+  if (p.has("story") && storyById.has(p.get("story")) && !(S.story && S.story.id === p.get("story"))) startStory(p.get("story"));
+  else if (p.has("node") && byId.has(p.get("node")) && S.selected !== p.get("node")) select(p.get("node"), { center: true });
 }
 addEventListener("hashchange", fromHash);
 fromHash();

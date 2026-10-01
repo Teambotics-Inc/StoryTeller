@@ -45,6 +45,7 @@ const fill = {
   TITLE: esc(`${story.title} · Story Graph`),
   DESCRIPTION: esc(desc),
   THEME_COLOR: esc(c.bg),
+  ACCENT_HEX: c.accent.replace("#", ""),
   ROOT_CSS: rootCss,
   FONT_LINKS: fontLinks,
   NOSCRIPT: `<h1>${esc(story.title)}</h1><p>${esc(story.tagline)}</p><p>This interactive story graph needs JavaScript. The full content follows.</p><ul>${story.nodes.map((n) => `<li><strong>${esc(n.title)}</strong>: ${esc(n.summary)}</li>`).join("")}</ul>`,
