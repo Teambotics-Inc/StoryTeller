@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Repository moved to the Teambotics-Inc organisation (old links redirect).
 - Two brand-matched company studies added as examples (their colours extracted from each company's own site, with provenance in `brandSources`).
 - Featured order of examples on the site is data (`site/order.json`), not code.
 - Featured stories on the landing page: a picker and an embedded viewer with view switching and a full-screen button; every story also gets its own page (`/stories/<slug>/`) with about, guided stories and sources, plus a standalone full page. Optional git-ignored `site/showcase/` for deployer-only stories.
