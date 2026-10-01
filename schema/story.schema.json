@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "story.schema.json",
+  "title": "StoryTeller story",
+  "description": "Everything the renderer needs: a sourced graph of nodes and edges, plus guided 'stories' (ordered paths through it). Positions are NOT authored: the renderer lays the graph out. scripts/validate.mjs enforces the rules JSON Schema cannot (referential integrity, provenance).",
+  "type": "object",
+  "required": ["schemaVersion", "title", "tagline", "root", "clusters", "sources", "nodes", "edges"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "title": { "type": "string", "description": "Short name of the subject. Becomes the wordmark unless theme.wordmark.text overrides it." },
+    "subject": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "kind": { "type": "string", "description": "person | company | brand | relationship | word | event | place | idea | other" },
+        "url": { "type": "string", "format": "uri" }
+      }
+    },
+    "tagline": { "type": "string", "description": "One sentence under the wordmark: what this map shows and why it is interesting." },
+    "root": { "type": "string", "description": "Node id of the centre of the map (usually the subject itself)." },
+    "credit": { "type": "string", "description": "Who made this, e.g. 'An independent StoryTeller study by <name>.'" },
+    "disclaimer": { "type": "string", "description": "Provenance/affiliation line, e.g. 'Built from X's public work. Not affiliated with X.'" },
+    "generated": { "type": "object", "properties": { "date": { "type": "string" }, "by": { "type": "string" } } },
+    "clusters": {
+      "type": "array", "minItems": 1,
+      "items": { "type": "object", "required": ["id", "label"], "properties": { "id": { "type": "string" }, "label": { "type": "string" } } },
+      "description": "Thematic groups (4-9 is ideal). Each gets a colour from the theme and a filter chip."
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["id", "title", "url"],
+        "properties": { "id": { "type": "string" }, "title": { "type": "string" }, "url": { "type": "string", "format": "uri", "pattern": "^https?://" }, "accessed": { "type": "string", "description": "ISO date you read it." }, "publisher": { "type": "string" } }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["id", "title", "cluster", "summary", "sources"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]*$" },
+          "title": { "type": "string", "description": "Label on the canvas. <= 30 chars reads best." },
+          "type": { "type": "string", "description": "Free-form kind, shown in the panel: concept, capability, case-study, person, place, word, event, outcome..." },
+          "cluster": { "type": "string" },
+          "summary": { "type": "string", "description": "1-2 sentences. What this is and why it matters to the story." },
+          "details": { "type": "string", "description": "Optional longer context." },
+          "evidence": { "type": "string", "description": "Optional verbatim/near-verbatim fact, figure or short quote that backs the node, exactly as the source states it." },
+          "when": { "type": "string", "description": "Optional human-readable date or period shown to the reader, e.g. '2 September 1666, about 1am' or 'c. 1200 CE'." },
+          "start": { "type": "string", "pattern": "^-?[0-9]{1,5}(-[0-9]{2}(-[0-9]{2})?)?$", "description": "Optional machine-readable start for the Timeline view: '1666-09-02', '1666-09', '1666', or negative for BCE ('-0500'). Date only. Keep 'when' for the human wording." },
+          "end": { "type": "string", "pattern": "^-?[0-9]{1,5}(-[0-9]{2}(-[0-9]{2})?)?$", "description": "Optional end of a period (draws a bar on the timeline). Same formats as 'start'." },
+          "sources": { "type": "array", "minItems": 1, "items": { "type": "string" }, "description": "ids from top-level sources." },
+          "themes": { "type": "array", "items": { "type": "string" } },
+          "featured": { "type": "boolean", "description": "Draw larger. Use for at most ~15% of nodes." }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object", "required": ["source", "target", "label", "kind"],
+        "properties": {
+          "source": { "type": "string" }, "target": { "type": "string" },
+          "label": { "type": "string", "description": "Verb-ish relationship, e.g. 'founded', 'derived from', 'shaped by', 'proves'." },
+          "kind": { "enum": ["explicit", "inferred"], "description": "explicit = a cited source states or directly shows it. inferred = your editorial bridge; the UI draws it dashed." },
+          "sources": { "type": "array", "items": { "type": "string" }, "description": "Required when kind is explicit." }
+        }
+      }
+    },
+    "views": { "type": "array", "items": { "enum": ["graph", "timeline", "read", "outline", "list"] }, "description": "Optional. Which views to offer, in order. Default: all that apply. Timeline needs 5+ nodes with 'start'; Read needs 1+ stories." },
+    "defaultView": { "enum": ["graph", "timeline", "read", "outline", "list"], "description": "Optional. View shown on load. Default: graph." },
+    "stories": {
+      "type": "array",
+      "description": "Guided paths. The renderer lets the reader step through them. 3-6 is ideal; each should argue something.",
+      "items": {
+        "type": "object", "required": ["id", "title", "steps"],
+        "properties": { "id": { "type": "string" }, "title": { "type": "string" }, "summary": { "type": "string" }, "steps": { "type": "array", "minItems": 2, "items": { "type": "string" } } }
+      }
+    }
+  }
+}

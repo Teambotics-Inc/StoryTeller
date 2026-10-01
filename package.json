@@ -1,0 +1,12 @@
+{
+  "name": "storyteller",
+  "version": "1.0.0",
+  "description": "Point an AI agent at this repo, name a subject, get an explorable, sourced story as one HTML file.",
+  "private": true,
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test tests/toolkit.test.mjs",
+    "build:examples": "node scripts/build.mjs examples/salary"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "theme.schema.json",
+  "title": "StoryTeller theme",
+  "description": "Visual identity for one story. For brands, derive it from the brand's own site (see playbook/4-brand.md). scripts/validate.mjs checks contrast.",
+  "type": "object",
+  "required": ["schemaVersion", "mode", "colors"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "name": { "type": "string" },
+    "mode": { "enum": ["dark", "light"] },
+    "colors": {
+      "type": "object", "required": ["bg", "text", "accent"],
+      "properties": {
+        "bg": { "type": "string", "description": "#hex page background" },
+        "surface": { "type": "string", "description": "#hex detail panel / cards" },
+        "text": { "type": "string", "description": "#hex. >= 4.5:1 on bg" },
+        "muted": { "type": "string", "description": "#hex secondary text. >= 4.5:1 on bg" },
+        "line": { "type": "string", "description": "any CSS colour; hairlines" },
+        "accent": { "type": "string", "description": "#hex. The brand's signature colour. >= 3:1 on bg" }
+      }
+    },
+    "clusters": { "type": "object", "additionalProperties": { "type": "string" }, "description": "cluster id -> #hex. Omit a cluster and one is derived from the accent." },
+    "font": {
+      "type": "object",
+      "properties": {
+        "body": { "type": "string", "description": "CSS font-family stack. Always end with system fallbacks." },
+        "display": { "type": "string", "description": "CSS font-family for the wordmark." },
+        "googleFonts": { "type": "string", "pattern": "^https://fonts.googleapis.com/", "description": "Optional. Only if the brand's font is on Google Fonts. Adds one network request; the page still works without it." }
+      }
+    },
+    "wordmark": { "type": "object", "properties": { "text": { "type": "string" }, "letterSpacing": { "type": "string" }, "uppercase": { "type": "boolean" } } },
+    "logo": { "type": "object", "required": ["src"], "properties": { "src": { "type": "string", "description": "https URL or data:image/... URI" }, "alt": { "type": "string" } } },
+    "brandSources": {
+      "type": "array",
+      "description": "Audit trail: where each colour/font came from, so a human can verify.",
+      "items": { "type": "object", "properties": { "what": { "type": "string" }, "from": { "type": "string" }, "note": { "type": "string" } } }
+    }
+  }
+}

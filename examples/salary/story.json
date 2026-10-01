@@ -1,0 +1,797 @@
+{
+  "schemaVersion": 1,
+  "title": "Salary",
+  "subject": {
+    "name": "salary",
+    "kind": "word",
+    "url": "https://www.etymonline.com/word/salary"
+  },
+  "tagline": "A word for pay that was built on salt, and why nobody can prove Roman soldiers were ever paid in it.",
+  "root": "salary",
+  "credit": "An independent StoryTeller study of a word.",
+  "disclaimer": "Built from public dictionaries and reference pages, read on 2026-09-30. Ancient texts were not read directly; Pliny is known here only through secondary accounts that disagree.",
+  "generated": {
+    "date": "2026-09-30"
+  },
+  "clusters": [
+    {
+      "id": "modern",
+      "label": "Modern use"
+    },
+    {
+      "id": "shifts",
+      "label": "Meaning shifts"
+    },
+    {
+      "id": "english",
+      "label": "Into English"
+    },
+    {
+      "id": "rome",
+      "label": "Rome"
+    },
+    {
+      "id": "root",
+      "label": "Salt and its roots"
+    },
+    {
+      "id": "debate",
+      "label": "The salt debate"
+    },
+    {
+      "id": "cousins",
+      "label": "Cousin words"
+    }
+  ],
+  "sources": [
+    {
+      "id": "ety",
+      "title": "Etymonline: salary",
+      "url": "https://www.etymonline.com/word/salary",
+      "accessed": "2026-09-30",
+      "publisher": "Online Etymology Dictionary"
+    },
+    {
+      "id": "wikt-en",
+      "title": "Wiktionary: salary",
+      "url": "https://en.wiktionary.org/wiki/salary",
+      "accessed": "2026-09-30",
+      "publisher": "Wiktionary"
+    },
+    {
+      "id": "wikt-la",
+      "title": "Wiktionary: salarium (Latin)",
+      "url": "https://en.wiktionary.org/wiki/salarium",
+      "accessed": "2026-09-30",
+      "publisher": "Wiktionary"
+    },
+    {
+      "id": "pie",
+      "title": "Wiktionary: PIE root for 'salt'",
+      "url": "https://en.wiktionary.org/wiki/Reconstruction:Proto-Indo-European/seh%E2%82%82l-",
+      "accessed": "2026-09-30",
+      "publisher": "Wiktionary"
+    },
+    {
+      "id": "wiki-sal",
+      "title": "Wikipedia: Salary",
+      "url": "https://en.wikipedia.org/wiki/Salary",
+      "accessed": "2026-09-30",
+      "publisher": "Wikipedia"
+    },
+    {
+      "id": "wiki-via",
+      "title": "Wikipedia: Via Salaria",
+      "url": "https://en.wikipedia.org/wiki/Via_Salaria",
+      "accessed": "2026-09-30",
+      "publisher": "Wikipedia"
+    },
+    {
+      "id": "wiki-hs",
+      "title": "Wikipedia: History of salt",
+      "url": "https://en.wikipedia.org/wiki/History_of_salt",
+      "accessed": "2026-09-30",
+      "publisher": "Wikipedia"
+    },
+    {
+      "id": "etymologia",
+      "title": "etymologia.org: Were Roman Soldiers Really Paid in Salt?",
+      "url": "https://etymologia.org/word-myths/salary-salt-roman-soldiers-myth/",
+      "accessed": "2026-09-30",
+      "publisher": "etymologia.org"
+    },
+    {
+      "id": "cover",
+      "title": "James Coverley: Were Roman Soldiers Paid in Salt?",
+      "url": "https://jamescoverley.substack.com/p/were-roman-soldiers-paid-in-salt",
+      "accessed": "2026-09-30",
+      "publisher": "Substack"
+    },
+    {
+      "id": "wage",
+      "title": "Etymonline: wage",
+      "url": "https://www.etymonline.com/word/wage",
+      "accessed": "2026-09-30",
+      "publisher": "Online Etymology Dictionary"
+    },
+    {
+      "id": "stipend",
+      "title": "Etymonline: stipend",
+      "url": "https://www.etymonline.com/word/stipend",
+      "accessed": "2026-09-30",
+      "publisher": "Online Etymology Dictionary"
+    },
+    {
+      "id": "salaryman",
+      "title": "Wikipedia: Salaryman",
+      "url": "https://en.wikipedia.org/wiki/Salaryman",
+      "accessed": "2026-09-30",
+      "publisher": "Wikipedia"
+    },
+    {
+      "id": "flsa",
+      "title": "US Dept of Labor: Fair Labor Standards Act",
+      "url": "https://www.dol.gov/agencies/whd/flsa",
+      "accessed": "2026-09-30",
+      "publisher": "US Department of Labor"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "salary",
+      "title": "salary",
+      "type": "word-form",
+      "cluster": "modern",
+      "featured": true,
+      "when": "today",
+      "summary": "A fixed regular payment for work, usually quoted per year. The story asks how a word with salt inside it ended up on a payslip.",
+      "evidence": "By the 19th century: \"recompense stipulated to be paid a person periodically for services\".",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "id": "salaried-hourly",
+      "title": "Salaried versus hourly",
+      "type": "shift",
+      "cluster": "modern",
+      "when": "1938",
+      "summary": "The everyday contrast: salary is pay by the period, wages are pay by the hour. US law wrote the split down in the 1930s.",
+      "evidence": "The salary/hourly distinction \"was first codified by the Fair Labor Standards Act of 1938\" (Wikipedia).",
+      "sources": [
+        "wiki-sal",
+        "flsa"
+      ],
+      "start": "1938"
+    },
+    {
+      "id": "salaryman",
+      "title": "Salaryman (sararīman)",
+      "type": "loanword",
+      "cluster": "modern",
+      "when": "Taisho to early Showa",
+      "summary": "Japan borrowed the English word to name a new kind of worker, the company office employee, and it grew into a national social image.",
+      "evidence": "Derived from English \"salaried man\"; after WWII \"a symbol of the typical Japanese worker\".",
+      "sources": [
+        "salaryman",
+        "ety"
+      ],
+      "start": "1912",
+      "end": "1935"
+    },
+    {
+      "id": "worth-salt",
+      "title": "Worth one's salt",
+      "type": "idiom",
+      "cluster": "modern",
+      "summary": "An English idiom for doing a job well enough to earn your keep, said to descend from the Roman salarium.",
+      "evidence": "The salarium \"gave rise to such expressions as 'being worth one's salt'\" (Wikipedia).",
+      "sources": [
+        "wiki-sal"
+      ]
+    },
+    {
+      "id": "beer-rations",
+      "title": "Beer rations on clay",
+      "type": "precedent",
+      "cluster": "cousins",
+      "when": "c. 3100 BCE",
+      "summary": "The oldest pay record the sources mention is not money at all: a tablet counting workers' daily beer. Pay in goods long predates pay in coin.",
+      "evidence": "\"A cuneiform inscribed clay tablet dated about 3100 BCE provides a record of the daily beer rations for workers in Mesopotamia.\"",
+      "sources": [
+        "wiki-sal"
+      ],
+      "start": "-3100"
+    },
+    {
+      "id": "medieval-rare",
+      "title": "Salary was rare",
+      "type": "shift",
+      "cluster": "shifts",
+      "when": "Middle Ages",
+      "summary": "For centuries regular salaried work was the exception, reserved for servants and higher-status roles, and pay often came as lodging and food.",
+      "evidence": "Salaried employment \"relatively rare and mostly limited to servants and higher status roles, especially in government service\"; pay could be \"lodging, food, and livery clothes\".",
+      "sources": [
+        "wiki-sal"
+      ],
+      "start": "0500",
+      "end": "1500"
+    },
+    {
+      "id": "honorary",
+      "title": "Salaried vs honorary",
+      "type": "shift",
+      "cluster": "shifts",
+      "when": "c. 1600",
+      "summary": "The adjective salaried first set paid posts against honorary, unpaid ones. Only later did the opposite become hourly.",
+      "evidence": "Salaried, c. 1600, originally contrasted with honorary; later with hourly.",
+      "sources": [
+        "ety"
+      ],
+      "start": "1600"
+    },
+    {
+      "id": "office-work",
+      "title": "Office work needs a salary",
+      "type": "shift",
+      "cluster": "shifts",
+      "when": "1870-1930",
+      "summary": "Big firms created managers and clerks whose output was hard to count by the hour, and a per-period salary fitted them.",
+      "evidence": "Office work was \"hard to measure hourly or piecewise\" (Wikipedia, on the Second Industrial Revolution, 1870-1930).",
+      "sources": [
+        "wiki-sal"
+      ],
+      "start": "1870",
+      "end": "1930"
+    },
+    {
+      "id": "verb-caxton",
+      "title": "To salary (verb)",
+      "type": "word-form",
+      "cluster": "shifts",
+      "when": "late 15c.",
+      "summary": "English made a verb from the noun, recorded in Caxton: to pay someone a regular salary.",
+      "evidence": "Verb sense \"to pay a regular salary to\", late 15c., in Caxton.",
+      "sources": [
+        "ety"
+      ],
+      "start": "1470",
+      "end": "1500"
+    },
+    {
+      "id": "english-13c",
+      "title": "salarie in Middle English",
+      "type": "word-form",
+      "cluster": "english",
+      "when": "late 13c.",
+      "summary": "The word enters English with the general sense of pay or reward, not yet a yearly figure.",
+      "evidence": "Noun, late 13c. Old French salaire \"wages, pay, reward\".",
+      "sources": [
+        "ety",
+        "wikt-en"
+      ],
+      "start": "1270",
+      "end": "1300"
+    },
+    {
+      "id": "anglo-french",
+      "title": "Anglo-French salarie",
+      "type": "word-form",
+      "cluster": "english",
+      "when": "13th c.",
+      "summary": "The French of medieval England is the bridge that carried the Latin word across the Channel into English.",
+      "evidence": "\"Anglo-French salarie\", from Old French salaire.",
+      "sources": [
+        "ety",
+        "wikt-en"
+      ],
+      "start": "1201",
+      "end": "1300"
+    },
+    {
+      "id": "old-french",
+      "title": "Old French salaire",
+      "type": "word-form",
+      "cluster": "english",
+      "summary": "Latin salarium evolved into French salaire, the direct parent of the English word and the one still in use in modern French.",
+      "evidence": "Old French salaire \"wages, pay, reward\".",
+      "sources": [
+        "ety",
+        "wikt-la"
+      ]
+    },
+    {
+      "id": "salarium",
+      "title": "Latin salarium",
+      "type": "word-form",
+      "cluster": "rome",
+      "featured": true,
+      "summary": "The Latin word for an allowance or stipend, and the hinge of the whole story. It is built on the word for salt, but the sources cannot say why.",
+      "evidence": "Senses: \"a salary, stipend, allowance, pension\" and \"a meal\".",
+      "sources": [
+        "wikt-la",
+        "ety"
+      ]
+    },
+    {
+      "id": "salarius",
+      "title": "Latin salarius",
+      "type": "word-form",
+      "cluster": "rome",
+      "summary": "An adjective meaning roughly 'to do with salt'. Salarium is that adjective turned into a noun.",
+      "evidence": "Salarium is a \"nominalization of salārius ('of or relating to salt')\".",
+      "sources": [
+        "wikt-la",
+        "wikt-en"
+      ]
+    },
+    {
+      "id": "via-salaria",
+      "title": "Via Salaria, the salt road",
+      "type": "place",
+      "cluster": "rome",
+      "summary": "A road out of Rome named for salt, used for fetching it. It shows how central salt was to early Rome's geography and trade, which is the background any salt-pay theory needs.",
+      "evidence": "\"The Via Salaria owes its name to the Latin word for 'salt'.\"",
+      "sources": [
+        "wiki-via",
+        "wiki-hs"
+      ]
+    },
+    {
+      "id": "stipendium",
+      "title": "Stipendium (stipend)",
+      "type": "word-form",
+      "cluster": "rome",
+      "when": "stipend: early 15c.",
+      "summary": "Rome's other word for soldier's pay, literally a weighing-out of coin. It is the closest relative of salarium and entered English as stipend.",
+      "evidence": "Latin stipendium, \"in military use 'pay, salary'\", from stips \"small payment\" + pendere \"to hang; weigh; pay\".",
+      "sources": [
+        "stipend",
+        "wikt-la"
+      ],
+      "start": "1400",
+      "end": "1433"
+    },
+    {
+      "id": "pie-salt",
+      "title": "PIE *sḗh₂l, salt",
+      "type": "root",
+      "cluster": "root",
+      "featured": true,
+      "summary": "The reconstructed ancestor of words for salt across Europe and beyond. Nobody wrote it down; it is inferred from its descendants.",
+      "evidence": "Descendants listed include Latin sal, Greek hā́ls, Proto-Germanic *saltą, Old Church Slavonic solь and Latvian sāls.",
+      "sources": [
+        "pie"
+      ]
+    },
+    {
+      "id": "sal",
+      "title": "Latin sal",
+      "type": "word-form",
+      "cluster": "root",
+      "summary": "The plain Latin word for salt. Everything Roman in this story grows from it.",
+      "evidence": "Latin sal descends from the Proto-Indo-European root for salt.",
+      "sources": [
+        "pie",
+        "wikt-la"
+      ]
+    },
+    {
+      "id": "greek-hals",
+      "title": "Greek hals",
+      "type": "word-form",
+      "cluster": "root",
+      "summary": "Greek's own descendant of the same root, a reminder that salt was named in much the same way on both sides of the Mediterranean.",
+      "evidence": "Greek hā́ls listed as a descendant of the PIE salt root.",
+      "sources": [
+        "pie"
+      ]
+    },
+    {
+      "id": "english-salt",
+      "title": "English salt",
+      "type": "word-form",
+      "cluster": "root",
+      "summary": "English salt reaches the same root by the Germanic route, so salary and salt are distant cousins by descent as well as parent and child by meaning.",
+      "evidence": "Proto-Germanic *saltą is listed as the ancestor of English salt.",
+      "sources": [
+        "pie"
+      ]
+    },
+    {
+      "id": "salarium-argentum",
+      "title": "\"Salt money\" (unattested)",
+      "type": "theory",
+      "cluster": "debate",
+      "summary": "The tidy explanation, salarium as short for 'salt money', rests on a phrase nobody has found in a Roman text.",
+      "evidence": "\"It is generally assumed that salārium was an abbreviation of salārium argentum ('salt money'), though that phrase is not attested.\"",
+      "sources": [
+        "wikt-en"
+      ]
+    },
+    {
+      "id": "salt-allowance",
+      "title": "A salt allowance",
+      "type": "theory",
+      "cluster": "debate",
+      "summary": "The cautious reading: soldiers got money meant to buy salt (and perhaps other small things), not salt itself. Even this is not well established.",
+      "evidence": "\"a salārium may have been an allowance paid to Roman soldiers for the purchase of salt, but even that is not well established.\"",
+      "sources": [
+        "wiki-hs",
+        "wikt-en"
+      ]
+    },
+    {
+      "id": "pliny-dispute",
+      "title": "What did Pliny say?",
+      "type": "dispute",
+      "cluster": "debate",
+      "when": "1st c. CE",
+      "summary": "Two modern writers quote Pliny's Natural History differently: one has him tying soldiers' reward to salt, the other reads it as being about salt taxes. This study has not read Pliny first-hand and does not choose.",
+      "evidence": "etymologia.org renders Pliny: \"In the old days, it was with salt that the valor of soldiers was rewarded, whence the Latin word for pay is derived.\" Coverley renders 31.89 as salt \"related to magistracies and duty abroad, and that's where we get the word 'salaries'\".",
+      "sources": [
+        "etymologia",
+        "cover"
+      ],
+      "start": "0001",
+      "end": "0100"
+    },
+    {
+      "id": "no-salt-pay",
+      "title": "\"Paid in salt\" is a myth",
+      "type": "debunk",
+      "cluster": "debate",
+      "summary": "The popular claim that legions received salt as wages has no backing in the ancient evidence as these sources report it. One source reports no surviving payroll record that specifies salt rather than coin.",
+      "evidence": "\"a persistent modern claim that the Roman Legions were sometimes paid in salt is baseless.\" Also: \"Historians have found no Roman military payroll records that specify payment in salt rather than coin.\"",
+      "sources": [
+        "wiki-sal",
+        "etymologia"
+      ]
+    },
+    {
+      "id": "sitarion",
+      "title": "Greek sitērion, grain-pay",
+      "type": "parallel",
+      "cluster": "cousins",
+      "summary": "Greek made its word for pay out of grain, not salt. Naming wages after the staple you were given is not unique to Rome.",
+      "evidence": "Greek sitērion \"pay\", etymologically \"provision for grain\", from sitos \"wheat or corn\".",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "id": "wage",
+      "title": "Wage",
+      "type": "word-form",
+      "cluster": "cousins",
+      "when": "c. 1300",
+      "summary": "Salary's everyday rival has a completely different ancestry: a Germanic word for a pledge, not a Latin word for salt.",
+      "evidence": "c. 1300 \"a payment for services rendered, reward\"; also \"a pledge, guarantee, surety\"; from Frankish *wadja-.",
+      "sources": [
+        "wage"
+      ],
+      "start": "1300"
+    }
+  ],
+  "edges": [
+    {
+      "source": "pie-salt",
+      "target": "sal",
+      "label": "descended into",
+      "kind": "explicit",
+      "sources": [
+        "pie"
+      ]
+    },
+    {
+      "source": "pie-salt",
+      "target": "greek-hals",
+      "label": "descended into",
+      "kind": "explicit",
+      "sources": [
+        "pie"
+      ]
+    },
+    {
+      "source": "pie-salt",
+      "target": "english-salt",
+      "label": "via Germanic into",
+      "kind": "explicit",
+      "sources": [
+        "pie"
+      ]
+    },
+    {
+      "source": "sal",
+      "target": "salarius",
+      "label": "base of",
+      "kind": "explicit",
+      "sources": [
+        "wikt-la",
+        "wikt-en"
+      ]
+    },
+    {
+      "source": "salarius",
+      "target": "salarium",
+      "label": "turned into noun",
+      "kind": "explicit",
+      "sources": [
+        "wikt-la"
+      ]
+    },
+    {
+      "source": "sal",
+      "target": "via-salaria",
+      "label": "names",
+      "kind": "explicit",
+      "sources": [
+        "wiki-via"
+      ]
+    },
+    {
+      "source": "via-salaria",
+      "target": "salarium",
+      "label": "same salt world as",
+      "kind": "inferred"
+    },
+    {
+      "source": "salarium",
+      "target": "stipendium",
+      "label": "glossed alongside",
+      "kind": "explicit",
+      "sources": [
+        "wikt-la"
+      ]
+    },
+    {
+      "source": "sitarion",
+      "target": "salarium",
+      "label": "parallel to",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "salarium",
+      "target": "salarium-argentum",
+      "label": "assumed short for",
+      "kind": "explicit",
+      "sources": [
+        "wikt-en"
+      ]
+    },
+    {
+      "source": "salarium",
+      "target": "salt-allowance",
+      "label": "perhaps meant",
+      "kind": "explicit",
+      "sources": [
+        "wiki-hs"
+      ]
+    },
+    {
+      "source": "salarium-argentum",
+      "target": "salt-allowance",
+      "label": "would mean",
+      "kind": "inferred"
+    },
+    {
+      "source": "pliny-dispute",
+      "target": "salarium",
+      "label": "is cited for",
+      "kind": "explicit",
+      "sources": [
+        "etymologia",
+        "cover"
+      ]
+    },
+    {
+      "source": "pliny-dispute",
+      "target": "no-salt-pay",
+      "label": "is misread to deny",
+      "kind": "inferred"
+    },
+    {
+      "source": "no-salt-pay",
+      "target": "salt-allowance",
+      "label": "leaves only",
+      "kind": "explicit",
+      "sources": [
+        "wiki-sal"
+      ]
+    },
+    {
+      "source": "salarium",
+      "target": "worth-salt",
+      "label": "gave rise to",
+      "kind": "explicit",
+      "sources": [
+        "wiki-sal"
+      ]
+    },
+    {
+      "source": "salarium",
+      "target": "old-french",
+      "label": "became",
+      "kind": "explicit",
+      "sources": [
+        "ety",
+        "wikt-la"
+      ]
+    },
+    {
+      "source": "old-french",
+      "target": "anglo-french",
+      "label": "carried to England as",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "anglo-french",
+      "target": "english-13c",
+      "label": "borrowed as",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "english-13c",
+      "target": "verb-caxton",
+      "label": "then also a verb",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "verb-caxton",
+      "target": "honorary",
+      "label": "then adjective, against",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "honorary",
+      "target": "salaried-hourly",
+      "label": "later opposed to hourly",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "english-13c",
+      "target": "salary",
+      "label": "narrowed to",
+      "kind": "explicit",
+      "sources": [
+        "ety"
+      ]
+    },
+    {
+      "source": "medieval-rare",
+      "target": "office-work",
+      "label": "gave way to",
+      "kind": "inferred"
+    },
+    {
+      "source": "office-work",
+      "target": "salaried-hourly",
+      "label": "made salary fit",
+      "kind": "explicit",
+      "sources": [
+        "wiki-sal"
+      ]
+    },
+    {
+      "source": "salaried-hourly",
+      "target": "salary",
+      "label": "shapes today's sense of",
+      "kind": "inferred"
+    },
+    {
+      "source": "office-work",
+      "target": "salaryman",
+      "label": "also produced",
+      "kind": "explicit",
+      "sources": [
+        "wiki-sal"
+      ]
+    },
+    {
+      "source": "salary",
+      "target": "salaryman",
+      "label": "lent to Japan as",
+      "kind": "explicit",
+      "sources": [
+        "salaryman",
+        "ety"
+      ]
+    },
+    {
+      "source": "wage",
+      "target": "salaried-hourly",
+      "label": "the hourly side of",
+      "kind": "explicit",
+      "sources": [
+        "ety",
+        "wage"
+      ]
+    },
+    {
+      "source": "beer-rations",
+      "target": "medieval-rare",
+      "label": "early pay in kind, like",
+      "kind": "inferred"
+    },
+    {
+      "source": "stipendium",
+      "target": "salary",
+      "label": "English stipend, sibling of",
+      "kind": "inferred"
+    }
+  ],
+  "stories": [
+    {
+      "id": "salt-to-payslip",
+      "title": "From salt to payslip",
+      "summary": "The main lineage: a root for salt becomes a Roman adjective, a Roman noun, a French word, an English word, and finally the number on an offer letter.",
+      "steps": [
+        "pie-salt",
+        "sal",
+        "salarius",
+        "salarium",
+        "old-french",
+        "anglo-french",
+        "english-13c",
+        "verb-caxton",
+        "honorary",
+        "salaried-hourly",
+        "salary"
+      ]
+    },
+    {
+      "id": "paid-in-salt",
+      "title": "Were soldiers paid in salt?",
+      "summary": "The famous story versus what the sources can support: the word is about salt, the payment probably was not.",
+      "steps": [
+        "salarium",
+        "salarium-argentum",
+        "salt-allowance",
+        "pliny-dispute",
+        "no-salt-pay",
+        "worth-salt"
+      ]
+    },
+    {
+      "id": "desk-job",
+      "title": "How salary became a desk job",
+      "summary": "Salaried work was rare for centuries. Offices and big firms made it the normal shape of a career, and Japan imported the word along with the idea.",
+      "steps": [
+        "medieval-rare",
+        "office-work",
+        "salaried-hourly",
+        "salaryman"
+      ]
+    },
+    {
+      "id": "other-pay-words",
+      "title": "Other words for pay",
+      "summary": "Grain, beer, weighed coin and pledges: pay has been named after many things, and salt is just one.",
+      "steps": [
+        "beer-rations",
+        "sitarion",
+        "salarium",
+        "stipendium",
+        "wage"
+      ]
+    }
+  ]
+}

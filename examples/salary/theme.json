@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "Salary: archive parchment",
+  "mode": "light",
+  "colors": { "bg": "#f4efe6", "surface": "#fbf8f2", "text": "#2a2520", "muted": "#5e564c", "line": "rgba(0,0,0,0.16)", "accent": "#9b3d2a" },
+  "clusters": {
+    "modern": "#9b3d2a",
+    "shifts": "#a8621a",
+    "english": "#2c6a70",
+    "rome": "#6b3a78",
+    "root": "#4a6b2a",
+    "debate": "#3c4f8a",
+    "cousins": "#b0486e"
+  },
+  "font": {
+    "body": "Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Times New Roman', serif",
+    "display": "Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, serif"
+  },
+  "wordmark": { "text": "salary", "letterSpacing": "0.04em" },
+  "brandSources": [
+    { "what": "palette (bg, text, accent)", "from": "playbook/4-brand.md, 'Archive / etymology / history' row", "note": "A word has no brand. Parchment and brick-red evoke a dictionary page and a Roman salt-road. Values taken from the playbook starting point, unchanged." },
+    { "what": "cluster colours", "from": "chosen by hand", "note": "Seven darker earth and ink tones so they stay >= 3:1 on the parchment background." },
+    { "what": "font", "from": "system serif stack", "note": "No webfont: Georgia/Palatino serif suggests print etymology, renders offline." }
+  ]
+}

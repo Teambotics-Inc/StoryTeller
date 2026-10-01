@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "name": "Neutral dark",
+  "mode": "dark",
+  "colors": { "bg": "#0c0d10", "surface": "#14161b", "text": "#eceae4", "muted": "#a3a19a", "line": "rgba(236,234,228,0.16)", "accent": "#7cc4ff" },
+  "clusters": {},
+  "font": { "body": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" },
+  "brandSources": [{ "what": "all", "from": "none", "note": "Neutral fallback: the subject has no brand identity (person, place, idea)." }]
+}
