@@ -32,6 +32,8 @@ node scripts/build.mjs examples/<name>  # rebuild an example after changing the 
 
 A deployer can feature extra stories without committing them: put `story.json` and `theme.json` (and an optional `thumb.webp`, plus an `order.json` array of slugs) in `site/showcase/<slug>/`. That folder is git-ignored; `.vercelignore` makes sure it is still uploaded when you deploy from your machine.
 
+Hosting: the repository can be connected to a static host so that every push to `main` redeploys the page. The build command and output folder are in `vercel.json`; set the `SITE_URL` environment variable to the public address.
+
 ## Reporting problems
 
 Open an issue with the subject you tried, what the agent produced, and what was wrong (a missing source, an unreadable colour, a broken view). A built `index.html` or the `story.json` helps.
