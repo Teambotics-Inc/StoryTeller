@@ -47,6 +47,8 @@ If a part of the subject is thinly sourced, *say so* (final message) rather than
 
 Some fetch tools return a model-written digest of a page, not the page. Never put a digest's wording in `evidence` as if it were a quote. For any figure or quote, get the raw text (curl the URL, or read it in a browser tool) and copy from that. If you only have a digest, paraphrase and say "per <source>", or leave the quote out. Put the assumptions you made without asking the user (scope, angle, affiliation) at the top of `research.md`.
 
+Other reading traps: a primary source that exists only as a scanned image or PDF with no text layer (render the page and read it, mark it "read from scan", and flag its quotes for a human to check); and tag-stripped page text can leave stray spaces before punctuation, so compare any quote with the rendered page, not just the extracted text.
+
 ## Conflicts and gaps
 
 - Sources disagree: model both as nodes or capture in `details` ("Source A dates this to 1854; Source B to 1857"). Don't silently pick. If the only sources you can reach contradict each other about a primary text you couldn't read yourself, make the disagreement its own node and say so; do not resolve it by guessing.

@@ -69,6 +69,7 @@ main{position:relative;flex:1;min-height:0}
 .badge text{fill:var(--bg);font-size:9px;font-weight:700;text-anchor:middle;dominant-baseline:central}
 .story-path{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:2 7;vector-effect:non-scaling-stroke;opacity:.85}
 
+.zoom.right{left:auto;right:20px}
 .zoom{position:absolute;left:20px;bottom:92px;display:flex;flex-direction:column;gap:6px}
 .zoom .btn{width:36px;padding:0;font-size:16px;letter-spacing:0}
 .foot{position:absolute;left:0;right:0;bottom:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 24px;padding:10px 24px;font-size:11px;color:var(--muted);pointer-events:none;background:linear-gradient(to top,var(--bg) 40%,transparent)}
@@ -487,6 +488,7 @@ function startStory(id) {
   const st = storyById.get(id); if (!st) return;
   S.story = st; S.step = 0;
   if (S.view !== "graph" && S.view !== "timeline") setView("graph");
+  if (S.view === "timeline") tlFocusStory(st); // zoom the timeline to the story's own dates
   $("storybar").classList.add("on"); goStep(0);
 }
 function goStep(i) {
@@ -611,6 +613,14 @@ function tlZoom(f, mx) {
   const ns = Math.min((fb - fa) * 1.5, Math.max(span * f, 2 / 365.25));
   const fx = Math.min(1, Math.max(0, (mx - TL.geo.x0) / TL.geo.pw)), tc = TL.v0 + fx * span;
   TL.v0 = tc - fx * ns; TL.v1 = TL.v0 + ns; renderTimeline();
+}
+function tlFocusStory(st) {
+  if (TL.even) return;
+  if (!TL.init) { tlReset(); TL.init = true; }
+  const ts = st.steps.map((id) => byId.get(id)).filter((n) => n && n.t0 != null);
+  if (ts.length < 2) return;
+  const a = Math.min(...ts.map((n) => n.t0)), b = Math.max(...ts.map((n) => n.t1)), pad = Math.max((b - a) * 0.14, 2 / 365.25);
+  TL.v0 = a - pad; TL.v1 = b + pad;
 }
 function ensureTL(n) {
   if (S.view !== "timeline" || TL.even || n.t0 == null) return;
@@ -789,6 +799,7 @@ function setView(v) {
   svgEl.style.visibility = v === "graph" ? "visible" : "hidden";
   const spatial = v === "graph" || v === "timeline";
   $("zoom").style.display = spatial ? "" : "none";
+  $("zoom").classList.toggle("right", v === "timeline");
   $("btn-fit").style.display = spatial ? "" : "none";
   $("chips").style.display = v === "read" ? "none" : "";
   $("stories").style.display = spatial ? "" : "none";

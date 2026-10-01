@@ -4,7 +4,7 @@ You were pointed at this repo because a person wants a **story** told about a su
 
 Subjects can be anything with a story: a person, a brand, a company, a relationship, a word's etymology, a historical event, a place, a product, an idea. See [`playbook/subject-kinds.md`](playbook/subject-kinds.md).
 
-The finished references are in [`examples/`](examples/). Open an example's `index.html` to see the quality bar, and read its `story.json` and `theme.json` to see the data. [`examples/salary/`](examples/salary/) is a non-brand subject (a word's etymology): light theme, dated nodes for the Timeline view, and a disputed source modelled as its own node.
+The finished references are in [`examples/`](examples/). Open an example's `index.html` to see the quality bar, and read its `story.json` and `theme.json` to see the data. [`examples/salary/`](examples/salary/) is a word's etymology: light theme, dated nodes, and a disputed source modelled as its own node. [`examples/great-fire-of-london/`](examples/great-fire-of-london/) is a historical event: dark theme, day-level dates (lead with the Timeline), and sources that disagree shown side by side rather than resolved.
 
 ## Hard rules
 

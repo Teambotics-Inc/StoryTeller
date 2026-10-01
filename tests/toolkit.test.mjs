@@ -151,3 +151,12 @@ test("no reference file mentions a local machine path or a placeholder token", (
     assert.ok(!/TODO|FIXME|XXX/.test(t), `${f} contains a TODO marker`);
   }
 });
+
+test("warns when one far-off date would stretch the timeline axis", () => {
+  const { story } = example();
+  for (const n of story.nodes) { delete n.start; delete n.end; }
+  story.nodes.slice(0, 10).forEach((n, i) => { n.start = `1666-09-${String(i + 1).padStart(2, "0")}`; });
+  assert.ok(!validateStory(story).warnings.some((w) => /outlier/.test(w)));
+  story.nodes[10].start = "1830";
+  assert.ok(validateStory(story).warnings.some((w) => /outlier/.test(w)));
+});

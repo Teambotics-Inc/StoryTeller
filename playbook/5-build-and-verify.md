@@ -17,7 +17,7 @@ No Node available? The renderer is just `template/story.html` with eight placeho
 
 ## Verify in a browser (do this, don't assume)
 
-Open the built `index.html` and check. `file://` works, or serve the folder (`python -m http.server 4173 --directory stories/<slug>`, then http://localhost:4173). Deep links: `index.html#node=<id>` and `#story=<id>`.
+Open the built `index.html` and check. `file://` works, or serve the folder (`python -m http.server 4173 --directory stories/<slug>`, then http://localhost:4173). Deep links: `index.html#node=<id>`, `#story=<id>` and `#view=<timeline|read|outline|list>`. Pick a free port if 4173 is taken.
 
 Some browser tools crop screenshots at emulated sizes; if so, also verify through DOM queries (panel open, `scrollWidth` equals the viewport width). Do all of these checks:
 

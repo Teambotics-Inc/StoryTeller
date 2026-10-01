@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "name": "Embers",
+  "mode": "dark",
+  "colors": { "bg": "#17110d", "surface": "#221a15", "text": "#f2e7d8", "muted": "#bcae9d", "line": "rgba(242,231,216,0.16)", "accent": "#ff7a2e" },
+  "clusters": {
+    "before": "#c8ab74",
+    "days": "#ff7a2e",
+    "spread": "#ffd23f",
+    "voices": "#5fc3c8",
+    "toll": "#ee5f6f",
+    "blame": "#b891ec",
+    "rebuild": "#86c971"
+  },
+  "font": {
+    "body": "Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Times New Roman', serif",
+    "display": "Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, serif"
+  },
+  "wordmark": { "text": "The Great Fire of London", "letterSpacing": "0.02em" },
+  "brandSources": [
+    { "what": "palette (bg, surface, text, muted, accent)", "from": "chosen by hand", "note": "Deliberate non-brand palette: an event has no brand. Very dark warm brown evokes soot and night, warm off-white text evokes lamplight and paper, and the fire-orange accent is the hot centre of the map. No company or organisation palette was copied." },
+    { "what": "cluster colours", "from": "chosen by hand", "note": "Seven hues spread around the wheel (sand, orange, yellow, teal, rose-red, violet, green) so every cluster is distinct at small dot size; all checked >= 3:1 against the background by the build." },
+    { "what": "font", "from": "system serif stack", "note": "No webfont: Georgia/Palatino serif suggests a printed chronicle and renders offline." }
+  ]
+}

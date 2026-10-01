@@ -4,7 +4,7 @@
 
 A person, a brand, a company, a relationship, a word's etymology, a moment in history, a place: anything with a story. The agent researches it, models it as a sourced graph, styles it to match the subject (real brand colours and fonts when there is a brand), and hands you **one self-contained HTML file** you can open, share, or host anywhere.
 
-Open [`examples/salary/index.html`](examples/salary/index.html) to see what comes out: the story of a word, with a graph, a timeline, a read-through narrative, an outline and a list.
+Open an example to see what comes out: [`examples/salary/index.html`](examples/salary/index.html) (the story of a word, light theme) or [`examples/great-fire-of-london/index.html`](examples/great-fire-of-london/index.html) (a historical event, dark theme, opens on its timeline). Each has a graph, a timeline, a read-through narrative, an outline and a list.
 
 ## How to use it
 
@@ -47,7 +47,7 @@ The agent writes two small JSON files (`story.json` = the graph, its sources and
 Node 18+ and nothing else (no `npm install`):
 
 ```bash
-node scripts/build.mjs examples/salary                 # validate + rebuild an example
+node scripts/build.mjs examples/salary                 # validate + rebuild an example (also: examples/great-fire-of-london)
 node scripts/build.mjs stories/my-subject --check      # validate only
 node scripts/brand-probe.mjs https://www.example.com   # inspect a site's brand evidence
 node --test tests/toolkit.test.mjs                     # run the tests

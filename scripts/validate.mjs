@@ -114,6 +114,14 @@ export function validateStory(s) {
     else if (b === null) E(`node '${n.id}' end must look like "1666-09-02", "1666-09", "1666" or "-0500"; got ${JSON.stringify(n.end)}`);
     else { dated++; if (b < a) E(`node '${n.id}' ends before it starts`); }
   }
+  {
+    const ts = s.nodes.flatMap((n) => [dateParts(n.start), n.end === undefined ? null : dateParts(n.end)]).filter((v) => v !== null).sort((a, b) => a - b);
+    if (ts.length >= 8) {
+      const q = (p) => ts[Math.min(ts.length - 1, Math.floor(p * (ts.length - 1)))];
+      const core = q(0.9) - q(0.1), full = ts[ts.length - 1] - ts[0];
+      if (core > 0 && full > core * 8) W(`a few outlier dates stretch the timeline (all dates span ${full.toFixed(1)} years but 80% fall within ${core.toFixed(1)}); keep far-off dates in 'when' only, or drop 'start'/'end' on those nodes`);
+    }
+  }
   if (dated > 0 && dated < 5) W(`only ${dated} node(s) have 'start'; the Timeline view needs at least 5 dated nodes, so it will be hidden`);
   if (s.views !== undefined && (!Array.isArray(s.views) || s.views.some((v) => !VIEWS.includes(v)))) E(`'views' must be an array drawn from ${VIEWS.join(", ")}`);
   if (s.defaultView !== undefined && !VIEWS.includes(s.defaultView)) E(`'defaultView' must be one of ${VIEWS.join(", ")}`);
