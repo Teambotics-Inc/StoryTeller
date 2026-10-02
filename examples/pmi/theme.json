@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "name": "Philip Morris International (independent study)",
+  "mode": "light",
+  "colors": {
+    "bg": "#ffffff",
+    "surface": "#f6f6f6",
+    "text": "#262626",
+    "muted": "#6e6e6e",
+    "line": "rgba(0,0,0,0.16)",
+    "accent": "#0074c0"
+  },
+  "clusters": {
+    "origins": "#6e6e6e",
+    "cigarettes": "#dd1414",
+    "pivot": "#0074c0",
+    "products": "#00778b",
+    "oversight": "#003da5",
+    "deals": "#4d8f2f",
+    "scrutiny": "#c2410c"
+  },
+  "font": {
+    "body": "Lato, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+    "googleFonts": "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap"
+  },
+  "wordmark": {
+    "text": "PHILIP MORRIS INTERNATIONAL",
+    "letterSpacing": "0.12em",
+    "uppercase": true
+  },
+  "brandSources": [
+    {
+      "what": "accent #0074c0",
+      "from": "https://www.pmi.com/ via scripts/brand-probe.mjs (--theme-color) and a screenshot of the home page",
+      "note": "The probe's top saturated colour; it is the site's theme colour and matches the blue progress banner on the home page. Contrast on white is about 5:1."
+    },
+    {
+      "what": "bg #ffffff, surface #f6f6f6, text #262626, muted #6e6e6e, mode light",
+      "from": "https://www.pmi.com/ via scripts/brand-probe.mjs",
+      "note": "Most-used colours on the site: #ffffff (381 uses), #000000, #6e6e6e, #25282a, #f6f6f6. Text uses the site's #262626 rather than pure black."
+    },
+    {
+      "what": "cluster colours",
+      "from": "probe accent candidates #0074c0, #003da5, #dd1414, #4d8f2f",
+      "note": "pivot #0074c0, oversight #003da5, cigarettes #dd1414 and deals #4d8f2f are site colours. products #00778b is my own dark teal, chosen to stay distinct from the site blues at dot size. origins uses the site grey #6e6e6e. scrutiny #c2410c is my own choice (a burnt orange) to make the critical cluster stand apart; it is not a PMI colour."
+    },
+    {
+      "what": "font",
+      "from": "https://www.pmi.com/ probe: Google Fonts link for Lato; computed families include Avenir / Helvetica Neue stacks",
+      "note": "Lato is on Google Fonts and is requested by the site, so it is used for body text with a Helvetica/Arial fallback. The real wordmark is not reproduced; the wordmark text is set in spaced capitals as an approximation and no logo is embedded."
+    }
+  ]
+}
