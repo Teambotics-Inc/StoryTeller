@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Standalone stories get a Full screen button (and the F key). It is hidden where the browser cannot do full screen and when the story is embedded in another page, which supplies its own button. All examples rebuilt.
 - Design sketch for optional public, no-account publishing: `scripts/publish.mjs` (dry run unless `--yes`; create, update, delete with a saved edit token), a reference service in `services/publish/` (server-side render, validation, size limits, rate limit, policy hook, noindex and no-network CSP), `docs/publishing.md`, and `playbook/6-publish.md`. Nothing is deployed and no service URL is built in. Rendering moved into `scripts/render.mjs` (output unchanged).
 - Repository moved to the Teambotics-Inc organisation (old links redirect).
 - Two brand-matched company studies added as examples (their colours extracted from each company's own site, with provenance in `brandSources`).

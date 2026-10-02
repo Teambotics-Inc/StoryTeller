@@ -234,6 +234,7 @@ noscript{display:block;padding:24px;max-width:760px}
   <div class="actions">
     <button class="btn" id="btn-fit">Fit</button>
     <button class="btn" id="btn-reset">Reset</button>
+    <button class="btn" id="btn-fs" hidden aria-pressed="false" title="Full screen (F)">Full screen</button>
   </div>
 </header>
 <div class="toolbar" role="region" aria-label="Filters">
@@ -835,6 +836,19 @@ if (viewList.length < 2) $("views").style.display = "none";
 $("q").addEventListener("input", (e) => { S.q = e.target.value.trim().toLowerCase(); render(); });
 $("btn-fit").onclick = () => { if (S.view === "timeline") { tlReset(); renderTimeline(); } else fit(); };
 $("btn-reset").onclick = () => { S.filter = "all"; S.q = ""; $("q").value = ""; endStoryQuiet(); tlReset(); layout(); place(); select(null); fit(); };
+/* Full screen: only offered where the browser supports it and the page is not embedded (an embedding page, like the product site, has its own button). */
+(() => {
+  const btn = $("btn-fs"), root = document.documentElement;
+  const request = root.requestFullscreen || root.webkitRequestFullscreen;
+  const isFs = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  let embedded = false; try { embedded = window.self !== window.top; } catch { embedded = true; }
+  if (!request || document.fullscreenEnabled === false || embedded) return;
+  const sync = () => { btn.textContent = isFs() ? "Exit full screen" : "Full screen"; btn.setAttribute("aria-pressed", String(isFs())); };
+  const toggle = () => { if (isFs()) (document.exitFullscreen || document.webkitExitFullscreen).call(document); else { const r = request.call(root); if (r && r.catch) r.catch(() => {}); } };
+  btn.hidden = false; btn.onclick = toggle; sync();
+  document.addEventListener("fullscreenchange", sync); document.addEventListener("webkitfullscreenchange", sync);
+  addEventListener("keydown", (e) => { if ((e.key === "f" || e.key === "F") && !e.ctrlKey && !e.metaKey && !e.altKey && !/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) { e.preventDefault(); toggle(); } });
+})();
 $("zin").onclick = () => (S.view === "timeline" ? tlZoom(1 / 1.4, (TL.geo ? TL.geo.x0 + TL.geo.pw / 2 : 0)) : zoomAt(1.3, svgEl.clientWidth / 2, svgEl.clientHeight / 2));
 $("zout").onclick = () => (S.view === "timeline" ? tlZoom(1.4, (TL.geo ? TL.geo.x0 + TL.geo.pw / 2 : 0)) : zoomAt(1 / 1.3, svgEl.clientWidth / 2, svgEl.clientHeight / 2));
 $("sb-prev").onclick = () => goStep(S.step - 1); $("sb-next").onclick = () => goStep(S.step + 1); $("sb-exit").onclick = endStory;
