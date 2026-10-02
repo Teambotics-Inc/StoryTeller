@@ -1,0 +1,1479 @@
+{
+  "schemaVersion": 1,
+  "title": "Philip Morris International",
+  "subject": {
+    "name": "Philip Morris International",
+    "kind": "company",
+    "url": "https://www.pmi.com/"
+  },
+  "tagline": "PMI says it is building a future without cigarettes. This map sets that vision beside what regulators, health bodies and its own numbers show.",
+  "root": "pmi",
+  "credit": "An independent StoryTeller study.",
+  "disclaimer": "Built from PMI’s public website, FDA and WHO statements, and independent analysis from Tobacco Tactics (University of Bath). PMI’s own figures are shown as PMI’s claims. Not affiliated with or endorsed by Philip Morris International.",
+  "generated": {
+    "date": "2026-10-02"
+  },
+  "clusters": [
+    {
+      "id": "origins",
+      "label": "Origins & structure"
+    },
+    {
+      "id": "cigarettes",
+      "label": "Marlboro & cigarettes"
+    },
+    {
+      "id": "pivot",
+      "label": "The smoke-free pivot"
+    },
+    {
+      "id": "products",
+      "label": "Products & science"
+    },
+    {
+      "id": "oversight",
+      "label": "Regulators & health bodies"
+    },
+    {
+      "id": "deals",
+      "label": "Deals"
+    },
+    {
+      "id": "scrutiny",
+      "label": "Scrutiny"
+    }
+  ],
+  "sources": [
+    {
+      "id": "ms",
+      "title": "Key milestones",
+      "url": "https://www.pmi.com/who-we-are/key-milestones",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "vision",
+      "title": "Our smoke-free vision",
+      "url": "https://www.pmi.com/our-progress/our-smoke-free-vision",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "progress",
+      "title": "Our progress",
+      "url": "https://www.pmi.com/our-progress",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "reg",
+      "title": "Our views: Regulation",
+      "url": "https://www.pmi.com/who-we-are/our-views-and-standards/our-views/regulation",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "health",
+      "title": "Our views: Health effects of smoking and tobacco use",
+      "url": "https://www.pmi.com/who-we-are/our-views-and-standards/our-views/health-effects-of-smoking-tobacco",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "heated",
+      "title": "Heated tobacco products",
+      "url": "https://www.pmi.com/our-business/smoke-free-products/heated-tobacco-products",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "oral",
+      "title": "Oral smokeless products",
+      "url": "https://www.pmi.com/our-business/smoke-free-products/oral-smokeless-products",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "science",
+      "title": "PMI’s science & research on smoke-free products",
+      "url": "https://www.pmi.com/our-science",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "youth",
+      "title": "Preventing youth use of our products",
+      "url": "https://www.pmi.com/our-business/preventing-youth-access",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "transp",
+      "title": "Transparency",
+      "url": "https://www.pmi.com/who-we-are/our-views-and-standards/standards/transparency",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "lead",
+      "title": "Our leadership team",
+      "url": "https://www.pmi.com/who-we-are/our-leadership-team",
+      "publisher": "Philip Morris International",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "fda19",
+      "title": "FDA permits sale of IQOS Tobacco Heating System through premarket tobacco product application pathway",
+      "url": "https://www.fda.gov/news-events/press-announcements/fda-permits-sale-iqos-tobacco-heating-system-through-premarket-tobacco-product-application-pathway",
+      "publisher": "US Food and Drug Administration",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "fdaiqos22",
+      "title": "FDA Authorizes Reduced Exposure Claim for IQOS 3 System Holder and Charger",
+      "url": "https://www.fda.gov/tobacco-products/ctp-newsroom/fda-authorizes-reduced-exposure-claim-iqos-3-system-holder-and-charger",
+      "publisher": "US Food and Drug Administration",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "who20",
+      "title": "WHO statement on heated tobacco products and the US FDA decision regarding IQOS",
+      "url": "https://www.who.int/news/item/27-07-2020-who-statement-on-heated-tobacco-products-and-the-us-fda-decision-regarding-iqos",
+      "publisher": "World Health Organization",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "fdazyn",
+      "title": "FDA Authorizes 20 ZYN Nicotine Pouches to Be Marketed with Specific Modified Risk Claim",
+      "url": "https://www.fda.gov/tobacco-products/ctp-newsroom/fda-authorizes-20-zyn-nicotine-pouches-be-marketed-specific-modified-risk-claim",
+      "publisher": "US Food and Drug Administration",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "tt",
+      "title": "Philip Morris International (Tobacco Tactics)",
+      "url": "https://www.tobaccotactics.org/article/philip-morris-international/",
+      "publisher": "Tobacco Control Research Group, University of Bath",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "wpmi",
+      "title": "Philip Morris International (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Philip_Morris_International",
+      "publisher": "Wikipedia",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "wmarl",
+      "title": "Marlboro (cigarette) (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Marlboro_(cigarette)",
+      "publisher": "Wikipedia",
+      "accessed": "2026-10-02"
+    },
+    {
+      "id": "wfsfw",
+      "title": "Foundation for a Smoke-Free World (Wikipedia)",
+      "url": "https://en.wikipedia.org/wiki/Foundation_for_a_Smoke-Free_World",
+      "publisher": "Wikipedia",
+      "accessed": "2026-10-02"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "pmi",
+      "title": "Philip Morris International",
+      "type": "company",
+      "cluster": "pivot",
+      "featured": true,
+      "summary": "The cigarette maker that sells Marlboro outside the US and says its purpose is now to replace cigarettes with smoke-free alternatives.",
+      "details": "Headquartered in Stamford, Connecticut, with its operations centre in Lausanne. Tobacco Tactics, citing Euromonitor, puts its share at around 23% of the global cigarette market outside China in 2025.",
+      "evidence": "approximately 84,900 employees",
+      "sources": [
+        "transp",
+        "ms",
+        "tt"
+      ],
+      "themes": [
+        "company"
+      ]
+    },
+    {
+      "id": "bond-street",
+      "title": "Bond Street shop, 1847",
+      "type": "event",
+      "cluster": "origins",
+      "summary": "The company’s own account of where it starts: a tobacconist’s shop in London, long before the US cigarette brands.",
+      "evidence": "Mr. Philip Morris opens a shop on London's Bond Street, selling tobacco and ready-made cigarettes.",
+      "when": "1847",
+      "start": "1847",
+      "sources": [
+        "ms"
+      ],
+      "themes": [
+        "history"
+      ]
+    },
+    {
+      "id": "philip-morris-cos",
+      "title": "Part of Philip Morris Cos.",
+      "type": "event",
+      "cluster": "origins",
+      "summary": "PMI began as the international operating arm of a US parent, which later renamed itself Altria.",
+      "details": "Wikipedia notes the parent changed its name to Altria Group in 2003.",
+      "evidence": "PMI is incorporated as an operating company of Philip Morris Companies Inc.",
+      "when": "1987",
+      "start": "1987",
+      "sources": [
+        "ms",
+        "wpmi"
+      ],
+      "themes": [
+        "structure"
+      ]
+    },
+    {
+      "id": "lausanne",
+      "title": "Lausanne operations centre",
+      "type": "place",
+      "cluster": "origins",
+      "summary": "PMI moved its operations centre from the US to Switzerland, where it still runs global operations.",
+      "evidence": "PMI operations center is transferred from Rye Brook, NY (U.S.) to Lausanne, Switzerland.",
+      "when": "2001",
+      "start": "2001",
+      "sources": [
+        "ms",
+        "tt"
+      ],
+      "themes": [
+        "structure"
+      ]
+    },
+    {
+      "id": "altria-spin",
+      "title": "Spun off from Altria, 2008",
+      "type": "event",
+      "cluster": "origins",
+      "featured": true,
+      "summary": "PMI became an independent public company, leaving the US cigarette business with Altria and taking the rest of the world.",
+      "details": "Tobacco Tactics, citing an Associated Press report, says the split let PMI clear the international business from the legal and regulatory constraints facing the US one.",
+      "evidence": "In March 2008, PMI was spun off from Altria and has been an entirely separate entity since then.",
+      "when": "March 2008",
+      "start": "2008-03",
+      "sources": [
+        "wpmi",
+        "tt"
+      ],
+      "themes": [
+        "structure"
+      ]
+    },
+    {
+      "id": "marlboro-brand",
+      "title": "Marlboro",
+      "type": "brand",
+      "cluster": "cigarettes",
+      "featured": true,
+      "summary": "The flagship cigarette brand. PMI sells it everywhere except the US, where Altria’s Philip Morris USA does.",
+      "details": "Tobacco Tactics says Marlboro is the biggest-selling cigarette brand in the international market.",
+      "evidence": "Marlboro, which went on to become the company’s most famous brand, is established and registered as a trademark.",
+      "when": "1908 (PMI’s date)",
+      "start": "1908",
+      "sources": [
+        "ms",
+        "tt",
+        "wmarl"
+      ],
+      "themes": [
+        "brand"
+      ]
+    },
+    {
+      "id": "marlboro-dispute",
+      "title": "When was Marlboro born?",
+      "type": "disagreement",
+      "cluster": "cigarettes",
+      "summary": "PMI dates the Marlboro trademark to 1908; Wikipedia says the brand was introduced in 1924. This map shows both rather than choosing.",
+      "details": "A trademark registration and a market launch can be different events, which may explain the gap, but neither source says so.",
+      "evidence": "The brand was introduced in 1924, initially marketed towards women before it evolved towards men during the 1950s.",
+      "when": "1908 vs 1924",
+      "sources": [
+        "ms",
+        "wmarl"
+      ],
+      "themes": [
+        "brand"
+      ]
+    },
+    {
+      "id": "marlboro-no1",
+      "title": "World’s best-selling cigarette",
+      "type": "event",
+      "cluster": "cigarettes",
+      "summary": "By PMI’s account Marlboro reached the top of global cigarette sales in 1972 and stayed there as the company’s anchor.",
+      "evidence": "Marlboro becomes the world’s best-selling cigarette.",
+      "when": "1972",
+      "start": "1972",
+      "sources": [
+        "ms",
+        "wpmi"
+      ],
+      "themes": [
+        "brand"
+      ]
+    },
+    {
+      "id": "pmi-says-cigs-harmful",
+      "title": "“All cigarettes are harmful”",
+      "type": "position",
+      "cluster": "cigarettes",
+      "summary": "PMI’s own health page states plainly that cigarettes are harmful and addictive, including the brands it sells.",
+      "details": "The page cites public-health authorities on smoke constituents and says secondhand smoke causes disease in non-smokers.",
+      "evidence": "Yes, all cigarettes are harmful and addictive.",
+      "sources": [
+        "health"
+      ],
+      "themes": [
+        "claims"
+      ]
+    },
+    {
+      "id": "one-billion",
+      "title": "One billion smokers",
+      "type": "premise",
+      "cluster": "pivot",
+      "summary": "The premise of the pivot: PMI argues the number of smokers is not expected to fall soon, so people who don’t quit need an alternative.",
+      "details": "PMI also says quitting is always the best option, and that its products are for adults who would otherwise keep smoking.",
+      "evidence": "There are more than one billion smokers in the world.",
+      "sources": [
+        "vision",
+        "science"
+      ],
+      "themes": [
+        "claims"
+      ]
+    },
+    {
+      "id": "vision-2016",
+      "title": "The smoke-free vision",
+      "type": "event",
+      "cluster": "pivot",
+      "featured": true,
+      "summary": "In 2016 PMI announced it would shift resources to smoke-free products, with the aim that they one day replace cigarettes.",
+      "details": "The Board reaffirmed this as the corporate purpose in 2020, according to PMI’s milestones page.",
+      "evidence": "PMI announces its vision to deliver a smoke-free future",
+      "when": "2016",
+      "start": "2016",
+      "sources": [
+        "ms",
+        "vision"
+      ],
+      "themes": [
+        "strategy",
+        "claims"
+      ]
+    },
+    {
+      "id": "not-risk-free",
+      "title": "“Not risk-free”",
+      "type": "position",
+      "cluster": "pivot",
+      "summary": "PMI’s vision is hedged: the products it promotes are described as better than smoking, not harmless, and they contain nicotine.",
+      "evidence": "Smoke-free products are not risk-free and contain nicotine, which is addictive.",
+      "sources": [
+        "vision",
+        "heated",
+        "oral"
+      ],
+      "themes": [
+        "claims"
+      ]
+    },
+    {
+      "id": "two-thirds-2030",
+      "title": "Two-thirds smoke-free by 2030",
+      "type": "target",
+      "cluster": "pivot",
+      "featured": true,
+      "summary": "A numeric target that turns the vision into something measurable: most revenue from non-cigarette products by 2030.",
+      "evidence": "PMI announces ambition for over two-thirds of its total net revenues to come from better alternatives to smoking by 2030.",
+      "when": "announced 2023",
+      "start": "2023",
+      "sources": [
+        "ms",
+        "progress"
+      ],
+      "themes": [
+        "strategy",
+        "claims"
+      ]
+    },
+    {
+      "id": "share-2026",
+      "title": "42% smoke-free, H1 2026",
+      "type": "metric",
+      "cluster": "pivot",
+      "summary": "PMI’s latest reported progress against the 2030 ambition: a little over two-fifths of net revenues from smoke-free products.",
+      "details": "PMI also reports more than 43 million estimated legal-age consumers of its smoke-free products as of 31 December 2025. Both are PMI’s own figures.",
+      "evidence": "42 percent of PMI’s total global net revenues came from our smoke-free business.",
+      "when": "H1 2026",
+      "start": "2026",
+      "sources": [
+        "ms",
+        "progress"
+      ],
+      "themes": [
+        "claims",
+        "numbers"
+      ]
+    },
+    {
+      "id": "ceo",
+      "title": "Jacek Olczak",
+      "type": "person",
+      "cluster": "pivot",
+      "summary": "A PMI lifer who became CEO in 2021 and Group CEO in 2026, the executive most associated with the transformation and the Swedish Match deal.",
+      "details": "Joined PMI in 1993 in finance; CFO from 2012 and COO from 2018.",
+      "evidence": "appointed Group CEO PMI in January 2026, having served as PMI’s Chief Executive Officer since May 2021",
+      "sources": [
+        "lead",
+        "tt"
+      ],
+      "themes": [
+        "people"
+      ]
+    },
+    {
+      "id": "neuchatel",
+      "title": "Neuchâtel R&D centre",
+      "type": "place",
+      "cluster": "products",
+      "summary": "The Swiss research facility PMI built for smoke-free products, years before it announced the vision publicly.",
+      "evidence": "PMI unveils its new research-and-development facility in Neuchâtel, Switzerland",
+      "when": "2009",
+      "start": "2009",
+      "sources": [
+        "ms"
+      ],
+      "themes": [
+        "science"
+      ]
+    },
+    {
+      "id": "science-spend",
+      "title": "US$16 billion on R&D",
+      "type": "metric",
+      "cluster": "products",
+      "summary": "PMI’s stated investment in smoke-free products since 2008, with a team of more than 1,600 scientists, engineers and technicians.",
+      "details": "PMI’s own figure as of 31 December 2025; it describes its methods as inspired by the pharmaceutical industry.",
+      "evidence": "Since 2008, we’ve invested over USD 16 billion to develop, scientifically substantiate, and commercialize smoke-free products",
+      "sources": [
+        "science",
+        "vision"
+      ],
+      "themes": [
+        "science",
+        "numbers"
+      ]
+    },
+    {
+      "id": "iqos-pilot",
+      "title": "IQOS pilot, 2014",
+      "type": "event",
+      "cluster": "products",
+      "summary": "PMI’s first heat-not-burn platform goes into trial markets in Italy and Japan.",
+      "evidence": "PMI pilots IQOS, its first heat-not-burn platform in its smoke-free products portfolio, in Italy and Japan.",
+      "when": "2014",
+      "start": "2014",
+      "sources": [
+        "ms"
+      ],
+      "themes": [
+        "products"
+      ]
+    },
+    {
+      "id": "iqos-launch-2015",
+      "title": "IQOS launches in Europe, 2015",
+      "type": "event",
+      "cluster": "products",
+      "summary": "A first wider rollout in selected cities, a year before the smoke-free vision was announced.",
+      "evidence": "PMI launches IQOS heated tobacco products in key cities in Portugal, Romania, Russia, and Switzerland.",
+      "when": "2015",
+      "start": "2015",
+      "sources": [
+        "ms"
+      ],
+      "themes": [
+        "products"
+      ]
+    },
+    {
+      "id": "iqos",
+      "title": "IQOS heated tobacco",
+      "type": "product",
+      "cluster": "products",
+      "featured": true,
+      "summary": "A device that heats tobacco sticks instead of burning them, PMI’s lead smoke-free product and the core of its case for “switching”.",
+      "details": "The FDA notes these products still meet the legal definition of a cigarette.",
+      "evidence": "Heated tobacco products heat real tobacco instead of burning it.",
+      "sources": [
+        "heated",
+        "ms",
+        "fda19"
+      ],
+      "themes": [
+        "products"
+      ]
+    },
+    {
+      "id": "iqos-claim",
+      "title": "“95% lower harmful chemicals”",
+      "type": "claim",
+      "cluster": "products",
+      "summary": "PMI’s headline number for IQOS, accompanied by its own footnote that this is not the same as a 95% reduction in risk.",
+      "details": "The figure is an average across a range of chemicals, excluding nicotine, versus a reference cigarette (3R4F). PMI’s footnote adds: “this does not necessarily equal a 95 percent reduction in risk”.",
+      "evidence": "Emits on average 95 percent lower levels of harmful chemicals compared with cigarettes",
+      "sources": [
+        "heated"
+      ],
+      "themes": [
+        "claims",
+        "numbers"
+      ]
+    },
+    {
+      "id": "iqos-ilumabonds",
+      "title": "IQOS ILUMA and BONDS",
+      "type": "product",
+      "cluster": "products",
+      "summary": "Newer generations: ILUMA (induction heating) in 2021 and a cheaper device, BONDS by IQOS, in 2022.",
+      "evidence": "Launch of IQOS ILUMA heated tobacco product.",
+      "when": "2021–2022",
+      "start": "2021",
+      "end": "2022",
+      "sources": [
+        "ms",
+        "heated"
+      ],
+      "themes": [
+        "products"
+      ]
+    },
+    {
+      "id": "zyn",
+      "title": "ZYN nicotine pouches",
+      "type": "product",
+      "cluster": "products",
+      "featured": true,
+      "summary": "A tobacco-free oral nicotine pouch that came with Swedish Match and became PMI’s second pillar in the US.",
+      "evidence": "ZYN nicotine pouches do not contain tobacco and are inherently smoke-free",
+      "sources": [
+        "oral",
+        "ms",
+        "fdazyn"
+      ],
+      "themes": [
+        "products"
+      ]
+    },
+    {
+      "id": "fctc-2000",
+      "title": "Calls for regulation, 2000",
+      "type": "event",
+      "cluster": "oversight",
+      "summary": "At WHO hearings on the tobacco treaty, PMI said publicly that the industry should be regulated.",
+      "evidence": "PMI calls for regulation of the tobacco industry at the World Health Organization’s public hearings",
+      "when": "2000",
+      "start": "2000",
+      "sources": [
+        "ms"
+      ],
+      "themes": [
+        "regulation"
+      ]
+    },
+    {
+      "id": "fda-pmta-2019",
+      "title": "FDA authorizes IQOS, 2019",
+      "type": "event",
+      "cluster": "oversight",
+      "featured": true,
+      "summary": "The FDA allowed IQOS onto the US market because it found fewer or lower levels of some toxins than cigarettes, with strict marketing limits.",
+      "details": "The FDA found acrolein and formaldehyde “89% to 95% and 66% to 91% lower” than from combustible cigarettes, and said few non-users would likely start. This was the premarket pathway, not a reduced-risk finding.",
+      "evidence": "it does not mean these products are safe or “FDA approved.”",
+      "when": "April 2019",
+      "start": "2019-04",
+      "sources": [
+        "fda19",
+        "ms"
+      ],
+      "themes": [
+        "regulation"
+      ]
+    },
+    {
+      "id": "no-safe-product",
+      "title": "“No safe tobacco product”",
+      "type": "position",
+      "cluster": "oversight",
+      "summary": "The regulator’s refrain across decisions: authorization is not endorsement, and quitting entirely benefits health most.",
+      "evidence": "There is no safe tobacco product, and those who do not use tobacco products should not start.",
+      "sources": [
+        "fdazyn",
+        "fda19"
+      ],
+      "themes": [
+        "regulation"
+      ]
+    },
+    {
+      "id": "fda-mrtp-2020",
+      "title": "FDA reduced-exposure order, 2020",
+      "type": "event",
+      "cluster": "oversight",
+      "summary": "A second FDA step let PMI tell US adults that switching completely reduces exposure to harmful chemicals, but not that IQOS is less harmful.",
+      "details": "WHO notes the FDA orders rejected claims that use of the product is less harmful or reduces risk to health.",
+      "evidence": "The FDA authorizes the marketing of IQOS 2.4 in the U.S. as a modified risk tobacco product with reduced exposure information.",
+      "when": "7 July 2020",
+      "start": "2020-07-07",
+      "sources": [
+        "ms",
+        "who20",
+        "fdaiqos22"
+      ],
+      "themes": [
+        "regulation"
+      ]
+    },
+    {
+      "id": "who-response",
+      "title": "WHO: exposure is not risk",
+      "type": "position",
+      "cluster": "oversight",
+      "featured": true,
+      "summary": "Three weeks later the WHO said the FDA decision did not show heated tobacco is safer, and warned that exposure claims may mislead.",
+      "details": "WHO also says some toxins are present at higher levels in HTP aerosols than in cigarette smoke, and that the FDA orders are specific to the US, which is not a party to the WHO tobacco treaty.",
+      "evidence": "reducing exposure to harmful chemicals in Heated Tobacco Products (HTPs) does not render them harmless",
+      "when": "27 July 2020",
+      "start": "2020-07-27",
+      "sources": [
+        "who20"
+      ],
+      "themes": [
+        "regulation",
+        "scrutiny"
+      ]
+    },
+    {
+      "id": "fda-zyn-2025",
+      "title": "FDA authorizes ZYN, 2025",
+      "type": "event",
+      "cluster": "oversight",
+      "summary": "ZYN pouches cleared the FDA’s premarket pathway in January 2025, a few years after Swedish Match joined PMI.",
+      "evidence": "authorized for sale in the United States since January 2025",
+      "when": "16 January 2025",
+      "start": "2025-01-16",
+      "sources": [
+        "fdazyn",
+        "ms"
+      ],
+      "themes": [
+        "regulation"
+      ]
+    },
+    {
+      "id": "fda-zyn-mrp",
+      "title": "ZYN reduced-risk claim, 2026",
+      "type": "event",
+      "cluster": "oversight",
+      "featured": true,
+      "summary": "The FDA allowed 20 ZYN products to say that using them instead of cigarettes lowers risk of several named diseases, the first MRTP claim of that kind for ZYN.",
+      "details": "The FDA says the orders expire in five years and can be withdrawn if, for example, youth uptake rises significantly. Orders went to Swedish Match USA, Inc.",
+      "evidence": "Using ZYN instead of cigarettes puts you at a lower risk of mouth cancer, heart disease, lung cancer, stroke, emphysema, and chronic bronchitis.",
+      "when": "30 June 2026",
+      "start": "2026-06-30",
+      "sources": [
+        "fdazyn",
+        "ms"
+      ],
+      "themes": [
+        "regulation",
+        "claims"
+      ]
+    },
+    {
+      "id": "youth",
+      "title": "Youth-access safeguards",
+      "type": "claim",
+      "cluster": "oversight",
+      "summary": "PMI describes programs to keep its smoke-free products away from people under the legal age; regulators make this a condition of authorization.",
+      "details": "The FDA says it can withdraw a marketing order if there is uptake of the product by youth.",
+      "evidence": "In 2024, 99 percent of our total shipment volume was covered by youth access prevention programs in our indirect retail channels.",
+      "sources": [
+        "youth",
+        "fda19"
+      ],
+      "themes": [
+        "claims",
+        "regulation"
+      ]
+    },
+    {
+      "id": "emerging-markets",
+      "title": "Sampoerna and Coltabaco, 2005",
+      "type": "deal",
+      "cluster": "deals",
+      "summary": "Two acquisitions that gave PMI the largest cigarette makers in Indonesia and Colombia, the kind of scale that built its international cigarette base.",
+      "evidence": "PMI acquires PT HM Sampoerna Tbk in Indonesia and Compania Colombiana de Tabaco SA (Coltabaco) in Colombia.",
+      "when": "2005",
+      "start": "2005",
+      "sources": [
+        "ms"
+      ],
+      "themes": [
+        "deals"
+      ]
+    },
+    {
+      "id": "altria-iqos",
+      "title": "Altria’s US IQOS rights",
+      "type": "deal",
+      "cluster": "deals",
+      "summary": "A 2013 arrangement left Altria with US rights to PMI’s heated product; PMI bought them back after a dispute and launched IQOS in the US in 2025.",
+      "details": "Tobacco Tactics reports Altria said it had met the milestones to keep its rights, PMI disagreed, and PMI paid Altria US$2.7 billion; rights transferred on 30 April 2024. IQOS went on sale in Austin, Texas in March 2025.",
+      "evidence": "In 2013, PMI and Altria had a commercial agreement that PMI not market IQOS in the US.",
+      "when": "2013 to 30 April 2024",
+      "start": "2013",
+      "end": "2024-04-30",
+      "sources": [
+        "tt",
+        "ms"
+      ],
+      "themes": [
+        "deals"
+      ]
+    },
+    {
+      "id": "swedish-match",
+      "title": "Swedish Match, 2022",
+      "type": "deal",
+      "cluster": "deals",
+      "featured": true,
+      "summary": "A US$16 billion acquisition that brought ZYN and a leading oral nicotine portfolio, aimed squarely at the US market.",
+      "details": "Per Tobacco Tactics, PMI made the offer in May 2022 and by November 2022 controlled the company.",
+      "evidence": "the opportunity in the U.S., which is the world’s largest market for smoke-free products",
+      "when": "2022",
+      "start": "2022",
+      "sources": [
+        "ms",
+        "tt"
+      ],
+      "themes": [
+        "deals"
+      ]
+    },
+    {
+      "id": "beyond-nicotine",
+      "title": "Vectura and Fertin, 2021",
+      "type": "deal",
+      "cluster": "deals",
+      "summary": "PMI bought inhaled-drug and oral-delivery businesses to grow beyond nicotine, in what it calls a broader wellness and healthcare push.",
+      "evidence": "PMI acquires Fertin Pharma, OtiTopic, and Vectura, providing growth opportunities beyond products that provide nicotine.",
+      "when": "2021",
+      "start": "2021",
+      "sources": [
+        "ms",
+        "tt"
+      ],
+      "themes": [
+        "deals"
+      ]
+    },
+    {
+      "id": "vectura-sale",
+      "title": "Vectura sold, 2024",
+      "type": "event",
+      "cluster": "scrutiny",
+      "summary": "After strong criticism, including from the WHO, PMI sold Vectura, saying the opposition to its transformation was unwarranted.",
+      "evidence": "unwarranted opposition to PMI’s transformation",
+      "when": "September 2024",
+      "start": "2024-09",
+      "sources": [
+        "tt"
+      ],
+      "themes": [
+        "scrutiny",
+        "deals"
+      ]
+    },
+    {
+      "id": "plain-pack",
+      "title": "Opposing plain packaging",
+      "type": "position",
+      "cluster": "scrutiny",
+      "summary": "PMI says it has “forcefully objected” to some regulation, such as plain packs; Tobacco Tactics documents legal and lobbying challenges to EU and other rules.",
+      "details": "Tobacco Tactics lists a 2014 challenge to the EU Tobacco Products Directive and a 2017 challenge to plain packaging in Uruguay.",
+      "evidence": "We still believe that plain packaging inappropriately treats adult smokers as unable to make their own decisions.",
+      "sources": [
+        "reg",
+        "tt"
+      ],
+      "themes": [
+        "regulation",
+        "scrutiny"
+      ]
+    },
+    {
+      "id": "combustible-share",
+      "title": "Still mostly cigarettes?",
+      "type": "claim",
+      "cluster": "scrutiny",
+      "featured": true,
+      "summary": "Tobacco Tactics reports that a majority of PMI’s 2025 revenue still came from combustible products, even as PMI reports 42% smoke-free in H1 2026.",
+      "details": "The two figures cover different periods and are not directly comparable; both are shown as sources state them.",
+      "evidence": "the majority of PMI’s revenue – around 59% in 2025 – comes from the sale of cigarettes and other conventional combustible tobacco products",
+      "when": "2025",
+      "start": "2025",
+      "sources": [
+        "tt"
+      ],
+      "themes": [
+        "scrutiny",
+        "numbers"
+      ]
+    },
+    {
+      "id": "shipments",
+      "title": "Cigarette volumes rose",
+      "type": "claim",
+      "cluster": "scrutiny",
+      "summary": "Tobacco Tactics notes cigarette shipments rose in 2024 and that PMI dropped a 2025 target to ship under 550 billion combustible units.",
+      "details": "It also cites University of Bath research (2024) finding that PMI’s own volume targets were conservative.",
+      "evidence": "shipments of cigarettes rose to 616.8 billion sticks, up from 612.9 billion in 2023",
+      "when": "2023–2024",
+      "start": "2023",
+      "end": "2024",
+      "sources": [
+        "tt"
+      ],
+      "themes": [
+        "scrutiny",
+        "numbers"
+      ]
+    },
+    {
+      "id": "two-faces",
+      "title": "Two audiences, two messages",
+      "type": "claim",
+      "cluster": "scrutiny",
+      "summary": "Researchers who analysed a leaked PMI strategy document say the public message is transformation while the investor message stresses cigarette brands.",
+      "details": "Tobacco Tactics quotes the study as saying that in investor-facing communications PMI “focus on cigarettes and reiterate the strength of their existing cigarette brand portfolios”. This is the researchers’ reading, not PMI’s.",
+      "evidence": "In public-facing communications, PMI stress their commitment to transformation and change",
+      "sources": [
+        "tt"
+      ],
+      "themes": [
+        "scrutiny"
+      ]
+    },
+    {
+      "id": "fsfw",
+      "title": "Foundation for a Smoke-Free World",
+      "type": "organisation",
+      "cluster": "scrutiny",
+      "summary": "A PMI-funded foundation launched in 2017; the WHO and other health bodies refused to work with it, and PMI ended its funding in 2023.",
+      "details": "Renamed Global Action to End Smoking in May 2024. Wikipedia reports a 2021 investigation by several outlets that described it as a lobbying tool; that is the investigators’ conclusion, not an established fact.",
+      "evidence": "In 2023, the agreement was terminated, with a payment of $140 million.",
+      "when": "2017 to 2023",
+      "start": "2017-09",
+      "end": "2023",
+      "sources": [
+        "tt",
+        "wfsfw"
+      ],
+      "themes": [
+        "scrutiny"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "bond-street",
+      "target": "pmi",
+      "label": "origin of",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "philip-morris-cos",
+      "label": "was an operating company of",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "altria-spin",
+      "target": "philip-morris-cos",
+      "label": "separated PMI from",
+      "kind": "explicit",
+      "sources": [
+        "wpmi",
+        "tt"
+      ]
+    },
+    {
+      "source": "lausanne",
+      "target": "pmi",
+      "label": "operations centre of",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "tt"
+      ]
+    },
+    {
+      "source": "altria-spin",
+      "target": "altria-iqos",
+      "label": "led to 2013 framework: US rights with Altria",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "tt"
+      ]
+    },
+    {
+      "source": "marlboro-brand",
+      "target": "pmi",
+      "label": "flagship of",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "tt"
+      ]
+    },
+    {
+      "source": "marlboro-brand",
+      "target": "marlboro-dispute",
+      "label": "dated differently in",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "wmarl"
+      ]
+    },
+    {
+      "source": "emerging-markets",
+      "target": "pmi",
+      "label": "added cigarette leaders to",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "pmi-says-cigs-harmful",
+      "target": "marlboro-brand",
+      "label": "applies to",
+      "kind": "inferred"
+    },
+    {
+      "source": "pmi-says-cigs-harmful",
+      "target": "one-billion",
+      "label": "motivates concern for",
+      "kind": "inferred"
+    },
+    {
+      "source": "pmi",
+      "target": "vision-2016",
+      "label": "announced",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "vision"
+      ]
+    },
+    {
+      "source": "vision-2016",
+      "target": "one-billion",
+      "label": "rests on",
+      "kind": "explicit",
+      "sources": [
+        "vision"
+      ]
+    },
+    {
+      "source": "vision-2016",
+      "target": "not-risk-free",
+      "label": "hedged by",
+      "kind": "explicit",
+      "sources": [
+        "vision"
+      ]
+    },
+    {
+      "source": "vision-2016",
+      "target": "two-thirds-2030",
+      "label": "restated as target",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "progress"
+      ]
+    },
+    {
+      "source": "two-thirds-2030",
+      "target": "share-2026",
+      "label": "measured by",
+      "kind": "explicit",
+      "sources": [
+        "progress",
+        "ms"
+      ]
+    },
+    {
+      "source": "vision-2016",
+      "target": "iqos",
+      "label": "to be delivered by",
+      "kind": "explicit",
+      "sources": [
+        "vision",
+        "heated"
+      ]
+    },
+    {
+      "source": "ceo",
+      "target": "pmi",
+      "label": "leads",
+      "kind": "explicit",
+      "sources": [
+        "lead"
+      ]
+    },
+    {
+      "source": "ceo",
+      "target": "swedish-match",
+      "label": "described US opportunity of",
+      "kind": "explicit",
+      "sources": [
+        "tt"
+      ]
+    },
+    {
+      "source": "neuchatel",
+      "target": "pmi",
+      "label": "R&D base of",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "neuchatel",
+      "target": "iqos-pilot",
+      "label": "built the capability behind",
+      "kind": "inferred"
+    },
+    {
+      "source": "pmi",
+      "target": "science-spend",
+      "label": "reports",
+      "kind": "explicit",
+      "sources": [
+        "science"
+      ]
+    },
+    {
+      "source": "science-spend",
+      "target": "iqos",
+      "label": "funds",
+      "kind": "inferred"
+    },
+    {
+      "source": "iqos-pilot",
+      "target": "iqos-launch-2015",
+      "label": "then",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "iqos-pilot",
+      "target": "iqos",
+      "label": "first trial of",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "iqos-launch-2015",
+      "target": "vision-2016",
+      "label": "then",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "iqos",
+      "target": "iqos-claim",
+      "label": "marketed with",
+      "kind": "explicit",
+      "sources": [
+        "heated"
+      ]
+    },
+    {
+      "source": "iqos",
+      "target": "iqos-ilumabonds",
+      "label": "evolved into",
+      "kind": "explicit",
+      "sources": [
+        "heated",
+        "ms"
+      ]
+    },
+    {
+      "source": "iqos",
+      "target": "zyn",
+      "label": "sits beside",
+      "kind": "explicit",
+      "sources": [
+        "vision"
+      ]
+    },
+    {
+      "source": "zyn",
+      "target": "two-thirds-2030",
+      "label": "counts toward",
+      "kind": "inferred"
+    },
+    {
+      "source": "iqos",
+      "target": "fda-pmta-2019",
+      "label": "authorized in the US via",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "fda19"
+      ]
+    },
+    {
+      "source": "fda-pmta-2019",
+      "target": "fda-mrtp-2020",
+      "label": "followed by",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "who20"
+      ]
+    },
+    {
+      "source": "fda-mrtp-2020",
+      "target": "who-response",
+      "label": "answered by",
+      "kind": "explicit",
+      "sources": [
+        "who20"
+      ]
+    },
+    {
+      "source": "who-response",
+      "target": "iqos-claim",
+      "label": "questions the meaning of",
+      "kind": "explicit",
+      "sources": [
+        "who20"
+      ]
+    },
+    {
+      "source": "fda-pmta-2019",
+      "target": "no-safe-product",
+      "label": "came with",
+      "kind": "explicit",
+      "sources": [
+        "fda19"
+      ]
+    },
+    {
+      "source": "fda-zyn-mrp",
+      "target": "no-safe-product",
+      "label": "came with",
+      "kind": "explicit",
+      "sources": [
+        "fdazyn"
+      ]
+    },
+    {
+      "source": "fda-pmta-2019",
+      "target": "youth",
+      "label": "required safeguards for",
+      "kind": "explicit",
+      "sources": [
+        "fda19"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "youth",
+      "label": "describes",
+      "kind": "explicit",
+      "sources": [
+        "youth"
+      ]
+    },
+    {
+      "source": "zyn",
+      "target": "fda-zyn-2025",
+      "label": "authorized by",
+      "kind": "explicit",
+      "sources": [
+        "fdazyn",
+        "ms"
+      ]
+    },
+    {
+      "source": "fda-zyn-2025",
+      "target": "fda-zyn-mrp",
+      "label": "followed by",
+      "kind": "explicit",
+      "sources": [
+        "fdazyn"
+      ]
+    },
+    {
+      "source": "swedish-match",
+      "target": "zyn",
+      "label": "brought",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "fdazyn"
+      ]
+    },
+    {
+      "source": "swedish-match",
+      "target": "iqos",
+      "label": "reached the US ahead of",
+      "kind": "inferred"
+    },
+    {
+      "source": "altria-iqos",
+      "target": "iqos",
+      "label": "kept out of the US",
+      "kind": "explicit",
+      "sources": [
+        "tt"
+      ]
+    },
+    {
+      "source": "swedish-match",
+      "target": "beyond-nicotine",
+      "label": "followed",
+      "kind": "inferred"
+    },
+    {
+      "source": "beyond-nicotine",
+      "target": "vectura-sale",
+      "label": "partly reversed by",
+      "kind": "explicit",
+      "sources": [
+        "tt"
+      ]
+    },
+    {
+      "source": "vectura-sale",
+      "target": "vision-2016",
+      "label": "tested the limits of",
+      "kind": "inferred"
+    },
+    {
+      "source": "pmi",
+      "target": "plain-pack",
+      "label": "opposed",
+      "kind": "explicit",
+      "sources": [
+        "reg",
+        "tt"
+      ]
+    },
+    {
+      "source": "fctc-2000",
+      "target": "plain-pack",
+      "label": "contrasts with",
+      "kind": "inferred"
+    },
+    {
+      "source": "share-2026",
+      "target": "combustible-share",
+      "label": "set against",
+      "kind": "inferred"
+    },
+    {
+      "source": "shipments",
+      "target": "combustible-share",
+      "label": "underlies",
+      "kind": "inferred"
+    },
+    {
+      "source": "pmi",
+      "target": "two-faces",
+      "label": "criticised for",
+      "kind": "explicit",
+      "sources": [
+        "tt"
+      ]
+    },
+    {
+      "source": "shipments",
+      "target": "two-thirds-2030",
+      "label": "complicates",
+      "kind": "inferred"
+    },
+    {
+      "source": "fsfw",
+      "target": "pmi",
+      "label": "funded by",
+      "kind": "explicit",
+      "sources": [
+        "tt",
+        "wfsfw"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "altria-spin",
+      "label": "emerged from",
+      "kind": "explicit",
+      "sources": [
+        "wpmi",
+        "tt"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "swedish-match",
+      "label": "acquired",
+      "kind": "explicit",
+      "sources": [
+        "ms",
+        "tt"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "beyond-nicotine",
+      "label": "acquired",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "pmi-says-cigs-harmful",
+      "label": "states",
+      "kind": "explicit",
+      "sources": [
+        "health"
+      ]
+    },
+    {
+      "source": "iqos-claim",
+      "target": "not-risk-free",
+      "label": "carries caveat",
+      "kind": "explicit",
+      "sources": [
+        "heated"
+      ]
+    },
+    {
+      "source": "pmi",
+      "target": "fctc-2000",
+      "label": "called for regulation in",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    },
+    {
+      "source": "marlboro-brand",
+      "target": "marlboro-no1",
+      "label": "became",
+      "kind": "explicit",
+      "sources": [
+        "ms"
+      ]
+    }
+  ],
+  "stories": [
+    {
+      "id": "replacing-cigarettes",
+      "title": "The case for replacing cigarettes",
+      "summary": "PMI’s own argument, in its own order: a billion smokers, a vision hedged by “not risk-free”, two product families, a revenue target and the latest progress figure.",
+      "steps": [
+        "one-billion",
+        "vision-2016",
+        "not-risk-free",
+        "iqos",
+        "zyn",
+        "two-thirds-2030",
+        "share-2026"
+      ]
+    },
+    {
+      "id": "cigarette-empire",
+      "title": "A cigarette empire",
+      "summary": "Where the company came from, and the brand that still anchors it: from a London shop to the world’s best-selling cigarette.",
+      "steps": [
+        "bond-street",
+        "pmi",
+        "marlboro-brand",
+        "marlboro-no1"
+      ]
+    },
+    {
+      "id": "regulators-weigh-in",
+      "title": "How regulators and the WHO read IQOS",
+      "summary": "One product, two readings: the FDA authorizes IQOS with caveats and a narrow exposure claim, and the WHO says reduced exposure does not prove reduced risk.",
+      "steps": [
+        "iqos",
+        "fda-pmta-2019",
+        "fda-mrtp-2020",
+        "who-response",
+        "iqos-claim"
+      ]
+    },
+    {
+      "id": "buying-the-us",
+      "title": "Getting to the US market",
+      "summary": "The US is the biggest prize for smoke-free products. The route took a spin-off, a rights dispute with Altria, a US$16 billion acquisition and two FDA decisions.",
+      "steps": [
+        "altria-spin",
+        "altria-iqos",
+        "iqos",
+        "swedish-match",
+        "zyn",
+        "fda-zyn-2025",
+        "fda-zyn-mrp"
+      ]
+    },
+    {
+      "id": "said-and-shown",
+      "title": "What PMI says and what the numbers show",
+      "summary": "The vision is a target, not yet a fact. This path sets PMI’s own progress figure beside independent reporting on cigarette revenue, volumes and messaging.",
+      "steps": [
+        "two-thirds-2030",
+        "share-2026",
+        "combustible-share",
+        "shipments",
+        "two-faces"
+      ]
+    }
+  ]
+}
