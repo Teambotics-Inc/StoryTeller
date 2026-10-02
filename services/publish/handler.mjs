@@ -17,14 +17,19 @@ const reply = (status, body, headers = {}) => new Response(JSON.stringify(body),
 const safeEqual = (a, b) => { const x = Buffer.from(a), y = Buffer.from(b); return x.length === y.length && crypto.timingSafeEqual(x, y); };
 
 // Headers for the published pages. They hold inline script and data, so they get no network access at all.
-export const PAGE_HEADERS = {
-  "content-type": "text/html; charset=utf-8",
-  "x-robots-tag": "noindex, nofollow",
-  "x-content-type-options": "nosniff",
-  "referrer-policy": "no-referrer",
-  "content-security-policy": "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
-  "cache-control": "public, max-age=300",
-};
+// Only the template's own scripts may run: script-src lists their SHA-256 hashes, so injected markup would not execute
+// even if a validation gap let some through. (JSON data blocks are not scripts and need no entry.)
+export function pageHeaders(html) {
+  const hashes = [...html.matchAll(/<script(?![^>]*type="application\/json")[^>]*>([\s\S]*?)<\/script>/g)].map((m) => `'sha256-${crypto.createHash("sha256").update(m[1]).digest("base64")}'`);
+  return {
+    "content-type": "text/html; charset=utf-8",
+    "x-robots-tag": "noindex, nofollow",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "no-referrer",
+    "content-security-policy": `default-src 'none'; script-src ${hashes.join(" ") || "'none'"}; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'`,
+    "cache-control": "public, max-age=300",
+  };
+}
 
 // ---- storage adapter: { get(id), put(id, record), delete(id) }. Swap in object storage or a KV store in production. ----
 export function memoryStore() {
@@ -33,7 +38,7 @@ export function memoryStore() {
 }
 
 // ---- rate limiter: { allow(key) -> boolean }. This one is a per-process sketch; use a shared store in production. ----
-export function memoryLimiter({ max = 10, windowMs = 3_600_000 } = {}) {
+export function memoryLimiter({ max = 10, windowMs = 3_600_000, maxKeys = 10_000 } = {}) {
   const hits = new Map();
   return {
     allow(key) {
@@ -41,7 +46,11 @@ export function memoryLimiter({ max = 10, windowMs = 3_600_000 } = {}) {
       const recent = (hits.get(key) || []).filter((t) => now - t < windowMs);
       if (recent.length >= max) { hits.set(key, recent); return false; }
       recent.push(now);
-      hits.set(key, recent);
+      hits.delete(key);
+      hits.set(key, recent); // re-insert so the Map stays ordered oldest-activity first
+      if (hits.size > maxKeys) { // bounded memory: drop the least recently active keys
+        for (const k of hits.keys()) { if (hits.size <= maxKeys) break; hits.delete(k); }
+      }
       return true;
     },
   };
@@ -67,7 +76,14 @@ function check(body) {
   return { errors: [...a.errors.map((m) => `story: ${m}`), ...b.errors.map((m) => `theme: ${m}`)], story, theme };
 }
 
-export function createHandler({ store = memoryStore(), limiter = memoryLimiter(), policy = defaultPolicy, baseUrl = "http://localhost:8787", clientKey = (req) => req.headers.get("x-forwarded-for") || "local" } = {}) {
+export function createHandler({ store = memoryStore(), limiter = memoryLimiter(), policy = defaultPolicy, baseUrl = "http://localhost:8787", trustProxy = false, clientKey } = {}) {
+  // The rate-limit key is the caller's socket address, passed by the transport as ctx.ip. X-Forwarded-For is client-controlled,
+  // so it is ignored unless trustProxy is set, which is only correct behind a proxy that appends the real address
+  // (the right-most entry is the one that proxy added).
+  const keyOf = clientKey || ((req, ctx) => {
+    if (trustProxy) { const xff = (req.headers.get("x-forwarded-for") || "").split(",").map((s) => s.trim()).filter(Boolean); if (xff.length) return xff[xff.length - 1]; }
+    return ctx.ip || "local";
+  });
   const base = baseUrl.replace(/\/$/, "");
 
   async function prepare(req) {
@@ -92,18 +108,18 @@ export function createHandler({ store = memoryStore(), limiter = memoryLimiter()
 
   const limited = () => reply(429, { error: "rate limit reached, try again later" }, { "retry-after": "3600" });
 
-  return async function handle(req) {
+  return async function handle(req, ctx = {}) {
     const url = new URL(req.url);
     const parts = url.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
 
     if (req.method === "GET" && parts[0] === "s" && parts.length === 2) {
       const rec = ID_RE.test(parts[1]) ? await store.get(parts[1]) : null;
-      return rec ? new Response(rec.html, { headers: PAGE_HEADERS }) : reply(404, { error: "not found" });
+      return rec ? new Response(rec.html, { headers: pageHeaders(rec.html) }) : reply(404, { error: "not found" });
     }
     if (parts[0] !== "v1" || parts[1] !== "stories") return reply(404, { error: "not found" });
 
     if (req.method === "POST" && parts.length === 2) {
-      if (!limiter.allow(clientKey(req))) return limited();
+      if (!limiter.allow(keyOf(req, ctx))) return limited();
       const p = await prepare(req);
       if (p.res) return p.res;
       const id = newId(), token = newToken(), now = new Date().toISOString();
@@ -115,7 +131,7 @@ export function createHandler({ store = memoryStore(), limiter = memoryLimiter()
       const o = await owner(req, id);
       if (o.res) return o.res;
       if (req.method === "DELETE") { await store.delete(id); return reply(200, { deleted: id }); }
-      if (!limiter.allow(clientKey(req))) return limited();
+      if (!limiter.allow(keyOf(req, ctx))) return limited();
       const p = await prepare(req);
       if (p.res) return p.res;
       await store.put(id, { ...o.rec, html: p.html, title: p.title, updatedAt: new Date().toISOString() });

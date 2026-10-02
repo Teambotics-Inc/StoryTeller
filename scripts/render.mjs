@@ -3,6 +3,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { isCssColour } from "./validate.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -13,7 +14,7 @@ const json = (o) => [60, 0x2028, 0x2029].reduce((s, cp) => s.split(String.fromCh
 
 export function renderStory(story, theme) {
   const c = theme.colors;
-  const rootCss = `:root{--bg:${c.bg};--surface:${c.surface || c.bg};--text:${c.text};--muted:${c.muted || c.text};--line:${c.line || "rgba(128,128,128,.25)"};--accent:${c.accent};color-scheme:${theme.mode}}`;
+  const rootCss = `:root{--bg:${c.bg};--surface:${c.surface || c.bg};--text:${c.text};--muted:${c.muted || c.text};--line:${isCssColour(c.line) ? c.line : "rgba(128,128,128,.25)"};--accent:${c.accent};color-scheme:${theme.mode}}`;
   const fontLinks = theme.font?.googleFonts
     ? `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="${esc(theme.font.googleFonts)}">`
     : "";

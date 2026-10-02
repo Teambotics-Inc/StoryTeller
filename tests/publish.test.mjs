@@ -9,6 +9,7 @@ import path from "node:path";
 import { spawn } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { createHandler, memoryLimiter, LIMITS } from "../services/publish/handler.mjs";
+import { nodeListener } from "../services/publish/server.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publish = path.join(root, "scripts", "publish.mjs");
@@ -16,14 +17,7 @@ const example = path.join(root, "examples", "salary");
 
 let server, base, handler;
 before(async () => {
-  server = http.createServer(async (nreq, nres) => {
-    const chunks = [];
-    for await (const c of nreq) chunks.push(c);
-    const noBody = ["GET", "HEAD"].includes(nreq.method);
-    const res = await handler(new Request(`http://${nreq.headers.host}${nreq.url}`, { method: nreq.method, headers: nreq.headers, body: noBody ? undefined : Buffer.concat(chunks) }));
-    nres.writeHead(res.status, Object.fromEntries(res.headers));
-    nres.end(Buffer.from(await res.arrayBuffer()));
-  });
+  server = http.createServer(nodeListener((req, ctx) => handler(req, ctx)));
   await new Promise((r) => server.listen(0, "127.0.0.1", r));
   base = `http://127.0.0.1:${server.address().port}`;
   handler = createHandler({ baseUrl: base, limiter: memoryLimiter({ max: 100 }) });
@@ -124,4 +118,56 @@ test("client refuses a non-https service and a missing service", async () => {
   const r2 = await exec([d, "--yes"], { ...process.env, STORYTELLER_PUBLISH_URL: "" });
   assert.notEqual(r2.status, 0);
   assert.match(r2.stderr, /no publishing service/);
+});
+
+test("a theme cannot smuggle markup through colours (stored XSS)", async () => {
+  const story = JSON.parse(fs.readFileSync(path.join(example, "story.json"), "utf8"));
+  const theme = JSON.parse(fs.readFileSync(path.join(example, "theme.json"), "utf8"));
+  for (const line of ["red}</style><script>alert(1)</script>", "rgba(0,0,0,1);}</style>", "url(https://x.test/a)"]) {
+    const res = await post({ story, theme: { ...theme, colors: { ...theme.colors, line } } });
+    assert.equal(res.status, 422, line);
+  }
+});
+
+test("published pages only allow the template's own scripts (CSP hashes)", async () => {
+  const story = JSON.parse(fs.readFileSync(path.join(example, "story.json"), "utf8"));
+  const theme = JSON.parse(fs.readFileSync(path.join(example, "theme.json"), "utf8"));
+  const { id } = await (await post({ story, theme })).json();
+  const res = await fetch(`${base}/s/${id}/`);
+  const csp = res.headers.get("content-security-policy");
+  assert.match(csp, /script-src 'sha256-[A-Za-z0-9+/=]+'/);
+  assert.ok(!/script-src[^;]*unsafe-inline/.test(csp));
+});
+
+test("rate limit key cannot be forged with X-Forwarded-For unless a proxy is trusted", async () => {
+  const story = JSON.parse(fs.readFileSync(path.join(example, "story.json"), "utf8"));
+  const theme = JSON.parse(fs.readFileSync(path.join(example, "theme.json"), "utf8"));
+  const send = (h, ip, xff) => h(new Request("http://x/v1/stories", { method: "POST", body: JSON.stringify({ story, theme }), headers: { "x-forwarded-for": xff } }), { ip });
+  const direct = createHandler({ limiter: memoryLimiter({ max: 1 }) });
+  assert.equal((await send(direct, "10.0.0.1", "1.1.1.1")).status, 201);
+  assert.equal((await send(direct, "10.0.0.1", "2.2.2.2")).status, 429, "a rotated header does not reset the limit");
+  assert.equal((await send(direct, "10.0.0.2", "1.1.1.1")).status, 201, "a different socket address has its own limit");
+  const proxied = createHandler({ limiter: memoryLimiter({ max: 1 }), trustProxy: true });
+  assert.equal((await send(proxied, "10.0.0.9", "6.6.6.6, 7.7.7.7")).status, 201);
+  assert.equal((await send(proxied, "10.0.0.9", "5.5.5.5, 7.7.7.7")).status, 429, "keyed by the proxy-added (right-most) address");
+});
+
+test("rate limiter memory is bounded", () => {
+  const l = memoryLimiter({ max: 5, maxKeys: 100 });
+  for (let i = 0; i < 1000; i++) assert.equal(l.allow("k" + i), true);
+  assert.equal(l.allow("k999"), true);
+});
+
+test("transport stops oversized bodies while streaming", async () => {
+  const declared = await fetch(`${base}/v1/stories`, { method: "POST", body: "x".repeat(LIMITS.bodyBytes + 10) });
+  assert.equal(declared.status, 413);
+  const chunked = await new Promise((resolve) => {
+    const req = http.request(`${base}/v1/stories`, { method: "POST", headers: { "transfer-encoding": "chunked" } }, (res) => { res.resume(); resolve(res.statusCode); });
+    req.on("error", () => resolve("closed"));
+    const chunk = "x".repeat(200_000);
+    let n = 0;
+    const pump = () => { if (n++ < 20 && req.write(chunk)) return pump(); if (n <= 20) req.once("drain", pump); else req.end(); };
+    pump();
+  });
+  assert.ok(chunked === 413 || chunked === "closed", `got ${chunked}`);
 });

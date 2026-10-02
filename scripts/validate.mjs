@@ -27,6 +27,8 @@ export function dateParts(s) {
   if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
   return y + (mo - 1) / 12 + (d - 1) / 372;
 }
+// Colours are interpolated into an inline <style>, so anything beyond a plain colour literal is refused.
+export const isCssColour = (v) => typeof v === "string" && v.length <= 64 && (/^#[0-9a-fA-F]{3,8}$/.test(v) || /^(rgb|hsl)a?\(\s*[\d.]+%?(\s*[,\s]\s*[\d.]+%?){2,3}(\s*\/\s*[\d.]+%?)?\s*\)$/i.test(v));
 export const VIEWS = ["graph", "timeline", "read", "outline", "list"];
 export const isHttpUrl = (u) => { try { return ["http:", "https:"].includes(new URL(u).protocol); } catch { return false; } };
 
@@ -154,6 +156,7 @@ export function validateTheme(t, story) {
   const c = t.colors || {};
   for (const k of ["bg", "text", "accent"]) if (!parseHex(c[k])) E(`theme.colors.${k} must be a #hex colour`);
   for (const k of ["surface", "muted"]) if (c[k] !== undefined && !parseHex(c[k])) E(`theme.colors.${k} must be a #hex colour`);
+  if (c.line !== undefined && !isCssColour(c.line)) E("theme.colors.line must be a #hex colour or a plain rgb()/rgba()/hsl()/hsla() value");
   if (errors.length) return { errors, warnings };
 
   const bg = parseHex(c.bg), text = parseHex(c.text), accent = parseHex(c.accent);

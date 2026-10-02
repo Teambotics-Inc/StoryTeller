@@ -41,8 +41,10 @@ Included:
 - Server-side render only (no client HTML), plus the existing validator, which refuses unsourced or unreadable stories.
 - Size and shape limits: 1 MB body, 200 nodes, 500 edges, 200 sources.
 - A policy hook (`defaultPolicy`): no private-relationship stories; `credit` and `disclaimer` required.
-- Per-client rate limit (in-memory in the sketch).
-- Page headers: `X-Robots-Tag: noindex`, and a CSP that allows no network access (`default-src 'none'`; inline script and style only, Google Fonts for styles). Serve pages from their own origin, not the origin that hosts the API or any site with cookies.
+- Per-client rate limit keyed by the socket address, never by `X-Forwarded-For` unless `trustProxy` is set (and then by the right-most entry, which is the one the proxy added). The in-memory limiter caps its own key count.
+- Body cap enforced while streaming at the transport (and from `Content-Length`), before anything is buffered.
+- Page headers: `X-Robots-Tag: noindex`, and a CSP that allows no network access (`default-src 'none'`). Scripts are allowed only by SHA-256 hash (the template's own), not `'unsafe-inline'`, so injected markup would not run even if a validation gap let some through. Styles may be inline; Google Fonts is allowed for styles.
+- Theme values that end up in the inline `<style>` (`colors.line` was the one gap) are validated as plain colour literals, and the renderer re-checks them. Serve pages from their own origin, not the origin that hosts the API or any site with cookies.
 - Constant-time token comparison; tokens never logged.
 
 Needed before running it for real:
