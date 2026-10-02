@@ -33,7 +33,7 @@ The agent reads [`AGENTS.md`](AGENTS.md), works through the [playbook](playbook/
 
 ```
 AGENTS.md            the agent's entry point: rules + workflow
-playbook/            1 scope → 2 research → 3 model → 4 brand → 5 build & verify (+ per-subject-kind advice)
+playbook/            1 scope → 2 research → 3 model → 4 brand → 5 build & verify → 6 publish, optional (+ per-subject-kind advice)
 schema/              story.schema.json, theme.schema.json
 scripts/
   build.mjs          validate + build the single HTML file
@@ -41,6 +41,7 @@ scripts/
   brand-probe.mjs    pull real colours/fonts/logo candidates from a site
 template/            the renderer (story.html) and a neutral default theme
 examples/            worked examples: research log, data, theme, built output
+services/publish/    reference service for public, no-account publishing (a sketch; see docs/publishing.md)
 site/                the product page (built into site/dist with scripts/build-site.mjs)
 tests/               node:test suite
 ```
