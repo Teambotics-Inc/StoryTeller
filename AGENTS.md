@@ -27,6 +27,7 @@ Work in a new folder, e.g. `stories/<subject-slug>/` (create `stories/` if neede
 | 3. Model | [`playbook/3-model.md`](playbook/3-model.md) | `stories/<slug>/story.json` (schema: [`schema/story.schema.json`](schema/story.schema.json)). |
 | 4. Brand | [`playbook/4-brand.md`](playbook/4-brand.md) | `stories/<slug>/theme.json` (schema: [`schema/theme.schema.json`](schema/theme.schema.json)). |
 | 5. Build & verify | [`playbook/5-build-and-verify.md`](playbook/5-build-and-verify.md) | `stories/<slug>/index.html`, checked in a browser on desktop and mobile widths. |
+| 6. Publish (only if asked) | [`playbook/6-publish.md`](playbook/6-publish.md) | A public link, via `scripts/publish.mjs`, after the user says yes for that story. |
 
 If the user gives you a starting URL, treat it as the first source, not the only one: research beyond it (other pages on the site, independent coverage, primary records) as `playbook/2-research.md` describes.
 

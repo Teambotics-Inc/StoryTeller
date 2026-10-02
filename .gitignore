@@ -9,3 +9,6 @@ site/dist/
 .vercel
 .env*
 site/showcase/
+
+# publishing receipts hold a secret edit token
+.publish.json
