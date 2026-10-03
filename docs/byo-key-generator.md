@@ -1,10 +1,10 @@
 # A bring-your-own-key story generator (design proposal)
 
-Status: proposal. Nothing is built. Related: the hosted publishing sketch in [`publishing.md`](publishing.md), which is parked because the project does not want to operate a hosting platform.
+Status: proposal; a first prototype of the Anthropic path exists in `prototype/byo-key/` (issue #13). Related: the hosted publishing sketch in [`publishing.md`](publishing.md), which is parked because the project does not want to operate a hosting platform.
 
 ## Idea in one paragraph
 
-A static web page where someone enters a subject and their **own Anthropic API key**, watches an agent research and model the story, and gets the finished single-file `index.html` back (to download or host themselves). The agent loop runs in the browser and calls Anthropic directly, so the project runs no backend and pays for no inference. Listing a story on the public site is a separate, optional, human-reviewed step done through a pull request, not instant hosting.
+A static web page where someone enters a subject and their **own Anthropic or OpenAI API key**, watches an agent research and model the story, and gets the finished single-file `index.html` back (to download or host themselves). The agent loop runs in the browser and calls Anthropic directly, so the project runs no backend and pays for no inference. Listing a story on the public site is a separate, optional, human-reviewed step done through a pull request, not instant hosting.
 
 ## Goals and non-goals
 
