@@ -223,3 +223,30 @@ test("cost arithmetic", () => {
   assert.equal(costOf({ cache_read_input_tokens: 1_000_000 }, "claude-opus-5-5"), 0.2);
   assert.equal(costOf({ input_tokens: 5 }, "unknown-model"), null);
 });
+
+test("site build: /byo/ page loads no third-party scripts, pins its CSP to the template script, and the header rule excludes it from the global policy", async () => {
+  const { execFileSync } = await import("node:child_process");
+  const os = await import("node:os"); const crypto = await import("node:crypto");
+  const out = fs.mkdtempSync(path.join(os.tmpdir(), "site-"));
+  execFileSync(process.execPath, [path.join(root, "scripts", "build-site.mjs")], { env: { ...process.env, SITE_OUT: out }, stdio: "pipe" });
+  const page = fs.readFileSync(path.join(out, "byo", "index.html"), "utf8");
+  assert.ok(!/<script[^>]+src="https?:/.test(page), "no external script tags");
+  assert.ok(!/esm\.sh|cdn\./.test(fs.readFileSync(path.join(out, "byo", "prototype", "byo-key", "web", "app.mjs"), "utf8")), "no CDN imports in app.mjs");
+  for (const f of ["scripts/validate.mjs", "scripts/render-core.mjs", "prototype/byo-key/agent.mjs", "prototype/byo-key/provenance.mjs", "prototype/byo-key/prompt.mjs", "prototype/byo-key/web/app.mjs", "prototype/byo-key/web/assets.generated.mjs", "prototype/byo-key/web/vendor/anthropic-sdk.mjs"]) assert.ok(fs.existsSync(path.join(out, "byo", f)), f);
+  const csp = /Content-Security-Policy" content="([^"]*)"/.exec(page)[1].replace(/&#39;/g, "'");
+  assert.match(csp, /connect-src https:\/\/api\.anthropic\.com;/);
+  const tpl = fs.readFileSync(path.join(root, "template", "story.html"), "utf8");
+  const inline = [...tpl.matchAll(/<script(?![^>]*type="application\/json")[^>]*>([\s\S]*?)<\/script>/g)].map((m) => `'sha256-${crypto.createHash("sha256").update(m[1]).digest("base64")}'`);
+  assert.ok(inline.length >= 1 && inline.every((h) => csp.includes(h)), "CSP carries the template's inline script hash");
+  assert.ok(!/script-src[^;]*unsafe-inline/.test(csp));
+  assert.match(page, /noindex/);
+  const vj = JSON.parse(fs.readFileSync(path.join(root, "vercel.json"), "utf8"));
+  const globalRule = vj.headers.find((h) => /byo/.test(h.source) && h.source.includes("?!"));
+  const byoRule = vj.headers.find((h) => h.source === "/byo/(.*)");
+  assert.ok(globalRule && byoRule, "global rule excludes /byo/ and a dedicated rule exists");
+  const byoCsp = byoRule.headers.find((h) => h.key === "Content-Security-Policy").value;
+  assert.match(byoCsp, /connect-src https:\/\/api\.anthropic\.com/);
+  assert.ok(!/connect-src[^;]*\*/.test(byoCsp));
+  const home = fs.readFileSync(path.join(out, "index.html"), "utf8");
+  assert.match(home, /href="\/byo\/"/);
+});

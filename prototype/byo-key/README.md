@@ -25,7 +25,7 @@ node build.mjs && node serve.mjs 8788
 # open http://localhost:8788/prototype/byo-key/web/
 ```
 
-The page loads the SDK from esm.sh. That is for the prototype only: a real build must vendor it (no third-party scripts near an API key).
+The SDK is vendored in `web/vendor/` (see its README), so the page loads no third-party scripts.
 
 ## Measure it (spends real money)
 

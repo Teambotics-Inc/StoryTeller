@@ -30,6 +30,7 @@
       <a class="hide-sm" href="#how">How it works</a>
       <a class="hide-sm" href="#views">Views</a>
       <a href="#stories">Stories</a>
+      <a class="hide-sm" href="/byo/">In your browser</a>
       <a class="btn small primary" href="{{REPO_URL}}" rel="noopener">GitHub</a>
     </nav>
   </div>
@@ -97,6 +98,11 @@
       <code id="prompt-text">Clone {{REPO_URL}} and follow AGENTS.md to tell the story of &lt;your subject&gt;.</code>
       <button class="btn primary" id="copy" type="button">Copy prompt</button>
       <p class="hint">Works with any coding agent that can read files, run Node and browse the web. The instructions are plain Markdown; we have built and tested it with Claude-based agents.</p>
+    </div>
+    <div class="beta" id="browser">
+      <h3>No coding agent? Make one in your browser <span class="tag">beta</span></h3>
+      <p>Paste your own Anthropic API key and name a subject. The research runs in your browser and your key goes only to Anthropic, never through this site. It spends credit on that key, so use one with a spend limit; you set a cap per story. It is an early prototype and the results are less polished than an agent run on your machine.</p>
+      <a class="btn primary" href="/byo/">Try it with your own key</a>
     </div>
   </div>
 </section>

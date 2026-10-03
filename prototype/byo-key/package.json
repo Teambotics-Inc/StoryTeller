@@ -10,6 +10,6 @@
     "eval": "node eval.mjs"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "latest"
+    "@anthropic-ai/sdk": "0.131.0"
   }
 }

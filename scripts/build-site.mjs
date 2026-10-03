@@ -15,7 +15,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
-import { fileURLToPath } from "node:url";
+import crypto from "node:crypto";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const site = path.join(root, "site");
@@ -84,6 +85,34 @@ for (const entry of fs.readdirSync(dist)) fs.rmSync(path.join(dist, entry), { re
 fs.mkdirSync(path.join(dist, "assets"), { recursive: true });
 for (const f of fs.readdirSync(path.join(site, "assets"))) fs.copyFileSync(path.join(site, "assets", f), path.join(dist, "assets", f));
 for (const e of entries) if (e.thumb) fs.copyFileSync(e.thumbSrc, path.join(dist, "assets", `thumb-${e.slug}.webp`));
+
+/* ---------- bring-your-own-key page (/byo/) ---------- */
+// The page runs the agent loop in the browser with the visitor's own API key. Files keep the repository layout under
+// /byo/ so the modules' relative imports work unchanged. The page gets a meta CSP that allows only the template's own
+// inline script (by hash, so the sandboxed preview of a generated story can run) and connections only to the API.
+const byoSrc = path.join(root, "prototype", "byo-key");
+const hasByo = fs.existsSync(path.join(byoSrc, "web", "index.html"));
+if (hasByo) {
+  const { loadAssets } = await import(pathToFileURL(path.join(byoSrc, "assets.mjs")).href);
+  const out = path.join(dist, "byo");
+  const put = (rel, from) => { fs.mkdirSync(path.dirname(path.join(out, rel)), { recursive: true }); fs.copyFileSync(from, path.join(out, rel)); };
+  for (const f of ["validate.mjs", "render-core.mjs"]) put(`scripts/${f}`, path.join(root, "scripts", f));
+  for (const f of ["agent.mjs", "provenance.mjs", "prompt.mjs"]) put(`prototype/byo-key/${f}`, path.join(byoSrc, f));
+  put("prototype/byo-key/web/app.mjs", path.join(byoSrc, "web", "app.mjs"));
+  put("prototype/byo-key/web/vendor/anthropic-sdk.mjs", path.join(byoSrc, "web", "vendor", "anthropic-sdk.mjs"));
+  fs.writeFileSync(path.join(out, "prototype", "byo-key", "web", "assets.generated.mjs"), `export const assets = ${forScript(loadAssets())};
+`);
+  const tpl = fs.readFileSync(path.join(root, "template", "story.html"), "utf8");
+  const hashes = [...tpl.matchAll(/<script(?![^>]*type="application\/json")[^>]*>([\s\S]*?)<\/script>/g)].map((m) => `'sha256-${crypto.createHash("sha256").update(m[1]).digest("base64")}'`);
+  const csp = `default-src 'none'; script-src 'self' ${hashes.join(" ")}; connect-src https://api.anthropic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data:; base-uri 'none'; form-action 'none'`;
+  let page = fs.readFileSync(path.join(byoSrc, "web", "index.html"), "utf8");
+  page = page.replace('<script type="module" src="./app.mjs"></script>', '<script type="module" src="./prototype/byo-key/web/app.mjs"></script>')
+    .replace('<meta name="referrer" content="no-referrer">', `<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="${esc(csp)}">`);
+  if (!page.includes("Content-Security-Policy") || !page.includes("prototype/byo-key/web/app.mjs")) fail("could not prepare the bring-your-own-key page");
+  fs.writeFileSync(path.join(out, "index.html"), page);
+}
 
 /* ---------- full pages ---------- */
 for (const e of entries) {

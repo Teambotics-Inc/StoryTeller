@@ -1,5 +1,5 @@
 // Prototype page logic. Run `node prototype/byo-key/build.mjs` first (creates assets.generated.mjs).
-// The SDK is loaded from esm.sh for the prototype only; a real build would vendor it (no third-party scripts).
+// The SDK is vendored (web/vendor/), so the page loads no third-party scripts.
 import { runStory } from "../agent.mjs";
 
 const $ = (id) => document.getElementById(id);
@@ -19,7 +19,7 @@ $("f").addEventListener("submit", async (e) => {
   try { ({ assets } = await import("./assets.generated.mjs")); } catch { status("Run `node prototype/byo-key/build.mjs` first (assets.generated.mjs is missing).", "bad"); return; }
   const key = $("key").value.trim();
   // globalThis.__TEST_ANTHROPIC__ lets a test inject a scripted fake client; real use always loads the SDK.
-  const Anthropic = globalThis.__TEST_ANTHROPIC__ || (await import("https://esm.sh/@anthropic-ai/sdk")).default;
+  const Anthropic = globalThis.__TEST_ANTHROPIC__ || (await import("./vendor/anthropic-sdk.mjs")).default;
   const client = new Anthropic({ apiKey: key, dangerouslyAllowBrowser: true });
   $("key").value = ""; // the key lives only in the client object from here on
   $("log").textContent = ""; $("result").style.display = "none";
