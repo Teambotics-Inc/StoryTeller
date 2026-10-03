@@ -1,3 +1,5 @@
+import { SOURCE_MINIMUMS, DEFAULT_MIN_SOURCES, MAX_THIN_RETRIES } from "./limits.mjs";
+
 // Builds the system prompt FROM the playbook text (not a copy), so the two cannot drift apart.
 // `assets` = { agents, playbook: {scope, research, model, brand}, storySchema, themeSchema, defaultTheme } (strings).
 
@@ -13,6 +15,8 @@ You run inside a web page, not a coding environment. You cannot run Node, script
 - Research: the web_search and web_fetch tools. web_fetch can only fetch URLs that appeared in a search result or were given by the user. Research beyond the first page, as the playbook says.
 - Build and validate: call submit_story with {story, theme}. The page validates it and returns errors and warnings. Errors must be fixed and resubmitted; read the warnings and fix them or knowingly accept them. Do not call submit_story until you have a complete draft.
 - Sources: every source you cite must be a page you actually fetched with web_fetch in this run. The page checks this against the tool results, so a source you only saw in search results, or never saw, is rejected or flagged. Do not set "accessed" yourself; the page fills it in. Copy figures and quotes exactly from fetched text.
+- Enough reading: submit_story rejects a draft that cites too few fetched sources. Expect at least ${SOURCE_MINIMUMS.company} fetched sources for a company, person or place, ${SOURCE_MINIMUMS.event} for an event, history or idea, ${SOURCE_MINIMUMS.word} for a word (${DEFAULT_MIN_SOURCES} if the kind is something else), and aim for more, including independent and primary sources, not only the subject's own pages. Research until you have them before you submit. A draft bounced for being thin is sent back up to ${MAX_THIN_RETRIES} times.
+- Cluster colours: theme.clusters must have a #hex colour for EVERY cluster id in the story. submit_story rejects a theme with any missing.
 - Brand: you cannot run the brand probe. If the user gave an accent colour or mode, use them. Otherwise, if the subject is a brand, infer colours and fonts only from what you fetched (say so honestly in brandSources, e.g. "inferred from page text, not measured"); if you cannot tell, use the neutral default theme below and say so. Never guess a brand colour from memory.
 - Questions: do not ask the user anything. Choose sensible defaults, record your assumptions in the tagline-free parts of the story (disclaimer, a "Method and limits" style node if useful), and proceed.
 - Affiliation: unless told otherwise, this is an independent study: credit "An independent StoryTeller study.", with a disclaimer saying it is built from public sources and not affiliated with or endorsed by the subject.

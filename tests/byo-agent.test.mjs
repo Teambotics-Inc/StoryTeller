@@ -232,7 +232,7 @@ test("site build: /byo/ page loads no third-party scripts, pins its CSP to the t
   const page = fs.readFileSync(path.join(out, "byo", "index.html"), "utf8");
   assert.ok(!/<script[^>]+src="https?:/.test(page), "no external script tags");
   assert.ok(!/esm\.sh|cdn\./.test(fs.readFileSync(path.join(out, "byo", "prototype", "byo-key", "web", "app.mjs"), "utf8")), "no CDN imports in app.mjs");
-  for (const f of ["scripts/validate.mjs", "scripts/render-core.mjs", "prototype/byo-key/agent.mjs", "prototype/byo-key/provenance.mjs", "prototype/byo-key/prompt.mjs", "prototype/byo-key/web/app.mjs", "prototype/byo-key/web/assets.generated.mjs", "prototype/byo-key/web/vendor/anthropic-sdk.mjs"]) assert.ok(fs.existsSync(path.join(out, "byo", f)), f);
+  for (const f of ["scripts/validate.mjs", "scripts/render-core.mjs", "prototype/byo-key/agent.mjs", "prototype/byo-key/provenance.mjs", "prototype/byo-key/prompt.mjs", "prototype/byo-key/limits.mjs", "prototype/byo-key/web/app.mjs", "prototype/byo-key/web/assets.generated.mjs", "prototype/byo-key/web/vendor/anthropic-sdk.mjs"]) assert.ok(fs.existsSync(path.join(out, "byo", f)), f);
   const csp = /Content-Security-Policy" content="([^"]*)"/.exec(page)[1].replace(/&#39;/g, "'");
   assert.match(csp, /connect-src https:\/\/api\.anthropic\.com;/);
   const tpl = fs.readFileSync(path.join(root, "template", "story.html"), "utf8");
@@ -249,4 +249,76 @@ test("site build: /byo/ page loads no third-party scripts, pins its CSP to the t
   assert.ok(!/connect-src[^;]*\*/.test(byoCsp));
   const home = fs.readFileSync(path.join(out, "index.html"), "utf8");
   assert.match(home, /href="\/byo\/"/);
+});
+
+// ---- quality floors: too few sources, missing cluster colours ----
+const thinStory = (s, n) => {
+  const keep = s.sources.slice(0, n), ids = new Set(keep.map((x) => x.id)), first = keep[0].id;
+  const fix = (arr) => (arr && arr.length ? [...new Set(arr.map((x) => (ids.has(x) ? x : first)))] : arr);
+  return { ...structuredClone(s), sources: keep, nodes: s.nodes.map((n2) => ({ ...n2, sources: fix(n2.sources) })), edges: s.edges.map((e) => ({ ...e, sources: fix(e.sources) })) };
+};
+
+test("source minimums by subject kind", async () => {
+  const { minSourcesFor, DEFAULT_MIN_SOURCES } = await import("../prototype/byo-key/limits.mjs");
+  assert.equal(minSourcesFor("company"), 8);
+  assert.equal(minSourcesFor("Event"), 6);
+  assert.equal(minSourcesFor("word"), 4);
+  assert.equal(minSourcesFor("something else"), DEFAULT_MIN_SOURCES);
+  assert.equal(minSourcesFor(undefined), DEFAULT_MIN_SOURCES);
+});
+
+test("a thin draft is bounced back for more research, then accepted once it cites enough fetched sources", async () => {
+  const s = goodStory();
+  const thin = thinStory({ ...s, subject: { ...s.subject, kind: "company" } }, 3);
+  const full = { ...s, subject: { ...s.subject, kind: "company" } };
+  const { r, client } = await run([
+    turn([...fetchBlocks(s), submit(thin, goodTheme(), "t1")]),
+    turn([submit(full, goodTheme(), "t2")]),
+    turn([{ type: "text", text: "ok" }], "end_turn"),
+  ]);
+  assert.equal(r.ok, true);
+  assert.equal(r.metrics.thinRetries, 1);
+  const first = JSON.parse(client.calls[1].messages.at(-1).content[0].content);
+  assert.equal(first.ok, false);
+  assert.match(first.errors.join("\n"), /Too few sources read: this draft cites 3 source\(s\) that you fetched, and at least 8 are expected for a company/);
+  assert.equal(r.story.sources.length, full.sources.length);
+});
+
+test("a subject with little to read is not looped forever: after the retry limit the thin draft is accepted with a warning", async () => {
+  const s = goodStory();
+  const { r } = await run([
+    turn([...fetchBlocks(s), submit(s, goodTheme(), "t1")]),
+    turn([submit(s, goodTheme(), "t2")]),
+    turn([submit(s, goodTheme(), "t3")]),
+    turn([{ type: "text", text: "ok" }], "end_turn"),
+  ], { minSources: 99 });
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.metrics.submissions.map((x) => x.errors > 0), [true, true, false]);
+  assert.equal(r.metrics.thinRetries, 2);
+  assert.ok(r.warnings.some((w) => /story is thin and was accepted after 2 requests/.test(w)));
+});
+
+test("missing cluster colours are an error the agent must fix, not a warning it can ignore", async () => {
+  const s = goodStory(), t = goodTheme();
+  const noColours = { ...t, clusters: Object.fromEntries(Object.entries(t.clusters).slice(2)) };
+  const missing = s.clusters.map((c) => c.id).filter((id) => !noColours.clusters[id]);
+  assert.ok(missing.length >= 2);
+  const { r, client } = await run([
+    turn([...fetchBlocks(s), submit(s, noColours, "t1")]),
+    turn([submit(s, t, "t2")]),
+    turn([{ type: "text", text: "ok" }], "end_turn"),
+  ]);
+  assert.equal(r.ok, true);
+  const feedback = JSON.parse(client.calls[1].messages.at(-1).content[0].content);
+  assert.equal(feedback.ok, false);
+  const msg = feedback.errors.join("\n");
+  for (const id of missing) assert.ok(msg.includes(`'${id}'`), id);
+  assert.match(msg, /Give every cluster id in the story its own #hex colour/);
+  assert.ok(!feedback.warnings.some((w) => /has no colour in theme/.test(w)), "the duplicate validator warning is removed");
+});
+
+test("the prompt states the quality floors up front", () => {
+  const req = buildRequest({ assets, input: { subject: "x" }, today: "2026-10-03" });
+  assert.match(req.system, /at least 8 fetched sources for a company, person or place, 6 for an event, history or idea, 4 for a word/);
+  assert.match(req.system, /theme\.clusters must have a #hex colour for EVERY cluster id/);
 });

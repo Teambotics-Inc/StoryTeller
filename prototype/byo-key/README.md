@@ -66,8 +66,8 @@ What it showed:
 
 ### Follow-ups this suggests
 
-- Treat very few sources as a failure to fix, not just a warning (for example under about 6 sources for a company or event), so the loop sends the agent back to research.
-- Make missing cluster colours something the agent must fix (a theme warning today, which the agent ignored).
+- **Done (untested against the real API):** very few sources is now an error that sends the agent back to research. The floors (`limits.mjs`) are fetched and cited sources: 8 for a company, brand, person, place or product; 6 for an event, history or idea; 4 for a word; 6 otherwise. A thin draft is bounced up to twice, then accepted with a "story is thin" warning so a subject with little to read cannot loop forever. The prompt states the floors up front.
+- **Done (untested against the real API):** a theme missing a colour for any cluster is now an error that lists the cluster ids (it was a validator warning the agent ignored).
 - Re-run the same subject at higher effort and on `claude-opus-5-5`, and run the other subject kinds with `eval.mjs`, to see how cost and source counts change.
 - Find out the per-search fees, so the cost counter can include them.
 
