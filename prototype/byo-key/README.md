@@ -2,7 +2,7 @@
 
 Prototype for [issue #13](https://github.com/Teambotics-Inc/StoryTeller/issues/13); design in [`docs/byo-key-generator.md`](../../docs/byo-key-generator.md). Not part of the toolkit or the site build. It lives in its own folder with its own `package.json` so the toolkit stays dependency-free.
 
-**Status: the loop is built and tested against a scripted fake API client. It has not yet been run against the real API**, so cost, time and quality numbers are still unmeasured. That is the next step and it needs an API key and a spending decision.
+**Status: live at `/byo/` on the product site, and one real run has worked end to end from the deployed page.** The loop is also tested against a scripted fake API client. One run is not a measurement: cost, time and quality across subject kinds, models and effort levels are still mostly unmeasured (see "First real run" and "Still unverified").
 
 ## What is here
 
@@ -39,15 +39,52 @@ node eval.mjs --max-usd 5 --yes         # all four subjects; worst case 4 x cap,
 
 Each run writes `runs/<name>/` with `story.json`, `theme.json`, `index.html` and `metrics.json` (cost, time, turns, searches, fetches, submission rounds, source-fetched rate, evidence-verbatim rate). `eval.mjs` also writes `runs/eval-*/summary.md`. The cost counter uses token prices only; per-search fees are not modelled, so check the pricing page before quoting totals.
 
-## Unverified assumptions (confirm on the first real run)
+## First real run
 
-- The request shape: `client.beta.messages.stream` with the server-side fallback beta and `fallbacks: "default"`, top-level `cache_control`, `output_config.effort`, `web_search_20260209` / `web_fetch_20260209`. If the API rejects any of it, `--no-fallbacks` is the first thing to try.
-- The shapes of `web_search_tool_result` and `web_fetch_tool_result` blocks that `provenance.mjs` reads (fixtures in `tests/byo-agent.test.mjs` follow the documented shape, not a captured real response). Capture a real one and add it as a fixture.
-- `dangerouslyAllowBrowser` as the SDK's browser opt-in, and any Anthropic guidance on browser-side keys.
-- Redirects and canonical URLs may make `urlKey` miss legitimate sources (false "not fetched" errors). The first runs will show how often.
+One run on the deployed page (2026-10-03), entered through the web form with the user's own key. It used the cheaper model at low effort, so it shows the floor, not the typical case.
+
+| | |
+|---|---|
+| Subject | Coca-Cola (a company), no start page |
+| Model, effort, cap | `claude-sonnet-5-5`, low, $1.00 |
+| Outcome | done: first submission accepted (0 errors, 8 warnings) |
+| Estimated cost | $0.30 (token prices only; search fees are not included) |
+| Time | 90 s |
+| Turns / searches / fetches | 2 / 2 / 2 |
+| Sources fetched | 2 of 2 cited sources had been fetched |
+| Evidence verbatim | 9 of 10 checkable nodes matched the fetched text |
+| Story | 30 nodes, 35 edges (20 inferred), 7 clusters, 3 guided stories, timeline on |
+
+What it showed:
+
+- **It works.** Browser access from our origin, the request shape (including the fallback option), the SDK vendored into the page, and the page's CSP are all confirmed by this run.
+- **The source ledger reads real results.** The page found the fetched text of both pages in the real `web_fetch` results and used it for the evidence check (9/10), so that block shape is confirmed. No false "not fetched" errors occurred, but with only two plain URLs this says little about redirects.
+- **The story was thin.** Two sources, where the playbook asks for 10 to 25: one reference article and the company's own history page. The agent itself said so in its summary and listed what it did not cover (the formula, criticism, bottler structure, financials). The validator warned that 20 of 35 edges were inferred ("find more sources").
+- **Warnings did not force improvement.** The first valid submission was accepted, and the agent chose not to resubmit although eight warnings remained, including seven cluster colours missing from the theme. The accepted-with-warnings note was only a suggestion.
+- **Brand:** it did not guess the brand colours (it used the neutral dark theme and said so), as the prompt requires, but the result does not look like the subject's own site.
+- **Cost:** $0.30 is for a two-source story at low effort on the cheaper model. A 10 to 25 source story at higher effort will cost more; that is the next thing to measure.
+
+### Follow-ups this suggests
+
+- Treat very few sources as a failure to fix, not just a warning (for example under about 6 sources for a company or event), so the loop sends the agent back to research.
+- Make missing cluster colours something the agent must fix (a theme warning today, which the agent ignored).
+- Re-run the same subject at higher effort and on `claude-opus-5-5`, and run the other subject kinds with `eval.mjs`, to see how cost and source counts change.
+- Find out the per-search fees, so the cost counter can include them.
+
+## Still unverified
+
+Confirmed by the first run: the request shape on `claude-sonnet-5-5`, browser access with `dangerouslyAllowBrowser` from the deployed origin, and the shape of `web_fetch` results that `provenance.mjs` reads. The test fixtures in `tests/byo-agent.test.mjs` still follow the documented shape, not a captured real response; capture one and add it.
+
+Still to check:
+
+- The same request shape on `claude-opus-5-5` (the default), at higher effort, and with `fallbacks` on that model.
+- The shape of `web_search_tool_result` blocks (only fetched pages mattered in the first run).
+- Redirects and canonical URLs may make `urlKey` miss legitimate sources (false "not fetched" errors); this run had none, with only two plain URLs.
+- Cost and time for a normal-sized story, per-search fees, and behaviour on the other subject kinds (event, word, place).
+- Any Anthropic guidance on browser-side keys.
 
 ## Findings so far (from building it)
 
-- A strict CSP on the page (`script-src 'self'`) would also be inherited by a `blob:`/`srcdoc` preview of the generated story, whose inline script then would not run. A hardened version needs the preview in a separate origin, or download only.
+- A strict CSP on the page is inherited by the `srcdoc` preview of the generated story, whose inline script would then not run. The deployed page solves this by allowing only the story template's inline script by hash (computed at site build) and keeping connections limited to the API; a separate origin for the preview remains an option for stricter hosting.
 - `submit_story` is deliberately not `strict`: the story schema is large and loose, and our own validator already returns precise errors. Forced `tool_choice` is rejected by the chosen model, so the prompt tells it when to call the tool.
 - The loop never edits earlier messages (needed for thinking blocks to stay valid) and only appends nudges and tool results.
