@@ -12,3 +12,9 @@ site/showcase/
 
 # publishing receipts hold a secret edit token
 .publish.json
+
+# prototype outputs
+prototype/byo-key/runs/
+prototype/byo-key/web/assets.generated.mjs
+prototype/byo-key/node_modules/
+prototype/byo-key/package-lock.json

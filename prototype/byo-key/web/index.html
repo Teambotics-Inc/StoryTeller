@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>StoryTeller · bring your own key (prototype)</title>
+<style>
+:root{--bg:#fff;--fg:#1d1d1f;--muted:#5c5c63;--line:#d8d8de;--accent:#1f5fbf;--bad:#b3261e;--ok:#1b6b3a;color-scheme:light dark}
+@media (prefers-color-scheme:dark){:root{--bg:#121214;--fg:#ededf0;--muted:#a3a3ad;--line:#33333a;--accent:#6aa3ff;--bad:#ff8a80;--ok:#7fd69a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:1.4rem;margin:0 0 4px}p.lead{color:var(--muted);margin:0 0 20px}
+.banner{border:1px solid var(--line);border-left:4px solid var(--accent);padding:10px 14px;margin:0 0 20px;font-size:.92rem}
+form{display:grid;gap:14px}
+label{display:grid;gap:4px;font-weight:600;font-size:.92rem}label small{font-weight:400;color:var(--muted)}
+input,select,textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);width:100%}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+button{font:inherit;padding:9px 16px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+button.secondary{background:transparent;color:var(--accent)}button:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#est{color:var(--muted);font-size:.9rem}
+#log{margin-top:22px;border:1px solid var(--line);border-radius:6px;padding:10px 12px;max-height:280px;overflow:auto;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap}
+#status{margin-top:12px;font-weight:600}.bad{color:var(--bad)}.ok{color:var(--ok)}
+#result{margin-top:20px;display:none}#result h2{font-size:1.1rem}
+table{border-collapse:collapse;font-size:.9rem}td,th{border:1px solid var(--line);padding:4px 8px;text-align:left}
+iframe{width:100%;height:560px;border:1px solid var(--line);border-radius:6px;margin-top:10px;background:#fff}
+ul.warn{font-size:.9rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<h1>StoryTeller, bring your own key</h1>
+<p class="lead">Prototype (issue #13). Research and modelling run in this page using your Anthropic API key. Nothing is sent to us.</p>
+<div class="banner"><strong>Your key stays in this tab's memory.</strong> It is sent only to api.anthropic.com. It is never stored, logged or put in a URL. Use a key with a spend limit. Running a story spends real money on that key: the cap below stops it, but search fees are not included in the counter.</div>
+
+<form id="f" autocomplete="off">
+  <label>Anthropic API key <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..." required></label>
+  <label>Subject <input id="subject" required placeholder="A company, a historical event, a word, a place"></label>
+  <div class="row">
+    <label>Start page (optional) <input id="url" type="url" placeholder="https://..."></label>
+    <label>Accent colour (optional) <input id="accent" placeholder="#0074c0"></label>
+    <label>Theme <select id="mode"><option value="">let the agent choose</option><option>light</option><option>dark</option></select></label>
+  </div>
+  <div class="row">
+    <label>Model <select id="model"><option value="claude-opus-5-5">claude-opus-5-5</option><option value="claude-sonnet-5-5">claude-sonnet-5-5 (cheaper)</option></select></label>
+    <label>Effort <select id="effort"><option>medium</option><option selected>high</option><option>low</option><option>xhigh</option></select></label>
+    <label>Spend cap (USD) <input id="cap" type="number" min="0.5" max="50" step="0.5" value="5"></label>
+  </div>
+  <div class="actions">
+    <button id="go" type="submit">Start</button>
+    <button id="stop" class="secondary" type="button" disabled>Cancel</button>
+    <span id="est"></span>
+  </div>
+</form>
+
+<div id="status" role="status"></div>
+<div id="log" aria-live="polite"></div>
+
+<section id="result">
+  <h2>Result</h2>
+  <p id="summary"></p>
+  <div class="actions"><button id="dl" type="button">Download index.html</button><button id="dlj" class="secondary" type="button">Download story.json</button></div>
+  <table id="metrics"></table>
+  <ul class="warn" id="warns"></ul>
+  <iframe id="prev" sandbox="allow-scripts" title="Story preview"></iframe>
+</section>
+</main>
+<script type="module" src="./app.mjs"></script>
+</body>
+</html>

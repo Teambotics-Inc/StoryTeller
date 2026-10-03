@@ -1,0 +1,15 @@
+{
+  "name": "byo-key-prototype",
+  "private": true,
+  "type": "module",
+  "description": "Prototype for issue #13. Kept separate so the toolkit itself stays dependency-free.",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "node serve.mjs",
+    "run": "node run.mjs",
+    "eval": "node eval.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  }
+}
