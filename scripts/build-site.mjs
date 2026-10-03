@@ -97,7 +97,7 @@ if (hasByo) {
   const out = path.join(dist, "byo");
   const put = (rel, from) => { fs.mkdirSync(path.dirname(path.join(out, rel)), { recursive: true }); fs.copyFileSync(from, path.join(out, rel)); };
   for (const f of ["validate.mjs", "render-core.mjs"]) put(`scripts/${f}`, path.join(root, "scripts", f));
-  for (const f of ["agent.mjs", "provenance.mjs", "prompt.mjs"]) put(`prototype/byo-key/${f}`, path.join(byoSrc, f));
+  for (const f of ["agent.mjs", "provenance.mjs", "prompt.mjs", "limits.mjs"]) put(`prototype/byo-key/${f}`, path.join(byoSrc, f));
   put("prototype/byo-key/web/app.mjs", path.join(byoSrc, "web", "app.mjs"));
   put("prototype/byo-key/web/vendor/anthropic-sdk.mjs", path.join(byoSrc, "web", "vendor", "anthropic-sdk.mjs"));
   fs.writeFileSync(path.join(out, "prototype", "byo-key", "web", "assets.generated.mjs"), `export const assets = ${forScript(loadAssets())};

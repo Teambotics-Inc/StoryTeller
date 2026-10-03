@@ -9,6 +9,7 @@ import { validateStory, validateTheme } from "../../scripts/validate.mjs";
 import { renderWithTemplate } from "../../scripts/render-core.mjs";
 import { createLedger, checkProvenance } from "./provenance.mjs";
 import { buildSystemPrompt, buildUserMessage } from "./prompt.mjs";
+import { minSourcesFor, MAX_THIN_RETRIES } from "./limits.mjs";
 
 // USD per million tokens. Cache write assumes the 5-minute ephemeral rate (1.25x input). Excludes any per-search fees,
 // which are not modelled here: check the current pricing page before quoting a total to users.
@@ -56,14 +57,14 @@ export function buildRequest({ assets, input, model = "claude-opus-5-5", effort 
 const clip = (s, n = 6000) => (s.length > n ? s.slice(0, n) + " ...[truncated]" : s);
 const asText = (o) => clip(JSON.stringify(o));
 
-export async function runStory({ client, assets, input, model = "claude-opus-5-5", effort = "high", maxUsd = 5, maxTurns = 40, maxSearches, maxFetches, fallbacks = true, onEvent = () => {}, signal, now = () => Date.now() }) {
+export async function runStory({ client, assets, input, model = "claude-opus-5-5", effort = "high", maxUsd = 5, maxTurns = 40, maxSearches, maxFetches, minSources, fallbacks = true, onEvent = () => {}, signal, now = () => Date.now() }) {
   const t0 = now();
   const today = new Date(t0).toISOString().slice(0, 10);
   const params = buildRequest({ assets, input, model, effort, maxSearches, maxFetches, fallbacks, today });
   const messages = params.messages;
   const ledger = createLedger();
   const usage = { input_tokens: 0, output_tokens: 0, cache_creation_input_tokens: 0, cache_read_input_tokens: 0 };
-  const m = { turns: 0, pauses: 0, truncations: 0, nudges: 0, searches: 0, fetches: 0, submissions: [], provenance: null };
+  const m = { thinRetries: 0, turns: 0, pauses: 0, truncations: 0, nudges: 0, searches: 0, fetches: 0, submissions: [], provenance: null };
   let accepted = null, finalText = "", stop = "turn_limit", error = null;
 
   const spend = () => costOf(usage, model);
@@ -89,6 +90,22 @@ export async function runStory({ client, assets, input, model = "claude-opus-5-5
     const a = validateStory(story), b = validateTheme(theme, story), p = checkProvenance(story, ledger, { today });
     const errors = [...a.errors.map((e) => `story: ${e}`), ...b.errors.map((e) => `theme: ${e}`), ...p.errors];
     const warnings = [...a.warnings.map((w) => `story: ${w}`), ...b.warnings.map((w) => `theme: ${w}`), ...p.warnings];
+
+    // Missing cluster colours are an error here (the validator only warns, and the model tends to ignore warnings).
+    const noColour = (story.clusters || []).map((c) => c.id).filter((id) => !(theme.clusters && theme.clusters[id]));
+    if (noColour.length) {
+      errors.push(`theme: theme.clusters has no colour for ${noColour.map((x) => `'${x}'`).join(", ")}. Give every cluster id in the story its own #hex colour.`);
+      for (let i = warnings.length - 1; i >= 0; i--) if (/has no colour in theme/.test(warnings[i])) warnings.splice(i, 1);
+    }
+
+    // Too few sources actually read: bounce the draft back for more research, a limited number of times.
+    const need = minSources ?? minSourcesFor(story.subject && story.subject.kind), have = p.stats.fetched;
+    if (have < need) {
+      if (m.thinRetries < MAX_THIN_RETRIES) {
+        m.thinRetries++;
+        errors.push(`Too few sources read: this draft cites ${have} source(s) that you fetched, and at least ${need} are expected for a ${(story.subject && story.subject.kind) || "story of this kind"}. Search and fetch more pages (independent and primary sources, not just the first page), add what you learn to the story, and resubmit.`);
+      } else warnings.push(`only ${have} fetched source(s) were cited (${need} expected): the story is thin and was accepted after ${MAX_THIN_RETRIES} requests for more research`);
+    }
     m.submissions.push({ errors: errors.length, warnings: warnings.length });
     m.provenance = p.stats;
     onEvent({ type: "submit", errors: errors.length, warnings: warnings.length });
