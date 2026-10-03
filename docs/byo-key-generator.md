@@ -75,6 +75,57 @@ Expect generated stories to be less brand-exact than ones made by a coding agent
 - **User:** a researched story means many search and fetch results plus several modelling passes. A rough guess is a few dollars per story on Opus 5.5 ($4 / $20 per million tokens in/out), but that is an estimate to be measured in the prototype, not a quote. The UI shows an estimate before starting, a running token and cost counter, and a hard cap the user sets; hitting the cap stops cleanly with whatever validates so far.
 - A cheaper model option can be offered once evals show where quality holds.
 
+## Providers and models: Anthropic and OpenAI keys
+
+Decision: the page accepts **Anthropic and OpenAI keys** (the two most widely used), detects which one was pasted, and offers the models that fit. Other providers are out of scope for now.
+
+Facts below about OpenAI come from its public docs as read on 2026-10-03 and must be re-checked when building: the Responses API has a `web_search` tool (supported models listed in the docs at that date: `gpt-5.5` with reasoning and `gpt-6-astra`); its responses carry `url_citation` annotations and a `sources` list of consulted URLs; **the full text of fetched pages is not returned**; reasoning models can use `open_page` and `find_in_page` actions; domain filters exist; search calls are billed per call. `GET /v1/models` lists model ids and owners, with no capability metadata. The OpenAI JavaScript SDK has a browser opt-in (`dangerouslyAllowBrowser`).
+
+### What has to become provider-neutral
+
+| Area | Anthropic (prototype today) | OpenAI | Consequence |
+|---|---|---|---|
+| Research tools | `web_search` and `web_fetch`, server-side | `web_search` in the Responses API, server-side | Both avoid a backend. Different tool shapes and results. |
+| Tool results the page can inspect | URLs and the **full fetched text** | URLs and citations only, **no page text** | Source checks become tiered (below). |
+| Our own tool | `submit_story` (client tool) | function calling with the same schema | Same name and schema, different wire format. |
+| Loop and wire format | Messages API, `pause_turn`, `tool_use` / `tool_result` | Responses API items and function-call outputs | Needs an adapter per provider. |
+| Usage and cost | token fields, cache reads and writes | token fields, cached tokens | Per-model price table per provider; search calls billed separately. |
+| Refusals and errors | `stop_reason: "refusal"`, typed errors | provider-specific | Normalised by the adapter to our stop reasons. |
+
+Design: `agent.mjs` talks to a small **provider interface** (one turn: send the conversation, get back normalised blocks, usage, stop reason; plus `listModels()` and a capability table). The current code becomes the Anthropic adapter; an OpenAI adapter is added. The loop, validator feedback, spend cap, cancel and append-only history stay shared.
+
+### Tiered source checks
+
+- **Tier 1 (Anthropic):** the source URL was fetched and its text is available, so evidence can be checked against the page.
+- **Tier 2 (OpenAI):** the source URL appears in the run's `sources` or citations, but its text is not available. The check is "this URL was consulted by the search tool"; evidence checks are skipped and the page says so. Using `open_page` where the model supports it may help, but its results are not guaranteed to be inspectable (to verify).
+
+Stories record which tier checked them (in the page's result and, optionally, in `generated.by`), so a reader can see how strongly the sources were verified.
+
+### Key detection and model list
+
+1. **Hint, don't probe.** Guess the provider from the key prefix (`sk-ant-` for Anthropic; `sk-proj-` or `sk-` for OpenAI) and show it. The user confirms the provider before any request is sent. **The page never tries one key against several providers**, because that would send the key to the wrong company. Keys it does not recognise, and gateway keys (for example OpenRouter's), are refused with an explanation.
+2. **Fetch the model list from the confirmed provider only.** Anthropic's Models API returns capabilities, which can be filtered for tool use and long output. OpenAI's list has none, so the page uses a short **curated allowlist** of models known to support the web search tool and function calling, intersected with what the key can actually see.
+3. **Present models in two groups:** "tested" (we ran the evals on it) and "experimental" (listed as capable but unmeasured). Show estimated price per model and the spend cap.
+4. **Fall back gracefully:** if the list call fails (restricted key, network), show the allowlist and say the list could not be checked.
+
+The allowlist and price tables are the main upkeep cost: models change often, so they live in one data file with a "last checked" date.
+
+### Effort (rough, one developer)
+
+| Piece | Estimate |
+|---|---|
+| Provider interface; current code becomes the Anthropic adapter; shared loop and tests | 2 to 3 days |
+| Key hint, confirmation step, model list and picker (Anthropic first) | 1 to 2 days |
+| OpenAI adapter: Responses API turn, function calling for `submit_story`, result and citation normalising, usage and price, fake-client tests, first real-run fixes | 3 to 5 days |
+| Tiered source checks and result labelling | 1 to 2 days |
+| Evals on both providers (the four-subject set, at least one model each) and prompt adjustments | 2 days plus the cost of the runs |
+
+About 2 to 3 weeks in total, on top of the prototype. Order: provider interface and Anthropic picker first (useful on its own), OpenAI second.
+
+### Not now
+
+Providers with no built-in search tool, and gateways. They would need a search service and a fetch proxy (a server we would run), which this project has decided against.
+
 ## Publishing: tiers
 
 | Tier | What | Cost/risk to the project |
@@ -98,7 +149,8 @@ Why not "commit to the public repo directly": the browser cannot push without th
 
 1. **Prototype (about a week).** A bare page with a key field and subject box, one real loop (research, `submit_story`, validate, render) on three or four subjects. Measure cost, time, validator pass rate, and source-verification behaviour. This decides whether to continue.
 2. **v1 (1-2 weeks more).** UI polish, budget cap, cancel and resume, error handling, refusal handling, brand options, tests, the eval set.
-3. **Gallery submission (small).** A prefilled PR flow and a contributor checklist.
+3. **Providers (about 2 to 3 weeks, see "Providers and models").** Provider interface and Anthropic model picker, then the OpenAI adapter and tiered source checks.
+4. **Gallery submission (small).** A prefilled PR flow and a contributor checklist.
 
 Estimates assume one developer and are rough.
 
@@ -106,6 +158,7 @@ Estimates assume one developer and are rough.
 
 - Which audience is this for: non-technical people, or developers who would rather use their own agent? That changes how much polish v1 needs.
 - Is "submit to the gallery" wanted at all, and who reviews?
-- Does Anthropic's guidance on browser-side keys change how we present key entry?
+- Does Anthropic's or OpenAI's guidance on browser-side keys change how we present key entry?
+- Which OpenAI models go in the first allowlist, and is `open_page` useful enough to rely on for source verification?
 - How strict should the code-enforced source checks be for quotes?
 - Where is it hosted (this site's domain or elsewhere), and who is named as the operator in the privacy text?
