@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "name": "Signal / action",
+  "mode": "dark",
+  "colors": {
+    "bg": "#0b0d12",
+    "surface": "#141922",
+    "text": "#f2f4f7",
+    "muted": "#b4bbc7",
+    "line": "rgba(242,244,247,0.16)",
+    "accent": "#66d6ff"
+  },
+  "clusters": {
+    "thesis": "#66d6ff",
+    "reasoning": "#c8a7ff",
+    "multimodal": "#8be28b",
+    "tool-layer": "#ffca72",
+    "software": "#ff8f70",
+    "interfaces": "#78a9ff",
+    "safety": "#f38ba8"
+  },
+  "font": {
+    "body": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif",
+    "display": "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif"
+  },
+  "wordmark": {
+    "text": "FROM CHATBOTS TO OPERATORS",
+    "letterSpacing": "0.14em",
+    "uppercase": true
+  },
+  "brandSources": [
+    { "what": "palette", "from": "Neutral history/ideas palette in playbook/4-brand.md", "note": "The subject is an idea/history, not a corporate brand; dark canvas plus a luminous accent signal systems, interfaces, and machine state." },
+    { "what": "font", "from": "System stack", "note": "No subject-owned font exists; use a readable system sans with no required webfont." }
+  ]
+}
