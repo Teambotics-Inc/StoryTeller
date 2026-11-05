@@ -8,7 +8,9 @@ site/dist/
 
 .vercel
 .env*
-site/showcase/
+# All showcase inputs stay ignored unless explicitly approved for publication.
+site/showcase/*
+!site/showcase/casper-studios/
 
 # publishing receipts hold a secret edit token
 .publish.json

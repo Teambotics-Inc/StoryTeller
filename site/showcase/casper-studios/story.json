@@ -1,0 +1,793 @@
+{
+  "schemaVersion": 1,
+  "title": "Casper Studios",
+  "subject": {
+    "name": "Casper Studios",
+    "kind": "company",
+    "url": "https://casperstudios.com/"
+  },
+  "tagline": "From a browser extension to an enterprise-wide AI delivery company: the people, working products, and partnerships behind the journey.",
+  "root": "casper",
+  "credit": "An independent StoryTeller study prepared by Nikhil Khedkar / TeamBotics.",
+  "disclaimer": "Independent study based on publicly available sources, accessed 2026-11-04. Not affiliated with, commissioned by, or endorsed by Casper Studios, Ode, or Anthropic. Analysis is identified as inference.",
+  "generated": {
+    "date": "2026-11-04",
+    "by": "TeamBotics"
+  },
+  "clusters": [
+    {
+      "id": "roots",
+      "label": "Origins"
+    },
+    {
+      "id": "people",
+      "label": "People"
+    },
+    {
+      "id": "builds",
+      "label": "Products & proof"
+    },
+    {
+      "id": "method",
+      "label": "Method"
+    },
+    {
+      "id": "enterprise",
+      "label": "Enterprise delivery"
+    },
+    {
+      "id": "ode",
+      "label": "Acquisition & next act"
+    }
+  ],
+  "sources": [
+    {
+      "id": "casper-home",
+      "title": "Casper Studios — Home",
+      "url": "https://casperstudios.com/",
+      "publisher": "Casper Studios",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "casper-about",
+      "title": "Casper Studios — About / leadership",
+      "url": "https://casperstudios.com/about",
+      "publisher": "Casper Studios",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "founder-post",
+      "title": "How We Landed Netflix and PepsiCo in Under Two Years",
+      "url": "https://casperstudios.com/blog/how-we-landed-netflix-and-pepsico-in-under-two-years",
+      "publisher": "Casper Studios",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "partner-announcement",
+      "title": "We’re Now an Anthropic Select Service Partner (June 22, 2026)",
+      "url": "https://casperstudios.com/blog/we-re-now-an-anthropic-select-service-partner",
+      "publisher": "Casper Studios",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ode-acquisition",
+      "title": "Ode with Anthropic Acquires Casper Studios (Aug 20, 2026)",
+      "url": "https://www.ode.com/press/ode-with-anthropic-acquires-casper-studios",
+      "publisher": "Ode",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "casper-cases",
+      "title": "Casper Studios — Client Case Studies",
+      "url": "https://casperstudios.com/work/case-studies",
+      "publisher": "Casper Studios",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "crn-founder",
+      "title": "Anthropic-Affiliated AI Services Company Ode Acquires Casper Studios",
+      "url": "https://www.crn.com/news/ai/2026/anthropic-affiliated-ai-services-company-ode-acquires-casper-studios",
+      "publisher": "CRN",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "founder-profile",
+      "title": "View from the Office: Jay Singh (Apr 19, 2025)",
+      "url": "https://ted-merz.com/2025/04/19/view-from-the-office-jay-singh/",
+      "publisher": "Ted Merz",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "jay-linkedin",
+      "title": "Jay Singh, LinkedIn public search preview",
+      "url": "https://www.linkedin.com/in/jaysingh10125",
+      "publisher": "LinkedIn",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "ode-linkedin",
+      "title": "Ode acquisition announcement (public LinkedIn post)",
+      "url": "https://www.linkedin.com/posts/odeai_today-ode-with-anthropic-acquired-casper-activity-7496252976651730945-M22t",
+      "publisher": "Ode",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "casper-legal",
+      "title": "Kirkland Advises Ode on Casper Acquisition",
+      "url": "https://www.kirkland.com/news/press-release/2026/08/kirkland-advises-ode-with-anthropic-on-acquisition-of-casper-studios",
+      "publisher": "Kirkland & Ellis",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "casper",
+      "title": "Casper Studios",
+      "type": "company",
+      "cluster": "roots",
+      "summary": "An AI services firm founded in 2022 that developed from proprietary product experimentation into company-wide AI implementation and external product delivery.",
+      "sources": [
+        "casper-about"
+      ],
+      "featured": true
+    },
+    {
+      "id": "origin",
+      "title": "The curiosity experiment",
+      "type": "milestone",
+      "cluster": "roots",
+      "summary": "Casper traces its beginnings to testing emerging AI capabilities and learning by building; its first product became an early market signal.",
+      "sources": [
+        "founder-post"
+      ],
+      "when": "December 2022",
+      "start": "2022-12"
+    },
+    {
+      "id": "extension",
+      "title": "Casper AI extension",
+      "type": "product",
+      "cluster": "builds",
+      "summary": "A browser extension built in the early experimentation phase. The company reports roughly 20,000 users; this is a Casper-reported number, not independently audited.",
+      "sources": [
+        "founder-post"
+      ],
+      "when": "2022–2023",
+      "start": "2022-12"
+    },
+    {
+      "id": "first-clients",
+      "title": "Early clients",
+      "type": "milestone",
+      "cluster": "roots",
+      "summary": "The extension’s adoption helped establish credibility and contributed to the first client opportunities, according to Casper’s retrospective.",
+      "sources": [
+        "founder-post"
+      ],
+      "when": "After December 2022",
+      "start": "2023"
+    },
+    {
+      "id": "jay",
+      "title": "Jay Singh",
+      "type": "person",
+      "cluster": "people",
+      "summary": "CEO and co-founder. Previously worked for nearly six years in LinkedIn business development and strategic product partnerships.",
+      "sources": [
+        "crn-founder"
+      ],
+      "featured": true
+    },
+    {
+      "id": "linkedin",
+      "title": "LinkedIn experience",
+      "type": "background",
+      "cluster": "people",
+      "summary": "Before Casper, Jay Singh worked in business development and strategic product partnerships, a relevant foundation for Casper’s client-facing commercial model.",
+      "sources": [
+        "crn-founder"
+      ]
+    },
+    {
+      "id": "derek",
+      "title": "Derek Gibbs",
+      "type": "person",
+      "cluster": "people",
+      "summary": "COO listed on Casper’s current leadership page; Casper’s founder story credits him with shaping the Stranger Things voice-activation pitch.",
+      "sources": [
+        "casper-about",
+        "founder-post"
+      ]
+    },
+    {
+      "id": "kelly",
+      "title": "Kelly Zhang",
+      "type": "person",
+      "cluster": "people",
+      "summary": "Head of Product & Delivery on Casper’s team page; the company credits her as project manager for the Netflix/Doritos activation.",
+      "sources": [
+        "casper-about",
+        "founder-post"
+      ]
+    },
+    {
+      "id": "sean",
+      "title": "Sean Urgel",
+      "type": "person",
+      "cluster": "people",
+      "summary": "Senior Engineer on Casper’s team page; Casper says he led engineering for the voice-activation project.",
+      "sources": [
+        "casper-about",
+        "founder-post"
+      ]
+    },
+    {
+      "id": "yap",
+      "title": "Yap voice product",
+      "type": "product",
+      "cluster": "builds",
+      "summary": "An internally built voice-first AI product. Casper described it as an important learning vehicle and demonstration of its voice capabilities.",
+      "sources": [
+        "founder-post"
+      ],
+      "when": "After Casper AI, before 2025 campaign"
+    },
+    {
+      "id": "livekit",
+      "title": "LiveKit relationship",
+      "type": "partnership",
+      "cluster": "method",
+      "summary": "Casper reached out to LiveKit after building Yap on its infrastructure, then developed a relationship that led toward a media campaign.",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "id": "netflix",
+      "title": "Stranger Things × Doritos",
+      "type": "case-study",
+      "cluster": "builds",
+      "summary": "A voice AI activation delivered through agency relationships involving Omnicom Media Group and Goodby Silverstein & Partners, as described by Casper.",
+      "sources": [
+        "founder-post"
+      ],
+      "when": "Public retrospective October 2025",
+      "start": "2025-10",
+      "featured": true
+    },
+    {
+      "id": "cases",
+      "title": "Cross-sector case studies",
+      "type": "portfolio",
+      "cluster": "enterprise",
+      "summary": "Casper lists work in financial services, enterprise operations, healthcare, and media, including Kit, a hedge fund, TZP Group, and other projects.",
+      "sources": [
+        "casper-cases"
+      ]
+    },
+    {
+      "id": "kit",
+      "title": "Kit report automation",
+      "type": "case-study",
+      "cluster": "enterprise",
+      "summary": "Casper lists an automation engagement for quarterly reports at Kit (formerly ConvertKit). The case-study index confirms the engagement topic, not independently verified ROI.",
+      "sources": [
+        "casper-cases"
+      ]
+    },
+    {
+      "id": "tzp",
+      "title": "TZP Group enablement",
+      "type": "case-study",
+      "cluster": "enterprise",
+      "summary": "Casper’s case-study listing describes hands-on AI adoption work in private equity workflows.",
+      "sources": [
+        "casper-cases"
+      ]
+    },
+    {
+      "id": "discover",
+      "title": "Strategy & discovery",
+      "type": "process",
+      "cluster": "method",
+      "summary": "Casper’s published method begins with current-state mapping, use-case validation, employee interviews, opportunity prioritization, and prototyping.",
+      "sources": [
+        "casper-home"
+      ]
+    },
+    {
+      "id": "voice-interviews",
+      "title": "Voice agent interviews",
+      "type": "method",
+      "cluster": "method",
+      "summary": "Casper describes using voice agents to gather qualitative input across departments to inform AI opportunity selection.",
+      "sources": [
+        "casper-home"
+      ]
+    },
+    {
+      "id": "execute",
+      "title": "Execution pathways",
+      "type": "process",
+      "cluster": "method",
+      "summary": "Casper distinguishes internal enablement and implementation from external AI product development.",
+      "sources": [
+        "casper-home"
+      ]
+    },
+    {
+      "id": "anthropic",
+      "title": "Anthropic Select Partner",
+      "type": "milestone",
+      "cluster": "enterprise",
+      "summary": "Casper announced Select Services Partner status in the Anthropic Partner Program on June 22, 2026.",
+      "sources": [
+        "partner-announcement"
+      ],
+      "when": "June 22, 2026",
+      "start": "2026-06-22"
+    },
+    {
+      "id": "claude",
+      "title": "Claude implementation",
+      "type": "capability",
+      "cluster": "enterprise",
+      "summary": "Casper’s published offering emphasizes integrating Claude skills, workflows, connectors and enterprise adoption practices.",
+      "sources": [
+        "partner-announcement"
+      ]
+    },
+    {
+      "id": "ode",
+      "title": "Ode with Anthropic",
+      "type": "company",
+      "cluster": "ode",
+      "summary": "Enterprise AI transformation company that acquired Casper Studios in August 2026.",
+      "sources": [
+        "ode-acquisition",
+        "casper-legal"
+      ],
+      "when": "2026",
+      "start": "2026",
+      "featured": true
+    },
+    {
+      "id": "chris",
+      "title": "Chris Taylor",
+      "type": "person",
+      "cluster": "people",
+      "summary": "CEO of Ode with Anthropic; announced the acquisition and cited previous joint work with Jay Singh’s team.",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "id": "acquisition",
+      "title": "Acquisition",
+      "type": "event",
+      "cluster": "ode",
+      "summary": "Ode formally announced its acquisition of Casper Studios on August 20, 2026. The purchase price was not disclosed in the cited announcement.",
+      "sources": [
+        "ode-acquisition"
+      ],
+      "when": "August 20, 2026",
+      "start": "2026-08-20",
+      "featured": true
+    },
+    {
+      "id": "sphera",
+      "title": "Sphera engagement",
+      "type": "case-study",
+      "cluster": "ode",
+      "summary": "Ode reported a 70% reduction in time-intensive bottlenecks from its custom tool, while Casper automated support, consulting and planning workflows for the same client. The 70% figure belongs to Ode’s tool.",
+      "sources": [
+        "ode-acquisition"
+      ],
+      "when": "Disclosed August 20, 2026",
+      "start": "2026-08-20"
+    },
+    {
+      "id": "same-code",
+      "title": "Shared Claude Code setup",
+      "type": "practice",
+      "cluster": "ode",
+      "summary": "Ode reported that the teams worked in the same Claude Code setup so each could use tooling built by the other.",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "id": "deep-broad",
+      "title": "Deep + broad model",
+      "type": "strategy",
+      "cluster": "ode",
+      "summary": "Ode described combining its custom engineering for complex enterprise priorities with Casper’s broad rollout of skills, connectors and context.",
+      "sources": [
+        "ode-acquisition"
+      ],
+      "featured": true
+    },
+    {
+      "id": "next",
+      "title": "What comes next?",
+      "type": "analysis",
+      "cluster": "ode",
+      "summary": "An editorial question: how can the combined team preserve founder-led discovery and speed while scaling repeatable cross-enterprise adoption? This is a hypothesis, not a published post-acquisition plan.",
+      "sources": [
+        "ode-acquisition"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "casper",
+      "target": "origin",
+      "label": "began with",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "origin",
+      "target": "extension",
+      "label": "created",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "extension",
+      "target": "first-clients",
+      "label": "generated credibility for",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "jay",
+      "label": "co-founded / led by",
+      "kind": "explicit",
+      "sources": [
+        "crn-founder"
+      ]
+    },
+    {
+      "source": "jay",
+      "target": "linkedin",
+      "label": "previously worked at",
+      "kind": "explicit",
+      "sources": [
+        "crn-founder"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "derek",
+      "label": "COO",
+      "kind": "explicit",
+      "sources": [
+        "casper-about"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "kelly",
+      "label": "product & delivery led by",
+      "kind": "explicit",
+      "sources": [
+        "casper-about"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "sean",
+      "label": "engineering team includes",
+      "kind": "explicit",
+      "sources": [
+        "casper-about"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "yap",
+      "label": "built",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "yap",
+      "target": "livekit",
+      "label": "used infrastructure from",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "livekit",
+      "target": "netflix",
+      "label": "connected to opportunity for",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "kelly",
+      "target": "netflix",
+      "label": "project-managed",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "sean",
+      "target": "netflix",
+      "label": "led engineering for",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "derek",
+      "target": "netflix",
+      "label": "helped shape pitch for",
+      "kind": "explicit",
+      "sources": [
+        "founder-post"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "cases",
+      "label": "published",
+      "kind": "explicit",
+      "sources": [
+        "casper-cases"
+      ]
+    },
+    {
+      "source": "cases",
+      "target": "kit",
+      "label": "includes",
+      "kind": "explicit",
+      "sources": [
+        "casper-cases"
+      ]
+    },
+    {
+      "source": "cases",
+      "target": "tzp",
+      "label": "includes",
+      "kind": "explicit",
+      "sources": [
+        "casper-cases"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "discover",
+      "label": "offers",
+      "kind": "explicit",
+      "sources": [
+        "casper-home"
+      ]
+    },
+    {
+      "source": "discover",
+      "target": "voice-interviews",
+      "label": "uses",
+      "kind": "explicit",
+      "sources": [
+        "casper-home"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "execute",
+      "label": "offers",
+      "kind": "explicit",
+      "sources": [
+        "casper-home"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "anthropic",
+      "label": "recognized as partner",
+      "kind": "explicit",
+      "sources": [
+        "partner-announcement"
+      ]
+    },
+    {
+      "source": "anthropic",
+      "target": "claude",
+      "label": "supports",
+      "kind": "explicit",
+      "sources": [
+        "partner-announcement"
+      ]
+    },
+    {
+      "source": "ode",
+      "target": "acquisition",
+      "label": "announced",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "acquisition",
+      "target": "casper",
+      "label": "acquired",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "ode",
+      "target": "chris",
+      "label": "led by",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "casper",
+      "target": "sphera",
+      "label": "served joint client",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "ode",
+      "target": "sphera",
+      "label": "served joint client",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "sphera",
+      "target": "same-code",
+      "label": "teams collaborated in",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "acquisition",
+      "target": "deep-broad",
+      "label": "combined",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "deep-broad",
+      "target": "claude",
+      "label": "rolls out through",
+      "kind": "explicit",
+      "sources": [
+        "ode-acquisition"
+      ]
+    },
+    {
+      "source": "origin",
+      "target": "discover",
+      "label": "matured into",
+      "kind": "inferred"
+    },
+    {
+      "source": "first-clients",
+      "target": "cases",
+      "label": "expanded toward",
+      "kind": "inferred"
+    },
+    {
+      "source": "yap",
+      "target": "netflix",
+      "label": "helped establish capability for",
+      "kind": "inferred"
+    },
+    {
+      "source": "anthropic",
+      "target": "acquisition",
+      "label": "preceded",
+      "kind": "inferred"
+    },
+    {
+      "source": "deep-broad",
+      "target": "next",
+      "label": "raises question",
+      "kind": "inferred"
+    },
+    {
+      "source": "voice-interviews",
+      "target": "next",
+      "label": "may offer a research lever for",
+      "kind": "inferred"
+    }
+  ],
+  "views": [
+    "graph",
+    "timeline",
+    "read",
+    "outline",
+    "list"
+  ],
+  "defaultView": "read",
+  "stories": [
+    {
+      "id": "origin",
+      "title": "From curiosity to credibility",
+      "summary": "How a side project became a client-delivery engine.",
+      "steps": [
+        "origin",
+        "extension",
+        "first-clients",
+        "yap",
+        "livekit",
+        "netflix"
+      ]
+    },
+    {
+      "id": "people",
+      "title": "The builders behind the firm",
+      "summary": "Public leadership roles and the work that connected them.",
+      "steps": [
+        "jay",
+        "linkedin",
+        "derek",
+        "kelly",
+        "sean",
+        "netflix"
+      ]
+    },
+    {
+      "id": "method",
+      "title": "From interviews to implementation",
+      "summary": "How Casper presents its client operating method.",
+      "steps": [
+        "discover",
+        "voice-interviews",
+        "execute",
+        "cases",
+        "kit",
+        "tzp"
+      ]
+    },
+    {
+      "id": "integration",
+      "title": "From Casper to Ode",
+      "summary": "Partner status, shared delivery, acquisition, and a new operating model.",
+      "steps": [
+        "anthropic",
+        "claude",
+        "ode",
+        "sphera",
+        "same-code",
+        "acquisition",
+        "deep-broad",
+        "next"
+      ]
+    }
+  ]
+}

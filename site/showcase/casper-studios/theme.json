@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "name": "Casper-inspired dark purple study",
+  "mode": "dark",
+  "colors": {
+    "bg": "#100a20",
+    "surface": "#1d1430",
+    "text": "#f6f2ff",
+    "muted": "#c1b5d2",
+    "line": "rgba(246,242,255,.14)",
+    "accent": "#bc74ff"
+  },
+  "clusters": {
+    "roots": "#bc74ff",
+    "people": "#f7b0d5",
+    "builds": "#9dc5ff",
+    "method": "#c3a4ff",
+    "enterprise": "#63d6c5",
+    "ode": "#ffd593"
+  },
+  "font": {
+    "body": "Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif"
+  },
+  "wordmark": {
+    "text": "CASPER / AN INDEPENDENT STUDY",
+    "letterSpacing": "0.09em"
+  },
+  "brandSources": [
+    {
+      "what": "Dark canvas and purple accent",
+      "from": "https://casperstudios.com/",
+      "note": "Direction inspired by the publicly observed dark-purple hero, logo, and visual references. Hex values are curated approximations, not claimed as CSS token extractions."
+    },
+    {
+      "what": "Typography",
+      "from": "https://casperstudios.com/",
+      "note": "System sans-serif approximation, with no claim of exact brand font."
+    }
+  ]
+}
