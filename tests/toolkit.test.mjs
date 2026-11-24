@@ -210,6 +210,32 @@ test("product site: landing page, a page and a full page per story, canonical ur
   assert.match(sitemap, /<loc>https:\/\/example\.test\/<\/loc>/);
 });
 
+test("product site: only the Rosetta Stone story page has the opt-in demo", () => {
+  const dist = buildSite();
+  const rosetta = path.join(dist, "stories", "rosetta-stone", "index.html");
+  const page = fs.readFileSync(rosetta, "utf8");
+  const demo = page.indexOf('id="story-demo-play"');
+  assert.ok(demo >= 0 && demo < page.indexOf('id="showcase"'));
+  assert.match(page, /href="https:\/\/www\.youtube\.com\/watch\?v=tc_ynR0gMDA"/);
+  assert.doesNotMatch(page, /youtube-nocookie/);
+  for (const file of walk(dist).filter((f) => f.endsWith(".html") && f !== rosetta)) {
+    assert.doesNotMatch(fs.readFileSync(file, "utf8"), /story-demo-play|rosetta-demo\.js/);
+  }
+  const headers = read(path.join(root, "vercel.json")).headers;
+  const policies = (route) => headers
+    .filter(({ source }) => new RegExp(`^${source}$`).test(route))
+    .flatMap((rule) => rule.headers)
+    .filter(({ key }) => key === "Content-Security-Policy")
+    .map(({ value }) => value);
+  assert.equal(policies("/stories/rosetta-stone").length, 1);
+  assert.deepEqual(policies("/stories/rosetta-stone/"), policies("/stories/rosetta-stone"));
+  assert.match(policies("/stories/rosetta-stone")[0], /frame-src 'self' https:\/\/www\.youtube-nocookie\.com;/);
+  for (const route of ["/", "/stories/salary/", "/stories/rosetta-stone/full/"]) {
+    assert.equal(policies(route).length, 1);
+    assert.match(policies(route)[0], /frame-src 'self';/);
+  }
+});
+
 test("product site: every internal link and asset resolves", () => {
   const dist = buildSite({ SHOWCASE_DIR: path.join(os.tmpdir(), "no-such-showcase-dir") });
   const pages = walk(dist).filter((f) => f.endsWith(".html") && !f.includes(path.join("stories", "")) || /stories[\\/][^\\/]+[\\/]index\.html$/.test(f));

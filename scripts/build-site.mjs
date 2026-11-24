@@ -154,6 +154,7 @@ const frameSrc = (e) => `${e.full}#view=${e.def}`;
 
 /* ---------- a page per story ---------- */
 const storyTpl = fs.readFileSync(path.join(site, "story.template.html"), "utf8");
+const rosettaDemo = fs.readFileSync(path.join(site, "rosetta-demo.html"), "utf8");
 for (const e of entries) {
   const s = e.story, others = entries.filter((o) => o !== e);
   const srcItems = s.sources.map((x) => {
@@ -169,6 +170,7 @@ for (const e of entries) {
     TITLE: esc(s.title), DESCRIPTION: esc(s.tagline), TAGLINE: esc(s.tagline),
     CHIPS: e.chips.map((c) => `<span>${esc(c)}</span>`).join(""),
     STATS: esc(e.stats), V_PAGE: e.page, V_FULL: esc(frameSrc(e)), V_FRAME: esc(frameSrc(e)), V_NOTE: esc(e.note),
+    STORY_DEMO: e.slug === "rosetta-stone" ? rosettaDemo : "",
     ABOUT: esc(about), SOURCE_COUNT: String(s.sources.length), SOURCES: srcItems, GUIDED: guided,
     MORE: others.map((o) => card(o, false)).join("\n"),
     SHOWCASE_JSON: payload([e]),
