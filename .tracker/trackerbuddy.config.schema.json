@@ -1,0 +1,24 @@
+{
+  "$id": "trackerbuddy.config.schema.json",
+  "title": "TrackerBuddy project configuration",
+  "type": "object",
+  "required": [
+    "productName",
+    "idPrefix",
+    "theme"
+  ],
+  "properties": {
+    "productName": {
+      "type": "string"
+    },
+    "idPrefix": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "object"
+    },
+    "schemaVersion": {
+      "type": "number"
+    }
+  }
+}
